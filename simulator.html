@@ -425,6 +425,56 @@
     .hero-result .fh-val   { font-size:38px; font-weight:900; letter-spacing:-0.04em; line-height:1.12; word-break:break-all; }
     .hero-result .fh-unit  { font-size:16px; font-weight:700; opacity:.85; margin-left:2px; }
     /* .fh-sub（ヘッドライン第3行）は全タブで廃止 */
+    /* 改善6：シナリオ比較ON時の複数ヘッドライン（クリックでアクティブ切替） */
+    .hero-compare { background: linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff; border-radius: var(--radius); box-shadow: var(--shadow); display:grid; }
+    .result-block .hero-compare { border-radius:0; box-shadow:none; }
+    .hero-mini { padding:14px 12px; text-align:center; border-right:1px solid rgba(255,255,255,.2); opacity:.62; cursor:pointer; transition:background .15s, opacity .15s; }
+    .hero-mini:last-child { border-right:none; }
+    .hero-mini:hover { opacity:1; }
+    .hero-mini.active { background:rgba(255,255,255,.14); opacity:1; }
+    .hero-mini .hm-name { font-size:11px; font-weight:700; opacity:.92; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hero-mini .hm-val { font-weight:900; letter-spacing:-.03em; line-height:1.1; word-break:break-all; }
+    .hero-mini .hm-label { font-size:10px; opacity:.8; margin-top:3px; }
+    .hero-compare[data-n="1"] .hm-val { font-size:38px; }
+    .hero-compare[data-n="2"] .hm-val { font-size:32px; }
+    .hero-compare[data-n="3"] .hm-val { font-size:26px; }
+    .hero-compare[data-n="4"] .hm-val { font-size:22px; }
+    @media (max-width:640px){ .hero-compare{grid-template-columns:1fr 1fr !important;} }
+
+    /* 項目4：ヘルプアイコン＋説明ポップオーバー（CSSのみ・hover/tap両対応） */
+    .lbl-row { display:inline-flex; align-items:center; gap:6px; }
+    .help-wrap { position:relative; display:inline-flex; }
+    .help-ic {
+      width:16px; height:16px; border-radius:50%; border:1.5px solid var(--accent);
+      background:#fff; color:var(--accent); font-size:11px; font-weight:800; line-height:1;
+      cursor:help; display:grid; place-items:center; padding:0; flex-shrink:0;
+      user-select:none; -webkit-tap-highlight-color:transparent;
+      transition:background .15s, color .15s;
+    }
+    .help-ic:hover, .help-ic:focus-visible { background:var(--accent); color:#fff; outline:none; }
+    .help-pop {
+      position:absolute; top:calc(100% + 9px); left:50%; transform:translateX(-50%);
+      width:264px; max-width:min(284px, calc(100vw - 32px));
+      background:#fff; border:1.5px solid var(--border); border-radius:10px;
+      box-shadow:0 6px 22px rgba(15,23,42,.14); padding:12px 14px;
+      font-size:12px; font-weight:500; color:var(--text2); line-height:1.75;
+      text-align:left; white-space:normal; z-index:60;
+      opacity:0; visibility:hidden; transform-origin:top center;
+      transition:opacity .15s ease, visibility .15s;
+    }
+    .help-pop strong { color:var(--accent); font-weight:800; }
+    .help-pop::before {
+      content:""; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+      border:6px solid transparent; border-bottom-color:var(--border);
+    }
+    .help-pop::after {
+      content:""; position:absolute; bottom:100%; left:50%; transform:translateX(-50%) translateY(1.5px);
+      border:6px solid transparent; border-bottom-color:#fff;
+    }
+    .help-wrap:hover .help-pop,
+    .help-ic:focus + .help-pop,
+    .help-ic:focus-visible + .help-pop { opacity:1; visibility:visible; }
+    @media (max-width:640px){ .help-pop{ left:auto; right:-8px; transform:none; } .help-pop::before,.help-pop::after{ left:auto; right:16px; transform:none; } }
 
     /* ── 大画面：ファーストビューに「条件入力＋ヘッドライン＋統計＋グラフ」を同時表示 ──
        980px以下は従来の縦並びを維持（モバイル崩れ防止） */
@@ -519,11 +569,19 @@
     }
     .panel-cmp-label input[type="checkbox"] { width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0; }
     .panel-cmp-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+    /* tab4 シナリオ選択UI（tab1〜3と統一：.panel-cmp-row / .compare-scenario-tabs を共用）
+       .nisa-scn-head / .scenario-tabs-bar は廃止 */
+    .nisa-name-row { display:flex; align-items:center; gap:8px; margin-top:10px; flex-basis:100%; width:100%; }
+    .nisa-name-label { font-size:12px; font-weight:700; color:var(--text2); white-space:nowrap; }
+    .nisa-name-input { flex:1; border:1.5px solid var(--border); border-radius:8px; padding:5px 10px; font-size:13px; font-weight:700; color:var(--text); outline:none; background:white; }
+    .nisa-sched-title { font-size:13px; font-weight:700; color:var(--text2); margin-bottom:6px; }
+    .nisa-sched-note { font-size:11px; color:var(--muted); margin-bottom:8px; line-height:1.6; }
+    .nisa-add-phase-btn { font-size:12px; padding:7px 12px; margin-top:4px; }
 
     /* ── tab1〜4 左パネル圧縮（B:数値+スライダー1行 / C:比較バー圧縮 / D:ボタン1行 / 詳細設定）。#tab5は対象外＝完全不変 ── */
     #tab1 .input-slider-wrap, #tab2 .input-slider-wrap,
     #tab3 .input-slider-wrap, #tab4 .input-slider-wrap {
-      display: grid; grid-template-columns: auto 1fr;
+      display: grid; grid-template-columns: 200px 1fr;
       column-gap: 12px; row-gap: 2px; align-items: center;
     }
     #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
@@ -534,8 +592,11 @@
     #tab3 .input-slider-wrap > .range-labels, #tab4 .input-slider-wrap > .range-labels { grid-column: 2; grid-row: 2; margin-top: 0; }
 
     /* 数値ブロックをコンパクト化（1行に収めるため。spin-btn注入される.input-rowは維持） */
-    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { width: 70px; padding: 7px 6px; font-size: 14px; }
-    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; }
+    /* 改善7：input-row幅を一定化し全行でスライダー開始/終端を縦に揃える */
+    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { width: 64px; padding: 7px 6px; font-size: 14px; }
+    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; min-width: 50px; display: inline-block; text-align: left; }
+    #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
+    #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { width: 200px; }
 
     /* 詳細設定アコーディオン（インフレ率を初期非表示・値は計算に使用継続） */
     .adv-set { border-top: 1.5px solid var(--border); padding-top: 6px; }
@@ -547,7 +608,7 @@
     .adv-set[open] > summary { color: var(--text2); margin-bottom: 6px; }
 
     /* C) 比較バーをコンパクトに（OFF時はチェックボックス1行のみ＝既存JSのdisplay:none利用） */
-    #tab1 .panel-cmp-bar, #tab2 .panel-cmp-bar, #tab3 .panel-cmp-bar { padding: 8px 12px; margin-bottom: 10px; }
+    #tab1 .panel-cmp-bar, #tab2 .panel-cmp-bar, #tab3 .panel-cmp-bar, #tab4 .panel-cmp-bar { padding: 8px 12px; margin-bottom: 10px; }
 
     /* D) ボタン群を1行・コンパクト */
     #tab1 .actions, #tab2 .actions, #tab3 .actions, #tab4 .actions { gap: 7px; }
@@ -560,10 +621,41 @@
     #tab1 .auto-calc-wrap, #tab2 .auto-calc-wrap,
     #tab3 .auto-calc-wrap, #tab4 .auto-calc-wrap { font-size: 12px; margin-left: 4px; }
 
+    /* 項目5：tab5 左パネルを tab1〜4 と完全統一（同一スコープCSSを #tab5 にも適用） */
+    #tab5 .input-slider-wrap { display:grid; grid-template-columns:200px 1fr; column-gap:12px; row-gap:2px; align-items:center; }
+    #tab5 .input-slider-wrap > .input-row { grid-column:1; grid-row:1; width:200px; }
+    #tab5 .input-slider-wrap > input[type="range"] { grid-column:2; grid-row:1; }
+    #tab5 .input-slider-wrap > .range-labels { grid-column:2; grid-row:2; margin-top:0; }
+    #tab5 .num-input { width:64px; padding:7px 6px; font-size:14px; }
+    #tab5 .unit-label { margin-left:6px; min-width:50px; display:inline-block; text-align:left; }
+    #tab5 .panel-cmp-bar { padding:8px 12px; margin-bottom:10px; }
+    #tab5 .actions { gap:7px; }
+    #tab5 .actions .btn-primary { padding:9px 15px; font-size:13px; }
+    #tab5 .actions .btn-secondary, #tab5 .actions .btn-share { padding:8px 11px; font-size:13px; }
+    #tab5 .auto-calc-wrap { font-size:12px; margin-left:4px; }
+    @media (max-width:640px){
+      #tab5 .input-slider-wrap { grid-template-columns:1fr; }
+      #tab5 .input-slider-wrap > input[type="range"] { grid-column:1; grid-row:2; }
+      #tab5 .input-slider-wrap > .range-labels { grid-column:1; grid-row:3; }
+    }
+
     /* A) 左パネル高さを tab5 基準に統一（tab1〜4のみ／tab5は#tab5不使用＝完全不変）。
        中身が基準未満なら下部に余白（上寄せ）。詳細設定アコーディオン展開時は自然に縦伸び */
     #tab1 .card.panel, #tab2 .card.panel, #tab3 .card.panel,
-    #tab4 .card.panel, #tab5 .card.panel { min-height: 616px; }
+    #tab4 .card.panel, #tab5 .card.panel { min-height: 660px; }
+
+    /* 改善4：tab4のみ左パネルを縦スクロール可（PC幅のみ。モバイルは自然スクロール） */
+    @media (min-width: 981px) {
+      #tab4 .card.panel {
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+      }
+      #tab4 .card.panel::-webkit-scrollbar { width: 8px; }
+      #tab4 .card.panel::-webkit-scrollbar-track { background: transparent; }
+      #tab4 .card.panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+    }
 
     @media (max-width: 640px) {
       /* モバイル：数値＋スライダーを縦2段に折り返し（崩れ防止） */
@@ -582,6 +674,7 @@
     /* ─── ②NISA税メリット ─── */
     .tax-card { background:var(--accent2-light);border:1.5px solid #6ee7b7;border-radius:12px;padding:14px 18px;margin-top:12px; }
     .tax-card-title { font-size:12px;font-weight:800;color:var(--accent2);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase; }
+    .tax-card-note { font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6; }
     .tax-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:10px; }
     .tax-stat .k { font-size:11px;font-weight:700;color:var(--muted);margin-bottom:3px; }
     .tax-stat .v { font-size:15px;font-weight:800;color:var(--text);word-break:break-all; }
@@ -618,7 +711,7 @@
       <button class="tab-btn active" data-tab="tab1">積立投資</button>
       <button class="tab-btn" data-tab="tab2">一括投資</button>
       <button class="tab-btn" data-tab="tab3">資産取り崩し</button>
-      <button class="tab-btn" data-tab="tab4">新NISAシミュレーター</button>
+      <button class="tab-btn" data-tab="tab4">新NISA（積立＆一括）</button>
       <button class="tab-btn" data-tab="tab5">FIRE逆算</button>
     </nav>
     <nav class="crumb" aria-label="パンくずリスト">
@@ -644,7 +737,7 @@
           <label class="panel-cmp-label"><input type="checkbox" id="t1-cmp-on"> シナリオ比較</label>
           <div class="panel-cmp-row" id="t1-panel-cmp-row" style="display:none">
             <div class="compare-scenario-tabs" id="t1-cmp-tabs"></div>
-            <button class="cmp-add-btn" id="t1-cmp-add">＋ シナリオ追加</button>
+            <button type="button" class="cmp-add-btn" id="t1-cmp-add">＋ シナリオ追加</button>
           </div>
         </div>
         <div class="form-grid">
@@ -658,7 +751,7 @@
               <div class="range-labels"><span>0万</span><span>30万</span></div>
             </div>
           </label>
-          <label>想定年利
+          <label><span class="lbl-row">想定年利<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="想定年利の説明">?</span><span class="help-pop" role="tooltip"><strong>年利の目安</strong><br>S&amp;P500や全世界株式などのインデックスは、歴史的に年平均7〜10%程度のリターンを記録してきました。ただし将来の成果を保証するものではありません。長期運用では3〜7%程度で想定する人が多く、保守的に見積もるほど将来計画の安全性が高まります。</span></span></span>
             <div class="input-slider-wrap">
               <div class="input-row">
                 <input class="num-input" id="t1-rate" type="number" min="0" max="30" step="0.1" value="7">
@@ -671,11 +764,11 @@
           <label>運用年数
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="t1-years" type="number" min="1" max="60" step="1" value="20">
+                <input class="num-input" id="t1-years" type="number" min="0" max="60" step="1" value="20">
                 <span class="unit-label">年</span>
               </div>
-              <input type="range" id="t1-years-r" min="1" max="60" step="1" value="20">
-              <div class="range-labels"><span>1年</span><span>60年</span></div>
+              <input type="range" id="t1-years-r" min="0" max="60" step="1" value="20">
+              <div class="range-labels"><span>0年</span><span>60年</span></div>
             </div>
           </label>
           <label>初期投資額
@@ -703,11 +796,11 @@
           </details>
           <div class="divider"></div>
           <div class="actions form-full">
-            <button class="btn-primary" id="t1-calc">計算する</button>
-            <button class="btn-secondary" id="t1-reset">リセット</button>
+            <button type="button" class="btn-primary" id="t1-calc">計算する</button>
+            <button type="button" class="btn-secondary" id="t1-reset">リセット</button>
             <button class="btn-share" type="button" id="t1-share">🔗 共有</button>
             <label class="auto-calc-wrap">
-              <input type="checkbox" id="t1-auto">自動再計算
+              <input type="checkbox" id="t1-auto" checked>自動再計算
             </label>
           </div>
         </div>
@@ -729,7 +822,7 @@
           <label class="panel-cmp-label"><input type="checkbox" id="t2-cmp-on"> シナリオ比較</label>
           <div class="panel-cmp-row" id="t2-panel-cmp-row" style="display:none">
             <div class="compare-scenario-tabs" id="t2-cmp-tabs"></div>
-            <button class="cmp-add-btn" id="t2-cmp-add">＋ シナリオ追加</button>
+            <button type="button" class="cmp-add-btn" id="t2-cmp-add">＋ シナリオ追加</button>
           </div>
         </div>
         <div class="form-grid">
@@ -744,7 +837,7 @@
               <div class="range-labels"><span>0万</span><span>1億円</span></div>
             </div>
           </label>
-          <label>想定年利
+          <label><span class="lbl-row">想定年利<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="想定年利の説明">?</span><span class="help-pop" role="tooltip"><strong>年利の目安</strong><br>S&amp;P500や全世界株式などのインデックスは、歴史的に年平均7〜10%程度のリターンを記録してきました。ただし将来の成果を保証するものではありません。長期運用では3〜7%程度で想定する人が多く、保守的に見積もるほど将来計画の安全性が高まります。</span></span></span>
             <div class="input-slider-wrap">
               <div class="input-row">
                 <input class="num-input" id="t2-rate" type="number" min="0" max="30" step="0.1" value="7">
@@ -757,11 +850,11 @@
           <label>運用年数
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="t2-years" type="number" min="1" max="60" step="1" value="20">
+                <input class="num-input" id="t2-years" type="number" min="0" max="60" step="1" value="20">
                 <span class="unit-label">年</span>
               </div>
-              <input type="range" id="t2-years-r" min="1" max="60" step="1" value="20">
-              <div class="range-labels"><span>1年</span><span>60年</span></div>
+              <input type="range" id="t2-years-r" min="0" max="60" step="1" value="20">
+              <div class="range-labels"><span>0年</span><span>60年</span></div>
             </div>
           </label>
           <details class="adv-set">
@@ -779,11 +872,11 @@
           </details>
           <div class="divider"></div>
           <div class="actions form-full">
-            <button class="btn-primary" id="t2-calc">計算する</button>
-            <button class="btn-secondary" id="t2-reset">リセット</button>
+            <button type="button" class="btn-primary" id="t2-calc">計算する</button>
+            <button type="button" class="btn-secondary" id="t2-reset">リセット</button>
             <button class="btn-share" type="button" id="t2-share">🔗 共有</button>
             <label class="auto-calc-wrap">
-              <input type="checkbox" id="t2-auto">自動再計算
+              <input type="checkbox" id="t2-auto" checked>自動再計算
             </label>
           </div>
         </div>
@@ -805,7 +898,7 @@
           <label class="panel-cmp-label"><input type="checkbox" id="t3-cmp-on"> シナリオ比較</label>
           <div class="panel-cmp-row" id="t3-panel-cmp-row" style="display:none">
             <div class="compare-scenario-tabs" id="t3-cmp-tabs"></div>
-            <button class="cmp-add-btn" id="t3-cmp-add">＋ シナリオ追加</button>
+            <button type="button" class="cmp-add-btn" id="t3-cmp-add">＋ シナリオ追加</button>
           </div>
         </div>
         <div class="form-grid">
@@ -827,14 +920,14 @@
             </div>
           </label>
           <div id="wrap-pct">
-            <label>年間取り崩し率
+            <label><span class="lbl-row">年間取り崩し率（4%ルール）<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="4%ルールの説明">?</span><span class="help-pop" role="tooltip"><strong>4%ルールとは</strong><br>資産の年間4%程度を取り崩すことで、長期間にわたり資産を維持しやすいという考え方です。米国市場の過去データを参考に研究されたもので、将来の運用成果を保証するものではありません。安全な取り崩し率は運用利回りやインフレ率によって変化し、保守的に運用する場合は3〜4%程度で設定されることが多いです。</span></span></span>
               <div class="input-slider-wrap">
                 <div class="input-row">
-                  <input class="num-input" id="t3-rate" type="number" min="0.1" max="30" step="0.1" value="4">
+                  <input class="num-input" id="t3-rate" type="number" min="0" max="30" step="0.1" value="4">
                   <span class="unit-label">%</span>
                 </div>
-                <input type="range" id="t3-rate-r" min="0.1" max="30" step="0.1" value="4">
-                <div class="range-labels"><span>0.1%</span><span>30%</span></div>
+                <input type="range" id="t3-rate-r" min="0" max="30" step="0.1" value="4">
+                <div class="range-labels"><span>0%</span><span>30%</span></div>
               </div>
             </label>
           </div>
@@ -850,7 +943,7 @@
               </div>
             </label>
           </div>
-          <label>想定年利（運用継続）
+          <label><span class="lbl-row">想定年利（運用継続）<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="想定年利の説明">?</span><span class="help-pop" role="tooltip"><strong>年利の目安</strong><br>S&amp;P500や全世界株式などのインデックスは、歴史的に年平均7〜10%程度のリターンを記録してきました。ただし将来の成果を保証するものではありません。長期運用では3〜7%程度で想定する人が多く、保守的に見積もるほど将来計画の安全性が高まります。</span></span></span>
             <div class="input-slider-wrap">
               <div class="input-row">
                 <!-- 想定年利 0-30% -->
@@ -864,20 +957,20 @@
           <label>取り崩し期間
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="t3-years" type="number" min="1" max="60" step="1" value="30">
+                <input class="num-input" id="t3-years" type="number" min="0" max="60" step="1" value="30">
                 <span class="unit-label">年</span>
               </div>
-              <input type="range" id="t3-years-r" min="1" max="60" step="1" value="30">
-              <div class="range-labels"><span>1年</span><span>60年</span></div>
+              <input type="range" id="t3-years-r" min="0" max="60" step="1" value="30">
+              <div class="range-labels"><span>0年</span><span>60年</span></div>
             </div>
           </label>
           <div class="divider"></div>
           <div class="actions form-full">
-            <button class="btn-primary" id="t3-calc">計算する</button>
-            <button class="btn-secondary" id="t3-reset">リセット</button>
+            <button type="button" class="btn-primary" id="t3-calc">計算する</button>
+            <button type="button" class="btn-secondary" id="t3-reset">リセット</button>
             <button class="btn-share" type="button" id="t3-share">🔗 共有</button>
             <label class="auto-calc-wrap">
-              <input type="checkbox" id="t3-auto">自動再計算
+              <input type="checkbox" id="t3-auto" checked>自動再計算
             </label>
           </div>
         </div>
@@ -893,24 +986,19 @@
   <div id="tab4" class="tab-panel">
     <main class="grid" id="nisa-grid">
 
-      <!-- LEFT: 設定パネル -->
-      <div style="display:grid;gap:14px;">
+      <!-- LEFT: 設定パネル（他タブと同じく section.card.panel を直接 grid 子に） -->
+      <section class="card panel">
+          <div class="panel-title">新NISA（積立＆一括）条件を入力</div>
 
-        <!-- シナリオ設定カード -->
-        <section class="card panel">
-          <div class="panel-title">新NISA条件を入力</div>
-
-          <!-- シナリオ選択（他タブと統一UI） -->
-          <div class="panel-cmp-bar" style="margin-bottom:16px;">
+          <!-- シナリオ選択（tab1〜3と完全統一構造） -->
+          <div class="panel-cmp-bar" id="nisa-panel-cmp-bar">
             <label class="panel-cmp-label"><input type="checkbox" id="nisa-cmp-on"> シナリオ比較</label>
-            <div id="nisa-cmp-body" style="display:none;">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;margin-bottom:6px;">
-                <div class="panel-cmp-row" style="margin-top:0;flex:1;" id="nisa-scenario-tabs"></div>
-                <button class="cmp-add-btn" id="nisa-add-scenario" style="margin-left:8px;">＋ シナリオ追加</button>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;" id="nisa-name-row">
-                <span style="font-size:12px;font-weight:700;color:var(--text2);white-space:nowrap;">シナリオ名</span>
-                <input type="text" id="ns-name" style="flex:1;border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;font-size:13px;font-weight:700;color:var(--text);outline:none;background:white;" value="シナリオ A">
+            <div class="panel-cmp-row" id="nisa-panel-cmp-row" style="display:none">
+              <div class="compare-scenario-tabs" id="nisa-scenario-tabs"></div>
+              <button type="button" class="cmp-add-btn" id="nisa-add-scenario">＋ シナリオ追加</button>
+              <div class="nisa-name-row" id="nisa-name-row">
+                <span class="nisa-name-label">シナリオ名</span>
+                <input type="text" id="ns-name" class="nisa-name-input" value="シナリオA">
               </div>
             </div>
           </div>
@@ -918,7 +1006,7 @@
           <div class="form-grid" id="nisa-form">
 
             <!-- 想定年利 -->
-            <label>想定年利
+            <label><span class="lbl-row">想定年利<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="想定年利の説明">?</span><span class="help-pop" role="tooltip"><strong>年利の目安</strong><br>S&amp;P500や全世界株式などのインデックスは、歴史的に年平均7〜10%程度のリターンを記録してきました。ただし将来の成果を保証するものではありません。長期運用では3〜7%程度で想定する人が多く、保守的に見積もるほど将来計画の安全性が高まります。</span></span></span>
               <div class="input-slider-wrap">
                 <div class="input-row">
                   <input class="num-input" id="ns-rate" type="number" min="0" max="20" step="0.1" value="5">
@@ -931,38 +1019,28 @@
 
             <!-- 投資フェーズ（統合） -->
             <div>
-              <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px;">投資スケジュール</div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">各期間の月額積立・年間一括投資を設定できます。合計が年360万円を超えないよう調整されます。</div>
+              <div class="nisa-sched-title">投資スケジュール</div>
+              <div class="nisa-sched-note">各期間の月額積立・年間一括投資を設定できます。合計が年360万円を超えないよう調整されます。</div>
               <div id="nisa-phases-list"></div>
-              <button class="btn-secondary" id="nisa-add-phase" style="font-size:12px;padding:7px 12px;margin-top:4px;">
+              <button type="button" class="btn-secondary nisa-add-phase-btn" id="nisa-add-phase">
                 ＋ 期間を追加（積立額変更・一括追加）
               </button>
             </div>
 
-            <!-- ボーナス追加投資 -->
-            <label>年間ボーナス追加投資（全期間共通・任意）
-              <div class="input-slider-wrap">
-                <div class="input-row">
-                  <input class="num-input" id="ns-bonus" type="number" min="0" max="240" step="10" value="0">
-                  <span class="unit-label">万円/年</span>
-                </div>
-                <input type="range" id="ns-bonus-r" min="0" max="240" step="10" value="0">
-                <div class="range-labels"><span>0万</span><span>240万</span></div>
-              </div>
-              <div id="nisa-limit-warn" style="display:none;color:var(--danger);font-size:11px;margin-top:4px;">
-                年間360万円（積立＋一括＋ボーナス）の上限を超えている期間があります
-              </div>
-            </label>
+            <!-- 改善8・案A：年間ボーナス追加投資（ns-bonus）は廃止。一括投資は投資スケジュールのフェーズで設定 -->
+            <div id="nisa-limit-warn" style="display:none;color:var(--danger);font-size:11px;margin-top:-4px;">
+              年間360万円（積立＋一括）の上限を超えている期間があります
+            </div>
 
             <!-- 運用年数 -->
             <label>運用年数
               <div class="input-slider-wrap">
                 <div class="input-row">
-                  <input class="num-input" id="ns-years" type="number" min="1" max="40" step="1" value="20">
+                  <input class="num-input" id="ns-years" type="number" min="0" max="40" step="1" value="20">
                   <span class="unit-label">年</span>
                 </div>
-                <input type="range" id="ns-years-r" min="1" max="40" step="1" value="20">
-                <div class="range-labels"><span>1年</span><span>40年</span></div>
+                <input type="range" id="ns-years-r" min="0" max="40" step="1" value="20">
+                <div class="range-labels"><span>0年</span><span>40年</span></div>
               </div>
               <div style="font-size:11px;color:var(--muted);margin-top:2px;">※元本上限1800万円に達した年以降も複利運用を継続します</div>
             </label>
@@ -973,9 +1051,7 @@
             <div id="nisa-quota-display" style="background:var(--accent-light,#eff4ff);border:1.5px solid #bdd3ff;border-radius:10px;padding:12px 14px;font-size:12px;">
               <div style="font-weight:700;color:var(--accent);margin-bottom:6px;">NISA枠の状況</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                <div>初年度投資額：<strong id="nq-annual">-</strong></div>
-                <div>年間上限まで：<strong id="nq-annual-rem">-</strong></div>
-                <div>生涯投資額：<strong id="nq-total">-</strong></div>
+                <div>合計投資額：<strong id="nq-total">-</strong></div>
                 <div>生涯上限まで：<strong id="nq-total-rem">-</strong></div>
               </div>
               <div style="margin-top:8px;">
@@ -990,18 +1066,16 @@
             </div>
 
             <div class="actions">
-              <button class="btn-primary" id="nisa-calc">計算する</button>
-              <button class="btn-secondary" id="nisa-reset">リセット</button>
+              <button type="button" class="btn-primary" id="nisa-calc">計算する</button>
+              <button type="button" class="btn-secondary" id="nisa-reset">リセット</button>
               <label class="auto-calc-wrap">
-                <input type="checkbox" id="ns-auto"> 自動再計算
+                <input type="checkbox" id="ns-auto" checked> 自動再計算
               </label>
             </div>
 
           </div><!-- /form-grid -->
 
-        </section>
-
-      </div><!-- /left -->
+      </section>
 
       <!-- RIGHT: 結果 -->
       <section class="right" id="nisa-right">
@@ -1019,11 +1093,11 @@
           <label>月の生活費（FIRE後）
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="f5-living" type="number" min="1" max="100" step="1" value="25">
+                <input class="num-input" id="f5-living" type="number" min="0" max="100" step="1" value="25">
                 <span class="unit-label">万円/月</span>
               </div>
-              <input type="range" id="f5-living-r" min="1" max="100" step="1" value="25">
-              <div class="range-labels"><span>1万</span><span>100万</span></div>
+              <input type="range" id="f5-living-r" min="0" max="100" step="1" value="25">
+              <div class="range-labels"><span>0万</span><span>100万</span></div>
             </div>
           </label>
           <label>現在の保有資産
@@ -1046,7 +1120,7 @@
               <div class="range-labels"><span>0万</span><span>100万</span></div>
             </div>
           </label>
-          <label>想定年利
+          <label><span class="lbl-row">想定年利<span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="想定年利の説明">?</span><span class="help-pop" role="tooltip"><strong>年利の目安</strong><br>S&amp;P500や全世界株式などのインデックスは、歴史的に年平均7〜10%程度のリターンを記録してきました。ただし将来の成果を保証するものではありません。長期運用では3〜7%程度で想定する人が多く、保守的に見積もるほど将来計画の安全性が高まります。</span></span></span>
             <div class="input-slider-wrap">
               <div class="input-row">
                 <input class="num-input" id="f5-rate" type="number" min="0" max="20" step="0.1" value="5">
@@ -1068,12 +1142,12 @@
           </label>
           <div class="divider"></div>
           <div class="actions form-full">
-            <button class="btn-primary" id="f5-calc">計算する</button>
-            <button class="btn-secondary" id="f5-reset">初期値に戻す</button>
+            <button type="button" class="btn-primary" id="f5-calc">計算する</button>
+            <button type="button" class="btn-secondary" id="f5-reset">リセット</button>
+            <button class="btn-share" type="button" id="f5-share">🔗 共有</button>
             <label class="auto-calc-wrap">
-              <input type="checkbox" id="f5-auto">自動で再計算
+              <input type="checkbox" id="f5-auto" checked>自動再計算
             </label>
-            <button class="btn-share" type="button" id="f5-share">🔗 URLをシェア</button>
           </div>
         </div>
       </section>
@@ -1259,9 +1333,9 @@
   }
 
   // ── CHART RENDERER: 積み上げ棒グラフ（元本 + 運用益）+ 折れ線 + 1年ごと丸プロット ──
-  function renderChart(svgId, points, lines, tt) {
+  function renderChart(svgId, points, lines, tt, opts) {
     const svg = el(svgId);
-    const W = 900, H = 260, pad = {t:36, r:20, b:44, l:84};
+    const W = 900, H = 406, pad = {t:36, r:20, b:44, l:84};
     const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
 
     const yPts = points.filter(p => p.year > 0);
@@ -1369,12 +1443,21 @@
         fill="transparent" style="cursor:pointer"/>`;
     });
 
+    // 非課税枠到達マーカー（tab4のみ opts 指定。他タブは undefined で無描画）
+    let limitMarker = '';
+    if (opts && opts.limitYear != null && opts.limitYear <= maxX) {
+      const mx = px(opts.limitYear);
+      const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
+      limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+    }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>
       ${yGrid}${xGrid}
       ${bars}
       ${pathsSvg}
       ${dots}
+      ${limitMarker}
       ${hovers}
     `;
     svg.classList.remove('chart-svg-reveal');
@@ -1443,13 +1526,8 @@
           <div class="stat"><div class="k">利益率</div><div class="v" id="t1-roi">-</div></div>
         </div>
       </div>
-      <div class="tax-card" id="t1-tax-card" style="display:none"><div class="tax-card-title">💰 NISA vs 課税口座 — 節税効果の試算（税率20.315%）</div><div class="tax-stats">
-        <div class="tax-stat"><div class="k">NISA 手取り評価額</div><div class="v v-accent" id="t1-nisa-hand">-</div></div>
-        <div class="tax-stat"><div class="k">課税口座 手取り評価額</div><div class="v" id="t1-tax-hand">-</div></div>
-        <div class="tax-stat"><div class="k">節税メリット</div><div class="v v-positive" id="t1-tax-bene">-</div></div>
-      </div></div>
       <div class="inf-note" id="t1-inf-note" style="display:none"></div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart1" viewBox="0 0 900 260"></svg></div><div class="legend" id="t1-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>投資元本</span></div></section>
+      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart1" viewBox="0 0 900 406"></svg></div><div class="legend" id="t1-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>投資元本</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>年間積立額</th><th>累計元本</th><th>予想評価額</th><th>累計運用益</th></tr></thead><tbody id="t1-table"></tbody></table></div></section>`;
   }
   function skeletonT2() {
@@ -1462,13 +1540,8 @@
           <div class="stat"><div class="k">利益率</div><div class="v" id="t2-roi">-</div></div>
         </div>
       </div>
-      <div class="tax-card" id="t2-tax-card" style="display:none"><div class="tax-card-title">💰 NISA vs 課税口座 — 節税効果の試算（税率20.315%）</div><div class="tax-stats">
-        <div class="tax-stat"><div class="k">NISA 手取り評価額</div><div class="v v-accent" id="t2-nisa-hand">-</div></div>
-        <div class="tax-stat"><div class="k">課税口座 手取り評価額</div><div class="v" id="t2-tax-hand">-</div></div>
-        <div class="tax-stat"><div class="k">節税メリット</div><div class="v v-positive" id="t2-tax-bene">-</div></div>
-      </div></div>
       <div class="inf-note" id="t2-inf-note" style="display:none"></div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart2" viewBox="0 0 900 260"></svg></div><div class="legend" id="t2-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>元本</span></div></section>
+      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart2" viewBox="0 0 900 406"></svg></div><div class="legend" id="t2-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>元本</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>評価額</th><th>元本</th><th>運用益</th><th>利益率</th></tr></thead><tbody id="t2-table"></tbody></table></div></section>`;
   }
   function skeletonT3() {
@@ -1481,7 +1554,7 @@
           <div class="stat"><div class="k">判定</div><div class="v" id="t3-verdict">-</div></div>
         </div>
       </div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart3" viewBox="0 0 900 260"></svg></div><div class="legend" id="t3-legend"><span><i class="dot" style="background:#2563eb"></i>資産残高</span></div></section>
+      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart3" viewBox="0 0 900 406"></svg></div><div class="legend" id="t3-legend"><span><i class="dot" style="background:#2563eb"></i>資産残高</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>年間取り崩し額</th><th>取り崩し累計</th><th>年末残高</th><th>年間運用益</th></tr></thead><tbody id="t3-table"></tbody></table></div></section>`;
   }
   function skeletonNisa() {
@@ -1494,8 +1567,12 @@
           <div class="stat"><div class="k">利益率</div><div class="v" id="nisa-stat-roi">-</div></div>
         </div>
       </div>
-      <section class="card chart-card"><div class="chart-title">シナリオ比較グラフ</div><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 260"></svg></div><div class="legend" id="nisa-legend"></div></section>
-      <div id="nisa-scenario-cards" style="display:grid;gap:12px;"></div>
+      <section class="card chart-card"><div class="chart-title">シナリオ比較グラフ</div><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 406"></svg></div><div class="legend" id="nisa-legend"></div></section>
+      <div class="tax-card" id="nisa-tax-card"><div class="tax-card-title">💰 新NISAの非課税メリット（運用益が非課税）</div><div class="tax-stats">
+        <div class="tax-stat"><div class="k">NISA 最終手取り</div><div class="v v-accent" id="nisa-tax-nisa">-</div></div>
+        <div class="tax-stat"><div class="k">課税口座だった場合</div><div class="v" id="nisa-tax-taxed">-</div></div>
+        <div class="tax-stat"><div class="k">非課税メリット</div><div class="v v-positive" id="nisa-tax-bene">-</div></div>
+      </div><div class="tax-card-note">運用益に対する税率20.315%で試算。新NISAなら売却時も非課税です。</div></div>
       <section class="card table-card"><div class="table-title">年次サマリー（選択中シナリオ）</div><div class="table-wrap"><table><thead><tr><th>年</th><th>年間投資額</th><th>累計元本</th><th>評価額</th><th>運用益</th><th>生涯枠残</th></tr></thead><tbody id="nisa-table"></tbody></table></div></section>`;
   }
 
@@ -1518,7 +1595,6 @@
       <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
       <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
     </tr>`).join('');
-    updateTaxBenefit('t1', r.principal, r.balance);
     updateInflation('t1', r.balance, r.principal, parseInt(el('t1-years').value)||0);
     const y1 = parseInt(el('t1-years').value)||0;
     el('t1-hero-label').textContent = `予想評価額（${y1}年後）`;
@@ -1563,7 +1639,6 @@
       <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
       <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td>
     </tr>`).join('');
-    updateTaxBenefit('t2', r.principal, r.balance);
     updateInflation('t2', r.balance, r.principal, parseInt(el('t2-years').value)||0);
     const y2 = parseInt(el('t2-years').value)||0;
     el('t2-hero-label').textContent = `予想評価額（${y2}年後）`;
@@ -1646,19 +1721,18 @@
   const NISA_LUMP_MAX  = 240;  // 万円/年（成長投資枠）
   const NISA_TSUMI_MAX = 120;  // 万円/年（積立枠）
   const SCENARIO_COLORS = ['#2563eb','#0ea472','#f59e0b','#a855f7'];
-  const SCENARIO_NAMES  = ['シナリオ A','シナリオ B','シナリオ C','シナリオ D'];
+  const SCENARIO_NAMES  = ['シナリオA','シナリオB','シナリオC','シナリオD'];
 
   let nisaScenarios = [makeDefaultScenario(0)];
   let activeScenarioIdx = 0;
 
   function makeDefaultScenario(idx) {
     return {
-      name: SCENARIO_NAMES[idx] || `シナリオ ${idx+1}`,
+      name: SCENARIO_NAMES[idx] || `シナリオ${String.fromCharCode(65 + idx)}`,
       rate: 5,
       years: 20,
       // phases: 各期間ごとの積立＋一括設定
       phases: [{ startYear: 1, monthly: 10, lump: 0 }],
-      bonus: 0,
     };
   }
 
@@ -1808,14 +1882,12 @@
     sc.name  = el('ns-name').value || sc.name;
     sc.rate  = parseFloat(el('ns-rate').value)  || 0;
     sc.years = parseInt(el('ns-years').value)   || 20;
-    sc.bonus = parseFloat(el('ns-bonus').value) || 0;
   }
 
   function loadScenarioToForm(sc) {
     el('ns-name').value  = sc.name;
     el('ns-rate').value  = sc.rate;  el('ns-rate-r').value  = sc.rate;  syncSliderBg('ns-rate-r');
     el('ns-years').value = sc.years; el('ns-years-r').value = sc.years; syncSliderBg('ns-years-r');
-    el('ns-bonus').value = sc.bonus; el('ns-bonus-r').value = sc.bonus; syncSliderBg('ns-bonus-r');
     renderPhases();
     updateNisaQuota();
   }
@@ -1830,7 +1902,6 @@
   function updateNisaQuota() {
     const sc = getActiveScenario();
     const years  = parseInt(el('ns-years')?.value) || 20;
-    const bonus  = parseFloat(el('ns-bonus')?.value) || 0;
 
     let lifetime = 0;
     let firstAnnual = null;
@@ -1840,7 +1911,7 @@
       const ph = [...sc.phases].filter(p => p.startYear <= y).pop() || sc.phases[0];
       const monthly  = Math.min(ph.monthly || 0, NISA_TSUMI_MAX / 12);
       const lump     = Math.min(ph.lump    || 0, NISA_LUMP_MAX);
-      const annualRaw = monthly * 12 + lump + bonus;
+      const annualRaw = monthly * 12 + lump;
       if (annualRaw > NISA_ANNUAL) anyOver = true;
       const annualCapped = Math.min(annualRaw, NISA_ANNUAL);
       const room = Math.max(0, NISA_LIFETIME - lifetime);
@@ -1852,10 +1923,7 @@
 
     const totalRem = Math.max(0, NISA_LIFETIME - lifetime);
     const pct = Math.min(100, lifetime / NISA_LIFETIME * 100);
-    const annualRem = Math.max(0, NISA_ANNUAL - (firstAnnual || 0));
 
-    el('nq-annual').textContent     = `${(firstAnnual||0).toFixed(0)}万円`;
-    el('nq-annual-rem').textContent = `${annualRem.toFixed(0)}万円`;
     el('nq-total').textContent      = `${lifetime.toFixed(0)}万円`;
     el('nq-total-rem').textContent  = `${totalRem.toFixed(0)}万円`;
     el('nq-pct').textContent        = `${pct.toFixed(1)}%`;
@@ -1868,7 +1936,6 @@
   function simulateNisa(sc) {
     const mr     = sc.rate / 100 / 12;
     const years  = sc.years;
-    const bonus  = (sc.bonus || 0) * 10000;
     let bal = 0, lifetime = 0;
     const pts  = [{year:0, balance:0, principal:0}];
     const rows = [];
@@ -1880,14 +1947,14 @@
       // 一括：240万/年上限
       const lumpManEn    = Math.min(ph.lump || 0, NISA_LUMP_MAX) * 10000;
       // 年間合計（360万上限）
-      let annualRaw = monthlyManEn * 12 + lumpManEn + bonus;
+      let annualRaw = monthlyManEn * 12 + lumpManEn;
       annualRaw = Math.min(annualRaw, NISA_ANNUAL * 10000);
       // 生涯枠キャップ
       const room = Math.max(0, NISA_LIFETIME * 10000 - lifetime);
       const annualInvest = Math.min(annualRaw, room);
 
       // 月次複利：積立は毎月、一括は年初に投入
-      const lumpActual    = Math.min(lumpManEn + bonus, annualInvest);
+      const lumpActual    = Math.min(lumpManEn, annualInvest);
       const tsumtotalMax  = annualInvest - lumpActual;
       const monthlyActual = tsumtotalMax / 12;
 
@@ -1922,7 +1989,7 @@
   // ── チャート描画（複数シナリオ重ねて表示） ──
   function renderNisaChart(allResults) {
     const svg = el('chart4');
-    const W = 900, H = 260, pad = {t:36,r:20,b:44,l:84};
+    const W = 900, H = 406, pad = {t:36,r:20,b:44,l:84};
     const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
 
     const allVals = allResults.flatMap(r => r.pts.map(p => p.balance));
@@ -1974,9 +2041,18 @@
         fill="transparent" style="cursor:pointer"/>`;
     }
 
+    // 非課税枠1800万円 到達マーカー（アクティブシナリオ基準）
+    let limitMarker = '';
+    const _lim = nisaLimitYear((allResults[activeScenarioIdx] || allResults[0]).pts);
+    if (_lim != null && _lim <= maxX) {
+      const mx = pxFn(_lim);
+      const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
+      limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+    }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>
-      ${yGrid}${xGrid}${pathsSvg}${dotsSvg}${hovers}
+      ${yGrid}${xGrid}${pathsSvg}${dotsSvg}${limitMarker}${hovers}
     `;
     svg.classList.remove('chart-svg-reveal');
     void svg.offsetWidth;
@@ -2014,26 +2090,9 @@
     }).join('');
   }
 
-  function renderNisaScenarioCards(allResults) {
-    el('nisa-scenario-cards').innerHTML = allResults.map((res, si) => {
-      const sc = nisaScenarios[si];
-      const color = SCENARIO_COLORS[si % SCENARIO_COLORS.length];
-      const isActive = si === activeScenarioIdx;
-      return `<div class="scenario-card ${isActive?'active-card':''}">
-        <div class="scenario-card-header">
-          <div class="scenario-dot" style="background:${color}"></div>
-          <div class="scenario-card-title">${sc.name}</div>
-          ${isActive ? '<span style="font-size:11px;color:var(--accent);font-weight:700;margin-left:auto;">▶ 表示中</span>' : ''}
-        </div>
-        <div class="scenario-stats">
-          <div class="scenario-stat"><div class="k">予想評価額</div><div class="v" style="color:${color}">${fmtYen(res.finalBal)}</div></div>
-          <div class="scenario-stat"><div class="k">投資元本</div><div class="v">${fmtYen(res.principal)}</div></div>
-          <div class="scenario-stat"><div class="k">運用益</div><div class="v" style="color:${res.profit>=0?'var(--accent2)':'var(--danger)'}">${fmtYen(res.profit)}</div></div>
-          <div class="scenario-stat"><div class="k">利益率</div><div class="v">${fmtPct(res.roi)}</div></div>
-        </div>
-      </div>`;
-    }).join('');
-  }
+  // 改善5・案A：シナリオ別カード（renderNisaScenarioCards）は廃止。
+  //   アクティブシナリオの最終評価額はヘッドライン＋stats、比較は
+  //   重ね描画グラフ＋凡例＋左パネルのシナリオタブ（色付き）で表現。
 
   function renderNisaTable(res) {
     el('nisa-table').innerHTML = res.rows.map(row => `<tr>
@@ -2047,20 +2106,53 @@
   }
 
   // 【ID命名規約 / tab4(新NISA)】影響範囲が大きく t4-* へのリネームは見送り。
-  //   ns-*   = 左パネルの入力系（ns-rate, ns-years, ns-bonus, ns-name, ns-auto）
+  //   ns-*   = 左パネルの入力系（ns-rate, ns-years, ns-name, ns-auto）
   //   nisa-* = 右パネルの結果/部品系（nisa-stat-*, nisa-hero-*, nisa-table, nisa-legend,
   //            nisa-scenario-cards/tabs, nisa-stats-*, nisa-grid, nisa-right 等）
   //   グラフのみ命名統一済み：nisa-chart → chart4（chart1〜chart5 連番）
+  // 新NISA非課税枠（投資元本1800万円=18,000,000円）に最初に到達した年を返す
+  const NISA_LIMIT_YEN = 18000000;
+  function nisaLimitYear(pts) {
+    for (const p of pts) { if ((p.principal || 0) >= NISA_LIMIT_YEN) return p.year; }
+    return null;
+  }
+
+  // 改善5：比較ON=折れ線重ね描画 / 比較OFF=tab1〜3と同じ棒＋折れ線（renderChart流用）
+  function renderNisaGraph(allResults) {
+    const compareOn = el('nisa-cmp-on') && el('nisa-cmp-on').checked && nisaScenarios.length > 1;
+    if (compareOn) {
+      renderNisaChart(allResults);
+    } else {
+      const active = allResults[activeScenarioIdx];
+      el('nisa-legend').innerHTML = '<span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>元本</span>';
+      renderChart('chart4', active.pts, [
+        {key:'balance',   color:'#2563eb', label:'評価額', w:3.5},
+        {key:'principal', color:'#0ea472', label:'元本',   w:2.5},
+      ], makeTooltip('tt4'), { limitYear: nisaLimitYear(active.pts) });
+    }
+  }
+
+  // 改善6：tab4 比較ON時、ヘッドラインをシナリオ別サマリーに差し替え
+  function applyNisaHero(allResults) {
+    if (!(el('nisa-cmp-on') && el('nisa-cmp-on').checked && nisaScenarios.length > 1)) return;
+    const items = allResults.map((res, i) => ({
+      name: nisaScenarios[i].name,
+      color: SCENARIO_COLORS[i % SCENARIO_COLORS.length],
+      val: fmtYen(res.finalBal),
+    }));
+    applyHeroCompare('nisa-right', items, activeScenarioIdx, '最終評価額', si => switchNisaScenario(si));
+  }
+
   function calcNisa() {
     el('nisa-right').innerHTML = skeletonNisa();
     saveScenarioFromForm();
     const allResults = nisaScenarios.map(simulateNisa);
-    renderNisaChart(allResults);
-    renderNisaScenarioCards(allResults);
+    renderNisaGraph(allResults);
     renderNisaTable(allResults[activeScenarioIdx]);
     updateNisaQuota();
     // アクティブシナリオの数値を上部サマリーに反映
     updateNisaStats(allResults[activeScenarioIdx]);
+    applyNisaHero(allResults);
   }
 
   function updateNisaStats(res) {
@@ -2072,21 +2164,28 @@
     el('nisa-stat-roi').textContent = fmtPct(res.roi);
     el('nisa-hero-label').textContent = `最終評価額（${sc.name}）`;
     el('nisa-hero-val').textContent = fmtYen(res.finalBal);
+    // 非課税メリット（運用益に対する課税口座との差）
+    const gain = Math.max(0, res.profit);
+    const taxedHand = res.principal + gain * (1 - TAX_JP);
+    const benefit = res.finalBal - taxedHand;
+    if (el('nisa-tax-nisa'))  el('nisa-tax-nisa').textContent  = fmtYen(res.finalBal);
+    if (el('nisa-tax-taxed')) el('nisa-tax-taxed').textContent = fmtYen(taxedHand);
+    if (el('nisa-tax-bene'))  el('nisa-tax-bene').textContent  = '+' + fmtYen(benefit);
   }
 
   function switchNisaScenario(idx) {
     saveScenarioFromForm();
     activeScenarioIdx = idx;
-    document.querySelectorAll('.nisa-stab').forEach((b,i) => b.classList.toggle('active', i===idx));
+    el('nisa-scenario-tabs').querySelectorAll('.cmp-stab').forEach((b,i) => b.classList.toggle('active', i===idx));
     loadScenarioToForm(getActiveScenario());
     // 即座にグラフ・テーブルを更新（骨格を再生成してから描画）
     el('nisa-right').innerHTML = skeletonNisa();
     const allResults = nisaScenarios.map(simulateNisa);
-    renderNisaChart(allResults);
-    renderNisaScenarioCards(allResults);
+    renderNisaGraph(allResults);
     renderNisaTable(allResults[activeScenarioIdx]);
     updateNisaQuota();
     updateNisaStats(allResults[activeScenarioIdx]);
+    applyNisaHero(allResults);
   }
 
   function renderNisaScenarioTabs() {
@@ -2125,7 +2224,7 @@
 
   // ════════ シナリオ比較（Tab 1-3 共通） ════════
   const CMP_COLORS = ['#2563eb','#f59e0b','#a855f7','#ef4444'];
-  const CMP_NAMES  = ['シナリオ1','シナリオ2','シナリオ3','シナリオ4'];
+  const CMP_NAMES  = ['シナリオA','シナリオB','シナリオC','シナリオD'];
 
   // compareState[tabId] = { on: bool, scenarios: [{label, params}], active: idx }
   function makeCmpState(tabId, defaultParams) {
@@ -2210,7 +2309,7 @@
 
   function renderCompareChart(svgId, allScenarios, tabId, tt) {
     const svg = el(svgId);
-    const W=900,H=260,pad={t:36,r:20,b:44,l:84};
+    const W=900,H=406,pad={t:36,r:20,b:44,l:84};
     const iW=W-pad.l-pad.r, iH=H-pad.t-pad.b;
     const allPts = allScenarios.flatMap(sc => sc.pts);
     const maxY = Math.max(...allPts.map(p=>p.balance??0), 1);
@@ -2383,6 +2482,50 @@
     }
   }
 
+  // 改善6：result-block 内の単一ヘッドラインを「シナリオ比較サマリー」に差し替え
+  function escHtml(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function applyHeroCompare(areaId, items, activeIdx, label, onClick) {
+    const area = el(areaId);
+    if (!area) return;
+    const block = area.querySelector('.result-block');
+    if (!block) return;
+    const hero = block.querySelector('.hero-result, .hero-compare');
+    if (!hero) return;
+    const n = items.length;
+    const wrap = document.createElement('div');
+    wrap.className = 'hero-compare';
+    wrap.setAttribute('data-n', n);
+    wrap.style.gridTemplateColumns = `repeat(${n},1fr)`;
+    wrap.innerHTML = items.map((it,i) => `<div class="hero-mini${i===activeIdx?' active':''}" data-si="${i}">
+        <div class="hm-name"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${it.color};margin-right:4px;"></i>${i===activeIdx?'▶ ':''}${escHtml(it.name)}</div>
+        <div class="hm-val">${it.val}</div>
+        <div class="hm-label">${label}</div>
+      </div>`).join('');
+    hero.replaceWith(wrap);
+    wrap.querySelectorAll('.hero-mini').forEach(m => {
+      m.addEventListener('click', () => onClick(+m.dataset.si));
+    });
+  }
+  // tab1〜3：比較タブクリックと同等のアクティブ切替（heroミニからも呼ぶ）
+  function switchCmpScenario(tabId, si) {
+    syncActiveScenarioParams(tabId);
+    cmpState[tabId].active = si;
+    loadCmpScenarioToForm(tabId, cmpState[tabId].scenarios[si].params);
+    renderCmpTabs(tabId);
+    refreshTabWithCompare(tabId);
+  }
+  function applyCmpHero(tabId) {
+    const st = cmpState[tabId];
+    if (st.scenarios.length < 2) return; // 1シナリオ時は通常の単一ヘッドラインを維持
+    const label = tabId === 't3' ? '月の取り崩し可能額' : '予想評価額';
+    const items = st.scenarios.map((s, i) => {
+      const rr = simulateFromParams(tabId, s.params);
+      return { name: s.label, color: CMP_COLORS[i % CMP_COLORS.length],
+        val: fmtYen(tabId === 't3' ? rr.monthlyW : rr.balance) };
+    });
+    applyHeroCompare(`${tabId}-result-area`, items, st.active, label, si => switchCmpScenario(tabId, si));
+  }
+
   function refreshTabWithCompare(tabId) {
     if (tabId === 't1') {
       if (cmpState.t1.on) {
@@ -2397,6 +2540,7 @@
         const profit=r.balance-r.principal; el('t1-profit').textContent=fmtYen(profit); el('t1-profit').className='v '+(profit>=0?'v-positive':'v-negative');
         el('t1-roi').textContent=fmtPct(r.principal?(profit/r.principal*100):0);
         el('t1-table').innerHTML=r.rows.map(row=>`<tr><td>${row.year}年目</td><td>${fmtYen(row.annual)}</td><td>${fmtYen(row.principal)}</td><td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td><td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td></tr>`).join('');
+        applyCmpHero('t1');
       } else { calc1(); }
     } else if (tabId === 't2') {
       if (cmpState.t2.on) {
@@ -2410,6 +2554,7 @@
         const profit=r.balance-r.principal; el('t2-profit').textContent=fmtYen(profit); el('t2-profit').className='v '+(profit>=0?'v-positive':'v-negative');
         el('t2-roi').textContent=fmtPct(r.principal?(profit/r.principal*100):0);
         el('t2-table').innerHTML=r.rows.map(row=>`<tr><td>${row.year}年目</td><td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td><td>${fmtYen(row.principal)}</td><td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td><td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td></tr>`).join('');
+        applyCmpHero('t2');
       } else { calc2(); }
     } else if (tabId === 't3') {
       if (cmpState.t3.on) {
@@ -2423,6 +2568,7 @@
         el('t3-final').textContent=fmtYen(r.finalBal); el('t3-final').className='v '+(r.finalBal>0?'v-positive':'v-negative');
         el('t3-verdict').textContent=r.survived?'持続可能':'資産枯渇'; el('t3-verdict').className='v '+(r.survived?'v-positive':'v-negative');
         el('t3-table').innerHTML=r.rows.map(row=>`<tr><td>${row.year}年目</td><td>${fmtYen(row.annualW)}</td><td>${fmtYen(row.totalW)}</td><td style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td><td style="color:#0ea472">${fmtYen(row.gain)}</td></tr>`).join('');
+        applyCmpHero('t3');
       } else { calc3(); }
     }
   }
@@ -2484,7 +2630,7 @@
   });
 
   el('nisa-cmp-on').addEventListener('change', function() {
-    el('nisa-cmp-body').style.display = this.checked ? '' : 'none';
+    el('nisa-panel-cmp-row').style.display = this.checked ? '' : 'none';
     if (!this.checked && nisaScenarios.length > 1) {
       // 比較OFFのとき：アクティブシナリオだけ残す
       nisaScenarios = [nisaScenarios[activeScenarioIdx]];
@@ -2501,7 +2647,7 @@
     nisaScenarios = [makeDefaultScenario(0)];
     activeScenarioIdx = 0;
     el('nisa-cmp-on').checked = false;
-    el('nisa-cmp-body').style.display = 'none';
+    el('nisa-panel-cmp-row').style.display = 'none';
     renderNisaScenarioTabs();
     loadScenarioToForm(getActiveScenario());
     calcNisa();
@@ -2515,7 +2661,6 @@
   const autoNisa = () => { if (el('ns-auto').checked) calcNisa(); };
   linkSlider('ns-rate',  'ns-rate-r',  autoNisa);
   linkSlider('ns-years', 'ns-years-r', autoNisa);
-  linkSlider('ns-bonus', 'ns-bonus-r', autoNisa);
 
   // Tooltip for NISA chart
   const tt4El = document.createElement('div');
@@ -2761,7 +2906,7 @@ function calcFire() {
   const chartHtml = `
     <section class="card chart-card">
       <div class="chart-title">${r.achieved?'FIRE達成までの資産推移':'資産推移グラフ（60年）'}</div>
-      <div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 260"></svg></div>
+      <div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div>
       <div class="legend">
         <span><i class="dot" style="background:#2563eb"></i>評価額</span>
         <span><i class="dot" style="background:#059669"></i>投資元本</span>
@@ -2785,7 +2930,7 @@ function calcFire() {
 function renderFireChart(r) {
   const svg = el('chart5');
   if (!svg) return;
-  const W=900, H=260, pad={t:36,r:20,b:44,l:84};
+  const W=900, H=406, pad={t:36,r:20,b:44,l:84};
   const iW=W-pad.l-pad.r, iH=H-pad.t-pad.b;
   const limit = r.fy!==null ? Math.min(r.fy+3, 60) : 60;
   const pts = r.pts.filter(p => p.year<=limit);
