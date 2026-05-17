@@ -12,9 +12,9 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow">
   <meta name="format-detection" content="telephone=no">
-  <link rel="canonical" href="https://newnisa.github.io/calculator-site/">
-  <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/">
-  <link rel="alternate" hreflang="x-default" href="https://newnisa.github.io/calculator-site/">
+  <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator.html">
+  <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/simulator.html">
+  <link rel="alternate" hreflang="x-default" href="https://newnisa.github.io/calculator-site/simulator.html">
 
   <!-- ═══ パフォーマンス最適化 ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="新NISAシミュレーター｜積立・一括・取り崩しを無料で試算＆シナリオ比較">
   <meta property="og:description" content="新NISAの積立・一括・取り崩しを無料でシミュレーション。複数シナリオを比較しながら将来の予想評価額を試算できます。FIRE達成までの資産推移もグラフで見える化。">
-  <meta property="og:url" content="https://newnisa.github.io/calculator-site/">
+  <meta property="og:url" content="https://newnisa.github.io/calculator-site/simulator.html">
   <meta property="og:site_name" content="新NISAシミュレーター">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
@@ -266,7 +266,11 @@
       outline: none; background: white; color: var(--text);
       border-radius: 0; padding: 8px 10px; font-size: 15px; font-weight: 700;
       transition: .18s; text-align: center; flex-shrink: 0;
+      -moz-appearance: textfield; appearance: textfield;
     }
+    /* ブラウザ標準スピナー非表示（＋/−ボタンで操作。キーボード入力は可） */
+    .num-input::-webkit-outer-spin-button,
+    .num-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .num-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,78,216,.13); background: white; z-index: 1; position: relative; }
     .unit-label { color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; margin-left: 10px; }
     input[type="range"] {
@@ -341,6 +345,8 @@
     .chart-sub   { font-size: 13px; color: var(--muted); font-weight: 500; margin-bottom: 16px; }
     .chart-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; }
     svg { width: 100%; height: auto; display: block; }
+    /* グラフ内テキストの可読性向上（色はSVG側属性を尊重、ウェイト/描画のみ底上げ） */
+    .chart-wrap svg text { font-weight: 600; font-family: "Hiragino Sans","Noto Sans JP","Yu Gothic UI",sans-serif; }
     .animated-path { stroke-dasharray: 6000; stroke-dashoffset: 6000; animation: drawLine 1.4s cubic-bezier(.4,0,.2,1) forwards; }
     @keyframes drawLine { to { stroke-dashoffset: 0; } }
     .fill-fade { opacity: 0; animation: fadeIn .9s ease .4s forwards; }
@@ -581,8 +587,8 @@
     /* ── tab1〜4 左パネル圧縮（B:数値+スライダー1行 / C:比較バー圧縮 / D:ボタン1行 / 詳細設定）。#tab5は対象外＝完全不変 ── */
     #tab1 .input-slider-wrap, #tab2 .input-slider-wrap,
     #tab3 .input-slider-wrap, #tab4 .input-slider-wrap {
-      display: grid; grid-template-columns: 200px 1fr;
-      column-gap: 12px; row-gap: 2px; align-items: center;
+      display: grid; grid-template-columns: 182px 1fr;
+      column-gap: 14px; row-gap: 2px; align-items: center;
     }
     #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
     #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { grid-column: 1; grid-row: 1; }
@@ -593,10 +599,10 @@
 
     /* 数値ブロックをコンパクト化（1行に収めるため。spin-btn注入される.input-rowは維持） */
     /* 改善7：input-row幅を一定化し全行でスライダー開始/終端を縦に揃える */
-    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { width: 64px; padding: 7px 6px; font-size: 14px; }
-    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; min-width: 50px; display: inline-block; text-align: left; }
+    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { width: 56px; padding: 7px 4px; font-size: 14px; }
+    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; min-width: 46px; display: inline-block; text-align: left; }
     #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
-    #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { width: 200px; }
+    #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { width: 182px; }
 
     /* 詳細設定アコーディオン（インフレ率を初期非表示・値は計算に使用継続） */
     .adv-set { border-top: 1.5px solid var(--border); padding-top: 6px; }
@@ -622,12 +628,12 @@
     #tab3 .auto-calc-wrap, #tab4 .auto-calc-wrap { font-size: 12px; margin-left: 4px; }
 
     /* 項目5：tab5 左パネルを tab1〜4 と完全統一（同一スコープCSSを #tab5 にも適用） */
-    #tab5 .input-slider-wrap { display:grid; grid-template-columns:200px 1fr; column-gap:12px; row-gap:2px; align-items:center; }
-    #tab5 .input-slider-wrap > .input-row { grid-column:1; grid-row:1; width:200px; }
+    #tab5 .input-slider-wrap { display:grid; grid-template-columns:182px 1fr; column-gap:14px; row-gap:2px; align-items:center; }
+    #tab5 .input-slider-wrap > .input-row { grid-column:1; grid-row:1; width:182px; }
     #tab5 .input-slider-wrap > input[type="range"] { grid-column:2; grid-row:1; }
     #tab5 .input-slider-wrap > .range-labels { grid-column:2; grid-row:2; margin-top:0; }
-    #tab5 .num-input { width:64px; padding:7px 6px; font-size:14px; }
-    #tab5 .unit-label { margin-left:6px; min-width:50px; display:inline-block; text-align:left; }
+    #tab5 .num-input { width:56px; padding:7px 4px; font-size:14px; }
+    #tab5 .unit-label { margin-left:6px; min-width:46px; display:inline-block; text-align:left; }
     #tab5 .panel-cmp-bar { padding:8px 12px; margin-bottom:10px; }
     #tab5 .actions { gap:7px; }
     #tab5 .actions .btn-primary { padding:9px 15px; font-size:13px; }
@@ -1089,6 +1095,13 @@
     <main class="grid">
       <section class="card panel">
         <div class="panel-title">FIRE逆算条件を入力</div>
+        <div class="panel-cmp-bar" id="f5-panel-cmp-bar">
+          <label class="panel-cmp-label"><input type="checkbox" id="f5-cmp-on"> シナリオ比較</label>
+          <div class="panel-cmp-row" id="f5-panel-cmp-row" style="display:none">
+            <div class="compare-scenario-tabs" id="f5-cmp-tabs"></div>
+            <button type="button" class="cmp-add-btn" id="f5-cmp-add">＋ シナリオ追加</button>
+          </div>
+        </div>
         <div class="form-grid">
           <label>月の生活費（FIRE後）
             <div class="input-slider-wrap">
@@ -1352,11 +1365,11 @@
     const barGroupW = iW / maxX;
 
     // Y軸グリッド + 万円ラベル
-    let yGrid = `<text x="${pad.l}" y="${pad.t - 12}" text-anchor="start" fill="#aaa" font-size="11" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t - 12}" text-anchor="start" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
     ticks.forEach(v => {
       const yy = py(v).toFixed(1);
       yGrid += `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#888" font-size="11" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
 
     // X軸グリッド
@@ -1368,11 +1381,11 @@
     for (let yr = 0; yr <= maxX; yr += xStep) {
       const xx = px(yr).toFixed(1);
       xGrid += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">${yr}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
     }
     if (maxX % xStep !== 0) {
       const xx = px(maxX).toFixed(1);
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">${maxX}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${maxX}年後</text>`;
     }
 
     // 積み上げ棒グラフ
@@ -1567,7 +1580,7 @@
           <div class="stat"><div class="k">利益率</div><div class="v" id="nisa-stat-roi">-</div></div>
         </div>
       </div>
-      <section class="card chart-card"><div class="chart-title">シナリオ比較グラフ</div><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 406"></svg></div><div class="legend" id="nisa-legend"></div></section>
+      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 406"></svg></div><div class="legend" id="nisa-legend"></div></section>
       <div class="tax-card" id="nisa-tax-card"><div class="tax-card-title">💰 新NISAの非課税メリット（運用益が非課税）</div><div class="tax-stats">
         <div class="tax-stat"><div class="k">NISA 最終手取り</div><div class="v v-accent" id="nisa-tax-nisa">-</div></div>
         <div class="tax-stat"><div class="k">課税口座だった場合</div><div class="v" id="nisa-tax-taxed">-</div></div>
@@ -2000,11 +2013,11 @@
     const pxFn = v => pad.l + v / maxX * iW;
     const pyFn = v => pad.t + iH - v / scaleY * iH;
 
-    let yGrid = `<text x="${pad.l}" y="${pad.t-14}" fill="#aaa" font-size="11" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t-14}" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
     ticks.forEach(v => {
       const yy = pyFn(v).toFixed(1);
       yGrid += `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#888" font-size="11" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
 
     const rawXStep = Math.max(1, Math.ceil(maxX / 8));
@@ -2012,7 +2025,7 @@
     for (let yr = 0; yr <= maxX; yr += rawXStep) {
       const xx = pxFn(yr).toFixed(1);
       xGrid += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">${yr}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
     }
 
     let pathsSvg = '', dotsSvg = '';
@@ -2235,6 +2248,7 @@
     t1: makeCmpState('t1', {monthly:2, rate:7, years:20, initial:0}),
     t2: makeCmpState('t2', {principal:1000, rate:7, years:20}),
     t3: makeCmpState('t3', {asset:2000, rate:4, amt:80, rRate:5, years:30, mode:'pct'}),
+    f5: makeCmpState('f5', {living:25, current:5000, monthly:0, rate:5, age:45}),
   };
 
   function getTabParams(tabId) {
@@ -2256,6 +2270,13 @@
       rRate: parseFloat(el('t3-return').value)||0,
       years: parseInt(el('t3-years').value)||30,
       mode:  withdrawMode,
+    };
+    if (tabId === 'f5') return {
+      living:  parseFloat(el('f5-living').value)||0,
+      current: parseFloat(el('f5-current').value)||0,
+      monthly: parseFloat(el('f5-monthly').value)||0,
+      rate:    parseFloat(el('f5-rate').value)||0,
+      age:     parseInt(el('f5-age').value)||30,
     };
   }
 
@@ -2305,6 +2326,15 @@
       }
       return {annualW, monthlyW:annualW/12, finalBal:bal, survived:bal>0, pts, rows};
     }
+    if (tabId === 'f5') {
+      const c = simulateFireParams(params);
+      if (!c) return { pts:[{year:0,balance:0}], fy:null, fm:null, fireMonth:null, achieved:false, fireTarget:0 };
+      // renderCompareChart は p.balance を円で扱うため万円→円へ変換
+      return {
+        pts: c.pts.map(p => ({ year:p.year, balance:p.balance*10000 })),
+        fy:c.fy, fm:c.fm, fireMonth:c.fireMonth, achieved:c.achieved, fireTarget:c.fireTarget,
+      };
+    }
   }
 
   function renderCompareChart(svgId, allScenarios, tabId, tt) {
@@ -2319,18 +2349,18 @@
     const pyFn = v => pad.t + iH - v/scaleY*iH;
     const barW = iW/maxX;
 
-    let yGrid = `<text x="${pad.l}" y="${pad.t-12}" fill="#aaa" font-size="11" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t-12}" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
     ticks.forEach(v=>{
       const yy=pyFn(v).toFixed(1);
       yGrid+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#888" font-size="11" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
     const rawXStep=Math.max(1,Math.ceil(maxX/8));
     let xGrid='';
     for(let yr=0;yr<=maxX;yr+=rawXStep){
       const xx=pxFn(yr).toFixed(1);
       xGrid+=`<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">${yr}年後</text>`;
+      xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
     }
 
     let paths='', dots='', hovers='';
@@ -2479,6 +2509,12 @@
       if (params.mode==='pct') { el('t3-rate').value=params.rate; el('t3-rate-r').value=params.rate; el('t3-rate-r').dispatchEvent(new Event('input')); }
       else { el('t3-amt').value=params.amt; el('t3-amt-r').value=params.amt; el('t3-amt-r').dispatchEvent(new Event('input')); }
       setWithdrawMode(params.mode);
+    } else if (tabId === 'f5') {
+      el('f5-living').value=params.living;   el('f5-living-r').value=params.living;   el('f5-living-r').dispatchEvent(new Event('input'));
+      el('f5-current').value=params.current; el('f5-current-r').value=params.current; el('f5-current-r').dispatchEvent(new Event('input'));
+      el('f5-monthly').value=params.monthly; el('f5-monthly-r').value=params.monthly; el('f5-monthly-r').dispatchEvent(new Event('input'));
+      el('f5-rate').value=params.rate;       el('f5-rate-r').value=params.rate;       el('f5-rate-r').dispatchEvent(new Event('input'));
+      el('f5-age').value=params.age;         el('f5-age-r').value=params.age;         el('f5-age-r').dispatchEvent(new Event('input'));
     }
   }
 
@@ -2517,11 +2553,11 @@
   function applyCmpHero(tabId) {
     const st = cmpState[tabId];
     if (st.scenarios.length < 2) return; // 1シナリオ時は通常の単一ヘッドラインを維持
-    const label = tabId === 't3' ? '月の取り崩し可能額' : '予想評価額';
+    const label = tabId === 't3' ? '月の取り崩し可能額' : tabId === 'f5' ? 'FIRE達成まで' : '予想評価額';
     const items = st.scenarios.map((s, i) => {
       const rr = simulateFromParams(tabId, s.params);
       return { name: s.label, color: CMP_COLORS[i % CMP_COLORS.length],
-        val: fmtYen(tabId === 't3' ? rr.monthlyW : rr.balance) };
+        val: tabId === 'f5' ? firePeriodStr(rr) : fmtYen(tabId === 't3' ? rr.monthlyW : rr.balance) };
     });
     applyHeroCompare(`${tabId}-result-area`, items, st.active, label, si => switchCmpScenario(tabId, si));
   }
@@ -2570,6 +2606,22 @@
         el('t3-table').innerHTML=r.rows.map(row=>`<tr><td>${row.year}年目</td><td>${fmtYen(row.annualW)}</td><td>${fmtYen(row.totalW)}</td><td style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td><td style="color:#0ea472">${fmtYen(row.gain)}</td></tr>`).join('');
         applyCmpHero('t3');
       } else { calc3(); }
+    } else if (tabId === 'f5') {
+      if (cmpState.f5.on) {
+        syncActiveScenarioParams('f5');
+        const core = simulateFireParams(cmpState.f5.scenarios[cmpState.f5.active].params);
+        const area = el('f5-result-area');
+        if (core) {
+          area.innerHTML = fireAreaHTML(core);
+        } else {
+          area.innerHTML = `<div class="result-block"><div class="hero-result"><div class="fh-label">FIRE達成まで</div><div><span class="fh-val">-</span></div></div><div class="stats"><div class="stat"><div class="k">月の生活費</div><div class="v">未入力</div></div></div></div>
+            <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div><div class="legend" id="f5-legend"></div></section>`;
+        }
+        const all = buildCmpScenarios('f5');
+        renderCompareChart('chart5', all, 'f5', makeTooltip('tt1'));
+        renderCompareLegend('f5-legend', all);
+        applyCmpHero('f5');
+      } else { calcFire(); }
     }
   }
 
@@ -2601,6 +2653,29 @@
       renderCmpTabs(tabId);
       refreshTabWithCompare(tabId);
     });
+  });
+
+  // tab5（FIRE逆算）シナリオ比較トグル／追加
+  el('f5-cmp-on').addEventListener('change', function() {
+    cmpState.f5.on = this.checked;
+    el('f5-panel-cmp-row').style.display = this.checked ? '' : 'none';
+    if (this.checked) {
+      cmpState.f5.scenarios[cmpState.f5.active].params = getTabParams('f5');
+      renderCmpTabs('f5');
+      refreshTabWithCompare('f5');
+    } else {
+      calcFire();
+    }
+  });
+  el('f5-cmp-add').addEventListener('click', () => {
+    const st = cmpState.f5;
+    if (st.scenarios.length >= 4) { alert('シナリオは最大4つまでです'); return; }
+    syncActiveScenarioParams('f5');
+    const ni = st.scenarios.length;
+    st.scenarios.push({ label: CMP_NAMES[ni], params: {...getTabParams('f5')} });
+    st.active = ni;
+    renderCmpTabs('f5');
+    refreshTabWithCompare('f5');
   });
 
   // Hook calc1/2/3 to also update compare if on
@@ -2695,6 +2770,28 @@
       <li><strong>シナリオ比較機能</strong>：複数の条件を並べて比較し、最適なプランを検討可能</li>
       <li><strong>グラフ表示</strong>：資産推移を視覚的に確認でき、元本と運用益の内訳も把握可能</li>
     </ul>
+  </article>
+
+  <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-top:20px;">
+    <h2 style="font-size:20px;font-weight:800;color:#111827;margin-bottom:14px;border-bottom:2px solid #c8cdd8;padding-bottom:10px;">各シミュレーションの解説</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px;">
+      <section style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 20px;">
+        <h3 style="font-size:16px;font-weight:800;color:#111827;margin-bottom:8px;">積立投資｜複利運用と長期積立のメリット</h3>
+        <p style="color:#374151;line-height:1.9;font-size:14px;">毎月一定額を投資し続ける積立投資は、購入価格が平準化される<strong>ドルコスト平均法</strong>により高値づかみのリスクを抑えられます。さらに運用益を再投資する<strong>複利</strong>の効果で、運用期間が長いほど資産は加速度的に増えます。例えば毎月3万円を年利5%で20年積み立てると、元本720万円に対し評価額は約1,237万円。時間を味方につけることが資産形成の王道です。</p>
+      </section>
+      <section style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 20px;">
+        <h3 style="font-size:16px;font-weight:800;color:#111827;margin-bottom:8px;">一括投資｜積立との違いとリスク分散</h3>
+        <p style="color:#374151;line-height:1.9;font-size:14px;">一括投資はまとまった資金を一度に投じるため運用期間を最大化できますが、投資直後の下落の影響を受けやすい面があります。積立投資は時間分散でリスクを抑えられる一方、上昇相場では機会損失になることも。どちらが有利かは相場と手元資金次第です。投資対象の<strong>地域・資産の分散</strong>と長期保有を組み合わせることで、価格変動の影響をさらに平準化できます。</p>
+      </section>
+      <section style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 20px;">
+        <h3 style="font-size:16px;font-weight:800;color:#111827;margin-bottom:8px;">新NISA｜非課税制度と1,800万円枠</h3>
+        <p style="color:#374151;line-height:1.9;font-size:14px;">新NISAは年間最大360万円、生涯<strong>1,800万円</strong>まで投資でき、運用益・配当が非課税になる制度です。通常は約20.315%課税される運用益が非課税になるため、長期・複利運用との相性は抜群です。非課税保有期間は無期限で、売却した分の枠は翌年に復活します。本タブでは積立枠と成長投資枠を組み合わせた複数フェーズ設定に対応し、枠の使用率も自動計算します。</p>
+      </section>
+      <section style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 20px;">
+        <h3 style="font-size:16px;font-weight:800;color:#111827;margin-bottom:8px;">FIRE逆算・取り崩し｜4%ルールと取り崩し戦略</h3>
+        <p style="color:#374151;line-height:1.9;font-size:14px;"><strong>FIRE</strong>は年間生活費の25倍の資産で経済的自立を目指す考え方です。築いた資産を年4%程度ずつ取り崩しても長期間維持しやすいという経験則が<strong>4%ルール</strong>です。ただし相場下落の時期やインフレで安全な取り崩し率は変動するため、保守的には3〜4%が目安。FIRE逆算タブで達成年数を、取り崩しタブで資産寿命をそれぞれ確認し、無理のない出口戦略を検討できます。</p>
+      </section>
+    </div>
   </article>
 
   <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-top:20px;">
@@ -2833,6 +2930,33 @@ linkSlider('t2-inf','t2-inf-r', () => {
 });
 
 // ─── ③ FIRE 逆算 ────────────────────────────────────────────
+// パラメータ駆動のFIRE試算コア（pts は万円単位）。simulateFire と同一ロジック
+function simulateFireParams(p) {
+  const livingM  = (p.living  ||0) * 10000;
+  const curAsset = (p.current ||0) * 10000;
+  const monthlyC = (p.monthly ||0) * 10000;
+  const rate     =  p.rate    ||0;
+  const age      =  p.age     ||30;
+  const mr       = rate / 100 / 12;
+  const annualLiving = livingM * 12;
+  const fireTarget   = annualLiving * 25;
+  if (fireTarget <= 0) return null;
+  let bal = curAsset, principal = curAsset;
+  const pts = [{year:0, balance:bal/10000, principal:principal/10000}];
+  let fireMonth = null;
+  for (let m = 1; m <= 720; m++) {
+    bal = bal * (1 + mr) + monthlyC;
+    principal += monthlyC;
+    if (m % 12 === 0) pts.push({year:m/12, balance:bal/10000, principal:principal/10000});
+    if (fireMonth===null && bal>=fireTarget) fireMonth = m;
+  }
+  const fy = fireMonth!==null ? Math.floor(fireMonth/12) : null;
+  const fm = fireMonth!==null ? fireMonth%12 : null;
+  return { fireTarget, annualLiving, bal, principal, pts,
+    fireMonth, fy, fm, achieved: fireMonth!==null,
+    fireAge: fireMonth!==null ? age + fireMonth/12 : null };
+}
+
 function simulateFire() {
   const livingM  = (parseFloat(el('f5-living').value)  ||0) * 10000;
   const curAsset = (parseFloat(el('f5-current').value) ||0) * 10000;
@@ -2878,42 +3002,43 @@ function fireTableRows(r) {
   return html;
 }
 
-function calcFire() {
-  const r = simulateFire();
-  const area = el('f5-result-area');
-  if (!r) return;
+// FIRE達成期間の表示文字列
+function firePeriodStr(r) {
+  if (!r || !r.achieved) return '達成困難';
+  const ys = r.fy > 0 ? `${r.fy}年` : '';
+  const ms = r.fm > 0 ? `${r.fm}ヶ月` : (r.fy===0 ? `${r.fireMonth}ヶ月` : '');
+  return `${ys||'1年未満'}${ms}`;
+}
 
+// 結果エリアのHTMLを生成（単一表示・比較表示で共用）
+function fireAreaHTML(r) {
   const yearsStr  = r.achieved ? (r.fy > 0 ? `${r.fy}年` : '') : '';
   const monthsStr = r.achieved ? (r.fm > 0 ? `${r.fm}ヶ月` : (r.fy===0 ? `${r.fireMonth}ヶ月` : '')) : '';
-
-  // 3カード（ヘッドラインの「FIRE達成期間」と重複しない指標のみ）
   const stat3 = `<div class="stats">
       <div class="stat"><div class="k">FIRE必要資産（25倍）</div><div class="v v-accent">${fmtYen(r.fireTarget)}</div></div>
       <div class="stat"><div class="k">年間生活費</div><div class="v">${fmtYen(r.annualLiving)}</div></div>
       <div class="stat"><div class="k">月間取り崩し可能額（4%）</div><div class="v">${fmtYen(r.fireTarget*0.04/12)}</div></div>
     </div>`;
-
-  // 改善4・案A：ヘッドライン＋statsを1つの result-block に統合
   const statsHtml = r.achieved
     ? `<div class="result-block">
         <div class="hero-result"><div class="fh-label">FIRE達成まであと</div><div><span class="fh-val">${yearsStr||'1年未満'}</span>${monthsStr?`<span class="fh-unit">${monthsStr}</span>`:''}</div></div>
         ${stat3}
       </div>`
     : `<div class="fire-impossible">⚠️ 現在の条件では60年以内のFIRE達成が難しい見込みです。<br>積立額・年利を増やすか、生活費の削減を検討してください。</div>
-      <div class="result-block">${stat3}</div>`;
-  const heroHtml = '';
-
+      <div class="result-block">
+        <div class="hero-result"><div class="fh-label">FIRE達成</div><div><span class="fh-val">達成困難</span></div></div>
+        ${stat3}
+      </div>`;
   const chartHtml = `
     <section class="card chart-card">
-      <div class="chart-title">${r.achieved?'FIRE達成までの資産推移':'資産推移グラフ（60年）'}</div>
+      <div class="chart-title">資産推移グラフ</div>
       <div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div>
-      <div class="legend">
+      <div class="legend" id="f5-legend">
         <span><i class="dot" style="background:#2563eb"></i>評価額</span>
         <span><i class="dot" style="background:#059669"></i>投資元本</span>
         <span><i class="dot" style="background:#ef4444"></i>FIRE目標</span>
       </div>
     </section>`;
-
   const tableHtml = `
     <section class="card table-card">
       <div class="table-title">年次サマリー${r.achieved?'（FIRE達成まで）':'（60年間の推移）'}</div>
@@ -2922,8 +3047,15 @@ function calcFire() {
         <tbody>${fireTableRows(r)}</tbody>
       </table></div>
     </section>`;
+  return statsHtml + chartHtml + tableHtml;
+}
 
-  area.innerHTML = heroHtml + statsHtml + chartHtml + tableHtml;
+function calcFire() {
+  if (cmpState.f5 && cmpState.f5.on) { syncActiveScenarioParams('f5'); refreshTabWithCompare('f5'); return; }
+  const r = simulateFire();
+  const area = el('f5-result-area');
+  if (!r) return;
+  area.innerHTML = fireAreaHTML(r);
   requestAnimationFrame(() => renderFireChart(r));
 }
 
@@ -2942,18 +3074,18 @@ function renderFireChart(r) {
   const pxF = v => pad.l + v/maxX*iW;
   const pyF = v => pad.t + iH - Math.min(v,scaleY)/scaleY*iH;
 
-  let yGrid=`<text x="${pad.l}" y="${pad.t-12}" text-anchor="start" fill="#aaa" font-size="11" font-family="sans-serif">万円</text>`;
+  let yGrid=`<text x="${pad.l}" y="${pad.t-12}" text-anchor="start" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
   ticks.forEach(v => {
     const yy=pyF(v).toFixed(1);
     yGrid+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-    yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#888" font-size="11" font-family="sans-serif">${fmtAxis(v)}</text>`;
+    yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
   });
   const xStep=Math.max(1,Math.ceil(maxX/6));
   let xGrid='';
   for (let yr=0; yr<=maxX; yr+=xStep) {
     const xx=pxF(yr).toFixed(1);
     xGrid+=`<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-    xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">${yr}年後</text>`;
+    xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
   }
   const bw=Math.max(2, iW/maxX*0.65);
   let bars='';
