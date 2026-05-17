@@ -22,11 +22,16 @@
   <meta property="og:site_name" content="新NISAシミュレーター">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="新NISAシミュレーターのトップ画面">
 
   <!-- ═══ Twitter Card ═══ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="新NISAシミュレーター｜積立・一括・FIRE 複利計算ツール【無料】">
   <meta name="twitter:description" content="新NISAの積立・一括・取り崩しを無料シミュレーション。将来の評価額をグラフで見える化。">
+  <meta name="twitter:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+  <meta name="twitter:image:alt" content="新NISAシミュレーターのトップ画面">
 
   <!-- ═══ ファビコン ═══ -->
   <meta name="theme-color" content="#2563eb">
@@ -59,6 +64,47 @@
         "operatingSystem": "Web",
         "isAccessibleForFree": true,
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "年利は何%で設定するのが一般的ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "S&P500や全世界株式などのインデックス投資では、過去の実績として年平均7〜10%程度のリターンが知られています。ただし将来のリターンは保証されないため、長期の資産計画では3〜7%程度で保守的に見積もる人が多いです。低めに想定するほど計画の安全性は高まります。" }
+          },
+          {
+            "@type": "Question",
+            "name": "新NISAはどんな制度ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "新NISAは2024年に始まった少額投資非課税制度です。年間最大360万円（つみたて投資枠120万円＋成長投資枠240万円）、生涯で1,800万円まで投資でき、運用益や配当が非課税になります。非課税保有期間は無期限で、売却した分の枠は翌年に復活します。" }
+          },
+          {
+            "@type": "Question",
+            "name": "FIREとは何ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "FIRE（Financial Independence, Retire Early）は、資産運用による収入で生活費をまかない、経済的自立と早期リタイアを目指す考え方です。一般的に年間生活費の25倍の資産を築き、その資産を年4%程度ずつ取り崩して生活することを目標とします。" }
+          },
+          {
+            "@type": "Question",
+            "name": "4%ルールは安全ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "4%ルールは、資産の年4%程度を取り崩せば長期間資産が維持されやすいという米国の研究にもとづく経験則です。万能ではなく、運用利回りやインフレ率、相場下落のタイミングによって安全な取り崩し率は変わります。保守的には3〜4%で計画する人が多いです。" }
+          },
+          {
+            "@type": "Question",
+            "name": "長期投資のメリットは何ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "長期投資の最大のメリットは複利効果です。運用益を再投資し続けることで資産が雪だるま式に増えます。さらに保有期間が長いほど価格変動の影響が平準化され、毎月一定額を積み立てる時間分散と組み合わせることでリスクを抑えやすくなります。" }
+          }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "新NISAシミュレーターの使い方",
+        "description": "種別を選び、条件を入力するだけで将来の資産推移を試算できます。",
+        "step": [
+          { "@type": "HowToStep", "position": 1, "name": "種別を選ぶ", "text": "積立投資・一括投資・資産取り崩し・新NISA・FIRE逆算から目的に合うタブを選びます。" },
+          { "@type": "HowToStep", "position": 2, "name": "条件を入力する", "text": "月額・年利・運用年数などをスライダーや入力欄で設定します。" },
+          { "@type": "HowToStep", "position": 3, "name": "結果を確認する", "text": "将来の評価額・運用益がグラフと数値で即時表示されます。" },
+          { "@type": "HowToStep", "position": 4, "name": "シナリオを比較する", "text": "最大4つの条件を同時比較して最適なプランを検討できます。" }
+        ]
       }
     ]
   }
@@ -418,6 +464,61 @@
       margin-right: auto;
     }
 
+    /* ─── 用語解説（FIRE / 4%ルール 等） ─── */
+    .glossary { background: var(--bg); }
+    .glossary-head { text-align: center; margin-bottom: 48px; }
+    .glossary-head .section-desc { margin: 0 auto; }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .gloss-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .gloss-card:hover { border-color: #bdd3ff; box-shadow: var(--shadow); transform: translateY(-2px); }
+    .gloss-card h3 {
+      font-size: 19px; font-weight: 800; color: var(--text);
+      letter-spacing: -0.02em; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .gloss-card h3 .ic { font-size: 22px; }
+    .gloss-card p { font-size: 14.5px; color: var(--text2); line-height: 1.95; }
+
+    /* ─── FAQ ─── */
+    .faq { background: white; }
+    .faq-head { text-align: center; margin-bottom: 44px; }
+    .faq-head .section-desc { margin: 0 auto; }
+    .faq-list { max-width: 800px; margin: 0 auto; display: grid; gap: 12px; }
+    .faq-item {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      overflow: hidden;
+      transition: border-color .15s;
+    }
+    .faq-item[open] { border-color: #bdd3ff; }
+    .faq-item summary {
+      list-style: none; cursor: pointer;
+      padding: 18px 22px;
+      font-size: 16px; font-weight: 800; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "＋"; color: var(--accent); font-weight: 900;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item .faq-a {
+      padding: 0 22px 20px;
+      font-size: 14.5px; color: var(--text2); line-height: 1.95;
+    }
+
     /* ─── レスポンシブ ─── */
     @media (max-width: 800px) {
       .compound-inner,
@@ -669,6 +770,72 @@
           <div class="step-title">シナリオを比較する</div>
           <p class="step-desc">「シナリオ比較」機能で最大4つの条件を同時表示。最適な投資プランを見つけるのに役立ちます。</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 用語解説（FIRE / 4%ルール / 一括 vs 積立） ─── -->
+  <section class="section glossary" aria-labelledby="glossary-heading">
+    <div class="container">
+      <div class="glossary-head">
+        <p class="section-label">Key Terms</p>
+        <h2 id="glossary-heading" class="section-title">投資の基礎用語をやさしく解説</h2>
+        <p class="section-desc">シミュレーターをより活用できるよう、押さえておきたい考え方をまとめました。</p>
+      </div>
+      <div class="glossary-grid">
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">🔥</span>FIREとは</h3>
+          <p>FIRE（Financial Independence, Retire Early）は、資産運用による収入で生活費をまかない、経済的自立と早期リタイアを目指すライフスタイルです。一般的には<strong>年間生活費の25倍</strong>の資産を築くことが一つの目安とされます。例えば年間生活費が300万円なら、目標資産は7,500万円です。本シミュレーターの「FIRE逆算」では、毎月の積立額・想定年利から、何年で目標資産に到達できるかを試算できます。完全リタイアだけでなく、生活費の一部を資産収入でまかなう「サイドFIRE」の検討にも役立ちます。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">📉</span>4%ルールとは</h3>
+          <p>4%ルールは、退職時の資産の<strong>年4%程度を取り崩しても、長期間にわたり資産が維持されやすい</strong>という、米国の過去データにもとづく経験則です。裏を返せば、年間生活費の25倍の資産があれば取り崩しで暮らせるという目安になります。ただし将来のリターンを保証するものではなく、相場下落の時期やインフレ率によって安全な取り崩し率は変動します。保守的に運用する場合は3〜4%で計画する人が多く、本ツールの「資産取り崩し」タブで残高推移を確認できます。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">⚖️</span>一括投資と積立投資の違い</h3>
+          <p>一括投資はまとまった資金を一度に投じる方法で、運用期間を最大限に活かせる一方、投資直後の下落の影響を受けやすい特徴があります。積立投資は毎月一定額を投じる方法で、購入価格が平準化される<strong>ドルコスト平均法</strong>により高値づかみのリスクを抑えられます。どちらが有利かは相場と手元資金次第です。本シミュレーターの「積立投資」「一括投資」タブで両者を試算し、シナリオ比較機能で同じ条件のもとに並べて検討できます。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">🛡️</span>リスク分散と長期投資</h3>
+          <p>投資のリスクは「長期・積立・分散」で抑えるのが基本です。投資対象を複数地域・資産に分散し、購入時期を分け、保有期間を長く取ることで価格変動の影響が平準化されます。新NISAは非課税で長期保有しやすく、この3つの原則と非常に相性が良い制度です。本ツールで運用年数や年利を変えながら試算すると、時間を味方につけることの効果を視覚的に理解できます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="section faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="faq-head">
+        <p class="section-label">FAQ</p>
+        <h2 id="faq-heading" class="section-title">よくある質問</h2>
+        <p class="section-desc">投資初心者の方からよく寄せられる質問にお答えします。</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>年利は何%で設定するのが一般的ですか？</summary>
+          <div class="faq-a">S&amp;P500や全世界株式などのインデックス投資では、過去の実績として年平均7〜10%程度のリターンが知られています。ただし将来のリターンは保証されないため、長期の資産計画では3〜7%程度で保守的に見積もる人が多いです。低めに想定するほど計画の安全性が高まります。本シミュレーターでは年利を自由に変えて複数のシナリオを比較できます。</div>
+        </details>
+        <details class="faq-item">
+          <summary>新NISAはどんな制度ですか？</summary>
+          <div class="faq-a">新NISAは2024年に始まった少額投資非課税制度です。年間最大360万円（つみたて投資枠120万円＋成長投資枠240万円）、生涯で1,800万円まで投資でき、運用益や配当が<strong>非課税</strong>になります。非課税保有期間は無期限で、売却した分の非課税枠は翌年に復活します。本ツールの「新NISA」タブでは、これらの枠を考慮した本格的な試算ができます。</div>
+        </details>
+        <details class="faq-item">
+          <summary>FIRE（早期リタイア）とは何ですか？</summary>
+          <div class="faq-a">FIREは経済的自立と早期リタイアを目指す考え方で、一般に年間生活費の25倍の資産形成が目安とされます。その資産を年4%程度ずつ取り崩して生活するのが基本的な戦略です。「FIRE逆算」タブで、毎月の積立額と想定年利から達成までの年数をシミュレーションできます。</div>
+        </details>
+        <details class="faq-item">
+          <summary>4%ルールは安全ですか？</summary>
+          <div class="faq-a">4%ルールは長期的に資産が維持されやすいという経験則ですが、万能ではありません。運用利回り・インフレ率・相場下落のタイミングによって安全な取り崩し率は変わります。保守的には3〜4%で計画する人が多く、「資産取り崩し」タブで取り崩し率を変えながら資産寿命を確認することをおすすめします。</div>
+        </details>
+        <details class="faq-item">
+          <summary>長期投資のメリットは何ですか？</summary>
+          <div class="faq-a">最大のメリットは<strong>複利効果</strong>です。運用益を再投資し続けることで資産が雪だるま式に増えます。さらに保有期間が長いほど価格変動の影響が平準化され、毎月一定額を積み立てる時間分散と組み合わせることでリスクを抑えやすくなります。新NISAの非課税メリットと長期投資は特に相性が良い組み合わせです。</div>
+        </details>
+        <details class="faq-item">
+          <summary>このシミュレーターは無料ですか？登録は必要ですか？</summary>
+          <div class="faq-a">完全無料で、会員登録やアプリのインストールは不要です。入力したデータはお使いのブラウザ内だけで処理され、サーバーに保存・送信されることはありません。スマートフォン・PCどちらでもそのままご利用いただけます。</div>
+        </details>
       </div>
     </div>
   </section>
