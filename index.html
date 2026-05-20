@@ -52,7 +52,14 @@
         "publisher": {
           "@type": "Organization",
           "name": "shakewakame",
-          "url": "https://newnisa.github.io/calculator-site/"
+          "url": "https://newnisa.github.io/calculator-site/",
+          "description": "新NISA・積立投資・FIREの将来資産を無料でシミュレーションできるツールを運営。情報提供を目的とし、特定金融商品の勧誘は行いません。",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://newnisa.github.io/calculator-site/ogp.png",
+            "width": 1200,
+            "height": 630
+          }
         }
       },
       {
@@ -92,6 +99,11 @@
             "@type": "Question",
             "name": "長期投資のメリットは何ですか？",
             "acceptedAnswer": { "@type": "Answer", "text": "長期投資の最大のメリットは複利効果です。運用益を再投資し続けることで資産が雪だるま式に増えます。さらに保有期間が長いほど価格変動の影響が平準化され、毎月一定額を積み立てる時間分散と組み合わせることでリスクを抑えやすくなります。" }
+          },
+          {
+            "@type": "Question",
+            "name": "このシミュレーターは無料ですか？登録は必要ですか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "完全無料で、会員登録やアプリのインストールは不要です。入力したデータはお使いのブラウザ内だけで処理され、サーバーに保存・送信されることはありません。スマートフォン・PCどちらでもそのままご利用いただけます。" }
           }
         ]
       },
@@ -247,7 +259,7 @@
     }
     .hero-sub {
       font-size: clamp(14px, 2vw, 17px);
-      opacity: 0.88;
+      opacity: 0.95;
       max-width: 620px;
       margin: 0 auto 34px;
       line-height: 1.85;
@@ -268,7 +280,7 @@
     .hero-note {
       margin-top: 13px;
       font-size: 12px;
-      opacity: 0.72;
+      opacity: 0.9;
       font-weight: 600;
       letter-spacing: 0.02em;
     }
@@ -283,10 +295,11 @@
     }
     .hero-stat { text-align: center; }
     .hero-stat .val { font-size: 26px; font-weight: 900; letter-spacing: -0.04em; }
-    .hero-stat .lbl { font-size: 12px; opacity: 0.8; font-weight: 600; margin-top: 3px; }
+    .hero-stat .lbl { font-size: 12px; opacity: 0.92; font-weight: 600; margin-top: 3px; }
 
     /* ─── セクション共通 ─── */
     .section { padding: 76px 0; }
+    .section[id] { scroll-margin-top: 76px; }
     .section-label {
       font-size: 12px;
       font-weight: 800;
@@ -427,7 +440,7 @@
     }
     .cta-final p {
       font-size: 16px;
-      opacity: 0.85;
+      opacity: 0.93;
       margin-bottom: 34px;
       line-height: 1.8;
     }
@@ -457,7 +470,7 @@
     .footer strong { color: #f3f4f6; }
     .footer-disclaimer {
       font-size: 12px;
-      opacity: 0.65;
+      opacity: 0.85;
       margin-top: 6px;
       max-width: 680px;
       margin-left: auto;
@@ -561,6 +574,65 @@
     .unique-cta { text-align: center; margin-top: 40px; }
     .section-cta { text-align: center; margin-top: 44px; }
 
+    /* ─── 運営者情報・免責（E-E-A-T） ─── */
+    .eeat { background: var(--bg); }
+    .eeat-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .eeat-card h2 {
+      font-size: 20px; font-weight: 800; color: var(--text);
+      letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .eeat-card h3 {
+      font-size: 15px; font-weight: 800; color: var(--text);
+      margin: 20px 0 6px;
+    }
+    .eeat-card p { font-size: 14.5px; color: var(--text2); line-height: 1.95; }
+    .eeat-meta {
+      margin-top: 22px; padding-top: 16px;
+      border-top: 1.5px solid var(--border);
+      font-size: 13px; color: var(--muted);
+    }
+    .eeat-meta time { font-weight: 700; color: var(--text2); }
+
+    /* ─── ページ内アンカーナビ ─── */
+    .jump-nav {
+      background: white;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .jump-nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 12px 24px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+    }
+    .jump-nav a {
+      font-size: 14px; font-weight: 700; color: var(--text2);
+      padding: 6px 4px; border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .jump-nav a:hover, .jump-nav a:focus-visible {
+      color: var(--accent); border-color: var(--accent); outline: none;
+    }
+    .jump-nav .jump-cta {
+      margin-left: auto;
+      background: var(--accent); color: #fff;
+      border-radius: 10px; padding: 8px 18px; border-bottom: none;
+    }
+    .jump-nav .jump-cta:hover, .jump-nav .jump-cta:focus-visible {
+      background: var(--accent-dark); color: #fff; border-color: transparent;
+    }
+    .feature-card { display: block; }
+    .feature-card:focus-visible { outline: 3px solid rgba(29,78,216,.4); outline-offset: 2px; }
+    a.feature-card .feature-cta {
+      display: inline-block; margin-top: 12px;
+      font-size: 13px; font-weight: 800; color: var(--accent);
+    }
+
     /* ─── レスポンシブ ─── */
     @media (max-width: 800px) {
       .compound-inner,
@@ -631,8 +703,19 @@
     </div>
   </section>
 
+  <!-- ─── ページ内アンカーナビ ─── -->
+  <nav class="jump-nav" aria-label="ページ内ナビゲーション">
+    <div class="jump-nav-inner">
+      <a href="#strengths">3つの強み</a>
+      <a href="#features">5つの機能</a>
+      <a href="#howto">使い方</a>
+      <a href="#faq">よくある質問</a>
+      <a href="./simulator.html" class="jump-cta">シミュレーターを使う →</a>
+    </div>
+  </nav>
+
   <!-- ─── 3つの強み ─── -->
-  <section class="section unique" aria-labelledby="unique-heading">
+  <section id="strengths" class="section unique" aria-labelledby="unique-heading">
     <div class="container">
       <div class="unique-head">
         <p class="section-label">Why This Tool</p>
@@ -688,7 +771,7 @@
   </section>
 
   <!-- ─── 機能紹介 ─── -->
-  <section class="section features" aria-labelledby="features-heading">
+  <section id="features" class="section features" aria-labelledby="features-heading">
     <div class="container">
       <div class="features-head">
         <p class="section-label">Features</p>
@@ -696,31 +779,36 @@
         <p class="section-desc">資産形成のすべてのフェーズに対応。状況に合わせてお使いください。</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card">
+        <a class="feature-card" href="./simulator.html?tab=tab1" aria-label="積立投資シミュレーションを開く">
           <span class="feature-icon" aria-hidden="true">📅</span>
           <div class="feature-name">積立投資シミュレーション</div>
           <p class="feature-desc">毎月一定額を積み立てた場合の将来評価額を複利計算。月額・年利・運用年数・初期投資額を自由に設定。ドルコスト平均法による長期投資の効果を確認できます。</p>
-        </div>
-        <div class="feature-card">
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
+        <a class="feature-card" href="./simulator.html?tab=tab2" aria-label="一括投資シミュレーションを開く">
           <span class="feature-icon" aria-hidden="true">💰</span>
           <div class="feature-name">一括投資シミュレーション</div>
           <p class="feature-desc">まとまった資金を一括投資した場合の資産推移を年複利で計算。元本・年利・運用年数を設定して将来の評価額と運用益を試算できます。</p>
-        </div>
-        <div class="feature-card">
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
+        <a class="feature-card" href="./simulator.html?tab=tab3" aria-label="資産取り崩しシミュレーションを開く">
           <span class="feature-icon" aria-hidden="true">🔥</span>
           <div class="feature-name">資産取り崩しシミュレーション</div>
           <p class="feature-desc">リタイア後の取り崩し計画を試算。4%ルールにも対応し、資産が何年持続するかをグラフで確認。取り崩し額は割合・金額どちらでも指定できます。</p>
-        </div>
-        <div class="feature-card">
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
+        <a class="feature-card" href="./simulator.html?tab=tab4" aria-label="積立＆一括（新NISA対応）シミュレーションを開く">
           <span class="feature-icon" aria-hidden="true">🏦</span>
           <div class="feature-name">積立＆一括（新NISA対応）</div>
           <p class="feature-desc">積立と一括を期間ごとに自由に組み合わせ、新NISAの非課税枠を最大限活用するシミュレーション。年360万円・生涯1,800万円の枠を自動管理します。</p>
-        </div>
-        <div class="feature-card">
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
+        <a class="feature-card" href="./simulator.html?tab=tab5" aria-label="FIRE逆算シミュレーションを開く">
           <span class="feature-icon" aria-hidden="true">🎯</span>
           <div class="feature-name">FIRE逆算シミュレーション</div>
           <p class="feature-desc">目標の生活費と想定運用利回りから、FIRE（経済的自立・早期リタイア）達成に必要な資産額と到達までの期間・年齢を逆算。出口から逆算した計画づくりに役立ちます。</p>
-        </div>
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
       </div>
       <div class="section-cta">
         <a href="./simulator.html" class="btn-nav" style="font-size:16px;padding:14px 32px;border-radius:14px;">5つの機能を無料で試す →</a>
@@ -849,7 +937,7 @@
   </section>
 
   <!-- ─── 使い方 ─── -->
-  <section class="section howto" aria-labelledby="howto-heading">
+  <section id="howto" class="section howto" aria-labelledby="howto-heading">
     <div class="container">
       <div class="howto-head">
         <p class="section-label">How To Use</p>
@@ -911,7 +999,7 @@
   </section>
 
   <!-- ─── FAQ ─── -->
-  <section class="section faq" aria-labelledby="faq-heading">
+  <section id="faq" class="section faq" aria-labelledby="faq-heading">
     <div class="container">
       <div class="faq-head">
         <p class="section-label">FAQ</p>
@@ -953,6 +1041,24 @@
       <h2 id="cta-heading">今すぐシミュレーションを始めよう</h2>
       <p>登録不要・完全無料。あなたの将来の資産を今すぐ試算しましょう。</p>
       <a href="./simulator.html" class="btn-cta">シミュレーターを使う（無料）→</a>
+    </div>
+  </section>
+
+  <!-- ─── 運営者情報・免責（E-E-A-T） ─── -->
+  <section class="section eeat" aria-labelledby="eeat-heading">
+    <div class="container">
+      <article class="eeat-card">
+        <h2 id="eeat-heading">運営者情報と免責事項</h2>
+        <p>本サイト「新NISAシミュレーター」は、新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算を無料で試算できるツールを提供する個人運営の情報サイトです。運営者（shakewakame）は、金融・資産形成に関する情報を、初心者の方にも分かりやすく届けることを目的に本ツールを開発・公開しています。</p>
+
+        <h3>免責事項</h3>
+        <p>本ツールが表示する結果は、入力された条件にもとづく数学的な試算であり、将来の運用成果・利回り・FIRE達成時期を保証するものではありません。実際の投資は手数料・税金・物価変動・為替・市場環境などの影響を受け、元本割れの可能性があります。本サイトは情報提供のみを目的としており、特定の金融商品の購入・売却を推奨・勧誘するものではありません。最終的な投資判断はご自身の責任で行ってください。</p>
+
+        <h3>データの取り扱い</h3>
+        <p>入力された数値はお使いのブラウザ内でのみ計算に使用され、サーバーへ送信・保存されることはありません。会員登録やアプリのインストールは不要です。</p>
+
+        <p class="eeat-meta">最終更新日：<time datetime="2026-05-20">2026年5月20日</time>　／　運営者：shakewakame</p>
+      </article>
     </div>
   </section>
 
