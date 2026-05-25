@@ -419,6 +419,10 @@
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
       .tab-btn { font-size: 13px; padding: 8px 12px; }
+      /* V-001対応: モバイルでサイドナビを横スクロール1行に */
+      .tab-bar { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .tab-bar .tab-btn { flex-shrink: 0; }
     }
 
     /* ── 汎用ヘッドライン結果カード（tab5 .fire-hero を流用、tab5自体は不変） ── */
@@ -2389,6 +2393,8 @@
   document.body.appendChild(tt4El);
 
   // Init
+  // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
+  try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
 
 </script>
 <!-- ═══ SEO向けコンテンツセクション ═══ -->
