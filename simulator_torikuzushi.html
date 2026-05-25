@@ -190,7 +190,11 @@
       line-height: 1.75;
       min-height: 100vh;
       font-size: 15px;
+      overflow-x: hidden;
     }
+    /* 横スクロール抑制（モバイルで内部要素が viewport を超えても画面外に出さない） */
+    html { overflow-x: hidden; max-width: 100vw; }
+    img, svg { max-width: 100%; }
     /* ── サイドナビ型レイアウト ── */
     .wrap {
       display: grid; grid-template-columns: 210px 1fr;
@@ -429,6 +433,11 @@
       .toggle-group button { padding: 8px 4px; font-size: 12px; letter-spacing: -0.02em; }
     }
 
+    @media (max-width: 980px) {
+      /* T-033: モバイルで panel/card が viewport を超えないよう包括的に max-width:100% min-width:0 を保証 */
+      .main-area, .card, .panel, .hero-result, .stats-wrap, .result-block, .compare-bar, .right, .grid > * { max-width: 100%; min-width: 0; }
+      .table-wrap { max-width: 100%; overflow-x: auto; }
+    }
     /* ── 汎用ヘッドライン結果カード（tab5 .fire-hero を流用、tab5自体は不変） ── */
     .hero-result {
       background: linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff;
