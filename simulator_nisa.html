@@ -307,13 +307,24 @@
     .divider { height: 1.5px; background: var(--border); margin: 2px 0; }
     .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .btn-primary {
-      border: none; border-radius: 11px; padding: 13px 22px;
-      font-size: 15px; font-weight: 800; cursor: pointer;
-      background: var(--accent); color: white;
-      box-shadow: 0 2px 10px rgba(29,78,216,.3);
-      transition: transform .12s, box-shadow .12s; letter-spacing: -.01em;
+      border: none; border-radius: 12px; padding: 15px 26px;
+      font-size: 16px; font-weight: 900; cursor: pointer;
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
+      box-shadow: 0 6px 22px rgba(29,78,216,.45), 0 2px 6px rgba(29,78,216,.3);
+      transition: transform .15s, box-shadow .15s, filter .15s; letter-spacing: -.01em;
+      position: relative;
     }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(29,78,216,.38); }
+    .btn-primary::after {
+      content:''; position:absolute; inset:0; border-radius:12px;
+      box-shadow: 0 0 0 0 rgba(59,130,246,.6); pointer-events:none;
+      animation: btnPulse 2.2s ease-out infinite;
+    }
+    @keyframes btnPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(59,130,246,.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); filter: brightness(1.08); box-shadow: 0 10px 28px rgba(29,78,216,.55), 0 4px 10px rgba(29,78,216,.35); }
     .btn-secondary {
       border: 1.5px solid var(--border); border-radius: 11px;
       padding: 12px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
@@ -460,13 +471,18 @@
         margin-bottom: 4px;
         justify-content: center;
       }
+      /* 改善: モバイルでグラフのインパクト・視認性向上 */
+      .chart-card { padding: 18px 12px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); }
+      .chart-title { font-size: 17px !important; font-weight: 800 !important; margin-bottom: 8px !important; }
+      .chart-wrap { padding: 6px 4px; min-height: 240px; }
+      .chart-wrap svg { min-height: 220px; }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
       .tab-btn { font-size: 13px; padding: 8px 12px; }
-      /* V-001対応: モバイルでサイドナビを横スクロール1行に */
-      .tab-bar { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .tab-bar::-webkit-scrollbar { display: none; }
-      .tab-bar .tab-btn { flex-shrink: 0; }
+      /* 改善: モバイルでサイドナビを2行3列gridに変更（水平スクロール完全解消） */
+      .tab-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; overflow: visible; }
+      /* scrollbarルール削除（gridでスクロール不要） */
+      .tab-bar .tab-btn { font-size: 11.5px; padding: 8px 4px; text-align: center; white-space: normal; line-height:1.25; }
     }
 
     @media (max-width: 980px) {
@@ -533,7 +549,7 @@
     .help-wrap:hover .help-pop,
     .help-ic:focus + .help-pop,
     .help-ic:focus-visible + .help-pop { opacity:1; visibility:visible; }
-    @media (max-width:640px){ .help-pop{ left:auto; right:-8px; transform:none; } .help-pop::before,.help-pop::after{ left:auto; right:16px; transform:none; } }
+    @media (max-width:640px){ .help-pop{ position:fixed; top:auto; bottom:16px; left:16px; right:16px; width:auto; max-width:none; transform:none; box-shadow:0 8px 28px rgba(15,23,42,.22); } .help-pop::before,.help-pop::after{ display:none; } }
 
     /* ── 大画面：ファーストビューに「条件入力＋ヘッドライン＋統計＋グラフ」を同時表示 ──
        980px以下は従来の縦並びを維持（モバイル崩れ防止） */
@@ -1013,14 +1029,14 @@
     if (inf <= 0) { noteEl.style.display='none'; return; }
     const realBal    = nomBal / Math.pow(1 + inf/100, years);
     const realProfit = realBal - principal;
-    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}`;
+    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}<div class="real-explain" style="margin-top:6px;font-size:11.5px;color:#6b7280;line-height:1.6;">物価上昇を考慮した「現在の貨幣価値」での金額です。例えば毎年2%物価が上がると、20年後の100万円は今の約67万円相当の価値しかありません。</div>`;
     noteEl.style.display = '';
   }
 
   // ── TOOLTIP ──
   function makeTooltip(id) {
     const t = el(id);
-    return {
+    const tip = {
       show(e, html) { t.innerHTML = html; t.style.display = 'block'; this.move(e); },
       move(e) {
         const tw = t.offsetWidth, th = t.offsetHeight;
@@ -1032,6 +1048,10 @@
       },
       hide() { t.style.display = 'none'; }
     };
+    // モバイル: 指を離したらツールチップを消す
+    document.addEventListener('touchend', () => tip.hide(), { passive: true });
+    document.addEventListener('touchcancel', () => tip.hide(), { passive: true });
+    return tip;
   }
   const tt1 = makeTooltip('tt1'), tt2 = makeTooltip('tt2'), tt3 = makeTooltip('tt3');
 
@@ -2462,6 +2482,62 @@
   // Init
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
+
+  // ── 課題8: 計算ボタン押下後の結果スクロール ＋「条件入力に戻る」ボタン ──
+  (function setupScrollNav(){
+    const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+    const calcBtn = document.getElementById('nisa-calc');
+    const findResult = () => document.getElementById('nisa-hero') || document.querySelector('.hero-result, .fire-hero');
+    const findInput = () => document.querySelector('#tab4 .panel') || document.querySelector('.panel');
+    const findChartCard = () => document.getElementById('nisa-chart')?.closest('.chart-card');
+
+    // 計算押下後: 結果領域へスムーズスクロール（モバイルのみ）
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => {
+        if (!isMobile()) return;
+        // 計算結果のDOM反映を待つ
+        setTimeout(() => {
+          const target = findResult();
+          if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 120);
+      });
+    }
+
+    // 「条件入力に戻る」ボタンをチャート後に挿入
+    function ensureBackBtn() {
+      const chartCard = findChartCard();
+      if (!chartCard) return;
+      if (chartCard.querySelector('.back-to-input-btn')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'back-to-input-btn';
+      btn.textContent = '↑ 条件入力に戻る';
+      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #1d4ed8;background:#fff;color:#1d4ed8;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
+      btn.addEventListener('mouseenter', () => { btn.style.background = '#1d4ed8'; btn.style.color = '#fff'; });
+      btn.addEventListener('mouseleave', () => { btn.style.background = '#fff'; btn.style.color = '#1d4ed8'; });
+      btn.addEventListener('click', () => {
+        const input = findInput();
+        if (input && input.scrollIntoView) {
+          input.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      chartCard.appendChild(btn);
+    }
+    // 初期 + 計算後に再確認（チャート再描画後を考慮）
+    ensureBackBtn();
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => setTimeout(ensureBackBtn, 150));
+    }
+    // 自動再計算でも追加されるよう、MutationObserver でチャートカード変化を監視
+    const chartCard = findChartCard();
+    if (chartCard) {
+      new MutationObserver(() => ensureBackBtn()).observe(chartCard, { childList: true });
+    }
+  })();
   renderNisaScenarioTabs();
   loadScenarioToForm(getActiveScenario());
   calcNisa();

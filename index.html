@@ -63,6 +63,17 @@
         }
       },
       {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://newnisa.github.io/calculator-site/"
+          }
+        ]
+      },
+      {
         "@type": "WebApplication",
         "name": "新NISAシミュレーター",
         "description": "新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算の5機能を無料でシミュレーション。最大4シナリオ同時比較、新NISA非課税枠の期間別最適化、FIRE逆算に対応。",
@@ -70,6 +81,13 @@
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "isAccessibleForFree": true,
+        "featureList": [
+          "積立投資シミュレーター（毎月の積立額から将来資産を計算）",
+          "一括投資シミュレーター（運用元本の将来価値を計算）",
+          "資産取り崩しシミュレーター（4%ルール対応、資産寿命の試算）",
+          "新NISA積立＆一括シミュレーター（非課税枠1800万円の期間別最適化）",
+          "FIRE逆算シミュレーター（目標生活費から必要資産・達成年数を逆算）"
+        ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
       },
       {
@@ -161,6 +179,16 @@
       --shadow:       0 4px 24px rgba(0,0,0,.09);
     }
     html { scroll-behavior: smooth; }
+    /* T-012: prefers-reduced-motion対応 (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
     body {
       font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
       background: var(--bg);
@@ -224,6 +252,7 @@
       box-shadow: 0 2px 8px rgba(29,78,216,.28);
     }
     .btn-nav:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(29,78,216,.35); }
+    .btn-nav:focus-visible { outline: 3px solid rgba(29,78,216,.55); outline-offset: 3px; box-shadow: 0 4px 14px rgba(29,78,216,.35); }
 
     /* ─── ヒーロー ─── */
     .hero {
@@ -297,6 +326,7 @@
       letter-spacing: -0.015em;
     }
     .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.28); }
+    .btn-hero:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; box-shadow: 0 10px 32px rgba(0,0,0,.28); }
     .hero-note {
       margin-top: 13px;
       font-size: 12px;
@@ -477,6 +507,7 @@
       letter-spacing: -0.015em;
     }
     .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.28); }
+    .btn-cta:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; box-shadow: 0 10px 32px rgba(0,0,0,.28); }
 
     /* ─── フッター ─── */
     .footer {

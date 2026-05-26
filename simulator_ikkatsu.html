@@ -17,8 +17,6 @@
   <link rel="alternate" hreflang="x-default" href="https://newnisa.github.io/calculator-site/simulator_ikkatsu.html">
 
   <!-- ═══ パフォーマンス最適化 ═══ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
   <!-- ═══ OGP（SNSシェア用） ═══ -->
   <meta property="og:type" content="website">
@@ -76,15 +74,16 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "新NISAシミュレーター"
+            "name": "一括投資シミュレーター",
+            "item": "https://newnisa.github.io/calculator-site/simulator_ikkatsu.html"
           }
         ]
       },
       {
         "@type": "WebApplication",
-        "name": "新NISAシミュレーター",
-        "description": "新NISAの積立投資・一括投資・資産取り崩しを無料でシミュレーションできるツール。複数シナリオの比較も可能。",
-        "url": "https://newnisa.github.io/calculator-site/",
+        "name": "一括投資シミュレーター",
+        "description": "一括投資元本・想定年利・運用年数から、複利計算で将来評価額・利益率を予測。最大4シナリオ比較、インフレ調整に対応した無料シミュレーター。",
+        "url": "https://newnisa.github.io/calculator-site/simulator_ikkatsu.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "browserRequirements": "HTML5対応ブラウザ",
@@ -306,13 +305,24 @@
     .divider { height: 1.5px; background: var(--border); margin: 2px 0; }
     .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .btn-primary {
-      border: none; border-radius: 11px; padding: 13px 22px;
-      font-size: 15px; font-weight: 800; cursor: pointer;
-      background: var(--accent); color: white;
-      box-shadow: 0 2px 10px rgba(29,78,216,.3);
-      transition: transform .12s, box-shadow .12s; letter-spacing: -.01em;
+      border: none; border-radius: 12px; padding: 15px 26px;
+      font-size: 16px; font-weight: 900; cursor: pointer;
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
+      box-shadow: 0 6px 22px rgba(29,78,216,.45), 0 2px 6px rgba(29,78,216,.3);
+      transition: transform .15s, box-shadow .15s, filter .15s; letter-spacing: -.01em;
+      position: relative;
     }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(29,78,216,.38); }
+    .btn-primary::after {
+      content:''; position:absolute; inset:0; border-radius:12px;
+      box-shadow: 0 0 0 0 rgba(59,130,246,.6); pointer-events:none;
+      animation: btnPulse 2.2s ease-out infinite;
+    }
+    @keyframes btnPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(59,130,246,.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); filter: brightness(1.08); box-shadow: 0 10px 28px rgba(29,78,216,.55), 0 4px 10px rgba(29,78,216,.35); }
     .btn-secondary {
       border: 1.5px solid var(--border); border-radius: 11px;
       padding: 12px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
@@ -420,13 +430,57 @@
       #tab4 .card.panel, #tab5 .card.panel { min-height: 0; }
     }
     @media (max-width: 640px) {
+      /* T-034: 年次サマリーテーブルをカード型レイアウトに変換（水平スクロール解消） */
+      .table-card thead { display: none; }
+      .table-card table { width: 100%; }
+      .table-card tbody, .table-card tr, .table-card td { display: block; }
+      .table-card tr {
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px 10px;
+        align-items: center;
+      }
+      .table-card td {
+        padding: 3px 6px;
+        border: none;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .table-card td:not(:first-child)::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 10.5px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .table-card td:first-child {
+        grid-column: 1 / -1;
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 13px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-bottom: 4px;
+        justify-content: center;
+      }
+      /* 改善: モバイルでグラフのインパクト・視認性向上 */
+      .chart-card { padding: 18px 12px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); }
+      .chart-title { font-size: 17px !important; font-weight: 800 !important; margin-bottom: 8px !important; }
+      .chart-wrap { padding: 6px 4px; min-height: 240px; }
+      .chart-wrap svg { min-height: 220px; }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
       .tab-btn { font-size: 13px; padding: 8px 12px; }
-      /* V-001対応: モバイルでサイドナビを横スクロール1行に */
-      .tab-bar { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .tab-bar::-webkit-scrollbar { display: none; }
-      .tab-bar .tab-btn { flex-shrink: 0; }
+      /* 改善: モバイルでサイドナビを2行3列gridに変更（水平スクロール完全解消） */
+      .tab-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; overflow: visible; }
+      /* scrollbarルール削除（gridでスクロール不要） */
+      .tab-bar .tab-btn { font-size: 11.5px; padding: 8px 4px; text-align: center; white-space: normal; line-height:1.25; }
     }
 
     @media (max-width: 980px) {
@@ -493,7 +547,7 @@
     .help-wrap:hover .help-pop,
     .help-ic:focus + .help-pop,
     .help-ic:focus-visible + .help-pop { opacity:1; visibility:visible; }
-    @media (max-width:640px){ .help-pop{ left:auto; right:-8px; transform:none; } .help-pop::before,.help-pop::after{ left:auto; right:16px; transform:none; } }
+    @media (max-width:640px){ .help-pop{ position:fixed; top:auto; bottom:16px; left:16px; right:16px; width:auto; max-width:none; transform:none; box-shadow:0 8px 28px rgba(15,23,42,.22); } .help-pop::before,.help-pop::after{ display:none; } }
 
     /* ── 大画面：ファーストビューに「条件入力＋ヘッドライン＋統計＋グラフ」を同時表示 ──
        980px以下は従来の縦並びを維持（モバイル崩れ防止） */
@@ -743,7 +797,7 @@
   </aside>
   <div class="main-area">
     <header class="topbar">
-      <h1>新NISAシミュレーター｜FIRE・積立・一括・取り崩し 無料試算</h1>
+      <h1>一括投資シミュレーター</h1>
     </header>
 
 
@@ -792,9 +846,7 @@
               <div class="range-labels"><span>0年</span><span>60年</span></div>
             </div>
           </label>
-          <details class="adv-set">
-            <summary>⚙ 詳細設定（インフレ率）</summary>
-            <label>インフレ率（実質資産の試算）
+          <label>インフレ率（実質資産の試算）
               <div class="input-slider-wrap">
                 <div class="input-row">
                   <input class="num-input" id="t2-inf" type="number" min="0" max="10" step="0.1" value="2">
@@ -804,7 +856,6 @@
                 <div class="range-labels"><span>0%</span><span>10%</span></div>
               </div>
             </label>
-          </details>
           <div class="divider"></div>
           <div class="actions form-full">
             <button type="button" class="btn-primary" id="t2-calc">計算する</button>
@@ -947,14 +998,14 @@
     if (inf <= 0) { noteEl.style.display='none'; return; }
     const realBal    = nomBal / Math.pow(1 + inf/100, years);
     const realProfit = realBal - principal;
-    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}`;
+    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}<div class="real-explain" style="margin-top:6px;font-size:11.5px;color:#6b7280;line-height:1.6;">物価上昇を考慮した「現在の貨幣価値」での金額です。例えば毎年2%物価が上がると、20年後の100万円は今の約67万円相当の価値しかありません。</div>`;
     noteEl.style.display = '';
   }
 
   // ── TOOLTIP ──
   function makeTooltip(id) {
     const t = el(id);
-    return {
+    const tip = {
       show(e, html) { t.innerHTML = html; t.style.display = 'block'; this.move(e); },
       move(e) {
         const tw = t.offsetWidth, th = t.offsetHeight;
@@ -966,6 +1017,10 @@
       },
       hide() { t.style.display = 'none'; }
     };
+    // モバイル: 指を離したらツールチップを消す
+    document.addEventListener('touchend', () => tip.hide(), { passive: true });
+    document.addEventListener('touchcancel', () => tip.hide(), { passive: true });
+    return tip;
   }
   const tt1 = makeTooltip('tt1'), tt2 = makeTooltip('tt2'), tt3 = makeTooltip('tt3');
 
@@ -1254,11 +1309,11 @@
       {key:'principal', color:'#0ea472', label:'投資元本', w:2.5},
     ], tt1);
     el('t1-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annual)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間積立額">${fmtYen(row.annual)}</td>
+      <td data-label="累計元本">${fmtYen(row.principal)}</td>
+      <td data-label="予想評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="累計運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
     </tr>`).join('');
     updateInflation('t1', r.balance, r.principal, parseInt(el('t1-years').value)||0);
     const y1 = parseInt(el('t1-years').value)||0;
@@ -1298,11 +1353,11 @@
       {key:'principal', color:'#0ea472', label:'元本', w:2.5},
     ], tt2);
     el('t2-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="元本">${fmtYen(row.principal)}</td>
+      <td data-label="運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="利益率" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td>
     </tr>`).join('');
     updateInflation('t2', r.balance, r.principal, parseInt(el('t2-years').value)||0);
     const y2 = parseInt(el('t2-years').value)||0;
@@ -1362,11 +1417,11 @@
       {key:'balance', color:'#2563eb', label:'資産残高', w:3.5},
     ], tt3);
     el('t3-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annualW)}</td>
-      <td>${fmtYen(row.totalW)}</td>
-      <td style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:#0ea472">${fmtYen(row.gain)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間取り崩し額">${fmtYen(row.annualW)}</td>
+      <td data-label="取り崩し累計">${fmtYen(row.totalW)}</td>
+      <td data-label="年末残高" style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="年間運用益" style="color:#0ea472">${fmtYen(row.gain)}</td>
     </tr>`).join('');
     el('t3-hero-label').textContent = `月の取り崩し可能額`;
     el('t3-hero-val').textContent = fmtYen(r.monthlyW);
@@ -1761,12 +1816,12 @@
 
   function renderNisaTable(res) {
     el('nisa-table').innerHTML = res.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annualInvest)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
-      <td style="color:${row.lifetimeRem>0?'var(--text2)':'var(--accent2)'}">${fmtYen(row.lifetimeRem)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間投資額">${fmtYen(row.annualInvest)}</td>
+      <td data-label="累計元本">${fmtYen(row.principal)}</td>
+      <td data-label="評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="生涯枠残" style="color:${row.lifetimeRem>0?'var(--text2)':'var(--accent2)'}">${fmtYen(row.lifetimeRem)}</td>
     </tr>`).join('');
   }
 
@@ -2398,7 +2453,94 @@
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
 
+  // ── 課題8: 計算ボタン押下後の結果スクロール ＋「条件入力に戻る」ボタン ──
+  (function setupScrollNav(){
+    const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+    const calcBtn = document.getElementById('t2-calc');
+    const findResult = () => document.getElementById('t2-hero') || document.querySelector('.hero-result, .fire-hero');
+    const findInput = () => document.querySelector('#tab2 .panel') || document.querySelector('.panel');
+    const findChartCard = () => document.getElementById('chart2')?.closest('.chart-card');
+
+    // 計算押下後: 結果領域へスムーズスクロール（モバイルのみ）
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => {
+        if (!isMobile()) return;
+        // 計算結果のDOM反映を待つ
+        setTimeout(() => {
+          const target = findResult();
+          if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 120);
+      });
+    }
+
+    // 「条件入力に戻る」ボタンをチャート後に挿入
+    function ensureBackBtn() {
+      const chartCard = findChartCard();
+      if (!chartCard) return;
+      if (chartCard.querySelector('.back-to-input-btn')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'back-to-input-btn';
+      btn.textContent = '↑ 条件入力に戻る';
+      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #1d4ed8;background:#fff;color:#1d4ed8;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
+      btn.addEventListener('mouseenter', () => { btn.style.background = '#1d4ed8'; btn.style.color = '#fff'; });
+      btn.addEventListener('mouseleave', () => { btn.style.background = '#fff'; btn.style.color = '#1d4ed8'; });
+      btn.addEventListener('click', () => {
+        const input = findInput();
+        if (input && input.scrollIntoView) {
+          input.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      chartCard.appendChild(btn);
+    }
+    // 初期 + 計算後に再確認（チャート再描画後を考慮）
+    ensureBackBtn();
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => setTimeout(ensureBackBtn, 150));
+    }
+    // 自動再計算でも追加されるよう、MutationObserver でチャートカード変化を監視
+    const chartCard = findChartCard();
+    if (chartCard) {
+      new MutationObserver(() => ensureBackBtn()).observe(chartCard, { childList: true });
+    }
+  })();
+
 </script>
+<!-- ═══ シミュレーター間クロスナビ (T-020) ═══ -->
+<nav class="cross-nav-section" aria-labelledby="cross-nav-heading" style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
+  <div style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="cross-nav-heading" style="font-size:17px;font-weight:800;color:#111827;margin-bottom:14px;letter-spacing:-0.01em;">他のシミュレーターも試す</h2>
+    <div class="cross-nav-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+      <a href="./simulator_tumitate.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">📈</span><span class="cn-name">積立投資<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_torikuzushi.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">🏖️</span><span class="cn-name">資産取り崩し<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_nisa.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">🎯</span><span class="cn-name">新NISA(積立&一括)<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_fire.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">🔥</span><span class="cn-name">FIRE逆算<br><small>シミュレーター</small></span></a>
+    </div>
+    <a href="./index.html" class="cross-nav-home" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
+  </div>
+</nav>
+<style>
+  .cross-nav-card {
+    display:flex; align-items:center; gap:10px;
+    padding:12px 14px; text-decoration:none;
+    background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px;
+    color:#111827; transition:all .15s;
+  }
+  .cross-nav-card:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
+  .cn-emoji { font-size:20px; flex-shrink:0; }
+  .cn-name { font-size:13px; font-weight:700; line-height:1.3; }
+  .cn-name small { font-size:10.5px; color:#6b7280; font-weight:600; }
+  .cross-nav-home:hover { text-decoration:underline; }
+  @media (max-width: 640px) {
+    .cross-nav-grid { grid-template-columns: 1fr 1fr !important; }
+    .cross-nav-card { padding: 10px 12px; }
+  }
+</style>
+
 <!-- ═══ SEO向けコンテンツセクション ═══ -->
 <section class="seo-content" aria-labelledby="seo-about" style="max-width:1220px;margin:40px auto 0;padding:0 22px;">
   <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
@@ -2646,9 +2788,9 @@ function fireTableRows(r) {
     const endBal   = cur.balance  * 10000;
     const annualIn = (cur.principal - prev.principal) * 10000;
     const gain     = (endBal - startBal - annualIn);
-    html += `<tr><td>${cur.year}年目</td><td>${fmtYen(startBal)}</td><td>${fmtYen(annualIn)}</td>`
-          + `<td style="color:#0ea472">${fmtYen(gain)}</td>`
-          + `<td style="color:#2563eb;font-weight:700">${fmtYen(endBal)}</td></tr>`;
+    html += `<tr><td data-label="年">${cur.year}年目</td><td data-label="期首残高">${fmtYen(startBal)}</td><td data-label="年間投資">${fmtYen(annualIn)}</td>`
+          + `<td data-label="運用益" style="color:#0ea472">${fmtYen(gain)}</td>`
+          + `<td data-label="期末残高" style="color:#2563eb;font-weight:700">${fmtYen(endBal)}</td></tr>`;
   }
   return html;
 }
