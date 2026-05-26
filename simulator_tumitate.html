@@ -475,6 +475,10 @@
         justify-content: center;
       }
       /* 改善2: モバイルで実質評価額(.inf-note)を chart より後に移動。計算結果＋グラフが一画面に収まるように */
+      /* 改善4: モバイルでパネル幅を統一（最大化）。main-area の余白を縮めて全カードを横幅いっぱいに */
+      .main-area { padding: 10px 6px 60px !important; }
+      .card, .panel, .compare-bar, .hero-result, .stats-wrap, .result-block, .table-card, .inf-note, .chart-card { width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box; }
+      .left, .right { width: 100%; max-width: 100%; }
       .right { display: flex; flex-direction: column; }
       .right > .hero-result, .right > .result-block { order: 0; }
       .right > .stats-wrap { order: 1; }
@@ -485,8 +489,8 @@
       /* 改善5: モバイルでグラフをパネルいっぱいに（タイトル削除/凡例重ね/最大化） */
       .chart-card { padding: 10px 8px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); position: relative; }
       .chart-title { display: none !important; }
-      .chart-wrap { padding: 0; min-height: 300px; border: none; border-radius: 8px; background: white; }
-      .chart-wrap svg { min-height: 300px; width: 100%; display:block; }
+      .chart-wrap { padding: 0; min-height: 380px; border: none; border-radius: 8px; background: white; }
+      .chart-wrap svg { min-height: 380px; width: 100%; display:block; }
       .chart-card .legend { position: absolute; top: 14px; left: 18px; margin: 0 !important; padding: 5px 10px; background: rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.06); border-radius: 8px; font-size: 11px; z-index: 3; display: flex; gap: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
@@ -2476,6 +2480,35 @@
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
 
+  // ── 課題3: label のテキスト/余白タップで内部の spin-btn が誤起動する問題を抑止 ──
+  document.addEventListener('click', e => {
+    const lbl = e.target.closest('label');
+    if (!lbl) return;
+    // label 内に spin-btn が含まれる場合のみ判定（数値入力欄を持つ行）
+    if (!lbl.querySelector('.spin-btn')) return;
+    // 直接タップされた要素が button/input/range/select でなければ、label の暗黙的アクティベートを停止
+    const t = e.target;
+    const isInteractive = t.matches('button, input, select, textarea, .spin-btn, .num-input, [role="button"]') ||
+                          t.closest('button, .spin-btn, [role="button"]');
+    if (!isInteractive) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+
+  // ── 課題: モバイルでグラフを縦に拡大（SVG preserveAspectRatio=none で歪み許容して min-height にフィット） ──
+  function applyChartAspect() {
+    const isMob = window.matchMedia('(max-width: 640px)').matches;
+    document.querySelectorAll('.chart-wrap svg').forEach(svg => {
+      if (isMob) svg.setAttribute('preserveAspectRatio', 'none');
+      else svg.removeAttribute('preserveAspectRatio');
+    });
+  }
+  applyChartAspect();
+  window.addEventListener('resize', applyChartAspect);
+  // 描画後（calc 押下時）にも再適用
+  new MutationObserver(() => applyChartAspect()).observe(document.body, { childList: true, subtree: true });
+
   // ── 課題1: help-ic クリック時に親要素への伝播を抑止（マイナスボタン誤押下等）。delegateで動的要素にも対応 ──
   document.addEventListener('mousedown', e => {
     if (e.target.classList && e.target.classList.contains('help-ic')) { e.preventDefault(); e.stopPropagation(); }
@@ -2508,6 +2541,8 @@
           const target = findResult();
           if (target && target.scrollIntoView) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 数ピクセル上に余白を作る（計算結果の上端にゆとり）
+            setTimeout(() => { window.scrollBy({ top: -24, behavior: 'smooth' }); }, 350);
           }
         }, 180);
       });
