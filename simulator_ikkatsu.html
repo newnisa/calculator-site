@@ -304,6 +304,11 @@
     .toggle-group button.active { background: var(--accent); color: white; box-shadow: 0 1px 6px rgba(29,78,216,.3); }
     .divider { height: 1.5px; background: var(--border); margin: 2px 0; }
     .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    /* 改善6: 計算ボタンを大型化＋目立たせる、他のサブ操作は下段に */
+    .actions .btn-primary { flex: 1 1 100%; font-size: 18px !important; padding: 18px 28px !important; min-height: 56px; border-radius: 14px !important; order: 0; }
+    .actions .btn-secondary { font-size: 13px; padding: 8px 14px; order: 1; }
+    .actions .btn-share { font-size: 13px; padding: 8px 14px; order: 2; }
+    .actions .auto-calc-wrap { order: 3; flex: 0 0 auto; font-size: 12.5px; color: var(--muted); }
     .btn-primary {
       border: none; border-radius: 12px; padding: 15px 26px;
       font-size: 16px; font-weight: 900; cursor: pointer;
@@ -469,11 +474,20 @@
         margin-bottom: 4px;
         justify-content: center;
       }
-      /* 改善: モバイルでグラフのインパクト・視認性向上 */
-      .chart-card { padding: 18px 12px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); }
-      .chart-title { font-size: 17px !important; font-weight: 800 !important; margin-bottom: 8px !important; }
-      .chart-wrap { padding: 6px 4px; min-height: 240px; }
-      .chart-wrap svg { min-height: 220px; }
+      /* 改善2: モバイルで実質評価額(.inf-note)を chart より後に移動。計算結果＋グラフが一画面に収まるように */
+      .right { display: flex; flex-direction: column; }
+      .right > .hero-result, .right > .result-block { order: 0; }
+      .right > .stats-wrap { order: 1; }
+      .right > .chart-card { order: 2; }
+      .right > .tax-card { order: 3; }
+      .right > .table-card { order: 4; }
+      .right > .inf-note { order: 9; }
+      /* 改善5: モバイルでグラフをパネルいっぱいに（タイトル削除/凡例重ね/最大化） */
+      .chart-card { padding: 10px 8px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); position: relative; }
+      .chart-title { display: none !important; }
+      .chart-wrap { padding: 0; min-height: 300px; border: none; border-radius: 8px; background: white; }
+      .chart-wrap svg { min-height: 300px; width: 100%; display:block; }
+      .chart-card .legend { position: absolute; top: 14px; left: 18px; margin: 0 !important; padding: 5px 10px; background: rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.06); border-radius: 8px; font-size: 11px; z-index: 3; display: flex; gap: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
       .tab-btn { font-size: 13px; padding: 8px 12px; }
@@ -559,7 +573,7 @@
       .right > .stats-wrap  { order: 1; }
       .right > .chart-card  { order: 2; }
       .right > .tax-card    { order: 3; }
-      .right > .inf-note    { order: 4; }
+      .right > .inf-note    { order: 6; }
       .right > .table-card  { order: 5; }
 
       /* ヘッドラインカードを大画面ではコンパクトに */
@@ -858,11 +872,11 @@
             </label>
           <div class="divider"></div>
           <div class="actions form-full">
-            <button type="button" class="btn-primary" id="t2-calc">計算する</button>
+            <button type="button" class="btn-primary" id="t2-calc">✨ 計算する</button>
             <button type="button" class="btn-secondary" id="t2-reset">リセット</button>
             <button class="btn-share" type="button" id="t2-share">🔗 共有</button>
             <label class="auto-calc-wrap">
-              <input type="checkbox" id="t2-auto" checked>自動再計算
+              <input type="checkbox" id="t2-auto">自動再計算
             </label>
           </div>
         </div>
@@ -998,7 +1012,7 @@
     if (inf <= 0) { noteEl.style.display='none'; return; }
     const realBal    = nomBal / Math.pow(1 + inf/100, years);
     const realProfit = realBal - principal;
-    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}<div class="real-explain" style="margin-top:6px;font-size:11.5px;color:#6b7280;line-height:1.6;">物価上昇を考慮した「現在の貨幣価値」での金額です。例えば毎年2%物価が上がると、20年後の100万円は今の約67万円相当の価値しかありません。</div>`;
+    noteEl.innerHTML = `<span class="real-badge">実質評価額（インフレ率 ${inf}% 調整後）</span>　${fmtYen(realBal)}　／　実質運用益　${fmtYen(realProfit)}<span class="help-wrap" style="margin-left:8px;vertical-align:middle;"><span class="help-ic" role="button" tabindex="0" aria-label="実質評価額の説明">?</span><span class="help-pop" role="tooltip"><strong>実質評価額とは</strong><br>物価上昇を考慮した「現在の貨幣価値」での金額です。例えば毎年2%物価が上がると、20年後の100万円は今の約67万円相当の価値しかありません。</span></span>`;
     noteEl.style.display = '';
   }
 
@@ -1072,11 +1086,11 @@
     const barGroupW = iW / maxX;
 
     // Y軸グリッド + 万円ラベル
-    let yGrid = `<text x="${pad.l}" y="${pad.t - 12}" text-anchor="start" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t - 12}" text-anchor="start" fill="#64748b" font-size="14" font-family="sans-serif">万円</text>`;
     ticks.forEach(v => {
       const yy = py(v).toFixed(1);
       yGrid += `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="14" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
 
     // X軸グリッド
@@ -1088,11 +1102,11 @@
     for (let yr = 0; yr <= maxX; yr += xStep) {
       const xx = px(yr).toFixed(1);
       xGrid += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="14" font-family="sans-serif">${yr}年後</text>`;
     }
     if (maxX % xStep !== 0) {
       const xx = px(maxX).toFixed(1);
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${maxX}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="14" font-family="sans-serif">${maxX}年後</text>`;
     }
 
     // 積み上げ棒グラフ
@@ -1169,7 +1183,7 @@
       const mx = px(opts.limitYear);
       const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
       limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
-        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
     }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>
@@ -1720,11 +1734,11 @@
     const pxFn = v => pad.l + v / maxX * iW;
     const pyFn = v => pad.t + iH - v / scaleY * iH;
 
-    let yGrid = `<text x="${pad.l}" y="${pad.t-14}" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t-14}" fill="#64748b" font-size="14" font-family="sans-serif">万円</text>`;
     ticks.forEach(v => {
       const yy = pyFn(v).toFixed(1);
       yGrid += `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid += `<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="14" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
 
     const rawXStep = Math.max(1, Math.ceil(maxX / 8));
@@ -1732,7 +1746,7 @@
     for (let yr = 0; yr <= maxX; yr += rawXStep) {
       const xx = pxFn(yr).toFixed(1);
       xGrid += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="14" font-family="sans-serif">${yr}年後</text>`;
     }
 
     let pathsSvg = '', dotsSvg = '';
@@ -1768,7 +1782,7 @@
       const mx = pxFn(_lim);
       const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
       limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
-        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
     }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>
@@ -2056,18 +2070,18 @@
     const pyFn = v => pad.t + iH - v/scaleY*iH;
     const barW = iW/maxX;
 
-    let yGrid = `<text x="${pad.l}" y="${pad.t-12}" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
+    let yGrid = `<text x="${pad.l}" y="${pad.t-12}" fill="#64748b" font-size="14" font-family="sans-serif">万円</text>`;
     ticks.forEach(v=>{
       const yy=pyFn(v).toFixed(1);
       yGrid+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-      yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
+      yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="14" font-family="sans-serif">${fmtAxis(v)}</text>`;
     });
     const rawXStep=Math.max(1,Math.ceil(maxX/8));
     let xGrid='';
     for(let yr=0;yr<=maxX;yr+=rawXStep){
       const xx=pxFn(yr).toFixed(1);
       xGrid+=`<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-      xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
+      xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="14" font-family="sans-serif">${yr}年後</text>`;
     }
 
     let paths='', dots='', hovers='';
@@ -2453,13 +2467,28 @@
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
 
+  // ── 課題1: help-ic クリック時に親要素への伝播を抑止（マイナスボタン誤押下等）。delegateで動的要素にも対応 ──
+  document.addEventListener('mousedown', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('click', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('touchstart', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.stopPropagation(); }
+  }, { capture: true, passive: true });
   // ── 課題8: 計算ボタン押下後の結果スクロール ＋「条件入力に戻る」ボタン ──
   (function setupScrollNav(){
     const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
     const calcBtn = document.getElementById('t2-calc');
-    const findResult = () => document.getElementById('t2-hero') || document.querySelector('.hero-result, .fire-hero');
+    const findResult = () => document.getElementById('t2-hero')
+      || document.querySelector('#tab2 .hero-result, #tab2 .fire-hero')
+      || document.querySelector('.tab-panel.active .hero-result, .tab-panel.active .fire-hero');
     const findInput = () => document.querySelector('#tab2 .panel') || document.querySelector('.panel');
-    const findChartCard = () => document.getElementById('chart2')?.closest('.chart-card');
+    // 改良: chart-card を tab panel ベースで探す。動的挿入されても active タブ内の .chart-card を取得
+    const findChartCard = () => document.querySelector('#tab2 .chart-card')
+      || document.querySelector('.tab-panel.active .chart-card')
+      || document.querySelector('.chart-card');
 
     // 計算押下後: 結果領域へスムーズスクロール（モバイルのみ）
     if (calcBtn) {
@@ -2471,15 +2500,22 @@
           if (target && target.scrollIntoView) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 120);
+        }, 180);
       });
     }
 
     // 「条件入力に戻る」ボタンをチャート後に挿入
     function ensureBackBtn() {
+      // 課題4: PCでは戻るボタンを表示しない
+      if (!isMobile()) {
+        // 既存のボタンが残っていれば PC リサイズ時に消す
+        const existing = document.querySelector('.back-to-input-btn');
+        if (existing) existing.remove();
+        return false;
+      }
       const chartCard = findChartCard();
-      if (!chartCard) return;
-      if (chartCard.querySelector('.back-to-input-btn')) return;
+      if (!chartCard) return false;
+      if (chartCard.querySelector('.back-to-input-btn')) return true;
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'back-to-input-btn';
@@ -2496,16 +2532,28 @@
         }
       });
       chartCard.appendChild(btn);
+      return true;
     }
-    // 初期 + 計算後に再確認（チャート再描画後を考慮）
-    ensureBackBtn();
+
+    // 初期試行 → 失敗時は遅延リトライ（動的挿入で後から chart-card が現れるケース対応）
+    if (!ensureBackBtn()) {
+      // 計算ボタンを発火してデフォルト結果を描画させ、再試行
+      setTimeout(ensureBackBtn, 250);
+      setTimeout(ensureBackBtn, 600);
+      setTimeout(ensureBackBtn, 1200);
+    }
     if (calcBtn) {
-      calcBtn.addEventListener('click', () => setTimeout(ensureBackBtn, 150));
+      calcBtn.addEventListener('click', () => {
+        setTimeout(ensureBackBtn, 180);
+        setTimeout(ensureBackBtn, 500);
+      });
     }
-    // 自動再計算でも追加されるよう、MutationObserver でチャートカード変化を監視
-    const chartCard = findChartCard();
-    if (chartCard) {
-      new MutationObserver(() => ensureBackBtn()).observe(chartCard, { childList: true });
+    // result-area / tab panel 配下を監視: 動的に chart-card が差し込まれたら追従
+    const watchRoot = document.getElementById('tab2')
+      || document.querySelector('.main-area')
+      || document.body;
+    if (watchRoot) {
+      new MutationObserver(() => ensureBackBtn()).observe(watchRoot, { childList: true, subtree: true });
     }
   })();
 
@@ -2867,18 +2915,18 @@ function renderFireChart(r) {
   const pxF = v => pad.l + v/maxX*iW;
   const pyF = v => pad.t + iH - Math.min(v,scaleY)/scaleY*iH;
 
-  let yGrid=`<text x="${pad.l}" y="${pad.t-12}" text-anchor="start" fill="#64748b" font-size="11.5" font-family="sans-serif">万円</text>`;
+  let yGrid=`<text x="${pad.l}" y="${pad.t-12}" text-anchor="start" fill="#64748b" font-size="14" font-family="sans-serif">万円</text>`;
   ticks.forEach(v => {
     const yy=pyF(v).toFixed(1);
     yGrid+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${v===0?'#ccc':'#e8eaef'}" stroke-width="${v===0?1.5:1}"/>`;
-    yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="11.5" font-family="sans-serif">${fmtAxis(v)}</text>`;
+    yGrid+=`<text x="${pad.l-8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="14" font-family="sans-serif">${fmtAxis(v)}</text>`;
   });
   const xStep=Math.max(1,Math.ceil(maxX/6));
   let xGrid='';
   for (let yr=0; yr<=maxX; yr+=xStep) {
     const xx=pxF(yr).toFixed(1);
     xGrid+=`<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
-    xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="11.5" font-family="sans-serif">${yr}年後</text>`;
+    xGrid+=`<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="14" font-family="sans-serif">${yr}年後</text>`;
   }
   const bw=Math.max(2, iW/maxX*0.65);
   let bars='';
