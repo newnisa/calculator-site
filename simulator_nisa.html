@@ -262,7 +262,9 @@
       transition: background .15s, color .15s;
       line-height: 1; user-select: none; padding: 0;
     }
-    .spin-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) {
+      .spin-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    }
     .spin-btn:active { opacity: .8; }
     .spin-btn.spin-minus { border-radius: 9px 0 0 9px; border-right: none; }
     .spin-btn.spin-plus  { border-radius: 0 9px 9px 0; border-left: none; }
@@ -477,6 +479,10 @@
         justify-content: center;
       }
       /* 改善2: モバイルで実質評価額(.inf-note)を chart より後に移動。計算結果＋グラフが一画面に収まるように */
+      /* 改善: モバイルでの不自然な改行を抑止（日本語は単語の途中で折返さない、文節単位で折返す） */
+      body, .main-area, .card, .panel, .faq-a, .seo-content, p, li, .real-explain, .nisa-sched-note, .gloss-card p { word-break: normal !important; overflow-wrap: anywhere !important; line-break: strict; }
+      /* タブも1行表示を試みつつ、収まらない場合は通常折返し */
+      .tab-btn { white-space: normal; word-break: keep-all; }
       /* 改善4: モバイルでパネル幅を統一（最大化）。main-area の余白を縮めて全カードを横幅いっぱいに */
       .main-area { padding: 10px 6px 60px !important; }
       .card, .panel, .compare-bar, .hero-result, .stats-wrap, .result-block, .table-card, .inf-note, .chart-card { width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box; }
@@ -491,8 +497,8 @@
       /* 改善5: モバイルでグラフをパネルいっぱいに（タイトル削除/凡例重ね/最大化） */
       .chart-card { padding: 10px 8px !important; background: linear-gradient(180deg, var(--surface) 0%, #f6f8fc 100%); border-width: 1.5px; box-shadow: 0 4px 18px rgba(29,78,216,.08); position: relative; }
       .chart-title { display: none !important; }
-      .chart-wrap { padding: 0; min-height: 380px; border: none; border-radius: 8px; background: white; }
-      .chart-wrap svg { min-height: 380px; width: 100%; display:block; }
+      .chart-wrap { padding: 0; min-height: 180px; border: none; border-radius: 8px; background: white; }
+      .chart-wrap svg { min-height: 180px; width: 100%; display:block; }
       .chart-card .legend { position: absolute; top: 14px; left: 18px; margin: 0 !important; padding: 5px 10px; background: rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.06); border-radius: 8px; font-size: 11px; z-index: 3; display: flex; gap: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
@@ -804,7 +810,7 @@
       <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
       <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
       <a class="tab-btn" href="simulator_torikuzushi.html">資産取り崩し</a>
-      <button class="tab-btn active" data-tab="tab4" aria-current="page">新NISA（積立＆一括）</button>
+      <button class="tab-btn active" data-tab="tab4" aria-current="page">新NISA</button>
       <a class="tab-btn" href="simulator_fire.html">FIRE逆算</a>
     </nav>
     <nav class="crumb" aria-label="パンくずリスト">
@@ -817,7 +823,7 @@
   </aside>
   <div class="main-area">
     <header class="topbar">
-      <h1>新NISA（積立＆一括）シミュレーター</h1>
+      <h1>新NISA積立＆一括シミュレーター</h1>
     </header>
 
 
@@ -829,7 +835,7 @@
 
       <!-- LEFT: 設定パネル（他タブと同じく section.card.panel を直接 grid 子に） -->
       <section class="card panel">
-          <div class="panel-title">新NISA（積立＆一括）条件を入力</div>
+          <div class="panel-title">新NISA条件を入力</div>
 
           <!-- シナリオ選択（tab1〜3と完全統一構造） -->
           <div class="panel-cmp-bar" id="nisa-panel-cmp-bar">
@@ -2501,6 +2507,24 @@
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
 
+  // ── 課題2: label の暗黙的 form-control 紐付けで spin-btn が hover/tap で誤反応する問題を吸収 ──
+  // 各 label の先頭に invisible dummy input を挿入し「最初の form-control」を spin-btn から dummy に変える
+  function injectLabelDummy() {
+    document.querySelectorAll('label').forEach(lbl => {
+      if (!lbl.querySelector('.spin-btn')) return;
+      if (lbl.querySelector('.label-dummy')) return;
+      const dummy = document.createElement('input');
+      dummy.type = 'text';
+      dummy.className = 'label-dummy';
+      dummy.setAttribute('aria-hidden', 'true');
+      dummy.tabIndex = -1;
+      dummy.style.cssText = 'position:absolute !important;left:-9999px !important;width:0 !important;height:0 !important;opacity:0 !important;pointer-events:none !important;';
+      lbl.insertBefore(dummy, lbl.firstChild);
+    });
+  }
+  injectLabelDummy();
+  new MutationObserver(injectLabelDummy).observe(document.body, { childList: true, subtree: true });
+
   // ── 課題3: label のテキスト/余白タップで内部の spin-btn が誤起動する問題を抑止 ──
   document.addEventListener('click', e => {
     const lbl = e.target.closest('label');
@@ -2516,19 +2540,6 @@
       e.stopPropagation();
     }
   }, true);
-
-  // ── 課題: モバイルでグラフを縦に拡大（SVG preserveAspectRatio=none で歪み許容して min-height にフィット） ──
-  function applyChartAspect() {
-    const isMob = window.matchMedia('(max-width: 640px)').matches;
-    document.querySelectorAll('.chart-wrap svg').forEach(svg => {
-      if (isMob) svg.setAttribute('preserveAspectRatio', 'none');
-      else svg.removeAttribute('preserveAspectRatio');
-    });
-  }
-  applyChartAspect();
-  window.addEventListener('resize', applyChartAspect);
-  // 描画後（calc 押下時）にも再適用
-  new MutationObserver(() => applyChartAspect()).observe(document.body, { childList: true, subtree: true });
 
   // ── 課題1: help-ic クリック時に親要素への伝播を抑止（マイナスボタン誤押下等）。delegateで動的要素にも対応 ──
   document.addEventListener('mousedown', e => {
@@ -2562,8 +2573,6 @@
           const target = findResult();
           if (target && target.scrollIntoView) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // 数ピクセル上に余白を作る（計算結果の上端にゆとり）
-            setTimeout(() => { window.scrollBy({ top: -24, behavior: 'smooth' }); }, 350);
           }
         }, 180);
       });
