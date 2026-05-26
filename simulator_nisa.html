@@ -17,8 +17,6 @@
   <link rel="alternate" hreflang="x-default" href="https://newnisa.github.io/calculator-site/simulator_nisa.html">
 
   <!-- ═══ パフォーマンス最適化 ═══ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
   <!-- ═══ OGP（SNSシェア用） ═══ -->
   <meta property="og:type" content="website">
@@ -76,15 +74,16 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "新NISAシミュレーター"
+            "name": "新NISA（積立&一括）シミュレーター",
+            "item": "https://newnisa.github.io/calculator-site/simulator_nisa.html"
           }
         ]
       },
       {
         "@type": "WebApplication",
-        "name": "新NISAシミュレーター",
-        "description": "新NISAの積立投資・一括投資・資産取り崩しを無料でシミュレーションできるツール。複数シナリオの比較も可能。",
-        "url": "https://newnisa.github.io/calculator-site/",
+        "name": "新NISA（積立&一括）シミュレーター",
+        "description": "新NISA非課税枠1800万円(成長240万/積立120万)の期間別最適化を試算。月額積立と年間一括の組み合わせ、生涯枠到達年も表示する無料シミュレーター。",
+        "url": "https://newnisa.github.io/calculator-site/simulator_nisa.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "browserRequirements": "HTML5対応ブラウザ",
@@ -422,6 +421,45 @@
       #tab4 .card.panel, #tab5 .card.panel { min-height: 0; }
     }
     @media (max-width: 640px) {
+      /* T-034: 年次サマリーテーブルをカード型レイアウトに変換（水平スクロール解消） */
+      .table-card thead { display: none; }
+      .table-card table { width: 100%; }
+      .table-card tbody, .table-card tr, .table-card td { display: block; }
+      .table-card tr {
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px 10px;
+        align-items: center;
+      }
+      .table-card td {
+        padding: 3px 6px;
+        border: none;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .table-card td:not(:first-child)::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 10.5px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .table-card td:first-child {
+        grid-column: 1 / -1;
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 13px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-bottom: 4px;
+        justify-content: center;
+      }
       .stats { grid-template-columns: 1fr 1fr; }
       .main-area { padding: 12px; }
       .tab-btn { font-size: 13px; padding: 8px 12px; }
@@ -745,7 +783,7 @@
   </aside>
   <div class="main-area">
     <header class="topbar">
-      <h1>新NISAシミュレーター｜FIRE・積立・一括・取り崩し 無料試算</h1>
+      <h1>新NISA（積立＆一括）シミュレーター</h1>
     </header>
 
 
@@ -1282,11 +1320,11 @@
       {key:'principal', color:'#0ea472', label:'投資元本', w:2.5},
     ], tt1);
     el('t1-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annual)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間積立額">${fmtYen(row.annual)}</td>
+      <td data-label="累計元本">${fmtYen(row.principal)}</td>
+      <td data-label="予想評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="累計運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
     </tr>`).join('');
     updateInflation('t1', r.balance, r.principal, parseInt(el('t1-years').value)||0);
     const y1 = parseInt(el('t1-years').value)||0;
@@ -1326,11 +1364,11 @@
       {key:'principal', color:'#0ea472', label:'元本', w:2.5},
     ], tt2);
     el('t2-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="元本">${fmtYen(row.principal)}</td>
+      <td data-label="運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="利益率" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtPct(row.roi)}</td>
     </tr>`).join('');
     updateInflation('t2', r.balance, r.principal, parseInt(el('t2-years').value)||0);
     const y2 = parseInt(el('t2-years').value)||0;
@@ -1390,11 +1428,11 @@
       {key:'balance', color:'#2563eb', label:'資産残高', w:3.5},
     ], tt3);
     el('t3-table').innerHTML = r.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annualW)}</td>
-      <td>${fmtYen(row.totalW)}</td>
-      <td style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:#0ea472">${fmtYen(row.gain)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間取り崩し額">${fmtYen(row.annualW)}</td>
+      <td data-label="取り崩し累計">${fmtYen(row.totalW)}</td>
+      <td data-label="年末残高" style="color:${row.balance>0?'#2563eb':'#dc2626'};font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="年間運用益" style="color:#0ea472">${fmtYen(row.gain)}</td>
     </tr>`).join('');
     el('t3-hero-label').textContent = `月の取り崩し可能額`;
     el('t3-hero-val').textContent = fmtYen(r.monthlyW);
@@ -1789,12 +1827,12 @@
 
   function renderNisaTable(res) {
     el('nisa-table').innerHTML = res.rows.map(row => `<tr>
-      <td>${row.year}年目</td>
-      <td>${fmtYen(row.annualInvest)}</td>
-      <td>${fmtYen(row.principal)}</td>
-      <td style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
-      <td style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
-      <td style="color:${row.lifetimeRem>0?'var(--text2)':'var(--accent2)'}">${fmtYen(row.lifetimeRem)}</td>
+      <td data-label="年">${row.year}年目</td>
+      <td data-label="年間投資額">${fmtYen(row.annualInvest)}</td>
+      <td data-label="累計元本">${fmtYen(row.principal)}</td>
+      <td data-label="評価額" style="color:#2563eb;font-weight:700">${fmtYen(row.balance)}</td>
+      <td data-label="運用益" style="color:${row.profit>=0?'#0ea472':'#dc2626'}">${fmtYen(row.profit)}</td>
+      <td data-label="生涯枠残" style="color:${row.lifetimeRem>0?'var(--text2)':'var(--accent2)'}">${fmtYen(row.lifetimeRem)}</td>
     </tr>`).join('');
   }
 
@@ -2429,6 +2467,37 @@
   calcNisa();
 
 </script>
+<!-- ═══ シミュレーター間クロスナビ (T-020) ═══ -->
+<nav class="cross-nav-section" aria-labelledby="cross-nav-heading" style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
+  <div style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="cross-nav-heading" style="font-size:17px;font-weight:800;color:#111827;margin-bottom:14px;letter-spacing:-0.01em;">他のシミュレーターも試す</h2>
+    <div class="cross-nav-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+      <a href="./simulator_tumitate.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">📈</span><span class="cn-name">積立投資<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_ikkatsu.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">💴</span><span class="cn-name">一括投資<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_torikuzushi.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">🏖️</span><span class="cn-name">資産取り崩し<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_fire.html" class="cross-nav-card"><span class="cn-emoji" aria-hidden="true">🔥</span><span class="cn-name">FIRE逆算<br><small>シミュレーター</small></span></a>
+    </div>
+    <a href="./index.html" class="cross-nav-home" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
+  </div>
+</nav>
+<style>
+  .cross-nav-card {
+    display:flex; align-items:center; gap:10px;
+    padding:12px 14px; text-decoration:none;
+    background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px;
+    color:#111827; transition:all .15s;
+  }
+  .cross-nav-card:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
+  .cn-emoji { font-size:20px; flex-shrink:0; }
+  .cn-name { font-size:13px; font-weight:700; line-height:1.3; }
+  .cn-name small { font-size:10.5px; color:#6b7280; font-weight:600; }
+  .cross-nav-home:hover { text-decoration:underline; }
+  @media (max-width: 640px) {
+    .cross-nav-grid { grid-template-columns: 1fr 1fr !important; }
+    .cross-nav-card { padding: 10px 12px; }
+  }
+</style>
+
 <!-- ═══ SEO向けコンテンツセクション ═══ -->
 <section class="seo-content" aria-labelledby="seo-about" style="max-width:1220px;margin:40px auto 0;padding:0 22px;">
   <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
@@ -2676,9 +2745,9 @@ function fireTableRows(r) {
     const endBal   = cur.balance  * 10000;
     const annualIn = (cur.principal - prev.principal) * 10000;
     const gain     = (endBal - startBal - annualIn);
-    html += `<tr><td>${cur.year}年目</td><td>${fmtYen(startBal)}</td><td>${fmtYen(annualIn)}</td>`
-          + `<td style="color:#0ea472">${fmtYen(gain)}</td>`
-          + `<td style="color:#2563eb;font-weight:700">${fmtYen(endBal)}</td></tr>`;
+    html += `<tr><td data-label="年">${cur.year}年目</td><td data-label="期首残高">${fmtYen(startBal)}</td><td data-label="年間投資">${fmtYen(annualIn)}</td>`
+          + `<td data-label="運用益" style="color:#0ea472">${fmtYen(gain)}</td>`
+          + `<td data-label="期末残高" style="color:#2563eb;font-weight:700">${fmtYen(endBal)}</td></tr>`;
   }
   return html;
 }
