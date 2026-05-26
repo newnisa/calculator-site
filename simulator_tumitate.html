@@ -743,15 +743,82 @@
 
     /* 改善4：tab4のみ左パネルを縦スクロール可（PC幅のみ。モバイルは自然スクロール） */
     @media (min-width: 981px) {
-      #tab4 .card.panel {
-        max-height: calc(100vh - 120px);
+      /* T-040: PC全タブで条件入力パネルの高さを統一し、内容過多はパネル内スクロール。.actions は sticky で下部固定 */
+      .left-col > .card.panel, .grid > .card.panel,
+      #tab1 .card.panel, #tab2 .card.panel, #tab3 .card.panel, #tab4 .card.panel, #tab5 .card.panel {
+        height: calc(100vh - 110px);
+        max-height: 720px;
+        min-height: 560px;
         overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
         scrollbar-width: thin;
         scrollbar-color: var(--border) transparent;
       }
-      #tab4 .card.panel::-webkit-scrollbar { width: 8px; }
-      #tab4 .card.panel::-webkit-scrollbar-track { background: transparent; }
-      #tab4 .card.panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+      .grid > .card.panel::-webkit-scrollbar,
+      #tab1 .card.panel::-webkit-scrollbar, #tab2 .card.panel::-webkit-scrollbar,
+      #tab3 .card.panel::-webkit-scrollbar, #tab4 .card.panel::-webkit-scrollbar,
+      #tab5 .card.panel::-webkit-scrollbar { width: 8px; }
+      .grid > .card.panel::-webkit-scrollbar-track,
+      #tab1 .card.panel::-webkit-scrollbar-track, #tab2 .card.panel::-webkit-scrollbar-track,
+      #tab3 .card.panel::-webkit-scrollbar-track, #tab4 .card.panel::-webkit-scrollbar-track,
+      #tab5 .card.panel::-webkit-scrollbar-track { background: transparent; }
+      .grid > .card.panel::-webkit-scrollbar-thumb,
+      #tab1 .card.panel::-webkit-scrollbar-thumb, #tab2 .card.panel::-webkit-scrollbar-thumb,
+      #tab3 .card.panel::-webkit-scrollbar-thumb, #tab4 .card.panel::-webkit-scrollbar-thumb,
+      #tab5 .card.panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+
+      /* 左カラム wrapper (panel + actions) */
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        min-width: 0;
+        height: calc(100vh - 90px);
+        max-height: 720px;
+        min-height: 540px;
+      }
+      .left-col > .card.panel { flex: 1 1 0 !important; min-height: 0 !important; height: auto !important; max-height: none !important; overflow-y: auto !important; }
+      .left-col > .actions.actions-detached { flex-shrink: 0; }
+      /* PC: actions は JS で panel 外に detach されカード型で常時表示（viewport bottom固定） */
+      .left-col > .actions.actions-detached {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        box-shadow: 0 8px 28px rgba(15,23,42,.12);
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      /* PC: panel が長い場合に actions が viewport 外へ押し出されないよう、actions を panel の sticky bottom に固定 */
+      .left-col { position: relative; overflow: visible; }
+      .left-col > .actions.actions-detached {
+        position: sticky;
+        bottom: 12px;
+        z-index: 10;
+      }
+      /* panel: 下部に actions 分の余白を確保し overlap 防止 */
+      .left-col > .card.panel { padding-bottom: 18px; }
+      .left-col > .actions.actions-detached .btn-primary {
+        flex: 1 1 100%;
+        font-size: 16px !important;
+        padding: 14px 24px !important;
+        order: 0;
+      }
+      .left-col > .actions.actions-detached .btn-secondary,
+      .left-col > .actions.actions-detached .btn-share { order: 1; font-size: 13px; padding: 8px 14px; }
+      .left-col > .actions.actions-detached .auto-calc-wrap { order: 3; font-size: 12.5px; color: var(--muted); }
+/* panel 高さは left-col の flex で制御。.left-col > .card.panel ルールが優先 */
+      /* パネル内余白を最適化（条件入力が多いタブで見通しが良くなるよう） */
+      .grid > .card.panel .panel-title { flex-shrink: 0; margin-bottom: 10px; padding-bottom: 8px; }
+      .grid > .card.panel .panel-cmp-bar, .grid > .card.panel .compare-bar { flex-shrink: 0; }
+      .grid > .card.panel .form-grid { gap: 10px; }
+      .left .card.panel label { gap: 4px; font-size: 13px; }
+      .grid > .card.panel .divider { flex-shrink: 0; }
     }
 
     @media (max-width: 640px) {
@@ -2485,6 +2552,41 @@
   // Init
   // V-009: モバイル横スクロールタブで current(active) を中央に寄せる
   try { const _a = document.querySelector(".tab-btn.active"); if (_a && _a.scrollIntoView) _a.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); } catch(_) {}
+
+  // ── 課題: PCで actions(計算/リセット/共有/自動再計算) を panel の外に出して常時表示にする ──
+  function detachActionsForPC() {
+    const isPC = !window.matchMedia('(max-width: 980px)').matches;
+    document.querySelectorAll('.tab-panel.active .grid').forEach(grid => {
+      // panel と actions を見つける
+      const panel = grid.querySelector(':scope > .card.panel');
+      if (!panel) return;
+      const actions = panel.querySelector('.actions') || grid.querySelector(':scope > .left-col > .actions');
+      if (!actions) return;
+
+      let wrap = grid.querySelector(':scope > .left-col');
+      if (isPC) {
+        // wrap を作って panel + actions を入れる
+        if (!wrap) {
+          wrap = document.createElement('div');
+          wrap.className = 'left-col';
+          grid.insertBefore(wrap, panel);
+          wrap.appendChild(panel);
+        }
+        if (actions.parentNode !== wrap) wrap.appendChild(actions);
+        actions.classList.add('actions-detached');
+      } else {
+        // モバイル: wrap を解いて元の構造に
+        if (wrap) {
+          if (actions.parentNode === wrap) panel.appendChild(actions);
+          grid.insertBefore(panel, wrap);
+          wrap.remove();
+          actions.classList.remove('actions-detached');
+        }
+      }
+    });
+  }
+  detachActionsForPC();
+  window.addEventListener('resize', detachActionsForPC);
 
   // ── 課題2: label の暗黙的 form-control 紐付けで spin-btn が hover/tap で誤反応する問題を吸収 ──
   // 各 label の先頭に invisible dummy input を挿入し「最初の form-control」を spin-btn から dummy に変える
