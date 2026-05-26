@@ -59,8 +59,21 @@
             "url": "https://newnisa.github.io/calculator-site/ogp.png",
             "width": 1200,
             "height": 630
-          }
+          },
+          "sameAs": [
+            "https://github.com/newnisa/calculator-site",
+            "https://newnisa.github.io/calculator-site/"
+          ]
         }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://newnisa.github.io/calculator-site/#webpage",
+        "url": "https://newnisa.github.io/calculator-site/",
+        "name": "新NISAシミュレーター",
+        "isPartOf": { "@type": "WebSite", "@id": "https://newnisa.github.io/calculator-site/#website" },
+        "dateModified": "2026-05-27",
+        "inLanguage": "ja"
       },
       {
         "@type": "BreadcrumbList",
@@ -179,6 +192,14 @@
       --shadow:       0 4px 24px rgba(0,0,0,.09);
     }
     html { scroll-behavior: smooth; }
+    /* T-015: Skip link (WCAG 2.4.1 Bypass Blocks) */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 9999;
+      background: var(--accent); color: #fff; padding: 10px 16px;
+      border-radius: 0 0 8px 0; font-weight: 800; font-size: 14px;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 0; outline: 3px solid #fff; outline-offset: -3px; }
     /* T-012: prefers-reduced-motion対応 (WCAG 2.3.3) */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -704,6 +725,7 @@
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
 <!-- ─── ナビゲーション ─── -->
 <nav class="nav" role="navigation" aria-label="メインナビゲーション">
@@ -716,7 +738,7 @@
   </div>
 </nav>
 
-<main>
+<main id="main">
 
   <!-- ─── ヒーローセクション ─── -->
   <section class="hero" aria-labelledby="hero-heading">
@@ -1045,6 +1067,18 @@
           <h3><span class="ic" aria-hidden="true">🛡️</span>リスク分散と長期投資</h3>
           <p>投資のリスクは「長期・積立・分散」で抑えるのが基本です。投資対象を複数地域・資産に分散し、購入時期を分け、保有期間を長く取ることで価格変動の影響が平準化されます。新NISAは非課税で長期保有しやすく、この3つの原則と非常に相性が良い制度です。本ツールで運用年数や年利を変えながら試算すると、時間を味方につけることの効果を視覚的に理解できます。</p>
         </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">📅</span>ドルコスト平均法</h3>
+          <p>毎月一定額を継続購入することで、価格が高いときは少なく、安いときは多く買えるため、平均購入単価が下がりやすくなる手法です。一括投資と異なり高値掴みのリスクを抑えられ、相場の上下に一喜一憂せず継続できるのが利点です。新NISA積立投資はこのドルコスト平均法を自然に実践できる仕組みです。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">📊</span>インデックス投資</h3>
+          <p>S&P500や全世界株式（オルカン）など、市場全体の指数（インデックス）に連動するファンドに投資する方法です。個別銘柄を選ぶ必要がなく、信託報酬が低く、長期的には市場平均並みのリターンが期待できます。投資初心者・忙しい人に広く選ばれており、本シミュレーターの想定年利3〜7%もインデックス投資を念頭にした数字です。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">⚖️</span>リバランス</h3>
+          <p>運用を続けると資産配分が当初比率からずれていきます。例えば株：債券=50:50で始めても、株価上昇で60:40に偏ることがあります。これを定期的に元の配分に戻す作業がリバランスです。年1回程度の頻度が一般的で、リスク水準を維持しつつ「高くなった資産を売り、安くなった資産を買う」効果も生まれます。</p>
+        </article>
       </div>
     </div>
   </section>
@@ -1084,19 +1118,19 @@
         </details>
         <details class="faq-item">
           <summary>iDeCoと新NISAはどちらを優先すべきですか？</summary>
-          <div class="faq-a">一般的には「新NISA優先」が多く選ばれます。新NISAはいつでも引き出せる自由度があり、非課税保有期間も無期限です。iDeCoは掛金が所得控除になる節税メリットがある一方、原則60歳まで引き出せません。まずは新NISAでシミュレーションして目標額を把握し、余裕があればiDeCoも組み合わせる方法が広く推奨されています。</div>
+          <div class="faq-a">一般的には「新NISA優先」が多く選ばれます。新NISAはいつでも引き出せる自由度があり、非課税保有期間も無期限です。iDeCoは掛金が所得控除になる節税メリットがある一方、原則60歳まで引き出せません。まずは<a href="./simulator_nisa.html">新NISA（積立＆一括）シミュレーター</a>で目標額を把握し、余裕があればiDeCoも組み合わせる方法が広く推奨されています。</div>
         </details>
         <details class="faq-item">
           <summary>インフレはシミュレーション結果に影響しますか？</summary>
-          <div class="faq-a">本ツールの試算は名目値（インフレ調整前）で表示されます。インフレが年2%続くと仮定すると、20年後の購買力は現在の約67%になります。実質的な資産価値を把握したい場合は、想定年利からインフレ率（例：2%）を引いた<strong>実質利回り</strong>で設定すると保守的な試算が可能です。</div>
+          <div class="faq-a">本ツールの試算は名目値（インフレ調整前）で表示されます。インフレが年2%続くと仮定すると、20年後の購買力は現在の約67%になります。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>や<a href="./simulator_ikkatsu.html">一括投資シミュレーター</a>では、インフレ率を設定して実質評価額も確認できます。実質的な資産価値を把握したい場合は、想定年利からインフレ率（例：2%）を引いた<strong>実質利回り</strong>で設定すると保守的な試算が可能です。</div>
         </details>
         <details class="faq-item">
           <summary>投資はいつから始めるのが良いですか？</summary>
-          <div class="faq-a">複利効果の観点では「できるだけ早く始める」が鉄則です。例えば月3万円を年利5%で積み立てると、20年間で約1,237万円ですが、30年間では約2,497万円と2倍以上になります。シミュレーターで<strong>運用年数を変えて比較</strong>すると、開始を10年遅らせると資産形成に大きな差が生まれることが一目でわかります。</div>
+          <div class="faq-a">複利効果の観点では「できるだけ早く始める」が鉄則です。例えば月3万円を年利5%で積み立てると、20年間で約1,237万円ですが、30年間では約2,497万円と2倍以上になります。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>で<strong>運用年数を変えて比較</strong>すると、開始を10年遅らせると資産形成に大きな差が生まれることが一目でわかります。</div>
         </details>
         <details class="faq-item">
           <summary>毎月いくらから積立投資を始めれば良いですか？</summary>
-          <div class="faq-a">月1,000円など少額からでも始められます。重要なのは「継続」です。本シミュレーターでは月額をスライダーで自由に動かして将来の試算額を確認できます。まず現実的な金額でシミュレーションし、生活費の見直しで積立額を少しずつ増やしていく方法が長続きしやすいとされています。</div>
+          <div class="faq-a">月1,000円など少額からでも始められます。重要なのは「継続」です。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>では月額をスライダーで自由に動かして将来の試算額を確認できます。まず現実的な金額でシミュレーションし、生活費の見直しで積立額を少しずつ増やしていく方法が長続きしやすいとされています。</div>
         </details>
       </div>
     </div>
