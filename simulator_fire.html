@@ -193,6 +193,22 @@
     }
     /* 横スクロール抑制（モバイルで内部要素が viewport を超えても画面外に出さない） */
     html { overflow-x: hidden; max-width: 100vw; }
+    /* T-042: Skip link (WCAG 2.4.1) */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 9999;
+      background: var(--accent); color: #fff; padding: 10px 16px;
+      border-radius: 0 0 8px 0; font-weight: 800; font-size: 14px; text-decoration: none;
+    }
+    .skip-link:focus { left: 0; outline: 3px solid #fff; outline-offset: -3px; }
+    /* T-036: prefers-reduced-motion 対応 (WCAG 2.3.3 - 全 simulator ファイルへ展開) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
     img, svg { max-width: 100%; }
     /* ── サイドナビ型レイアウト ── */
     .wrap {
@@ -858,6 +874,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 <div id="tt1" class="chart-tooltip"></div>
 <div id="tt2" class="chart-tooltip"></div>
 <div id="tt3" class="chart-tooltip"></div>
@@ -886,7 +903,7 @@
       </ol>
     </nav>
   </aside>
-  <div class="main-area">
+  <div class="main-area" id="main">
     <header class="topbar">
       <h1>FIRE逆算シミュレーター</h1>
     </header>
@@ -1157,7 +1174,10 @@
   // ── CHART RENDERER: 積み上げ棒グラフ（元本 + 運用益）+ 折れ線 + 1年ごと丸プロット ──
   function renderChart(svgId, points, lines, tt, opts) {
     const svg = el(svgId);
-    const W = 900, H = 406, pad = {t:36, r:20, b:44, l:84};
+    // T-041: モバイルでグラフを縦長化（viewBox W/H/pad を viewport に応じて動的設定）
+    const _isMob = window.matchMedia('(max-width: 980px)').matches;
+    const W = 900, H = _isMob ? 760 : 406, pad = {t: 36, r: 20, b: _isMob ? 56 : 44, l: _isMob ? 96 : 84};
+    if (svg) svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
 
     const yPts = points.filter(p => p.year > 0);
@@ -1811,7 +1831,9 @@
   // ── チャート描画（複数シナリオ重ねて表示） ──
   function renderNisaChart(allResults) {
     const svg = el('chart4');
-    const W = 900, H = 406, pad = {t:36,r:20,b:44,l:84};
+    const _isMob = window.matchMedia('(max-width: 980px)').matches;
+    const W = 900, H = _isMob ? 760 : 406, pad = {t: 36, r: 20, b: _isMob ? 56 : 44, l: _isMob ? 96 : 84};
+    if (svg) svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
 
     const allVals = allResults.flatMap(r => r.pts.map(p => p.balance));
@@ -2148,8 +2170,10 @@
 
   function renderCompareChart(svgId, allScenarios, tabId, tt) {
     const svg = el(svgId);
-    const W=900,H=406,pad={t:36,r:20,b:44,l:84};
-    const iW=W-pad.l-pad.r, iH=H-pad.t-pad.b;
+    const _isMob = window.matchMedia('(max-width: 980px)').matches;
+    const W = 900, H = _isMob ? 760 : 406, pad = {t: 36, r: 20, b: _isMob ? 56 : 44, l: _isMob ? 96 : 84};
+    if (svg) svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
     // FIRE逆算タブのみ: x軸を年齢表記に
     const _ageEl = (tabId === 'f5') ? document.getElementById('f5-age') : null;
     const currentAgeForChart = _ageEl ? (parseInt(_ageEl.value) || 0) : 0;
@@ -3063,8 +3087,10 @@ function calcFire() {
 function renderFireChart(r) {
   const svg = el('chart5');
   if (!svg) return;
-  const W=900, H=406, pad={t:36,r:20,b:44,l:84};
-  const iW=W-pad.l-pad.r, iH=H-pad.t-pad.b;
+  const _isMob = window.matchMedia('(max-width: 980px)').matches;
+  const W = 900, H = _isMob ? 760 : 406, pad = {t: 36, r: 20, b: _isMob ? 56 : 44, l: _isMob ? 96 : 84};
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
   const limit = r.fy!==null ? Math.min(r.fy+3, 60) : 60;
   const pts = r.pts.filter(p => p.year<=limit);
   if (!pts.length) return;
