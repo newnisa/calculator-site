@@ -6,6 +6,8 @@
 
   <!-- ═══ 基本SEO ═══ -->
   <title>あなたのお金は20年後いくら？｜新NISA・FIRE・積立投資 複利シミュレーター【無料】</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1d4ed8">
   <meta name="description" content="20年後の資産はいくら？新NISA・積立投資・一括投資・FIRE・資産取り崩しを無料でシミュレーション。スマホからすぐ使え、複利で増える将来資産をグラフで見える化。最大4シナリオ同時比較・新NISA枠の期間別最適化・FIRE逆算に対応。登録不要。">
   <meta name="keywords" content="新NISA,シミュレーター,積立投資,複利計算,資産運用,FIRE,つみたてNISA,iDeCo,資産形成,将来資産">
   <meta name="author" content="shakewakame">
@@ -72,7 +74,7 @@
         "url": "https://newnisa.github.io/calculator-site/",
         "name": "新NISAシミュレーター",
         "isPartOf": { "@type": "WebSite", "@id": "https://newnisa.github.io/calculator-site/#website" },
-        "dateModified": "2026-05-27",
+        "dateModified": "2026-05-28",
         "inLanguage": "ja"
       },
       {
@@ -364,7 +366,16 @@
       padding-top: 36px;
       border-top: 1.5px solid rgba(255,255,255,0.2);
     }
-    .hero-stat { text-align: center; }
+    .hero-stat { text-align: center; padding: 4px 18px; position: relative; }
+    .hero-stat + .hero-stat::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 12%;
+      bottom: 12%;
+      width: 1.5px;
+      background: rgba(255,255,255,0.4);
+    }
     .hero-stat .val { font-size: 26px; font-weight: 900; letter-spacing: -0.04em; }
     .hero-stat .lbl { font-size: 12px; opacity: 0.92; font-weight: 600; margin-top: 3px; }
 
@@ -1080,6 +1091,18 @@
         <article class="gloss-card">
           <h3><span class="ic" aria-hidden="true">⚖️</span>リバランス</h3>
           <p>運用を続けると資産配分が当初比率からずれていきます。例えば株：債券=50:50で始めても、株価上昇で60:40に偏ることがあります。これを定期的に元の配分に戻す作業がリバランスです。年1回程度の頻度が一般的で、リスク水準を維持しつつ「高くなった資産を売り、安くなった資産を買う」効果も生まれます。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">📦</span>ETF（上場投資信託）</h3>
+          <p>株式と同じく証券取引所に上場している投資信託です。S&P500連動・全世界株式連動などのインデックス型ETFは信託報酬が0.05〜0.2%程度と低く、リアルタイムで売買できます。投資信託より信託報酬が安いケースが多く、新NISA成長投資枠でも購入可能です。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">🏦</span>投資信託</h3>
+          <p>投資家から集めた資金をプロが運用し、その成果を分配する金融商品です。1本で数十〜数百銘柄に分散投資できます。新NISAでは「つみたて投資枠」対象の投資信託は金融庁の基準を満たした低コスト・長期運用向けの商品に限定されており、初心者でも選びやすい仕組みになっています。</p>
+        </article>
+        <article class="gloss-card">
+          <h3><span class="ic" aria-hidden="true">🌱</span>新NISA 成長投資枠</h3>
+          <p>新NISAの2つの枠のうち、年間最大240万円・生涯1,200万円まで投資できる枠です。つみたて枠よりも対象商品が広く、ETF・個別株・REITも購入可能。積立枠（年120万・生涯1,800万 - 成長枠分）と組み合わせると年360万円・生涯1,800万円まで非課税運用ができます。</p>
         </article>
       </div>
     </div>
