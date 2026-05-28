@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>住民税&ふるさと納税シミュレーター｜翌年住民税と寄付限度額を試算</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1d4ed8">
+  <meta name="description" content="基本給・ボーナス・各種手当・源泉徴収票項目から翌年の住民税とふるさと納税の自己負担2,000円で済む寄付限度額を試算。家族構成・各種控除にも対応した無料シミュレーター。">
+  <meta name="keywords" content="住民税,シミュレーター,ふるさと納税,限度額,所得割,源泉徴収,給与所得控除,寄付">
+  <meta name="author" content="shakewakame">
+  <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏠%3C/text%3E%3C/svg%3E">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="住民税&ふるさと納税シミュレーター｜翌年住民税と寄付限度額を試算">
+  <meta property="og:description" content="基本給・ボーナス・手当・源泉徴収から翌年住民税と、ふるさと納税の自己負担2,000円限度額を試算。無料。">
+  <meta property="og:url" content="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
+  <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="住民税&ふるさと納税シミュレーター">
+  <meta name="twitter:description" content="翌年住民税と、ふるさと納税の自己負担2,000円限度額を試算。無料。">
+  <meta name="twitter:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "住民税&ふるさと納税シミュレーター",
+        "description": "基本給・ボーナス・控除条件から翌年住民税と、ふるさと納税の自己負担2,000円で済む寄付限度額を試算する無料シミュレーター。",
+        "url": "https://newnisa.github.io/calculator-site/simulator_juminzei.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+        "inLanguage": "ja"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://newnisa.github.io/calculator-site/" },
+          { "@type": "ListItem", "position": 2, "name": "住民税&ふるさと納税シミュレーター", "item": "https://newnisa.github.io/calculator-site/simulator_juminzei.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f4f6fa; --surface: #ffffff; --surface2: #f6f8fc;
+      --text: #1a202c; --text2: #2c3340; --muted: #5a6478;
+      --accent: #1d4ed8; --accent-dark: #1e3a8a; --accent2: #2563eb; --accent3: #3b82f6;
+      --border: #c8cdd8; --success: #059669; --danger: #dc2626; --warn: #d97706;
+      --shadow: 0 4px 24px rgba(0,0,0,.09); --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 15px; overflow-x: hidden; }
+    html { overflow-x: hidden; max-width: 100vw; scroll-behavior: smooth; }
+    img, svg { max-width: 100%; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+    .wrap { display: grid; grid-template-columns: 232px 1fr; max-width: 1480px; margin: 0 auto; min-height: 100vh; }
+    .sidebar { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 18px 14px; background: var(--surface); border-right: 1.5px solid var(--border); }
+    .logo-icon { width: 44px; height: 44px; border-radius: 13px; background: var(--accent); display: grid; place-items: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(29,78,216,.35); }
+    .crumb { margin-top: auto; font-size: 11px; color: var(--muted); }
+    .crumb ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+    .crumb a { color: var(--accent); text-decoration: none; }
+    .main-area { min-width: 0; padding: 14px 22px 70px; }
+    .topbar { display: flex; align-items: center; min-height: 40px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    h1 { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .tab-bar { display: flex; flex-direction: column; gap: 4px; }
+    .tab-btn { background: none; border: none; text-align: left; width: 100%; color: var(--muted); font-size: 13.5px; font-weight: 700; padding: 11px 14px; cursor: pointer; border-radius: 10px; text-decoration: none; display: block; transition: .18s; }
+    .tab-btn:hover { color: var(--text); background: var(--bg); }
+    .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 10px rgba(29,78,216,.35); }
+    .grid { display: grid; grid-template-columns: 390px 1fr; gap: 20px; align-items: start; }
+    .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel { padding: 16px; }
+    .panel-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .form-grid { display: grid; gap: 14px; }
+    label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--text2); }
+    .lbl-row { display: inline-flex; align-items: center; gap: 6px; }
+    .num-input, .sel-input { width: 100%; border: 1.5px solid var(--border); outline: none; background: white; color: var(--text); border-radius: 9px; padding: 8px 12px; font-size: 15px; font-weight: 700; text-align: center; }
+    .num-input:focus, .sel-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(29,78,216,.13); }
+    .input-row { display: flex; align-items: center; gap: 6px; }
+    .unit-label { color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .help-wrap { position: relative; display: inline-flex; }
+    .help-ic { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--accent); background: #fff; color: var(--accent); font-size: 11px; font-weight: 800; cursor: help; display: grid; place-items: center; }
+    .help-ic:hover, .help-ic:focus-visible { background: var(--accent); color: #fff; outline: none; }
+    .help-pop { position: absolute; top: calc(100% + 9px); left: 50%; transform: translateX(-50%); width: 280px; max-width: min(300px, calc(100vw - 32px)); background: #fff; border: 1.5px solid var(--border); border-radius: 10px; box-shadow: 0 6px 22px rgba(15,23,42,.14); padding: 12px 14px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.75; z-index: 60; opacity: 0; visibility: hidden; transition: opacity .15s; }
+    .help-pop strong { color: var(--accent); font-weight: 800; }
+    .help-wrap:hover .help-pop, .help-ic:focus + .help-pop, .help-ic:focus-visible + .help-pop { opacity: 1; visibility: visible; }
+    @media (max-width: 640px) { .help-pop { position: fixed; top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; max-width: none; transform: none; } }
+    .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+    .btn-primary { border: none; border-radius: 12px; padding: 15px 26px; font-size: 16px; font-weight: 900; cursor: pointer; background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white; box-shadow: 0 6px 22px rgba(29,78,216,.45); transition: transform .15s; position: relative; }
+    .btn-primary::after { content:''; position:absolute; inset:0; border-radius:12px; pointer-events:none; animation: btnPulse 2.2s ease-out infinite; }
+    @keyframes btnPulse { 0%{box-shadow:0 0 0 0 rgba(59,130,246,.55)} 70%{box-shadow:0 0 0 14px rgba(59,130,246,0)} 100%{box-shadow:0 0 0 0 rgba(59,130,246,0)} }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); filter: brightness(1.08); }
+    .btn-secondary { border: 1.5px solid var(--border); border-radius: 11px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--surface2); color: var(--text2); }
+    .auto-calc-wrap { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12.5px; color: var(--muted); }
+    .actions .btn-primary { flex: 1 1 100%; min-height: 56px; }
+
+    .right { display: grid; gap: 18px; }
+    .hero-result { background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; padding: 28px 22px; }
+    .hero-result .fh-label { font-size: 13px; opacity: .9; margin-bottom: 8px; font-weight: 700; letter-spacing: .05em; }
+    .hero-result .fh-val { font-size: 46px; font-weight: 900; letter-spacing: -0.04em; }
+    .hero-result .fh-sub { font-size: 13px; opacity: .9; font-weight: 600; margin-top: 8px; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
+    .stat { background: var(--surface); padding: 14px 16px; }
+    .stat .k { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .05em; }
+    .stat .v { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; word-break: break-all; line-height: 1.2; }
+    .stat .v.accent { color: var(--accent2); }
+    .stat .v.warn { color: var(--warn); }
+    .stat .v.success { color: var(--success); }
+
+    /* breakdown */
+    .bd-card { padding: 22px; }
+    .bd-title { font-size: 16px; font-weight: 800; margin-bottom: 14px; }
+    .bd-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    .bd-row:last-child { border-bottom: none; font-weight: 800; padding-top: 12px; }
+    .bd-row .bd-lbl { color: var(--text2); }
+    .bd-row .bd-val { font-weight: 700; color: var(--text); }
+    .bd-row.minus .bd-val { color: var(--success); }
+    .bd-row.plus .bd-val { color: var(--danger); }
+
+    /* furusato */
+    .furusato-hero {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: white; border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 24px; text-align: center;
+    }
+    .furusato-hero .fh-emoji { font-size: 36px; margin-bottom: 6px; }
+    .furusato-hero .fh-label { font-size: 14px; opacity: .9; margin-bottom: 6px; font-weight: 700; }
+    .furusato-hero .fh-val { font-size: 42px; font-weight: 900; }
+    .furusato-hero .fh-sub { font-size: 13px; opacity: .92; margin-top: 8px; font-weight: 600; }
+    .furusato-detail { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.3); font-size: 12.5px; }
+
+    /* 解説 */
+    .explain-card { padding: 24px; }
+    .explain-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .explain-card h3 { font-size: 15px; font-weight: 800; color: var(--accent2); margin: 16px 0 8px; }
+    .explain-card p { color: var(--text2); line-height: 1.85; margin-bottom: 10px; font-size: 13.5px; }
+    .explain-list { margin: 8px 0 12px 18px; }
+    .explain-list li { margin-bottom: 6px; line-height: 1.75; color: var(--text2); font-size: 13.5px; }
+    .highlight-box { background: linear-gradient(135deg, #fff7ed, #fed7aa); border-left: 4px solid var(--warn); padding: 14px 16px; border-radius: 10px; margin: 14px 0; font-size: 13px; line-height: 1.85; color: var(--text2); }
+    .highlight-box strong { color: #92400e; }
+    .step-flow { display: grid; gap: 10px; margin: 14px 0; }
+    .step-row { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; padding: 12px 14px; background: var(--surface2); border-radius: 10px; border-left: 4px solid var(--accent); }
+    .step-num { font-size: 18px; font-weight: 900; color: var(--accent); }
+    .step-text { font-size: 13px; line-height: 1.7; color: var(--text2); }
+    .step-text strong { color: var(--text); }
+
+    .compare-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; }
+
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; overflow: visible; flex-direction: row; flex-wrap: wrap; gap: 10px; padding: 10px 14px; border-right: none; border-bottom: 1.5px solid var(--border); }
+      .tab-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
+      .tab-btn { font-size: 11.5px; padding: 8px 4px; text-align: center; }
+      .main-area { padding: 12px 8px 60px; }
+      .grid { grid-template-columns: 1fr; }
+      .crumb { width: 100%; order: 3; margin-top: 0; }
+    }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .card { width: 100%; max-width: 100%; }
+      .hero-result .fh-val { font-size: 36px; }
+      .furusato-hero .fh-val { font-size: 36px; }
+    }
+
+    /* Chart */
+    .chart-card { padding: 22px; }
+    .chart-title { font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+    .chart-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .chart-wrap svg { width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <a href="./index.html" style="text-decoration:none;"><div class="logo-icon">🏠</div></a>
+    <nav class="tab-bar">
+      <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
+      <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
+      <a class="tab-btn" href="simulator_torikuzushi.html">資産取り崩し</a>
+      <a class="tab-btn" href="simulator_nisa.html">新NISA</a>
+      <a class="tab-btn" href="simulator_fire.html">FIRE逆算</a>
+      <a class="tab-btn" href="simulator_shaho.html">社会保険料</a>
+      <button class="tab-btn active" aria-current="page">住民税&ふるさと納税</button>
+    </nav>
+    <div class="crumb"><ol><li><a href="./index.html">ホーム</a></li><li>›</li><li>住民税&ふるさと納税シミュレーター</li></ol></div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar"><h1>住民税&ふるさと納税シミュレーター</h1></header>
+
+    <main class="grid">
+      <section class="card panel">
+        <div class="panel-title">給与・控除情報を入力</div>
+
+        <div class="form-grid">
+          <label>
+            <span class="lbl-row">年収（給与+ボーナス・税引前）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>年収の入力</strong><br>1年間の額面の総支給額。給与明細の「支給額」の年間合計、または源泉徴収票の「支払金額」を入力してください。手取りではなく税引き前の金額です。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="income" type="number" min="0" max="30000000" step="100000" value="5000000">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">社会保険料（年間）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>社会保険料</strong><br>健康保険・厚生年金・雇用保険の年間合計（個人負担分）。給与明細の保険料合計 × 12 + 賞与時の保険料、または源泉徴収票の「社会保険料等の金額」を入力。<br>目安: 年収の約14%程度。<a href="./simulator_shaho.html" style="color:#1d4ed8;">社会保険料シミュレーター</a>で詳しく試算可能。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="social" type="number" min="0" max="5000000" step="10000" value="750000">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">配偶者の有無
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>配偶者控除</strong><br>配偶者(年収103万以下)がいる場合、住民税の所得から33万円が控除されます。本人年収900万超では控除額が減ります。配偶者特別控除(年収201万まで)は別途。</span></span>
+            </span>
+            <select class="sel-input" id="spouse">
+              <option value="0">なし</option>
+              <option value="330000" selected>あり（年収103万以下・配偶者控除）</option>
+              <option value="220000">あり（年収103〜201万・配偶者特別控除目安）</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="lbl-row">扶養家族数（16歳以上）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>扶養控除</strong><br>16歳以上の扶養親族1人につき住民税の所得から33万円控除（特定扶養親族19-22歳は45万、老人扶養38万）。配偶者は別カウントです。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="dependents" type="number" min="0" max="20" step="1" value="0">
+              <span class="unit-label">人</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">生命保険料控除（年間支払額）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>生命保険料控除</strong><br>一般生命保険・介護医療保険・個人年金保険の年間保険料。住民税では各最大2.8万円・合計7万円が上限。年末調整で申告した金額を入力してください。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="lifeins" type="number" min="0" max="500000" step="10000" value="80000">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">iDeCo / 小規模企業共済掛金（年間）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>小規模企業共済等掛金控除</strong><br>iDeCo（個人型確定拠出年金）・小規模企業共済などの年間掛金は全額控除されます。会社員iDeCo上限は月23,000円(年27.6万円)など、加入区分で異なります。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="ideco" type="number" min="0" max="816000" step="1000" value="0">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">医療費控除（10万円超え分）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>医療費控除</strong><br>年間医療費が10万円(または所得5%)を超えた分を控除。家族の医療費も合算可。確定申告で適用されます。例: 年間18万円なら8万円を入力。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="medical" type="number" min="0" max="2000000" step="10000" value="0">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">既に予定しているふるさと納税額
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>計画中の寄付額</strong><br>今年すでに寄付した、または寄付予定のふるさと納税合計額。限度額との比較に使用します（未確定なら0でOK）。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="furusato" type="number" min="0" max="10000000" step="1000" value="0">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-primary" id="calc-btn">✨ 計算する</button>
+          <button type="button" class="btn-secondary" id="reset-btn">リセット</button>
+          <label class="auto-calc-wrap"><input type="checkbox" id="auto-calc"> 自動再計算</label>
+        </div>
+      </section>
+
+      <section class="right" id="result-area">
+        <div class="hero-result">
+          <div class="fh-label">翌年の住民税（年額）</div>
+          <div class="fh-val" id="hero-juminzei">¥-</div>
+          <div class="fh-sub" id="hero-sub">月割: -</div>
+        </div>
+
+        <div class="furusato-hero">
+          <div class="fh-emoji" aria-hidden="true">🎁</div>
+          <div class="fh-label">ふるさと納税 限度額（自己負担2,000円で済む上限）</div>
+          <div class="fh-val" id="hero-furusato">¥-</div>
+          <div class="fh-sub" id="furusato-status">あと <span id="furusato-remain">-</span> 寄付可能</div>
+          <div class="furusato-detail" id="furusato-detail">所得割の約20% + 2,000円 が目安</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="k">住民税(所得割)</div><div class="v accent" id="r-incomeTax">-</div></div>
+          <div class="stat"><div class="k">課税所得</div><div class="v" id="r-taxable">-</div></div>
+          <div class="stat"><div class="k">所得控除合計</div><div class="v success" id="r-deduction">-</div></div>
+        </div>
+
+        <div class="card bd-card">
+          <div class="bd-title">📋 計算内訳</div>
+          <div class="bd-row plus"><span class="bd-lbl">給与収入</span><span class="bd-val" id="bd-income">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 給与所得控除</span><span class="bd-val" id="bd-salary-ded">-</span></div>
+          <div class="bd-row"><span class="bd-lbl">= 給与所得</span><span class="bd-val" id="bd-salary-income">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 社会保険料控除</span><span class="bd-val" id="bd-social-ded">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 基礎控除(43万)</span><span class="bd-val">¥430,000</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 配偶者控除</span><span class="bd-val" id="bd-spouse-ded">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 扶養控除</span><span class="bd-val" id="bd-dep-ded">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 生命保険料控除</span><span class="bd-val" id="bd-life-ded">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- iDeCo/小規模企業共済</span><span class="bd-val" id="bd-ideco-ded">-</span></div>
+          <div class="bd-row minus"><span class="bd-lbl">- 医療費控除</span><span class="bd-val" id="bd-medical-ded">-</span></div>
+          <div class="bd-row"><span class="bd-lbl">= 課税所得</span><span class="bd-val" id="bd-taxable">-</span></div>
+          <div class="bd-row"><span class="bd-lbl">所得割(10%) - 調整控除</span><span class="bd-val" id="bd-income-tax">-</span></div>
+          <div class="bd-row"><span class="bd-lbl">+ 均等割(5,000円)</span><span class="bd-val">¥5,000</span></div>
+          <div class="bd-row"><span class="bd-lbl">= 住民税合計</span><span class="bd-val" id="bd-total">-</span></div>
+        </div>
+
+        <div class="card explain-card">
+          <h2>🎁 ふるさと納税のしくみと有効活用</h2>
+
+          <h3>ふるさと納税とは？</h3>
+          <p><strong>応援したい自治体に寄付すると、寄付額のうち2,000円を超える部分が、その年の所得税と翌年の住民税から控除される</strong>制度。実質負担2,000円で各地の返礼品（米・肉・果物・家電等）を受け取れる、<strong>ほぼノーリスクで節約できる仕組み</strong>です。</p>
+
+          <div class="highlight-box">
+            <strong>💡 つまり</strong>：年収500万円・限度額6万円なら、6万円寄付して2,000円自己負担、残り58,000円分は税金から戻る。返礼品は寄付額の約30%（18,000円相当）が受け取れるので、<strong>実質16,000円のお得</strong>になります。
+          </div>
+
+          <h3>📅 利用の4ステップ</h3>
+          <div class="step-flow">
+            <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>限度額を試算</strong> ← 本ツールで自分の上限を確認（自己負担2,000円で済む金額）</div></div>
+            <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>サイトで寄付</strong>：さとふる・楽天ふるさと納税・ふるなび等で12月末までに申込</div></div>
+            <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>ワンストップ特例 or 確定申告</strong>：寄付先5自治体までならワンストップ特例(申請書送付のみ)、6箇所以上なら確定申告</div></div>
+            <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>翌年6月から住民税が安くなる</strong>：給与天引きの住民税が減り、その分が実質還付される形</div></div>
+          </div>
+
+          <h3>⚠️ 注意点</h3>
+          <ul class="explain-list">
+            <li><strong>限度額を超えた分は自己負担</strong>：本ツールで上限把握必須</li>
+            <li><strong>申込みは「その年の12月31日まで」</strong>：12月の駆け込み寄付は支払日に注意</li>
+            <li><strong>住宅ローン控除と併用すると限度額が下がる場合あり</strong>：住宅ローン1年目で控除大きい場合は要注意</li>
+            <li><strong>専業主婦/主夫など給与収入なしの方は対象外</strong>：本人に住民税課税がないため</li>
+          </ul>
+
+          <h2 style="margin-top:24px;">📊 住民税のしくみ</h2>
+
+          <h3>住民税はいつ・いくら払う？</h3>
+          <p>住民税は<strong>前年の所得に対して翌年6月〜翌々年5月の12回</strong>で給与天引き(または納付書)で支払います。例: 2024年の年収 → 2025年6月から2026年5月まで天引き。</p>
+
+          <h3>計算式</h3>
+          <ul class="explain-list">
+            <li>給与収入 - <strong>給与所得控除</strong>(年収に応じた階段式) = 給与所得</li>
+            <li>給与所得 - <strong>所得控除</strong>(社会保険料・基礎・配偶者・扶養・生命保険・iDeCo・医療費等) = 課税所得</li>
+            <li>課税所得 × <strong>10%</strong>(市民税6% + 県民税4%) - 調整控除 = 所得割</li>
+            <li>所得割 + <strong>均等割5,000円</strong>(自治体により差) = 住民税年額</li>
+          </ul>
+
+          <h3>節税できるポイント</h3>
+          <ul class="explain-list">
+            <li><strong>iDeCo加入</strong>：掛金全額が控除。月23,000円(会社員上限)なら年27.6万円控除</li>
+            <li><strong>生命保険料控除</strong>：3区分 × 上限2.8万円 = 最大8.4万円控除</li>
+            <li><strong>医療費控除</strong>：年10万超え分を確定申告で控除</li>
+            <li><strong>ふるさと納税</strong>：限度額内なら2,000円で寄付額相当の返礼品ゲット</li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>🌟 本ツールの活用方法</strong><br>
+            ・<strong>ふるさと納税の限度額を正確に把握</strong> → 12月までに上限ぎりぎりで寄付計画<br>
+            ・<strong>iDeCo導入時の節税効果を試算</strong> → iDeCo欄を変えてみて住民税減少を確認<br>
+            ・<strong>共働き世帯の世帯戦略</strong> → 配偶者控除あり/なしで比較
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- クロスナビ -->
+<nav style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
+  <div style="background:#fff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 style="font-size:17px;font-weight:800;margin-bottom:14px;">他のシミュレーターも試す</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+      <a href="./simulator_tumitate.html" class="cn"><span style="font-size:20px;">📈</span><span style="font-size:13px;font-weight:700;">積立投資<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+      <a href="./simulator_ikkatsu.html" class="cn"><span style="font-size:20px;">💴</span><span style="font-size:13px;font-weight:700;">一括投資<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+      <a href="./simulator_torikuzushi.html" class="cn"><span style="font-size:20px;">🏖️</span><span style="font-size:13px;font-weight:700;">資産取り崩し<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+      <a href="./simulator_nisa.html" class="cn"><span style="font-size:20px;">🎯</span><span style="font-size:13px;font-weight:700;">新NISA<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+      <a href="./simulator_fire.html" class="cn"><span style="font-size:20px;">🔥</span><span style="font-size:13px;font-weight:700;">FIRE逆算<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+      <a href="./simulator_shaho.html" class="cn"><span style="font-size:20px;">📊</span><span style="font-size:13px;font-weight:700;">社会保険料<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
+    </div>
+    <a href="./index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
+  </div>
+</nav>
+<style>
+  .cn { display:flex; align-items:center; gap:10px; padding:12px 14px; text-decoration:none; background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px; color:#111827; transition:all .15s; }
+  .cn:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
+</style>
+
+<script>
+  const el = id => document.getElementById(id);
+  const fmtYen = n => '¥' + Math.round(n).toLocaleString('ja-JP');
+
+  // 給与所得控除 (令和2年〜現行)
+  function salaryDeduction(income) {
+    if (income <= 1625000) return 550000;
+    if (income <= 1800000) return Math.floor(income * 0.4 - 100000);
+    if (income <= 3600000) return Math.floor(income * 0.3 + 80000);
+    if (income <= 6600000) return Math.floor(income * 0.2 + 440000);
+    if (income <= 8500000) return Math.floor(income * 0.1 + 1100000);
+    return 1950000;
+  }
+
+  // 生命保険料控除 (住民税)
+  function lifeInsDeduction(annual) {
+    // 3区分平均で簡略化: 上限7万円(住民税)
+    if (annual <= 12000) return annual;
+    if (annual <= 32000) return Math.floor(annual / 2 + 6000);
+    if (annual <= 56000) return Math.floor(annual / 4 + 14000);
+    return 28000; // 1区分上限
+  }
+
+  // 配偶者控除(住民税): 本人年収による段階あり、簡略化
+  function calcJuminzei(input) {
+    const income = input.income;
+    const salDed = salaryDeduction(income);
+    const salaryIncome = Math.max(0, income - salDed);
+
+    const basicDed = 430000; // 住民税基礎控除
+    const socialDed = input.social;
+    const spouseDed = input.spouse;
+    const depDed = input.dependents * 330000;
+    const lifeDed = lifeInsDeduction(input.lifeins);
+    const idecoDed = input.ideco;
+    const medicalDed = input.medical;
+
+    const totalDeduction = basicDed + socialDed + spouseDed + depDed + lifeDed + idecoDed + medicalDed;
+    const taxable = Math.max(0, salaryIncome - totalDeduction);
+
+    // 所得割10%
+    const incomeTax = Math.floor(taxable * 0.10);
+    // 調整控除(簡易): 課税所得200万以下なら2500、200万超は所得控除差額の5%
+    const adjustment = taxable <= 2000000 ? 2500 : Math.max(2500, Math.floor((2000000 - 0) * 0.05));
+    const incomeTaxNet = Math.max(0, incomeTax - adjustment);
+    // 均等割
+    const flatTax = 5000;
+    const totalJuminzei = incomeTaxNet + flatTax;
+
+    // ふるさと納税限度額(概算)
+    // 公式: 個人住民税所得割 × 20% / (90% - 所得税率×1.021) + 2000
+    // 簡易: 所得割 × 0.2 + 2000 (所得税率10%の場合)
+    let furusatoLimit;
+    if (taxable <= 1950000) furusatoLimit = Math.floor(incomeTaxNet * 0.2367 + 2000);
+    else if (taxable <= 3300000) furusatoLimit = Math.floor(incomeTaxNet * 0.2553 + 2000);
+    else if (taxable <= 6950000) furusatoLimit = Math.floor(incomeTaxNet * 0.2789 + 2000);
+    else if (taxable <= 9000000) furusatoLimit = Math.floor(incomeTaxNet * 0.3061 + 2000);
+    else if (taxable <= 18000000) furusatoLimit = Math.floor(incomeTaxNet * 0.3578 + 2000);
+    else furusatoLimit = Math.floor(incomeTaxNet * 0.4063 + 2000);
+
+    return {
+      income, salDed, salaryIncome, basicDed, socialDed, spouseDed, depDed, lifeDed, idecoDed, medicalDed,
+      totalDeduction, taxable, incomeTax, adjustment, incomeTaxNet, flatTax, totalJuminzei, furusatoLimit
+    };
+  }
+
+  function readInput() {
+    return {
+      income: parseInt(el('income').value) || 0,
+      social: parseInt(el('social').value) || 0,
+      spouse: parseInt(el('spouse').value) || 0,
+      dependents: parseInt(el('dependents').value) || 0,
+      lifeins: parseInt(el('lifeins').value) || 0,
+      ideco: parseInt(el('ideco').value) || 0,
+      medical: parseInt(el('medical').value) || 0,
+      furusato: parseInt(el('furusato').value) || 0,
+    };
+  }
+
+  function render(r, input) {
+    el('hero-juminzei').textContent = fmtYen(r.totalJuminzei);
+    el('hero-sub').textContent = `月割: ${fmtYen(r.totalJuminzei/12)}（6月から翌年5月まで給与天引き）`;
+    el('hero-furusato').textContent = fmtYen(r.furusatoLimit);
+    const remain = Math.max(0, r.furusatoLimit - input.furusato);
+    el('furusato-remain').textContent = fmtYen(remain);
+    if (input.furusato >= r.furusatoLimit) {
+      el('furusato-status').innerHTML = `✅ <strong>限度額到達</strong>（自己負担2,000円分活用済）`;
+    } else if (input.furusato > 0) {
+      el('furusato-status').innerHTML = `あと <strong>${fmtYen(remain)}</strong> 寄付可能`;
+    } else {
+      el('furusato-status').innerHTML = `未利用：あと <strong>${fmtYen(remain)}</strong> 寄付可能`;
+    }
+    el('furusato-detail').textContent = `実質負担 2,000円で寄付額の約30%相当の返礼品が受け取れます。`;
+
+    el('r-incomeTax').textContent = fmtYen(r.incomeTaxNet);
+    el('r-taxable').textContent = fmtYen(r.taxable);
+    el('r-deduction').textContent = fmtYen(r.totalDeduction);
+
+    el('bd-income').textContent = fmtYen(r.income);
+    el('bd-salary-ded').textContent = fmtYen(r.salDed);
+    el('bd-salary-income').textContent = fmtYen(r.salaryIncome);
+    el('bd-social-ded').textContent = fmtYen(r.socialDed);
+    el('bd-spouse-ded').textContent = fmtYen(r.spouseDed);
+    el('bd-dep-ded').textContent = fmtYen(r.depDed);
+    el('bd-life-ded').textContent = fmtYen(r.lifeDed);
+    el('bd-ideco-ded').textContent = fmtYen(r.idecoDed);
+    el('bd-medical-ded').textContent = fmtYen(r.medicalDed);
+    el('bd-taxable').textContent = fmtYen(r.taxable);
+    el('bd-income-tax').textContent = fmtYen(r.incomeTaxNet);
+    el('bd-total').textContent = fmtYen(r.totalJuminzei);
+  }
+
+  function calc() {
+    const input = readInput();
+    const r = calcJuminzei(input);
+    render(r, input);
+  }
+
+  el('calc-btn').addEventListener('click', calc);
+  el('reset-btn').addEventListener('click', () => {
+    el('income').value = 5000000; el('social').value = 750000; el('spouse').value = 330000;
+    el('dependents').value = 0; el('lifeins').value = 80000; el('ideco').value = 0;
+    el('medical').value = 0; el('furusato').value = 0;
+    calc();
+  });
+  ['income','social','spouse','dependents','lifeins','ideco','medical','furusato'].forEach(id => {
+    el(id)?.addEventListener('input', () => { if (el('auto-calc').checked) calc(); });
+  });
+  calc();
+
+  document.addEventListener('click', e => {
+    const lbl = e.target.closest('label');
+    if (!lbl) return;
+    if (!lbl.querySelector('input, select')) return;
+    const t = e.target;
+    if (t === lbl || (t.classList && t.classList.contains('lbl-row'))) {
+      e.preventDefault();
+    }
+  }, true);
+</script>
+</body>
+</html>

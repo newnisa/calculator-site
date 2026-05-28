@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>社会保険料シミュレーター｜4-6月の残業で標準報酬月額が上がる？無料試算</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1d4ed8">
+  <meta name="description" content="基本給・各種手当・残業時間を入力するだけで、4-6月の標準報酬月額と社会保険料ランクを試算。残業がランク変動境界に届くかを可視化し、年間手取りを最大化する戦略立てを支援する無料シミュレーター。">
+  <meta name="keywords" content="社会保険料,シミュレーター,標準報酬月額,4月5月6月,残業,健康保険料,厚生年金,等級,手取り">
+  <meta name="author" content="shakewakame">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator_shaho.html">
+  <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/simulator_shaho.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="社会保険料シミュレーター｜4-6月の残業で標準報酬月額が上がる？">
+  <meta property="og:description" content="基本給・手当・残業から標準報酬月額と社会保険料ランクを試算。年間手取りを最大化する戦略立てに。無料。">
+  <meta property="og:url" content="https://newnisa.github.io/calculator-site/simulator_shaho.html">
+  <meta property="og:site_name" content="新NISAシミュレーター">
+  <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="社会保険料シミュレーター｜4-6月の残業で標準報酬月額が上がる？">
+  <meta name="twitter:description" content="基本給・手当・残業から社会保険料ランクを予測。残業ボーダーライン可視化で年間手取りを最大化。無料。">
+  <meta name="twitter:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+
+  <!-- 構造化データ (WebApplication + BreadcrumbList) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "社会保険料シミュレーター",
+        "description": "4-6月の標準報酬月額と社会保険料ランクを予測し、残業がランク境界に届くかを可視化する無料シミュレーター。年間手取り最大化に。",
+        "url": "https://newnisa.github.io/calculator-site/simulator_shaho.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+        "inLanguage": "ja"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://newnisa.github.io/calculator-site/" },
+          { "@type": "ListItem", "position": 2, "name": "社会保険料シミュレーター", "item": "https://newnisa.github.io/calculator-site/simulator_shaho.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --surface: #ffffff;
+      --surface2: #f6f8fc;
+      --text: #1a202c;
+      --text2: #2c3340;
+      --muted: #5a6478;
+      --accent: #1d4ed8;
+      --accent-dark: #1e3a8a;
+      --accent2: #2563eb;
+      --accent3: #3b82f6;
+      --border: #c8cdd8;
+      --success: #059669;
+      --danger: #dc2626;
+      --warn: #d97706;
+      --shadow: 0 4px 24px rgba(0,0,0,.09);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.07);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.75; font-size: 15px;
+      overflow-x: hidden;
+    }
+    html { overflow-x: hidden; max-width: 100vw; scroll-behavior: smooth; }
+    img, svg { max-width: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    .wrap { display: grid; grid-template-columns: 232px 1fr; max-width: 1480px; margin: 0 auto; min-height: 100vh; }
+    .sidebar {
+      position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 16px; padding: 18px 14px;
+      background: var(--surface); border-right: 1.5px solid var(--border);
+    }
+    .logo-icon {
+      width: 44px; height: 44px; border-radius: 13px;
+      background: var(--accent); display: grid; place-items: center;
+      font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(29,78,216,.35);
+    }
+    .crumb { margin-top: auto; font-size: 11px; color: var(--muted); line-height: 1.6; }
+    .crumb ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+    .crumb a { color: var(--accent); text-decoration: none; }
+    .main-area { min-width: 0; padding: 14px 22px 70px; }
+    .topbar { display: flex; align-items: center; min-height: 40px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    h1 { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.3; }
+    .tab-bar { display: flex; flex-direction: column; gap: 4px; }
+    .tab-btn {
+      background: none; border: none; text-align: left; width: 100%;
+      color: var(--muted); font-size: 13.5px; font-weight: 700;
+      padding: 11px 14px; cursor: pointer; border-radius: 10px;
+      transition: all .18s; text-decoration: none; display: block;
+    }
+    .tab-btn:hover { color: var(--text); background: var(--bg); }
+    .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 10px rgba(29,78,216,.35); }
+    .grid { display: grid; grid-template-columns: 390px 1fr; gap: 20px; align-items: start; }
+    .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel { padding: 16px; }
+    .panel-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); letter-spacing: -.01em; }
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--text2); }
+    .lbl-row { display: inline-flex; align-items: center; gap: 6px; }
+    .num-input { width: 100%; border: 1.5px solid var(--border); outline: none; background: white; color: var(--text); border-radius: 9px; padding: 8px 12px; font-size: 15px; font-weight: 700; transition: .18s; text-align: center; }
+    .num-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(29,78,216,.13); }
+    .input-row { display: flex; align-items: center; gap: 6px; }
+    .spin-btn { width: 36px; height: 38px; border: 1.5px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; font-weight: 800; cursor: pointer; border-radius: 9px; display: grid; place-items: center; flex-shrink: 0; user-select: none; }
+    @media (hover: hover) and (pointer: fine) {
+      .spin-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    }
+    .unit-label { color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .help-wrap { position: relative; display: inline-flex; }
+    .help-ic { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--accent); background: #fff; color: var(--accent); font-size: 11px; font-weight: 800; cursor: help; display: grid; place-items: center; padding: 0; flex-shrink: 0; user-select: none; }
+    .help-ic:hover, .help-ic:focus-visible { background: var(--accent); color: #fff; outline: none; }
+    .help-pop {
+      position: absolute; top: calc(100% + 9px); left: 50%; transform: translateX(-50%);
+      width: 280px; max-width: min(300px, calc(100vw - 32px));
+      background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+      box-shadow: 0 6px 22px rgba(15,23,42,.14); padding: 12px 14px;
+      font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.75;
+      text-align: left; z-index: 60;
+      opacity: 0; visibility: hidden; transition: opacity .15s;
+    }
+    .help-pop strong { color: var(--accent); font-weight: 800; }
+    .help-wrap:hover .help-pop, .help-ic:focus + .help-pop, .help-ic:focus-visible + .help-pop { opacity: 1; visibility: visible; }
+    @media (max-width: 640px) {
+      .help-pop { position: fixed; top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; max-width: none; transform: none; }
+    }
+    .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+    .btn-primary {
+      border: none; border-radius: 12px; padding: 15px 26px;
+      font-size: 16px; font-weight: 900; cursor: pointer;
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
+      box-shadow: 0 6px 22px rgba(29,78,216,.45), 0 2px 6px rgba(29,78,216,.3);
+      transition: transform .15s, box-shadow .15s; position: relative;
+    }
+    .btn-primary::after { content:''; position:absolute; inset:0; border-radius:12px; pointer-events:none; animation: btnPulse 2.2s ease-out infinite; }
+    @keyframes btnPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(59,130,246,.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); filter: brightness(1.08); }
+    .btn-secondary { border: 1.5px solid var(--border); border-radius: 11px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--surface2); color: var(--text2); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .auto-calc-wrap { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12.5px; color: var(--muted); }
+    .actions .btn-primary { flex: 1 1 100%; min-height: 56px; order: 0; }
+    .actions .btn-secondary { order: 1; }
+    .actions .auto-calc-wrap { order: 3; }
+
+    /* ── 結果カード ── */
+    .right { display: grid; gap: 18px; }
+    .hero-result {
+      background: linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      text-align: center; padding: 24px 22px;
+    }
+    .hero-result .fh-label { font-size: 13px; opacity: .88; margin-bottom: 8px; font-weight: 700; letter-spacing: .05em; }
+    .hero-result .fh-val { font-size: 38px; font-weight: 900; letter-spacing: -0.04em; line-height: 1.15; }
+    .hero-result .fh-sub { font-size: 13px; opacity: .85; font-weight: 600; margin-top: 6px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
+    .stat { background: var(--surface); padding: 14px 16px; }
+    .stat .k { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px; }
+    .stat .v { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; color: var(--text); word-break: break-all; line-height: 1.2; }
+    .stat .v.accent { color: var(--accent2); }
+    .stat .v.danger { color: var(--danger); }
+    .stat .v.success { color: var(--success); }
+
+    /* ── 等級ランクテーブル ── */
+    .grade-card { padding: 22px; }
+    .grade-title { font-size: 16px; font-weight: 800; margin-bottom: 14px; color: var(--text); }
+    .grade-current {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 2px solid var(--accent);
+      border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;
+    }
+    .grade-current .gc-num { font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1.1; }
+    .grade-current .gc-range { font-size: 12.5px; color: var(--text2); margin-top: 4px; font-weight: 600; }
+    .grade-bar { position: relative; height: 14px; background: var(--surface2); border-radius: 7px; margin: 18px 0 10px; border: 1.5px solid var(--border); overflow: hidden; }
+    .grade-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); transition: width .4s; }
+    .grade-bar-marker {
+      position: absolute; top: -6px; bottom: -6px; width: 3px;
+      background: var(--danger); border-radius: 2px; box-shadow: 0 0 0 2px rgba(220,38,38,.18);
+    }
+    .grade-thresholds { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 6px; font-weight: 600; }
+    .grade-warning {
+      background: #fff7ed; border-left: 4px solid var(--warn); padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-top: 12px; line-height: 1.7;
+    }
+    .grade-warning.danger { background: #fef2f2; border-left-color: var(--danger); }
+    .grade-warning.success { background: #ecfdf5; border-left-color: var(--success); }
+    .grade-warning strong { color: var(--text); }
+
+    /* ── 残業ボーダー試算 ── */
+    .overtime-card { padding: 22px; }
+    .overtime-rows { display: grid; gap: 8px; margin-top: 10px; }
+    .overtime-row {
+      display: grid; grid-template-columns: 80px 1fr auto; gap: 10px; align-items: center;
+      padding: 10px 12px; background: var(--surface2); border-radius: 8px; font-size: 13px;
+    }
+    .overtime-row .ot-h { font-weight: 800; color: var(--accent); }
+    .overtime-row .ot-grade { color: var(--text2); font-weight: 700; }
+    .overtime-row .ot-fee { font-weight: 800; color: var(--text); }
+    .overtime-row.danger { background: #fef2f2; }
+    .overtime-row.danger .ot-h { color: var(--danger); }
+
+    /* シナリオ比較 */
+    .compare-bar {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      background: var(--surface2); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;
+    }
+    .scenario-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .scn-btn { background: var(--surface); border: 1.5px solid var(--border); border-radius: 8px; padding: 5px 14px; font-size: 13px; font-weight: 700; color: var(--text2); cursor: pointer; }
+    .scn-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .scn-add { background: none; border: 1.5px dashed var(--border); border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; }
+    .scn-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 13px; padding: 2px 5px; }
+
+    /* ── 解説セクション ── */
+    .explain-card { padding: 24px; }
+    .explain-card h2 { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .explain-card h3 { font-size: 15px; font-weight: 800; color: var(--accent2); margin: 16px 0 8px; }
+    .explain-card p { color: var(--text2); line-height: 1.85; margin-bottom: 10px; font-size: 13.5px; }
+    .explain-list { margin: 8px 0 12px 18px; }
+    .explain-list li { margin-bottom: 6px; line-height: 1.75; color: var(--text2); font-size: 13.5px; }
+    .highlight-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px; border-radius: 10px; margin: 14px 0;
+      font-size: 13px; line-height: 1.85; color: var(--text2);
+    }
+    .highlight-box strong { color: var(--accent-dark); }
+
+    /* モバイル */
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; min-height: 0; }
+      .sidebar { position: static; height: auto; overflow: visible; flex-direction: row; flex-wrap: wrap; gap: 10px; padding: 10px 14px; border-right: none; border-bottom: 1.5px solid var(--border); }
+      .tab-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
+      .tab-btn { font-size: 11.5px; padding: 8px 4px; text-align: center; }
+      .main-area { padding: 12px 8px 60px; }
+      .grid { grid-template-columns: 1fr; }
+      .crumb { width: 100%; order: 3; margin-top: 0; }
+    }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .card, .panel { width: 100%; max-width: 100%; }
+    }
+
+    /* SVG chart */
+    .chart-card { padding: 22px; }
+    .chart-title { font-size: 15px; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+    .chart-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .chart-wrap svg { width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <a href="./index.html" aria-label="新NISAシミュレーター ホーム" style="text-decoration:none;">
+      <div class="logo-icon" aria-hidden="true">📊</div>
+    </a>
+    <nav class="tab-bar" aria-label="シミュレーター切替">
+      <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
+      <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
+      <a class="tab-btn" href="simulator_torikuzushi.html">資産取り崩し</a>
+      <a class="tab-btn" href="simulator_nisa.html">新NISA</a>
+      <a class="tab-btn" href="simulator_fire.html">FIRE逆算</a>
+      <button class="tab-btn active" aria-current="page">社会保険料</button>
+      <a class="tab-btn" href="simulator_juminzei.html">住民税&ふるさと納税</a>
+    </nav>
+    <div class="crumb" aria-label="パンくず">
+      <ol><li><a href="./index.html">ホーム</a></li><li>›</li><li>社会保険料シミュレーター</li></ol>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar"><h1>社会保険料シミュレーター</h1></header>
+
+    <main class="grid">
+      <section class="card panel">
+        <div class="panel-title">給与条件を入力</div>
+
+        <div class="compare-bar">
+          <label class="auto-calc-wrap"><input type="checkbox" id="cmp-on"> シナリオ比較</label>
+          <div id="cmp-row" style="display:none;width:100%;">
+            <div class="scenario-tabs" id="scn-tabs"></div>
+            <button type="button" class="scn-add" id="scn-add">＋ シナリオ追加</button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span class="lbl-row">基本給（月額・税引前）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0" aria-label="基本給の説明">?</span><span class="help-pop" role="tooltip"><strong>基本給とは</strong><br>給与のうち手当を除いた基本的な部分です。総支給額から残業手当・住宅手当・通勤手当などを引いた金額を入力してください。源泉徴収票の「給与・賞与」欄から推測することもできます。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="base" type="number" min="0" max="3000000" step="1000" value="280000">
+              <span class="unit-label">円/月</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">住宅手当
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>住宅手当</strong><br>会社から支給される住宅関連の手当です。標準報酬月額の計算に含まれるため、住宅手当も社会保険料の対象になります。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="housing" type="number" min="0" max="200000" step="1000" value="20000">
+              <span class="unit-label">円/月</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">通勤手当
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>通勤手当</strong><br>所得税は非課税(月15万まで)ですが、社会保険料の計算には<strong>含まれます</strong>。電車通勤6ヶ月定期÷6の金額などを入力してください。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="commute" type="number" min="0" max="200000" step="1000" value="15000">
+              <span class="unit-label">円/月</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">その他の手当
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>その他の手当</strong><br>役職手当・資格手当・家族手当・食事手当など、毎月支給される手当の合計を入力してください。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="other" type="number" min="0" max="500000" step="1000" value="0">
+              <span class="unit-label">円/月</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">4-6月の残業時間（月平均）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>4-6月の残業がカギ！</strong><br>標準報酬月額は<strong>毎年4・5・6月の支給額の平均</strong>で決まり、その年の9月から翌年8月までの社会保険料に反映されます。この3ヶ月に残業が多いと、1年間ずっと高い保険料を払うことに。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="overtime" type="number" min="0" max="200" step="1" value="20">
+              <span class="unit-label">時間/月</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">時給換算（残業単価）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>残業単価</strong><br>基本給 ÷ 月所定労働時間(160h前後) × 1.25倍（深夜なら1.5倍）。不明な場合は基本給 × 0.008 程度が目安。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="hourly" type="number" min="0" max="20000" step="50" value="2000">
+              <span class="unit-label">円/h</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">年間ボーナス（手取前）
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>賞与の社会保険料</strong><br>ボーナスも個別に社会保険料が引かれます(標準賞与額)。月給とは別計算で、健康保険は年573万円・厚生年金は1回150万円が上限。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="bonus" type="number" min="0" max="20000000" step="10000" value="800000">
+              <span class="unit-label">円/年</span>
+            </div>
+          </label>
+
+          <label>
+            <span class="lbl-row">年齢
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>40歳から介護保険料</strong><br>40歳以上65歳未満の方は健康保険料に加えて介護保険料(1.60%、労使折半)が上乗せされます。</span></span>
+            </span>
+            <div class="input-row">
+              <input class="num-input" id="age" type="number" min="18" max="70" step="1" value="35">
+              <span class="unit-label">歳</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-primary" id="calc-btn">✨ 計算する</button>
+          <button type="button" class="btn-secondary" id="reset-btn">リセット</button>
+          <label class="auto-calc-wrap"><input type="checkbox" id="auto-calc"> 自動再計算</label>
+        </div>
+      </section>
+
+      <section class="right" id="result-area">
+        <div class="hero-result">
+          <div class="fh-label">月の社会保険料（個人負担）</div>
+          <div class="fh-val" id="hero-monthly">¥-</div>
+          <div class="fh-sub" id="hero-sub">標準報酬月額: -</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="k">健康保険料/月</div><div class="v accent" id="r-health">-</div></div>
+          <div class="stat"><div class="k">厚生年金保険料/月</div><div class="v accent" id="r-pension">-</div></div>
+          <div class="stat"><div class="k">年間社会保険料</div><div class="v danger" id="r-annual">-</div></div>
+        </div>
+
+        <div class="card grade-card">
+          <div class="grade-title">📊 標準報酬月額ランク（健康保険）</div>
+          <div class="grade-current">
+            <div class="gc-num" id="grade-num">第- 等級</div>
+            <div class="gc-range" id="grade-range">- 円 ~ - 円</div>
+          </div>
+          <div class="grade-bar">
+            <div class="grade-bar-fill" id="grade-fill" style="width:0%;"></div>
+            <div class="grade-bar-marker" id="grade-marker" style="left:0%;"></div>
+          </div>
+          <div class="grade-thresholds">
+            <span id="grade-lower">下のランク境界</span>
+            <span id="grade-upper">上のランク境界</span>
+          </div>
+          <div id="grade-warning" class="grade-warning" style="display:none;"></div>
+        </div>
+
+        <div class="card overtime-card">
+          <div class="grade-title">⏰ 残業ボーダー試算</div>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:4px;line-height:1.7;">残業時間別に4-6月平均給与がどのランクになるか、保険料がいくら変わるかを表示します。</p>
+          <div class="overtime-rows" id="overtime-rows"></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-title">📈 ランクごとの年間社会保険料</div>
+          <div class="chart-wrap"><svg id="chart-shaho" viewBox="0 0 900 406"></svg></div>
+        </div>
+
+        <div class="card explain-card">
+          <h2>社会保険料を抑えて手取りを増やす方法</h2>
+
+          <h3>🎯 標準報酬月額とは？</h3>
+          <p>毎月の給与から天引きされる社会保険料（健康保険・厚生年金・介護保険）は、その月の給与そのものではなく、<strong>標準報酬月額</strong>という階段状の区分で計算されます。階段の段がひとつ違うと、毎月の保険料が数千円〜1万円以上変わります。</p>
+
+          <div class="highlight-box">
+            <strong>💡 ポイント</strong>：標準報酬月額は<strong>毎年4・5・6月に支給された給与の平均</strong>で決まり、その年の<strong>9月から翌年8月までの1年間</strong>の保険料に反映されます。
+          </div>
+
+          <h3>📅 4-6月の残業がカギ</h3>
+          <p>4・5・6月にたくさん残業すると、その平均が高くなり、結果として9月以降1年間ずっと高い社会保険料を支払うことになります。逆に4-6月の残業を抑えると、年間で数万円〜10万円以上の手取り改善が可能なケースもあります。</p>
+
+          <ul class="explain-list">
+            <li><strong>支給日基準</strong>で計算されます。「4月20日支給(3月分の給与)」は4月の対象</li>
+            <li>残業手当・住宅手当・通勤手当も<strong>すべて含まれる</strong></li>
+            <li>一時的に大きな手当が出るとランクが上がる可能性</li>
+            <li>急に7%以上昇給するなどがあれば随時改定で見直されることも</li>
+          </ul>
+
+          <h3>💰 賞与（ボーナス）の社会保険料</h3>
+          <p>賞与にも社会保険料がかかります。月給とは別に「標準賞与額」を基準に計算されますが、健康保険は年間573万円・厚生年金は1回あたり150万円が上限。高額賞与の場合は上限を活かす戦略もあります。</p>
+
+          <h3>📌 介護保険料（40歳〜64歳）</h3>
+          <p>40歳の誕生月から65歳の前月まで、健康保険料に介護保険料（1.60%、本人負担0.80%）が上乗せされます。年齢を入力して反映されているか確認しましょう。</p>
+
+          <h3>⚠️ 注意：4-6月の残業を減らすには</h3>
+          <ul class="explain-list">
+            <li>業務の繁忙期との兼ね合い → 上司と相談して4-6月に残業集中しない調整</li>
+            <li>有給休暇の活用（暦上の出勤日数調整は実報酬には直接影響しない）</li>
+            <li>業務効率化で残業時間自体を減らす</li>
+            <li>会社の都合で4-6月に残業集中する場合は仕方ない（無理に減らすと業務影響）</li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>🌟 本ツールの活用方法</strong><br>
+            ・自分のランク境界を把握 → 残業時間で境界を超えそうな場合は注意<br>
+            ・複数シナリオ比較で「残業20h vs 40h」のような選択肢を見比べる<br>
+            ・年間手取りインパクトを可視化することでモチベーション形成に
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ═══ シミュレーター間クロスナビ ═══ -->
+<nav class="cross-nav-section" aria-labelledby="cross-nav-heading" style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
+  <div style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="cross-nav-heading" style="font-size:17px;font-weight:800;color:#111827;margin-bottom:14px;">他のシミュレーターも試す</h2>
+    <div class="cross-nav-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+      <a href="./simulator_tumitate.html" class="cross-nav-card"><span class="cn-emoji">📈</span><span class="cn-name">積立投資<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_ikkatsu.html" class="cross-nav-card"><span class="cn-emoji">💴</span><span class="cn-name">一括投資<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_torikuzushi.html" class="cross-nav-card"><span class="cn-emoji">🏖️</span><span class="cn-name">資産取り崩し<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_nisa.html" class="cross-nav-card"><span class="cn-emoji">🎯</span><span class="cn-name">新NISA<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_fire.html" class="cross-nav-card"><span class="cn-emoji">🔥</span><span class="cn-name">FIRE逆算<br><small>シミュレーター</small></span></a>
+      <a href="./simulator_juminzei.html" class="cross-nav-card"><span class="cn-emoji">🏠</span><span class="cn-name">住民税&ふるさと納税<br><small>シミュレーター</small></span></a>
+    </div>
+    <a href="./index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
+  </div>
+</nav>
+<style>
+  .cross-nav-card { display:flex; align-items:center; gap:10px; padding:12px 14px; text-decoration:none; background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px; color:#111827; transition:all .15s; }
+  .cross-nav-card:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
+  .cn-emoji { font-size:20px; }
+  .cn-name { font-size:13px; font-weight:700; line-height:1.3; }
+  .cn-name small { font-size:10.5px; color:#6b7280; font-weight:600; }
+</style>
+
+<script>
+  const el = id => document.getElementById(id);
+  const fmtYen = n => '¥' + Math.round(n).toLocaleString('ja-JP');
+
+  // ── 標準報酬月額表（健康保険・東京都協会けんぽ 2024年・全50等級から主要を抜粋）──
+  // [等級, 標準報酬月額, 該当範囲下限, 該当範囲上限]
+  const HEALTH_GRADES = [
+    [1, 58000, 0, 63000], [2, 68000, 63000, 73000], [3, 78000, 73000, 83000],
+    [4, 88000, 83000, 93000], [5, 98000, 93000, 101000], [6, 104000, 101000, 107000],
+    [7, 110000, 107000, 114000], [8, 118000, 114000, 122000], [9, 126000, 122000, 130000],
+    [10, 134000, 130000, 138000], [11, 142000, 138000, 146000], [12, 150000, 146000, 155000],
+    [13, 160000, 155000, 165000], [14, 170000, 165000, 175000], [15, 180000, 175000, 185000],
+    [16, 190000, 185000, 195000], [17, 200000, 195000, 210000], [18, 220000, 210000, 230000],
+    [19, 240000, 230000, 250000], [20, 260000, 250000, 270000], [21, 280000, 270000, 290000],
+    [22, 300000, 290000, 310000], [23, 320000, 310000, 330000], [24, 340000, 330000, 350000],
+    [25, 360000, 350000, 370000], [26, 380000, 370000, 395000], [27, 410000, 395000, 425000],
+    [28, 440000, 425000, 455000], [29, 470000, 455000, 485000], [30, 500000, 485000, 515000],
+    [31, 530000, 515000, 545000], [32, 560000, 545000, 575000], [33, 590000, 575000, 605000],
+    [34, 620000, 605000, 635000], [35, 650000, 635000, 665000], [36, 680000, 665000, 695000],
+    [37, 710000, 695000, 730000], [38, 750000, 730000, 770000], [39, 790000, 770000, 810000],
+    [40, 830000, 810000, 855000], [41, 880000, 855000, 905000], [42, 930000, 905000, 955000],
+    [43, 980000, 955000, 1005000], [44, 1030000, 1005000, 1055000], [45, 1090000, 1055000, 1115000],
+    [46, 1150000, 1115000, 1175000], [47, 1210000, 1175000, 1235000], [48, 1270000, 1235000, 1295000],
+    [49, 1330000, 1295000, 1355000], [50, 1390000, 1355000, Infinity],
+  ];
+
+  // 厚生年金等級は1-32等級まで(健康保険の4-35等級に対応)
+  function pensionStdSalary(stdSalary) {
+    if (stdSalary <= 88000) return 88000;
+    if (stdSalary >= 650000) return 650000;
+    return stdSalary;
+  }
+
+  function findGrade(monthly) {
+    for (const g of HEALTH_GRADES) {
+      if (monthly >= g[2] && monthly < g[3]) return g;
+    }
+    return HEALTH_GRADES[HEALTH_GRADES.length - 1];
+  }
+
+  // 保険料率（協会けんぽ 東京都 2024年）
+  const RATE_HEALTH = 0.0998;       // 健康保険率
+  const RATE_HEALTH_CARE = 0.1158;  // 介護保険込み(40歳以上)
+  const RATE_PENSION = 0.1830;      // 厚生年金
+  const RATE_BONUS_LIMIT_HEALTH = 5730000; // 年間累計上限
+  const RATE_BONUS_LIMIT_PENSION = 1500000; // 1回上限
+
+  function calcShaho(input, overrideOvertime) {
+    const ot = overrideOvertime != null ? overrideOvertime : input.overtime;
+    const overtimeFee = ot * input.hourly;
+    const monthly456 = input.base + input.housing + input.commute + input.other + overtimeFee;
+    const grade = findGrade(monthly456);
+    const stdSalary = grade[1];
+    const pStd = pensionStdSalary(stdSalary);
+    const isCare = input.age >= 40 && input.age < 65;
+    const healthRate = isCare ? RATE_HEALTH_CARE : RATE_HEALTH;
+    const healthFee = stdSalary * healthRate / 2;
+    const pensionFee = pStd * RATE_PENSION / 2;
+    const monthlySocial = healthFee + pensionFee;
+
+    // ボーナス分(年間)
+    const bonusStdAnnual = Math.min(input.bonus, RATE_BONUS_LIMIT_HEALTH);
+    const bonusHealth = bonusStdAnnual * healthRate / 2;
+    const bonusPensionStd = Math.min(input.bonus, RATE_BONUS_LIMIT_PENSION); // 簡略化
+    const bonusPension = bonusPensionStd * RATE_PENSION / 2;
+    const bonusSocial = bonusHealth + bonusPension;
+
+    // 年間
+    const annualSocial = monthlySocial * 12 + bonusSocial;
+
+    return { monthly456, grade, stdSalary, healthFee, pensionFee, monthlySocial, bonusSocial, annualSocial, isCare };
+  }
+
+  function readInput() {
+    return {
+      base: parseInt(el('base').value) || 0,
+      housing: parseInt(el('housing').value) || 0,
+      commute: parseInt(el('commute').value) || 0,
+      other: parseInt(el('other').value) || 0,
+      overtime: parseInt(el('overtime').value) || 0,
+      hourly: parseInt(el('hourly').value) || 0,
+      bonus: parseInt(el('bonus').value) || 0,
+      age: parseInt(el('age').value) || 35,
+    };
+  }
+
+  function render(r, input) {
+    el('hero-monthly').textContent = fmtYen(r.monthlySocial);
+    el('hero-sub').textContent = `標準報酬月額: ${fmtYen(r.stdSalary)}（4-6月平均給与: ${fmtYen(r.monthly456)}）${r.isCare ? '・介護保険込み' : ''}`;
+    el('r-health').textContent = fmtYen(r.healthFee);
+    el('r-pension').textContent = fmtYen(r.pensionFee);
+    el('r-annual').textContent = fmtYen(r.annualSocial);
+
+    // Grade card
+    const g = r.grade;
+    el('grade-num').textContent = `第${g[0]} 等級`;
+    el('grade-range').textContent = `${fmtYen(g[2])} ~ ${g[3] === Infinity ? '上限なし' : fmtYen(g[3])}`;
+
+    // grade-bar: 現在の月給が範囲内のどこにあるか
+    const lower = g[2], upper = g[3] === Infinity ? g[2] * 1.1 : g[3];
+    const ratio = (r.monthly456 - lower) / (upper - lower);
+    el('grade-fill').style.width = Math.max(0, Math.min(100, ratio * 100)) + '%';
+    el('grade-marker').style.left = Math.max(0, Math.min(99, ratio * 100)) + '%';
+    el('grade-lower').textContent = fmtYen(lower);
+    el('grade-upper').textContent = g[3] === Infinity ? '上限' : fmtYen(g[3]);
+
+    // 警告 / 余裕
+    const warn = el('grade-warning');
+    const toUpper = upper - r.monthly456;
+    const fromLower = r.monthly456 - lower;
+    if (g[3] !== Infinity && toUpper < 15000) {
+      warn.className = 'grade-warning danger';
+      warn.style.display = 'block';
+      warn.innerHTML = `⚠️ <strong>上のランクに近接</strong>：あと <strong>${fmtYen(toUpper)}</strong> 月収が増えると次のランクに上がります。残業や手当の調整で防げる範囲。`;
+    } else if (fromLower < 12000) {
+      warn.className = 'grade-warning success';
+      warn.style.display = 'block';
+      warn.innerHTML = `✅ <strong>余裕あり</strong>：下のランク境界から<strong>${fmtYen(fromLower)}</strong> 上。現状ランクは安定しています。`;
+    } else {
+      warn.style.display = 'none';
+    }
+
+    // 残業ボーダー試算 (0h, 10h, 20h, 30h, 40h, 50h, 60h)
+    const otRows = [0, 10, 20, 30, 40, 50, 60, 80];
+    const rowsHtml = otRows.map(ot => {
+      const sim = calcShaho(input, ot);
+      const isCur = ot === input.overtime;
+      const isDanger = sim.grade[0] > r.grade[0];
+      return `<div class="overtime-row ${isDanger ? 'danger' : ''}" style="${isCur ? 'outline:2px solid var(--accent);' : ''}">
+        <span class="ot-h">${ot}h</span>
+        <span class="ot-grade">第${sim.grade[0]}等級（${fmtYen(sim.stdSalary)}）</span>
+        <span class="ot-fee">${fmtYen(sim.annualSocial)}/年</span>
+      </div>`;
+    }).join('');
+    el('overtime-rows').innerHTML = rowsHtml;
+
+    // SVG chart: 残業時間 vs 年間社会保険料
+    renderChart(input);
+  }
+
+  function renderChart(input) {
+    const svg = el('chart-shaho');
+    if (!svg) return;
+    const isMob = window.matchMedia('(max-width: 980px)').matches;
+    const W = 900, H = isMob ? 760 : 406, pad = {t: 40, r: 20, b: isMob ? 60 : 50, l: isMob ? 110 : 100};
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
+
+    const pts = [];
+    for (let ot = 0; ot <= 80; ot += 5) {
+      const s = calcShaho(input, ot);
+      pts.push({ ot, fee: s.annualSocial, grade: s.grade[0] });
+    }
+    const maxFee = Math.max(...pts.map(p => p.fee));
+    const minFee = Math.min(...pts.map(p => p.fee));
+    const maxX = 80;
+    const px = v => pad.l + (v / maxX) * iW;
+    const py = v => pad.t + iH - ((v - minFee * 0.95) / (maxFee - minFee * 0.95)) * iH;
+
+    // Y軸ラベル
+    let yGrid = '';
+    const yTicks = 5;
+    for (let i = 0; i <= yTicks; i++) {
+      const v = minFee * 0.95 + (maxFee - minFee * 0.95) * (i / yTicks);
+      const yy = py(v).toFixed(1);
+      yGrid += `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="#e8eaef"/>`;
+      yGrid += `<text x="${pad.l - 8}" y="${+yy+4}" text-anchor="end" fill="#475569" font-size="13">${Math.round(v/10000)}万円</text>`;
+    }
+
+    // X軸ラベル
+    let xGrid = '';
+    for (let ot = 0; ot <= maxX; ot += 10) {
+      const xx = px(ot).toFixed(1);
+      xGrid += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#e8eaef"/>`;
+      xGrid += `<text x="${xx}" y="${H-10}" text-anchor="middle" fill="#475569" font-size="13">${ot}h</text>`;
+    }
+
+    // 階段ライン (各点で grade が変わる箇所に縦線)
+    let stepLine = '';
+    for (let i = 1; i < pts.length; i++) {
+      if (pts[i].grade !== pts[i-1].grade) {
+        const xx = px(pts[i].ot).toFixed(1);
+        stepLine += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6"/>`;
+      }
+    }
+
+    // バー
+    const barW = iW / pts.length * 0.8;
+    let bars = '';
+    pts.forEach((p, i) => {
+      const x = px(p.ot) - barW / 2;
+      const y = py(p.fee);
+      const h = H - pad.b - y;
+      const isCur = Math.abs(p.ot - input.overtime) < 3;
+      bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${isCur ? '#dc2626' : '#3b82f6'}" opacity="0.75" rx="3"/>`;
+    });
+
+    // タイトル軸
+    const xAxisLabel = `<text x="${(pad.l+W-pad.r)/2}" y="${H-25}" text-anchor="middle" fill="#475569" font-size="13" font-weight="700">4-6月の残業時間（月平均）</text>`;
+
+    svg.innerHTML = `<rect width="${W}" height="${H}" fill="white"/>${yGrid}${xGrid}${stepLine}${bars}${xAxisLabel}`;
+  }
+
+  function calc() {
+    const input = readInput();
+    const r = calcShaho(input);
+    render(r, input);
+  }
+
+  // Event wiring
+  el('calc-btn').addEventListener('click', calc);
+  el('reset-btn').addEventListener('click', () => {
+    el('base').value = 280000; el('housing').value = 20000; el('commute').value = 15000;
+    el('other').value = 0; el('overtime').value = 20; el('hourly').value = 2000;
+    el('bonus').value = 800000; el('age').value = 35;
+    calc();
+  });
+  ['base','housing','commute','other','overtime','hourly','bonus','age'].forEach(id => {
+    el(id)?.addEventListener('input', () => { if (el('auto-calc').checked) calc(); });
+  });
+
+  // 初期計算
+  calc();
+
+  // 課題3: label のテキスト/余白タップで内部の spin-btn が誤起動を抑止
+  document.addEventListener('click', e => {
+    const lbl = e.target.closest('label');
+    if (!lbl) return;
+    if (!lbl.querySelector('.spin-btn')) return;
+    const t = e.target;
+    const isInteractive = t.matches('button, input, select, textarea, .spin-btn, .num-input, [role="button"]') ||
+                          t.closest('button, .spin-btn, [role="button"]');
+    if (!isInteractive) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+</script>
+</body>
+</html>
