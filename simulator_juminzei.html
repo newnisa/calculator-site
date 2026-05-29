@@ -9,7 +9,9 @@
   <meta name="description" content="基本給・ボーナス・各種手当・源泉徴収票項目から翌年の住民税とふるさと納税の自己負担2,000円で済む寄付限度額を試算。家族構成・各種控除にも対応した無料シミュレーター。">
   <meta name="keywords" content="住民税,シミュレーター,ふるさと納税,限度額,所得割,源泉徴収,給与所得控除,寄付">
   <meta name="author" content="shakewakame">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
+  <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏠%3C/text%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
@@ -17,10 +19,14 @@
   <meta property="og:description" content="基本給・ボーナス・手当・源泉徴収から翌年住民税と、ふるさと納税の自己負担2,000円限度額を試算。無料。">
   <meta property="og:url" content="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
   <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="新NISAシミュレーター - 7機能を無料で試算">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="住民税&ふるさと納税シミュレーター">
   <meta name="twitter:description" content="翌年住民税と、ふるさと納税の自己負担2,000円限度額を試算。無料。">
   <meta name="twitter:image" content="https://newnisa.github.io/calculator-site/ogp.png">
+  <meta name="twitter:image:alt" content="新NISAシミュレーター">
 
   <script type="application/ld+json">
   {
@@ -43,6 +49,17 @@
           { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://newnisa.github.io/calculator-site/" },
           { "@type": "ListItem", "position": 2, "name": "住民税&ふるさと納税シミュレーター", "item": "https://newnisa.github.io/calculator-site/simulator_juminzei.html" }
         ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "住民税&ふるさと納税シミュレーターの使い方",
+        "description": "年収と各種控除条件から翌年の住民税とふるさと納税の限度額を試算します。",
+        "step": [
+          {"@type": "HowToStep", "position": 1, "name": "年収を入力", "text": "給与+ボーナスの年間総支給額(税引前)を入力します。源泉徴収票の支払金額が参考になります。"},
+          {"@type": "HowToStep", "position": 2, "name": "社会保険料を入力", "text": "健康保険+厚生年金+雇用保険の年間合計を入力。年収の約14%が目安です。"},
+          {"@type": "HowToStep", "position": 3, "name": "家族構成・各種控除を入力", "text": "配偶者の有無・扶養家族・生命保険料・iDeCo掛金・医療費控除を入力します。"},
+          {"@type": "HowToStep", "position": 4, "name": "計算ボタンを押して結果を確認", "text": "翌年住民税・ふるさと納税限度額・計算内訳が表示されます。"}
+        ]
       }
     ]
   }
@@ -50,8 +67,8 @@
 
   <style>
     :root {
-      --bg: #f4f6fa; --surface: #ffffff; --surface2: #f6f8fc;
-      --text: #1a202c; --text2: #2c3340; --muted: #5a6478;
+      --bg: #edf0f4; --surface: #ffffff; --surface2: #f4f6f9;
+      --text: #111827; --text2: #374151; --muted: #6b7280;
       --accent: #1d4ed8; --accent-dark: #1e3a8a; --accent2: #2563eb; --accent3: #3b82f6;
       --border: #c8cdd8; --success: #059669; --danger: #dc2626; --warn: #d97706;
       --shadow: 0 4px 24px rgba(0,0,0,.09); --radius: 16px;
@@ -69,7 +86,7 @@
     .crumb a { color: var(--accent); text-decoration: none; }
     .main-area { min-width: 0; padding: 14px 22px 70px; }
     .topbar { display: flex; align-items: center; min-height: 40px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-    h1 { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    h1 { font-size: 15px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
     .tab-bar { display: flex; flex-direction: column; gap: 4px; }
     .tab-btn { background: none; border: none; text-align: left; width: 100%; color: var(--muted); font-size: 13.5px; font-weight: 700; padding: 11px 14px; cursor: pointer; border-radius: 10px; text-decoration: none; display: block; transition: .18s; }
     .tab-btn:hover { color: var(--text); background: var(--bg); }
@@ -102,7 +119,7 @@
     .actions .btn-primary { flex: 1 1 100%; min-height: 56px; }
 
     .right { display: grid; gap: 18px; }
-    .hero-result { background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; padding: 28px 22px; }
+    .hero-result { background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; padding: 28px 22px; }
     .hero-result .fh-label { font-size: 13px; opacity: .9; margin-bottom: 8px; font-weight: 700; letter-spacing: .05em; }
     .hero-result .fh-val { font-size: 46px; font-weight: 900; letter-spacing: -0.04em; }
     .hero-result .fh-sub { font-size: 13px; opacity: .9; font-weight: 600; margin-top: 8px; }
@@ -175,13 +192,81 @@
     .chart-title { font-size: 15px; font-weight: 800; margin-bottom: 10px; }
     .chart-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; }
     .chart-wrap svg { width: 100%; height: auto; display: block; }
+
+    /* ── 統一: PC actions detached + left-col wrapper ── */
+    @media (min-width: 981px) {
+      .left-col {
+        display: flex; flex-direction: column; gap: 0; min-width: 0;
+        height: calc(100vh - 90px); max-height: 720px; min-height: 540px;
+      }
+      .left-col > .card.panel {
+        flex: 1 1 0 !important; min-height: 0 !important; height: auto !important;
+        max-height: none !important; overflow-y: auto !important;
+        scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+      }
+      .left-col > .card.panel::-webkit-scrollbar { width: 8px; }
+      .left-col > .card.panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+      .left-col > .actions.actions-detached {
+        flex-shrink: 0;
+        background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px;
+        padding: 12px 14px; box-shadow: 0 8px 28px rgba(15,23,42,.12);
+        margin-top: 12px;
+        display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+      }
+      .left-col > .actions.actions-detached .btn-primary {
+        flex: 1 1 100%; font-size: 16px !important; padding: 12px 20px !important;
+        min-height: 48px !important; order: 0;
+      }
+      .left-col > .actions.actions-detached .btn-secondary { order: 1; }
+      .left-col > .actions.actions-detached .auto-calc-wrap { order: 3; font-size: 12.5px; color: var(--muted); }
+    }
+
+    /* ── 統一: Skip link ── */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 9999;
+      background: var(--accent); color: #fff; padding: 10px 16px;
+      border-radius: 0 0 8px 0; font-weight: 800; font-size: 14px;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 0; outline: 3px solid #fff; outline-offset: -3px; }
+
+    /* ── 統一: spin-btn hover はマウス操作のみ ── */
+    @media (hover: hover) and (pointer: fine) {
+      .spin-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    }
+
+
+    /* レンジスライダー(統一) */
+    .input-slider-wrap { display: grid; gap: 7px; }
+    .input-slider-wrap input[type="range"] {
+      width: 100%; height: 6px; border-radius: 999px; outline: none;
+      cursor: pointer; border: none; background: var(--border);
+      -webkit-appearance: none; appearance: none;
+    }
+    .input-slider-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+      background: white; border: 3px solid var(--accent); cursor: pointer;
+      box-shadow: 0 2px 6px rgba(29,78,216,.28);
+    }
+    .input-slider-wrap input[type="range"]::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: white; border: 3px solid var(--accent); cursor: pointer;
+      box-shadow: 0 2px 6px rgba(29,78,216,.28);
+    }
+    .range-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--muted); font-weight: 600;
+      margin-top: -3px;
+    }
+
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
 <div class="wrap">
   <aside class="sidebar">
-    <a href="./index.html" style="text-decoration:none;"><div class="logo-icon">🏠</div></a>
+    <a href="./index.html" style="text-decoration:none;"><div class="logo-icon" role="img" aria-label="ホーム">📈</div></a>
     <nav class="tab-bar">
       <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
       <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
@@ -191,10 +276,10 @@
       <a class="tab-btn" href="simulator_shaho.html">社会保険料</a>
       <button class="tab-btn active" aria-current="page">住民税&ふるさと納税</button>
     </nav>
-    <div class="crumb"><ol><li><a href="./index.html">ホーム</a></li><li>›</li><li>住民税&ふるさと納税シミュレーター</li></ol></div>
+    <div class="crumb"><ol><li><a href="./index.html">ホーム</a></li><li>›</li><li><a href="./index.html#features">シミュレーター</a></li><li>›</li><li>住民税&ふるさと納税</li></ol></div>
   </aside>
 
-  <div class="main-area">
+  <div class="main-area" id="main">
     <header class="topbar"><h1>住民税&ふるさと納税シミュレーター</h1></header>
 
     <main class="grid">
@@ -206,9 +291,13 @@
             <span class="lbl-row">年収（給与+ボーナス・税引前）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>年収の入力</strong><br>1年間の額面の総支給額。給与明細の「支給額」の年間合計、または源泉徴収票の「支払金額」を入力してください。手取りではなく税引き前の金額です。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="income" type="number" min="0" max="30000000" step="100000" value="5000000">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="income" type="number" min="0" max="30000000" step="100000" value="5000000">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="income-r" min="1000000" max="20000000" step="100000" value="5000000">
+              <div class="range-labels"><span>100万円</span><span>2000万円</span></div>
             </div>
           </label>
 
@@ -216,9 +305,13 @@
             <span class="lbl-row">社会保険料（年間）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>社会保険料</strong><br>健康保険・厚生年金・雇用保険の年間合計（個人負担分）。給与明細の保険料合計 × 12 + 賞与時の保険料、または源泉徴収票の「社会保険料等の金額」を入力。<br>目安: 年収の約14%程度。<a href="./simulator_shaho.html" style="color:#1d4ed8;">社会保険料シミュレーター</a>で詳しく試算可能。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="social" type="number" min="0" max="5000000" step="10000" value="750000">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="social" type="number" min="0" max="5000000" step="10000" value="750000">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="social-r" min="0" max="3000000" step="10000" value="750000">
+              <div class="range-labels"><span>0円</span><span>300万円</span></div>
             </div>
           </label>
 
@@ -237,9 +330,13 @@
             <span class="lbl-row">扶養家族数（16歳以上）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>扶養控除</strong><br>16歳以上の扶養親族1人につき住民税の所得から33万円控除（特定扶養親族19-22歳は45万、老人扶養38万）。配偶者は別カウントです。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="dependents" type="number" min="0" max="20" step="1" value="0">
-              <span class="unit-label">人</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="dependents" type="number" min="0" max="20" step="1" value="0">
+                <span class="unit-label">人</span>
+              </div>
+              <input type="range" id="dependents-r" min="0" max="10" step="1" value="0">
+              <div class="range-labels"><span>0人</span><span>10人</span></div>
             </div>
           </label>
 
@@ -247,9 +344,13 @@
             <span class="lbl-row">生命保険料控除（年間支払額）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>生命保険料控除</strong><br>一般生命保険・介護医療保険・個人年金保険の年間保険料。住民税では各最大2.8万円・合計7万円が上限。年末調整で申告した金額を入力してください。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="lifeins" type="number" min="0" max="500000" step="10000" value="80000">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="lifeins" type="number" min="0" max="500000" step="10000" value="80000">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="lifeins-r" min="0" max="200000" step="5000" value="80000">
+              <div class="range-labels"><span>0円</span><span>20万円</span></div>
             </div>
           </label>
 
@@ -257,9 +358,13 @@
             <span class="lbl-row">iDeCo / 小規模企業共済掛金（年間）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>小規模企業共済等掛金控除</strong><br>iDeCo（個人型確定拠出年金）・小規模企業共済などの年間掛金は全額控除されます。会社員iDeCo上限は月23,000円(年27.6万円)など、加入区分で異なります。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="ideco" type="number" min="0" max="816000" step="1000" value="0">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="ideco" type="number" min="0" max="816000" step="1000" value="0">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="ideco-r" min="0" max="816000" step="1000" value="0">
+              <div class="range-labels"><span>0円</span><span>81.6万円</span></div>
             </div>
           </label>
 
@@ -267,9 +372,13 @@
             <span class="lbl-row">医療費控除（10万円超え分）
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>医療費控除</strong><br>年間医療費が10万円(または所得5%)を超えた分を控除。家族の医療費も合算可。確定申告で適用されます。例: 年間18万円なら8万円を入力。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="medical" type="number" min="0" max="2000000" step="10000" value="0">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="medical" type="number" min="0" max="2000000" step="10000" value="0">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="medical-r" min="0" max="500000" step="10000" value="0">
+              <div class="range-labels"><span>0円</span><span>50万円</span></div>
             </div>
           </label>
 
@@ -277,9 +386,13 @@
             <span class="lbl-row">既に予定しているふるさと納税額
               <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>計画中の寄付額</strong><br>今年すでに寄付した、または寄付予定のふるさと納税合計額。限度額との比較に使用します（未確定なら0でOK）。</span></span>
             </span>
-            <div class="input-row">
-              <input class="num-input" id="furusato" type="number" min="0" max="10000000" step="1000" value="0">
-              <span class="unit-label">円/年</span>
+            <div class="input-slider-wrap">
+              <div class="input-row">
+                <input class="num-input" id="furusato" type="number" min="0" max="10000000" step="1000" value="0">
+                <span class="unit-label">円/年</span>
+              </div>
+              <input type="range" id="furusato-r" min="0" max="500000" step="1000" value="0">
+              <div class="range-labels"><span>0円</span><span>50万円</span></div>
             </div>
           </label>
         </div>
@@ -287,6 +400,7 @@
         <div class="actions">
           <button type="button" class="btn-primary" id="calc-btn">✨ 計算する</button>
           <button type="button" class="btn-secondary" id="reset-btn">リセット</button>
+          <button type="button" class="btn-secondary btn-share" id="share-btn" title="URLをコピー">🔗 共有</button>
           <label class="auto-calc-wrap"><input type="checkbox" id="auto-calc"> 自動再計算</label>
         </div>
       </section>
@@ -533,11 +647,79 @@
     el('income').value = 5000000; el('social').value = 750000; el('spouse').value = 330000;
     el('dependents').value = 0; el('lifeins').value = 80000; el('ideco').value = 0;
     el('medical').value = 0; el('furusato').value = 0;
-    calc();
+  
+  // スライダーと数値入力の連動 (既存simulator と同じパターン)
+  function linkSlider(numId, rangeId, cb) {
+    const num = document.getElementById(numId);
+    const range = document.getElementById(rangeId);
+    if (!num || !range) return;
+    num.addEventListener('input', () => {
+      range.value = num.value;
+      if (cb) cb();
+    });
+    range.addEventListener('input', () => {
+      num.value = range.value;
+      if (cb) cb();
+    });
+  }
+
+  linkSlider('income', 'income-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('social', 'social-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('dependents', 'dependents-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('ideco', 'ideco-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('lifeins', 'lifeins-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('medical', 'medical-r', () => { if (el('auto-calc').checked) calc(); });
+  linkSlider('furusato', 'furusato-r', () => { if (el('auto-calc').checked) calc(); });
+
+  calc();
   });
   ['income','social','spouse','dependents','lifeins','ideco','medical','furusato'].forEach(id => {
     el(id)?.addEventListener('input', () => { if (el('auto-calc').checked) calc(); });
   });
+
+  // ±スピンボタン自動注入 (既存simulator と同じパターン)
+  function injectSpinButtons() {
+    document.querySelectorAll('.input-row').forEach(row => {
+      const inp = row.querySelector('.num-input');
+      if (!inp || row.querySelector('.spin-btn')) return;
+      const minus = document.createElement('button');
+      minus.type = 'button';
+      minus.className = 'spin-btn spin-minus';
+      minus.textContent = '−';
+      minus.setAttribute('aria-label', '減らす');
+      const plus = document.createElement('button');
+      plus.type = 'button';
+      plus.className = 'spin-btn spin-plus';
+      plus.textContent = '+';
+      plus.setAttribute('aria-label', '増やす');
+      row.insertBefore(minus, inp);
+      inp.after(plus);
+      function step(dir) {
+        const s = parseFloat(inp.step) || 1;
+        const mn = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+        const mx = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+        const cur = parseFloat(inp.value) || 0;
+        const decimals = (s.toString().split('.')[1] || '').length;
+        const next = Math.min(mx, Math.max(mn, parseFloat((cur + dir * s).toFixed(decimals))));
+        inp.value = next;
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      minus.addEventListener('click', () => step(-1));
+      plus.addEventListener('click', () => step(1));
+      let timer = null, interval = null;
+      function startRepeat(dir) { timer = setTimeout(() => { interval = setInterval(() => step(dir), 80); }, 400); }
+      function stopRepeat() { clearTimeout(timer); clearInterval(interval); }
+      [minus, plus].forEach(btn => {
+        const dir = btn === minus ? -1 : 1;
+        btn.addEventListener('mousedown', () => startRepeat(dir));
+        btn.addEventListener('touchstart', () => startRepeat(dir), { passive: true });
+      });
+      document.addEventListener('mouseup', stopRepeat);
+      document.addEventListener('touchend', stopRepeat);
+    });
+  }
+  injectSpinButtons();
+
   calc();
 
   document.addEventListener('click', e => {
@@ -549,6 +731,152 @@
       e.preventDefault();
     }
   }, true);
+
+  // ── 課題3 統一: label のテキスト/余白タップで内部の spin-btn が誤起動を抑止 ──
+  document.addEventListener('mousedown', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('click', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('touchstart', e => {
+    if (e.target.classList && e.target.classList.contains('help-ic')) { e.stopPropagation(); }
+  }, { capture: true, passive: true });
+
+  // ── label-dummy 暗黙的紐付け吸収 ──
+  function injectLabelDummy() {
+    document.querySelectorAll('label').forEach(lbl => {
+      if (!lbl.querySelector('.num-input, .sel-input')) return;
+      if (lbl.querySelector('.label-dummy')) return;
+      const dummy = document.createElement('input');
+      dummy.type = 'text';
+      dummy.className = 'label-dummy';
+      dummy.setAttribute('aria-hidden', 'true');
+      dummy.tabIndex = -1;
+      dummy.style.cssText = 'position:absolute !important;left:-9999px !important;width:0 !important;height:0 !important;opacity:0 !important;pointer-events:none !important;';
+      lbl.insertBefore(dummy, lbl.firstChild);
+    });
+  }
+  injectLabelDummy();
+
+  // ── PC: actions を panel 外に detach してカード型常時表示 + モバイル: 計算後スクロール+戻るボタン ──
+  (function setupScrollNav(){
+    const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+    const calcBtn = document.getElementById('calc-btn');
+    const findResult = () => document.querySelector('.right .hero-result');
+    const findInput = () => document.querySelector('.panel');
+    const findChartCard = () => document.querySelector('.right .chart-card') || document.querySelector('.right .bd-card') || document.querySelector('.right .grade-card');
+
+    // 計算押下後: 結果領域へスムーズスクロール（モバイルのみ）
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => {
+        if (!isMobile()) return;
+        setTimeout(() => {
+          const target = findResult();
+          if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 180);
+      });
+    }
+
+    // 「↑ 条件入力に戻る」ボタン挿入（モバイルのみ）
+    function ensureBackBtn() {
+      if (!isMobile()) {
+        const existing = document.querySelector('.back-to-input-btn');
+        if (existing) existing.remove();
+        return false;
+      }
+      const chartCard = findChartCard();
+      if (!chartCard || chartCard.querySelector('.back-to-input-btn')) return false;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'back-to-input-btn';
+      btn.textContent = '↑ 条件入力に戻る';
+      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #1d4ed8;background:#fff;color:#1d4ed8;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
+      btn.addEventListener('click', () => {
+        const input = findInput();
+        if (input && input.scrollIntoView) input.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      chartCard.appendChild(btn);
+      return true;
+    }
+    ensureBackBtn();
+    setTimeout(ensureBackBtn, 250);
+
+    // ── PC: actions を panel の外に detach してカード型常時表示 ──
+    function detachActionsForPC() {
+      const isPC = !window.matchMedia('(max-width: 980px)').matches;
+      document.querySelectorAll('.tab-panel.active .grid, main.grid').forEach(grid => {
+        const panel = grid.querySelector(':scope > .card.panel');
+        if (!panel) return;
+        const actions = panel.querySelector('.actions') || grid.querySelector(':scope > .left-col > .actions');
+        if (!actions) return;
+        let wrap = grid.querySelector(':scope > .left-col');
+        if (isPC) {
+          if (!wrap) {
+            wrap = document.createElement('div');
+            wrap.className = 'left-col';
+            grid.insertBefore(wrap, panel);
+            wrap.appendChild(panel);
+          }
+          if (actions.parentNode !== wrap) wrap.appendChild(actions);
+          actions.classList.add('actions-detached');
+        } else {
+          if (wrap) {
+            if (actions.parentNode === wrap) panel.appendChild(actions);
+            grid.insertBefore(panel, wrap);
+            wrap.remove();
+            actions.classList.remove('actions-detached');
+          }
+        }
+      });
+    }
+    detachActionsForPC();
+    window.addEventListener('resize', () => { detachActionsForPC(); ensureBackBtn(); });
+  })();
+
+
+  // 共有ボタン: URL をクリップボードにコピー (share-btn handler)
+  el('share-btn')?.addEventListener('click', () => {
+    const url = window.location.href.split('?')[0];
+    // 入力値を query string にまとめる(オプション)
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = el('share-btn');
+        const orig = btn.textContent;
+        btn.textContent = '✓ コピー完了';
+        setTimeout(() => { btn.textContent = orig; }, 1800);
+      });
+    } else {
+      window.prompt('このURLをコピーしてください:', url);
+    }
+  });
 </script>
+
+
+<!-- ═══ SEO向けコンテンツセクション ═══ -->
+<section class="seo-content" aria-labelledby="seo-about-juminzei" style="max-width:1220px;margin:40px auto 0;padding:0 22px;">
+  <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="seo-about-juminzei" style="font-size:20px;font-weight:800;color:#111827;margin-bottom:14px;border-bottom:2px solid #c8cdd8;padding-bottom:10px;">住民税&ふるさと納税シミュレーターについて</h2>
+    <p style="color:#374151;line-height:1.9;margin-bottom:14px;">住民税は前年所得に対し翌年6月から翌々年5月までの12回で給与天引きされます。所得割(課税所得×10%)+均等割(5,000円)-調整控除という構造で、給与所得控除・基礎控除・社会保険料控除・配偶者控除・扶養控除・生命保険料控除・iDeCo掛金控除・医療費控除など各種控除を反映して計算されます。</p>
+    <p style="color:#374151;line-height:1.9;margin-bottom:14px;"><strong>ふるさと納税</strong>は応援したい自治体に寄付すると2,000円を超える額が翌年住民税から控除される制度で、実質負担2,000円で寄付額の30%相当の返礼品(米・肉・果物・家電等)が受け取れる「ノーリスクで節約できる仕組み」。本ツールでは課税所得階層別の係数(20-40%)を使った正確な限度額計算が可能です。</p>
+    <p style="color:#374151;line-height:1.9;">関連シミュレーター: <a href="./simulator_shaho.html" style="color:#1d4ed8;">社会保険料</a>で年間社会保険料を試算→本ツールに入力すれば住民税試算の精度UP。<a href="./simulator_tumitate.html" style="color:#1d4ed8;">新NISA積立投資</a>と併用で資産形成の最適化が可能です。</p>
+  </article>
+</section>
+
+<!-- 注意セクション(統一) -->
+<section style="max-width:1220px;margin:24px auto 0;padding:0 22px;" aria-labelledby="disclaimer-heading">
+  <article style="background:#fffbeb;border:1.5px solid #fde047;border-radius:14px;padding:22px;">
+    <h2 id="disclaimer-heading" style="font-size:16px;font-weight:800;color:#92400e;margin-bottom:8px;">⚠️ ご利用にあたっての注意</h2>
+    <p style="color:#78350f;line-height:1.8;font-size:13.5px;">本シミュレーターは情報提供のみを目的としており、特定の金融商品の購入・税制判断を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、実際の保険料・税額・運用成果を保証するものではありません。社会保険料・住民税・ふるさと納税限度額の正確な金額は、お住まいの自治体・加入する健康保険組合・年末調整等によって異なります。最終的なご判断はご自身の責任で、必要に応じて税理士・社労士等の専門家にご相談ください。</p>
+  </article>
+</section>
+
+
+<footer style="max-width:1220px;margin:32px auto 0;padding:24px 22px;border-top:2px solid #c8cdd8;text-align:center;color:#6b7280;font-size:13px;">
+  <p style="margin-bottom:8px;"><strong>新NISAシミュレーター</strong> ｜ 積立・一括・取り崩し・新NISA・FIRE・社会保険料・住民税の7機能を無料で試算</p>
+  <p style="margin-bottom:8px;">© 2024-2026 shakewakame. All Rights Reserved.</p>
+  <p>最終更新日：<time datetime="2026-05-29">2026年5月29日</time></p>
+</footer>
+
 </body>
 </html>

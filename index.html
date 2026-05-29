@@ -74,7 +74,7 @@
         "url": "https://newnisa.github.io/calculator-site/",
         "name": "新NISAシミュレーター",
         "isPartOf": { "@type": "WebSite", "@id": "https://newnisa.github.io/calculator-site/#website" },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "ja"
       },
       {
@@ -91,7 +91,7 @@
       {
         "@type": "WebApplication",
         "name": "新NISAシミュレーター",
-        "description": "新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算の5機能を無料でシミュレーション。最大4シナリオ同時比較、新NISA非課税枠の期間別最適化、FIRE逆算に対応。",
+        "description": "新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算・社会保険料・住民税&ふるさと納税の7機能を無料でシミュレーション。最大4シナリオ同時比較、新NISA非課税枠の期間別最適化、FIRE逆算に対応。",
         "url": "https://newnisa.github.io/calculator-site/",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
@@ -101,7 +101,9 @@
           "一括投資シミュレーター（運用元本の将来価値を計算）",
           "資産取り崩しシミュレーター（4%ルール対応、資産寿命の試算）",
           "新NISA積立＆一括シミュレーター（非課税枠1800万円の期間別最適化）",
-          "FIRE逆算シミュレーター（目標生活費から必要資産・達成年数を逆算）"
+          "FIRE逆算シミュレーター（目標生活費から必要資産・達成年数を逆算）",
+          "社会保険料シミュレーター（4-6月残業から標準報酬月額ランクを予測）",
+          "住民税&ふるさと納税シミュレーター（翌年住民税と寄付限度額を試算）"
         ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
       },
@@ -157,6 +159,21 @@
             "@type": "Question",
             "name": "毎月いくらから積立投資を始めれば良いですか？",
             "acceptedAnswer": { "@type": "Answer", "text": "月1,000円など少額からでも始められます。重要なのは「継続」です。本シミュレーターでは月額をスライダーで自由に動かして将来の試算額を確認できます。まず現実的な金額でシミュレーションし、生活費の見直しで積立額を少しずつ増やしていく方法が長続きしやすいとされています。" }
+          },
+          {
+            "@type": "Question",
+            "name": "4-6月の残業を減らすと本当に手取りが増えますか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "はい、標準報酬月額は4・5・6月の支給額平均で決まり、その年9月から翌年8月までの社会保険料に反映されます。1ランク上がると毎月数千円〜1万円以上の保険料アップになるため、年間で数万〜10万円以上の手取りに差が出るケースもあります。" }
+          },
+          {
+            "@type": "Question",
+            "name": "ふるさと納税の限度額はどう計算しますか？",
+            "acceptedAnswer": { "@type": "Answer", "text": "ふるさと納税の自己負担2,000円で済む限度額は、住民税の所得割額の約20%＋2,000円が目安です。正確には課税所得階層・所得税率により異なります。年収・社会保険料・各種控除から自動計算可能。12月20日頃までの寄付完了が安全です。" }
+          },
+          {
+            "@type": "Question",
+            "name": "iDeCo・ふるさと納税・新NISAを併用するメリットは？",
+            "acceptedAnswer": { "@type": "Answer", "text": "3つの制度はそれぞれ目的が異なります。iDeCoは掛金全額が所得控除（節税）、ふるさと納税は実質2,000円で返礼品取得、新NISAは運用益が非課税です。年収500万円なら年間 iDeCo 27.6万 + ふるさと納税 6万 + 新NISA 月10万 程度の併用が選ばれます。" }
           }
         ]
       },
@@ -762,13 +779,13 @@
         <span class="hl">いくら持っている？</span>
       </h1>
       <p class="hero-sub">
-        新NISA・積立投資・FIREの将来資産を、複利で増える未来として無料でグラフ化。月額・年利・運用年数を設定するだけで、最大4シナリオの同時比較・新NISA枠の期間別最適化・FIRE逆算まで行える本格シミュレーターです。
+        新NISA・積立投資・FIREの将来資産を複利で見える化し、社会保険料・住民税・ふるさと納税まで一括で試算。月額・年利・各種控除を入力するだけで、最大4シナリオの同時比較・年間手取り最大化戦略まで支援する7機能の無料シミュレーターです。
       </p>
       <a href="./simulator_tumitate.html" class="btn-hero">シミュレーターを使ってみる →</a>
       <p class="hero-note">登録不要 ・ 完全無料 ・ お使いのブラウザで動作</p>
       <div class="hero-stats" role="list" aria-label="サービス概要">
         <div class="hero-stat" role="listitem">
-          <div class="val">5種類</div>
+          <div class="val">7種類</div>
           <div class="lbl">シミュレーション機能</div>
         </div>
         <div class="hero-stat" role="listitem">
@@ -861,7 +878,7 @@
     <div class="container">
       <div class="features-head">
         <p class="section-label">Features</p>
-        <h2 id="features-heading" class="section-title">5つのシミュレーション機能</h2>
+        <h2 id="features-heading" class="section-title">7つのシミュレーション機能</h2>
         <p class="section-desc">資産形成のすべてのフェーズに対応。状況に合わせてお使いください。</p>
       </div>
       <div class="features-grid">
@@ -895,9 +912,21 @@
           <p class="feature-desc">目標の生活費と想定運用利回りから、FIRE（経済的自立・早期リタイア）達成に必要な資産額と到達までの期間・年齢を逆算。出口から逆算した計画づくりに役立ちます。</p>
           <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
         </a>
+        <a class="feature-card" href="./simulator_shaho.html" aria-label="社会保険料シミュレーションを開く">
+          <span class="feature-icon" aria-hidden="true">📊</span>
+          <div class="feature-name">社会保険料シミュレーション</div>
+          <p class="feature-desc">基本給・各種手当・4-6月の残業時間から標準報酬月額と社会保険料ランクを予測。残業がランク境界に届くかを可視化して、年間手取りを最大化する戦略立てを支援。</p>
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
+        <a class="feature-card" href="./simulator_juminzei.html" aria-label="住民税&ふるさと納税シミュレーションを開く">
+          <span class="feature-icon" aria-hidden="true">🏠</span>
+          <div class="feature-name">住民税&ふるさと納税シミュレーション</div>
+          <p class="feature-desc">年収・各種控除から翌年の住民税と、ふるさと納税の自己負担2,000円で済む寄付限度額を試算。配偶者控除・扶養・iDeCo・医療費控除など細かい条件にも対応。</p>
+          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+        </a>
       </div>
       <div class="section-cta">
-        <a href="./simulator_tumitate.html" class="btn-nav" style="font-size:16px;padding:14px 32px;border-radius:14px;">5つの機能を無料で試す →</a>
+        <a href="./simulator_tumitate.html" class="btn-nav" style="font-size:16px;padding:14px 32px;border-radius:14px;">7つの機能を無料で試す →</a>
       </div>
     </div>
   </section>
@@ -1157,6 +1186,18 @@
           <summary>毎月いくらから積立投資を始めれば良いですか？</summary>
           <div class="faq-a">月1,000円など少額からでも始められます。重要なのは「継続」です。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>では月額をスライダーで自由に動かして将来の試算額を確認できます。まず現実的な金額でシミュレーションし、生活費の見直しで積立額を少しずつ増やしていく方法が長続きしやすいとされています。</div>
         </details>
+        <details class="faq-item">
+          <summary>4-6月の残業を減らすと本当に手取りが増えますか？</summary>
+          <div class="faq-a">はい、標準報酬月額は4・5・6月の支給額平均で決まり、その年9月から翌年8月までの社会保険料に反映されます。1ランク上がると毎月数千円〜1万円以上の保険料アップになるため、年間で数万〜10万円以上の手取りに差が出るケースもあります。<a href="./simulator_shaho.html">社会保険料シミュレーター</a>で残業時間別のランク変動と保険料差を可視化できます。</div>
+        </details>
+        <details class="faq-item">
+          <summary>ふるさと納税の限度額はどう計算しますか？</summary>
+          <div class="faq-a">ふるさと納税の「自己負担2,000円で済む限度額」は、住民税の所得割額の約20%＋2,000円が目安です。正確には課税所得階層・所得税率により異なります。<a href="./simulator_juminzei.html">住民税&ふるさと納税シミュレーター</a>に年収・社会保険料・各種控除を入力すると、限度額を自動計算します。年末ぎりぎりの寄付では支払日が翌年にずれる場合があるので、12月20日頃までに完了させるのが安全です。</div>
+        </details>
+        <details class="faq-item">
+          <summary>iDeCo・ふるさと納税・新NISAを併用するメリットは？</summary>
+          <div class="faq-a">3つの制度はそれぞれ目的・効果が異なり、併用で節税・資産形成・地域貢献を最大化できます。<strong>iDeCo</strong>は掛金全額が所得控除（住民税&所得税の節税）、<strong>ふるさと納税</strong>は実質2,000円で返礼品取得、<strong>新NISA</strong>は運用益が非課税です。年収500万円なら年間で iDeCo 27.6万 + ふるさと納税 6万 + 新NISA 月10万 程度の併用がよく選ばれます。本サイトの<a href="./simulator_juminzei.html">住民税シミュレーター</a>でiDeCo導入時の節税効果を試算可能。</div>
+        </details>
       </div>
     </div>
   </section>
@@ -1183,7 +1224,7 @@
         <h3>データの取り扱い</h3>
         <p>入力された数値はお使いのブラウザ内でのみ計算に使用され、サーバーへ送信・保存されることはありません。会員登録やアプリのインストールは不要です。</p>
 
-        <p class="eeat-meta">最終更新日：<time datetime="2026-05-27">2026年5月27日</time>　／　運営者：<address style="display:inline;font-style:normal;">shakewakame</address></p>
+        <p class="eeat-meta">最終更新日：<time datetime="2026-05-29">2026年5月29日</time>　／　運営者：<address style="display:inline;font-style:normal;">shakewakame</address></p>
       </article>
     </div>
   </section>
