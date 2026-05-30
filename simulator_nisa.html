@@ -40,7 +40,7 @@
   <meta name="twitter:image:alt" content="新NISAシミュレーターのトップ画面">
 
   <!-- ═══ テーマカラー・ファビコン ═══ -->
-  <meta name="theme-color" content="#2563eb">
+  
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📈%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📈%3C/text%3E%3C/svg%3E">
 
@@ -226,6 +226,7 @@
       padding: 18px 14px;
       background: var(--surface); border-right: 1.5px solid var(--border);
     }
+    .logo-link { display: block; }
     .logo-icon {
       width: 44px; height: 44px; border-radius: 13px;
       background: var(--accent); display: grid; place-items: center;
@@ -255,7 +256,9 @@
     .tab-panel.active { display: block; }
     .grid { display: grid; grid-template-columns: 390px 1fr; gap: 20px; align-items: start; }
     .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .panel { padding: 16px; }
+    .panel { padding: 16px; overflow: visible !important; }
+    /* help-pop 表示優先 */
+    .card.panel { overflow: visible !important; }
     @keyframes chartReveal { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0% 0 0); } }
     .chart-svg-reveal { animation: chartReveal 0.85s cubic-bezier(.4,0,.2,1) forwards; }
     .panel-title {
@@ -271,27 +274,21 @@
 
     /* ── ±ボタン付き入力 ── */
     .input-slider-wrap { display: grid; gap: 7px; }
-    .input-row { display: flex; align-items: center; gap: 0; }
-    .spin-btn {
-      width: 36px; height: 38px; border: 1.5px solid var(--border);
-      background: var(--surface2); color: var(--text2);
-      font-size: 20px; font-weight: 700; cursor: pointer;
-      display: grid; place-items: center; flex-shrink: 0;
-      transition: background .15s, color .15s;
-      line-height: 1; user-select: none; padding: 0;
-    }
+    .input-row { display: flex; align-items: center; gap: 6px; }
+    .spin-btn { width: 36px; height: 38px; border: 1.5px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; font-weight: 800; line-height: 1; cursor: pointer; border-radius: 9px; display: grid; place-items: center; flex-shrink: 0; user-select: none; padding: 0; touch-action: manipulation; transition: background .15s, color .15s; }
     @media (hover: hover) and (pointer: fine) {
       .spin-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
     }
     .spin-btn:active { opacity: .8; }
-    .spin-btn.spin-minus { border-radius: 9px 0 0 9px; border-right: none; }
-    .spin-btn.spin-plus  { border-radius: 0 9px 9px 0; border-left: none; }
+    .spin-btn.spin-minus { border-radius: 9px; }
+    .spin-btn.spin-plus  { border-radius: 9px; }
     .num-input {
-      width: 96px; border: 1.5px solid var(--border);
+      width: 100%; min-width: 0; border: 1.5px solid var(--border);
       outline: none; background: white; color: var(--text);
-      border-radius: 0; padding: 8px 10px; font-size: 15px; font-weight: 700;
-      transition: .18s; text-align: center; flex-shrink: 0;
+      border-radius: 9px; padding: 8px 10px; font-size: 15px; font-weight: 700;
+      transition: .18s; text-align: center; flex: 1 1 auto;
       -moz-appearance: textfield; appearance: textfield;
+      touch-action: manipulation;
     }
     /* ブラウザ標準スピナー非表示（＋/−ボタンで操作。キーボード入力は可） */
     .num-input::-webkit-outer-spin-button,
@@ -331,7 +328,7 @@
     .actions .btn-secondary { font-size: 13px; padding: 8px 14px; order: 1; }
     .actions .btn-share { font-size: 13px; padding: 8px 14px; order: 2; }
     .actions .auto-calc-wrap { order: 3; flex: 0 0 auto; font-size: 12.5px; color: var(--muted); }
-    .btn-primary {
+        .btn-primary {
       border: none; border-radius: 12px; padding: 15px 26px;
       font-size: 16px; font-weight: 900; cursor: pointer;
       background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
@@ -350,9 +347,9 @@
       100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
     }
     .btn-primary:hover { transform: translateY(-2px) scale(1.02); filter: brightness(1.08); box-shadow: 0 10px 28px rgba(29,78,216,.55), 0 4px 10px rgba(29,78,216,.35); }
-    .btn-secondary {
+        .btn-secondary {
       border: 1.5px solid var(--border); border-radius: 11px;
-      padding: 12px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
+      padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer;
       background: var(--surface2); color: var(--text2);
       transition: transform .12s, border-color .15s;
     }
@@ -575,7 +572,7 @@
       background:#fff; border:1.5px solid var(--border); border-radius:10px;
       box-shadow:0 6px 22px rgba(15,23,42,.14); padding:12px 14px;
       font-size:12px; font-weight:500; color:var(--text2); line-height:1.75;
-      text-align:left; white-space:normal; z-index:60;
+      text-align:left; white-space:normal; z-index: 9999;
       opacity:0; visibility:hidden; transform-origin:top center;
       transition:opacity .15s ease, visibility .15s;
     }
@@ -698,22 +695,18 @@
     /* ── tab1〜4 左パネル圧縮（B:数値+スライダー1行 / C:比較バー圧縮 / D:ボタン1行 / 詳細設定）。#tab5は対象外＝完全不変 ── */
     #tab1 .input-slider-wrap, #tab2 .input-slider-wrap,
     #tab3 .input-slider-wrap, #tab4 .input-slider-wrap {
-      display: grid; grid-template-columns: 182px 1fr;
-      column-gap: 14px; row-gap: 2px; align-items: center;
+      display: grid; grid-template-columns: 1fr; gap: 7px; align-items: stretch;
     }
-    #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
-    #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { grid-column: 1; grid-row: 1; }
-    #tab1 .input-slider-wrap > input[type="range"], #tab2 .input-slider-wrap > input[type="range"],
-    #tab3 .input-slider-wrap > input[type="range"], #tab4 .input-slider-wrap > input[type="range"] { grid-column: 2; grid-row: 1; }
-    #tab1 .input-slider-wrap > .range-labels, #tab2 .input-slider-wrap > .range-labels,
-    #tab3 .input-slider-wrap > .range-labels, #tab4 .input-slider-wrap > .range-labels { grid-column: 2; grid-row: 2; margin-top: 0; }
+    #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row, #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { display: flex; gap: 6px; align-items: center; }
+    #tab1 .input-slider-wrap > input[type="range"], #tab2 .input-slider-wrap > input[type="range"], #tab3 .input-slider-wrap > input[type="range"], #tab4 .input-slider-wrap > input[type="range"] { width: 100%; }
+    #tab1 .input-slider-wrap > .range-labels, #tab2 .input-slider-wrap > .range-labels, #tab3 .input-slider-wrap > .range-labels, #tab4 .input-slider-wrap > .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: -3px; }
 
     /* 数値ブロックをコンパクト化（1行に収めるため。spin-btn注入される.input-rowは維持） */
     /* 改善7：input-row幅を一定化し全行でスライダー開始/終端を縦に揃える */
-    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { width: 56px; padding: 7px 4px; font-size: 14px; }
-    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; min-width: 46px; display: inline-block; text-align: left; }
-    #tab1 .input-slider-wrap > .input-row, #tab2 .input-slider-wrap > .input-row,
-    #tab3 .input-slider-wrap > .input-row, #tab4 .input-slider-wrap > .input-row { width: 182px; }
+    /* T-069: 数値入力を shaho 形式に統一(flexで広く取る) */
+    #tab1 .num-input, #tab2 .num-input, #tab3 .num-input, #tab4 .num-input { flex: 1 1 auto; min-width: 0; padding: 8px 10px; font-size: 15px; }
+    #tab1 .unit-label, #tab2 .unit-label, #tab3 .unit-label, #tab4 .unit-label { margin-left: 6px; flex-shrink: 0; }
+    
 
     /* 詳細設定アコーディオン（インフレ率を初期非表示・値は計算に使用継続） */
     .adv-set { border-top: 1.5px solid var(--border); padding-top: 6px; }
@@ -728,28 +721,25 @@
     #tab1 .panel-cmp-bar, #tab2 .panel-cmp-bar, #tab3 .panel-cmp-bar, #tab4 .panel-cmp-bar { padding: 8px 12px; margin-bottom: 10px; }
 
     /* D) ボタン群を1行・コンパクト */
-    #tab1 .actions, #tab2 .actions, #tab3 .actions, #tab4 .actions { gap: 7px; }
-    #tab1 .actions .btn-primary, #tab2 .actions .btn-primary,
-    #tab3 .actions .btn-primary, #tab4 .actions .btn-primary { padding: 9px 15px; font-size: 13px; }
+    
+    
     #tab1 .actions .btn-secondary, #tab2 .actions .btn-secondary,
     #tab3 .actions .btn-secondary, #tab4 .actions .btn-secondary,
-    #tab1 .actions .btn-share, #tab2 .actions .btn-share,
-    #tab3 .actions .btn-share, #tab4 .actions .btn-share { padding: 8px 11px; font-size: 13px; }
-    #tab1 .auto-calc-wrap, #tab2 .auto-calc-wrap,
-    #tab3 .auto-calc-wrap, #tab4 .auto-calc-wrap { font-size: 12px; margin-left: 4px; }
+    
+    
 
     /* 項目5：tab5 左パネルを tab1〜4 と完全統一（同一スコープCSSを #tab5 にも適用） */
-    #tab5 .input-slider-wrap { display:grid; grid-template-columns:182px 1fr; column-gap:14px; row-gap:2px; align-items:center; }
-    #tab5 .input-slider-wrap > .input-row { grid-column:1; grid-row:1; width:182px; }
-    #tab5 .input-slider-wrap > input[type="range"] { grid-column:2; grid-row:1; }
+    #tab5 .input-slider-wrap { display: grid; grid-template-columns: 1fr; gap: 7px; align-items: stretch; }
+    #tab5 .input-slider-wrap > .input-row { display: flex; gap: 6px; align-items: center; }
+    #tab5 .input-slider-wrap > input[type="range"] { width: 100%; }
     #tab5 .input-slider-wrap > .range-labels { grid-column:2; grid-row:2; margin-top:0; }
-    #tab5 .num-input { width:56px; padding:7px 4px; font-size:14px; }
+    #tab5 .num-input { flex: 1 1 auto; min-width: 0; padding: 8px 10px; font-size: 15px; }
     #tab5 .unit-label { margin-left:6px; min-width:46px; display:inline-block; text-align:left; }
     #tab5 .panel-cmp-bar { padding:8px 12px; margin-bottom:10px; }
-    #tab5 .actions { gap:7px; }
-    #tab5 .actions .btn-primary { padding:9px 15px; font-size:13px; }
-    #tab5 .actions .btn-secondary, #tab5 .actions .btn-share { padding:8px 11px; font-size:13px; }
-    #tab5 .auto-calc-wrap { font-size:12px; margin-left:4px; }
+    
+    
+    #tab5 .actions .btn-secondary, 
+    
     @media (max-width:640px){
       #tab5 .input-slider-wrap { grid-template-columns:1fr; }
       #tab5 .input-slider-wrap > input[type="range"] { grid-column:1; grid-row:2; }
@@ -875,6 +865,105 @@
     .result-placeholder .rp-title { font-size:16px;font-weight:700;color:var(--text); }
     .result-placeholder .rp-sub { font-size:13px;margin-top:8px; }
     @media(max-width:640px){ .tax-stats{grid-template-columns:1fr 1fr;} }
+    /* T-075 統一: panel-title / form-grid / h1 等の構造CSSを全7完全同一値に */
+    .wrap { display: grid !important; grid-template-columns: 232px 1fr !important; max-width: 1480px; margin: 0 auto; min-height: 100vh; padding: 0; }
+    .main-area { min-width: 0; padding: 14px 22px 70px; }
+    .topbar { display: flex; align-items: center; min-height: 40px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    h1 { font-size: 15px !important; font-weight: 800 !important; color: var(--text) !important; letter-spacing: -0.02em !important; line-height: 1.3 !important; }
+    .grid { display: grid !important; grid-template-columns: 390px 1fr !important; gap: 20px !important; align-items: start !important; }
+    .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel { padding: 16px !important; overflow: visible !important; }
+    .panel-title { font-size: 15px !important; font-weight: 800 !important; color: var(--text) !important; margin-bottom: 12px !important; padding-bottom: 10px !important; border-bottom: 2px solid var(--border) !important; letter-spacing: -.01em !important; }
+    .form-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 14px !important; align-items: start !important; }
+    label { display: grid !important; gap: 6px !important; font-size: 13px !important; font-weight: 700 !important; color: var(--text2) !important; }
+    .right { display: grid !important; gap: 18px !important; }
+    @media (max-width: 980px) { .main-area { padding: 14px !important; } }
+    @media (max-width: 640px) { .main-area { padding: 12px !important; } }
+    /* T-076 統一: 条件入力パネル高さ全7完全同一 + auto-calc 1行表示 */
+    @media (min-width: 981px) {
+      /* 条件入力パネル: 既存5の .left-col 機構と同じ実効高さに統一 */
+      .grid > .card.panel,
+      .left-col > .card.panel {
+        min-height: 540px !important;
+        max-height: calc(100vh - 220px) !important;
+      }
+    }
+    /* 自動再計算: チェックボックスとラベルテキストを必ず1行で表示 */
+    .actions .auto-calc-wrap,
+    .auto-calc-wrap {
+      white-space: nowrap !important;
+      flex-wrap: nowrap !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    /* T-077 修正: panel-cmp-label と類似 label 系は inline-flex 1行 (T-075 grid強制の例外) */
+    .panel-cmp-label,
+    label.panel-cmp-label,
+    .compare-bar label {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 6px !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+    }
+    /* shaho/juminzei calc ボタン高さを既存5と完全に揃える */
+    .actions .btn-primary,
+    .left-col > .actions.actions-detached .btn-primary,
+    .grid > .actions.actions-detached .btn-primary {
+      min-height: 56px !important;
+      max-height: 56px !important;
+      height: 56px !important;
+      padding: 0 28px !important;
+      font-size: 18px !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    /* T-078 修正: auto-calc-wrap font-size を全パターン+specificity高く強制統一 */
+    .auto-calc-wrap,
+    label.auto-calc-wrap,
+    .actions .auto-calc-wrap,
+    .actions label.auto-calc-wrap,
+    .left-col > .actions.actions-detached .auto-calc-wrap,
+    .grid > .actions.actions-detached .auto-calc-wrap,
+    .left-col > .actions.actions-detached label.auto-calc-wrap,
+    .grid > .actions.actions-detached label.auto-calc-wrap {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--muted) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      line-height: 1.4 !important;
+    }
+    /* T-080 フォント完全統一 (全要素・全7同一) */
+    html, body, button, input, select, textarea, label, p, span, div, h1, h2, h3, h4, h5, h6, a, td, th, li {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif !important;
+    }
+    body { font-size: 15px; color: var(--text); line-height: 1.75; }
+    /* タイトル/見出し系 */
+    h1 { font-size: 15px !important; font-weight: 800 !important; color: var(--text) !important; letter-spacing: -0.02em !important; line-height: 1.3 !important; }
+    h2 { font-weight: 800 !important; color: var(--text) !important; }
+    h3 { font-weight: 800 !important; }
+    .panel-title { font-size: 15px !important; font-weight: 800 !important; color: var(--text) !important; letter-spacing: -.01em !important; }
+    /* 入力ラベル系 */
+    label { color: var(--text2) !important; font-weight: 700 !important; }
+    label:not(.panel-cmp-label):not(.auto-calc-wrap):not(.compare-bar label) { font-size: 13px !important; }
+    /* テキスト全般 */
+    p { color: var(--text2); }
+    /* 数値表示 */
+    .num-input { font-weight: 700 !important; }
+    .unit-label { font-weight: 600 !important; color: var(--muted) !important; }
+
+
+
+
+  
 </style>
 </head>
 <body>
@@ -891,7 +980,7 @@
 
 <div class="wrap">
   <aside class="sidebar">
-    <div class="logo-icon" role="img" aria-label="成長グラフのアイコン">📈</div>
+    <a href="./index.html" class="logo-link" aria-label="トップへ戻る" style="text-decoration:none;"><div class="logo-icon" role="img" aria-label="新NISAシミュレーター ホーム">📈</div></a>
     <nav class="tab-bar" aria-label="シミュレーター切替">
       <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
       <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
@@ -1005,6 +1094,7 @@
             <div class="actions">
               <button type="button" class="btn-primary" id="nisa-calc">✨ 計算する</button>
               <button type="button" class="btn-secondary" id="nisa-reset">リセット</button>
+              <button class="btn-share" type="button" id="nisa-share" title="URLをコピー">🔗 共有</button>
               <label class="auto-calc-wrap">
                 <input type="checkbox" id="ns-auto"> 自動再計算
               </label>
@@ -1395,7 +1485,7 @@
         </div>
       </div>
       <div class="inf-note" id="t1-inf-note" style="display:none"></div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart1" viewBox="0 0 900 406"></svg></div><div class="legend" id="t1-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>投資元本</span></div></section>
+      <section class="card chart-card"><div class="chart-wrap"><svg id="chart1" viewBox="0 0 900 406"></svg></div><div class="legend" id="t1-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>投資元本</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>年間積立額</th><th>累計元本</th><th>予想評価額</th><th>累計運用益</th></tr></thead><tbody id="t1-table"></tbody></table></div></section>`;
   }
   function skeletonT2() {
@@ -1409,7 +1499,7 @@
         </div>
       </div>
       <div class="inf-note" id="t2-inf-note" style="display:none"></div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart2" viewBox="0 0 900 406"></svg></div><div class="legend" id="t2-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>元本</span></div></section>
+      <section class="card chart-card"><div class="chart-wrap"><svg id="chart2" viewBox="0 0 900 406"></svg></div><div class="legend" id="t2-legend"><span><i class="dot" style="background:#2563eb"></i>評価額</span><span><i class="dot" style="background:#0ea472"></i>元本</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>評価額</th><th>元本</th><th>運用益</th><th>利益率</th></tr></thead><tbody id="t2-table"></tbody></table></div></section>`;
   }
   function skeletonT3() {
@@ -1422,7 +1512,7 @@
           <div class="stat"><div class="k">判定</div><div class="v" id="t3-verdict">-</div></div>
         </div>
       </div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart3" viewBox="0 0 900 406"></svg></div><div class="legend" id="t3-legend"><span><i class="dot" style="background:#2563eb"></i>資産残高</span></div></section>
+      <section class="card chart-card"><div class="chart-wrap"><svg id="chart3" viewBox="0 0 900 406"></svg></div><div class="legend" id="t3-legend"><span><i class="dot" style="background:#2563eb"></i>資産残高</span></div></section>
       <section class="card table-card"><div class="table-title">年次サマリー</div><div class="table-wrap"><table><thead><tr><th>年</th><th>年間取り崩し額</th><th>取り崩し累計</th><th>年末残高</th><th>年間運用益</th></tr></thead><tbody id="t3-table"></tbody></table></div></section>`;
   }
   function skeletonNisa() {
@@ -1435,7 +1525,7 @@
           <div class="stat"><div class="k">利益率</div><div class="v" id="nisa-stat-roi">-</div></div>
         </div>
       </div>
-      <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 406"></svg></div><div class="legend" id="nisa-legend"></div></section>
+      <section class="card chart-card"><div class="chart-wrap"><svg id="chart4" viewBox="0 0 900 406"></svg></div><div class="legend" id="nisa-legend"></div></section>
       <div class="tax-card" id="nisa-tax-card"><div class="tax-card-title">💰 新NISAの非課税メリット（運用益が非課税）</div><div class="tax-stats">
         <div class="tax-stat"><div class="k">NISA 最終手取り</div><div class="v v-accent" id="nisa-tax-nisa">-</div></div>
         <div class="tax-stat"><div class="k">課税口座だった場合</div><div class="v" id="nisa-tax-taxed">-</div></div>
@@ -2474,7 +2564,7 @@
           area.innerHTML = fireAreaHTML(core);
         } else {
           area.innerHTML = `<div class="result-block"><div class="hero-result"><div class="fh-label">FIRE達成まで</div><div><span class="fh-val">-</span></div></div><div class="stats"><div class="stat"><div class="k">月の生活費</div><div class="v">未入力</div></div></div></div>
-            <section class="card chart-card"><div class="chart-title">資産推移グラフ</div><div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div><div class="legend" id="f5-legend"></div></section>`;
+            <section class="card chart-card"><div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div><div class="legend" id="f5-legend"></div></section>`;
         }
         const all = buildCmpScenarios('f5');
         renderCompareChart('chart5', all, 'f5', makeTooltip('tt1'));
@@ -2576,6 +2666,7 @@
 
   el('nisa-add-phase')?.addEventListener('click', addPhase);
   el('nisa-calc')?.addEventListener('click', calcNisa);
+  el('nisa-share')?.addEventListener('click', () => { const url = location.href; navigator.clipboard?.writeText(url); alert('URLをコピーしました'); });
   el('nisa-reset')?.addEventListener('click', () => {
     nisaScenarios = [makeDefaultScenario(0)];
     activeScenarioIdx = 0;
@@ -3083,7 +3174,7 @@ function fireAreaHTML(r) {
       </div>`;
   const chartHtml = `
     <section class="card chart-card">
-      <div class="chart-title">資産推移グラフ</div>
+      
       <div class="chart-wrap"><svg id="chart5" viewBox="0 0 900 406"></svg></div>
       <div class="legend" id="f5-legend">
         <span><i class="dot" style="background:#2563eb"></i>評価額</span>
@@ -3191,6 +3282,90 @@ const autoFire=()=>{ if(el('f5-auto')?.checked) calcFire(); };
 // URL読み込み（ページ表示時）
 loadFromURL();
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous">
+  // ── help-pop を body に detach + fixed 位置で表示（panel overflow:auto に影響されない） ──
+  (function setupHelpPop(){
+    function setup(){
+      document.querySelectorAll('.help-wrap').forEach(wrap => {
+        const ic = wrap.querySelector('.help-ic');
+        const pop = wrap.querySelector('.help-pop');
+        if (!ic || !pop || pop.dataset.detached) return;
+        // body 直下に移動
+        document.body.appendChild(pop);
+        pop.dataset.detached = '1';
+        pop.style.position = 'fixed';
+        pop.style.top = '0';
+        pop.style.left = '0';
+        pop.style.zIndex = '9999';
+        pop.style.transition = 'opacity .15s';
+        pop.style.opacity = '0';
+        pop.style.visibility = 'hidden';
+        pop.style.pointerEvents = 'none';
+        pop.style.transform = 'none';
+        function show() {
+          const rect = ic.getBoundingClientRect();
+          const vw = window.innerWidth, vh = window.innerHeight;
+          pop.style.visibility = 'visible';
+          pop.style.opacity = '1';
+          // モバイル: 下部固定
+          if (vw <= 640) {
+            pop.style.left = '16px';
+            pop.style.right = '16px';
+            pop.style.top = 'auto';
+            pop.style.bottom = '16px';
+            pop.style.width = 'auto';
+            pop.style.maxWidth = 'none';
+            return;
+          }
+          // PC: ?ボタン下に配置、viewport内に収める
+          pop.style.right = 'auto';
+          pop.style.bottom = 'auto';
+          pop.style.width = '280px';
+          pop.style.maxWidth = 'min(300px, ' + (vw - 32) + 'px)';
+          let left = rect.left + rect.width/2 - 140; // 280/2
+          let top  = rect.bottom + 9;
+          if (left < 8) left = 8;
+          if (left + 280 > vw - 8) left = vw - 288;
+          if (top + 200 > vh) top = rect.top - 200 - 9;
+          pop.style.left = left + 'px';
+          pop.style.top = top + 'px';
+        }
+        function hide() {
+          pop.style.opacity = '0';
+          pop.style.visibility = 'hidden';
+        }
+        ic.addEventListener('mouseenter', show);
+        ic.addEventListener('mouseleave', hide);
+        ic.addEventListener('focus', show);
+        ic.addEventListener('blur', hide);
+        ic.addEventListener('touchstart', e => { show(); e.stopPropagation(); }, { passive: true });
+        document.addEventListener('touchend', () => setTimeout(hide, 100), { passive: true });
+      });
+    }
+    setup();
+    new MutationObserver(setup).observe(document.body, { childList: true, subtree: true });
+  })();
+
+
+  // T-079: linkSlider 拡張 - スライド済み部分を青く塗りつぶす
+  function syncRangeBg(range) {
+    if (!range) return;
+    const v = +range.value, mn = +range.min, mx = +range.max;
+    const pct = mx > mn ? ((v - mn) / (mx - mn)) * 100 : 0;
+    range.style.setProperty('--pct', pct + '%');
+  }
+  // 既存 linkSlider を拡張: input イベントで syncBg
+  (function enhanceLinkSliders(){
+    document.querySelectorAll('input[type="range"]').forEach(range => {
+      syncRangeBg(range);
+      range.addEventListener('input', () => syncRangeBg(range));
+    });
+    // 動的追加にも対応
+    new MutationObserver(() => {
+      document.querySelectorAll('input[type="range"]').forEach(syncRangeBg);
+    }).observe(document.body, { childList: true, subtree: true });
+  })();
+
+</script>
 </body>
 </html>
