@@ -961,6 +961,22 @@
     /* 数値表示 */
     .num-input { font-weight: 700 !important; }
     .unit-label { font-weight: 600 !important; color: var(--muted) !important; }
+    /* T-081 モバイル wrap/grid 1fr 強制 (T-075の!importantが効きすぎていたため修正) */
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr !important; min-height: 0 !important; }
+      .grid { grid-template-columns: 1fr !important; }
+      .main-area { padding: 14px !important; max-width: 100% !important; }
+      .sidebar { position: static !important; height: auto !important; overflow: visible !important; }
+    }
+    @media (max-width: 640px) {
+      .wrap { grid-template-columns: 1fr !important; }
+      .grid { grid-template-columns: 1fr !important; }
+      .main-area { padding: 12px 8px 60px !important; }
+      .card, .panel, .hero-result, .stats-wrap, .result-block, .compare-bar, .right, .chart-card, .table-card, .inf-note {
+        max-width: 100% !important; min-width: 0 !important; width: 100% !important; box-sizing: border-box !important;
+      }
+    }
+
 
 
 
