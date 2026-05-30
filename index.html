@@ -7,7 +7,7 @@
   <!-- ═══ 基本SEO ═══ -->
   <title>未来デザイン研究所｜お金の知識で人生を設計する｜NISA/FIRE/税金/手取り 無料シミュレーター</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#1d4ed8">
+  <meta name="theme-color" content="#2D7FF9">
   <meta name="description" content="未来デザイン研究所は、20-40代向けにお金の知識を学び・将来をシミュレーションし・人生を設計するための情報プラットフォーム。NISA・FIRE・社会保険料・住民税・ふるさと納税の7種類の無料シミュレーターで、あなたの未来は変えられる。">
   <meta name="keywords" content="新NISA,シミュレーター,積立投資,複利計算,資産運用,FIRE,つみたてNISA,iDeCo,資産形成,将来資産">
   <meta name="author" content="shakewakame">
@@ -195,19 +195,21 @@
     /* ─── リセット & 基本 ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --accent:       #1d4ed8;
-      --accent-dark:  #1e40af;
+      --accent:       #2D7FF9;
+      --accent-dark:  #2D7FF9;
       --accent-light: #eff4ff;
-      --accent2:      #059669;
-      --text:         #111827;
-      --text2:        #374151;
-      --muted:        #6b7280;
+      --accent2:      #27B99A;
+      --text:         #1A1F36;
+      --text2:        #4B5563;
+      --muted:        #6B7280;
       --bg:           #f8fafc;
       --surface:      #ffffff;
       --border:       #e2e8f0;
       --radius:       16px;
       --shadow-sm:    0 1px 4px rgba(0,0,0,.07), 0 4px 14px rgba(0,0,0,.06);
       --shadow:       0 4px 24px rgba(0,0,0,.09);
+      --accent-pink: #FF6B9D; --accent-pink-dark: #C8487A;
+      --sky-light: #e0f2fe; --sky-mid: #bae6fd; --sky-blue: #2D7FF9;
     }
     html { scroll-behavior: smooth; }
     /* T-015: Skip link (WCAG 2.4.1 Bypass Blocks) */
@@ -295,7 +297,7 @@
 
     /* ─── ヒーロー ─── */
     .hero {
-      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 45%, #2563eb 75%, #3b82f6 100%);
+      background: linear-gradient(135deg, #2D7FF9 0%, #2D7FF9 45%, #2D7FF9 75%, #2D7FF9 100%);
       color: white;
       padding: 88px 0 72px;
       text-align: center;
@@ -525,7 +527,7 @@
 
     /* ─── 最終CTA ─── */
     .cta-final {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #2D7FF9 0%, #2D7FF9 100%);
       color: white;
       padding: 88px 0;
       text-align: center;
@@ -559,7 +561,7 @@
 
     /* ─── フッター ─── */
     .footer {
-      background: #111827;
+      background: #1A1F36;
       color: #9ca3af;
       padding: 36px 24px;
       text-align: center;
@@ -749,756 +751,428 @@
       .hide-mobile { display: none; }
       .show-mobile { display: inline; }
     }
+  
+    /* ═════════ Mockup-v1 準拠スタイル ═════════ */
+    :root {
+      /* T-089 公式カラーパレット (vision.md 準拠) */
+      --primary-blue: #2D7FF9;
+      --primary-pink: #FF6B9D;
+      --secondary-green: #27B99A;
+      --secondary-purple: #7A7FF0;
+      --accent-yellow: #FFC857;
+      --accent-orange: #FF8A65;
+      --bg-light-gray: #F7FAFC;
+      --bg-white: #FFFFFF;
+      --bg-light-blue: #EAF4FF;
+      --surface: #FFFFFF;
+      --text-primary: #1A1F36;
+      --text-secondary: #4B5563;
+      --text-muted: #6B7280;
+      /* 旧変数(後方互換) */
+      --m-pink: #FF6B9D; --m-pink-light: #FFC1D6; --m-pink-dark: #C8487A;
+      --m-sky-1: #EAF4FF; --m-sky-2: #BFDDFF; --m-sky-3: #2D7FF9;
+      --m-text: #1A1F36; --m-text-dark: #1A1F36; --m-text-sub: #4B5563;
+      --m-bg: #FFFFFF;
+      --m-yellow: #FFF3D1; --m-mint: #D4F5EB; --m-rose: #FFE2EC; --m-blue: #EAF4FF; --m-purple: #E3E5FE;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      color: #1A1F36; background: white; line-height: 1.7; font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .skip-link { position: absolute; left: -9999px; }
+    .skip-link:focus { left: 0; top: 0; background: #2D7FF9; color: white; padding: 10px 16px; z-index: 9999; }
+    a { color: inherit; }
+
+    /* ─ ヘッダーナビ ─ */
+    .m-nav { background: white; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,.03); }
+    .m-nav-inner { max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 32px; }
+    .m-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .m-logo-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--m-pink), var(--m-pink-light));
+      color: white; display: grid; place-items: center; font-size: 20px;
+      box-shadow: 0 2px 8px rgba(236,72,153,.3);
+    }
+    .m-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .m-logo-ja { font-size: 16px; font-weight: 800; color: #1A1F36; letter-spacing: -.01em; }
+    .m-logo-en { font-size: 10px; color: #9ca3af; font-weight: 600; letter-spacing: .04em; }
+    .m-nav-links { display: flex; gap: 28px; flex: 1; }
+    .m-nav-links a { font-size: 14px; font-weight: 700; color: #4B5563; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .18s; }
+    .m-nav-links a:hover { color: var(--m-pink); border-bottom-color: var(--m-pink); }
+    .m-nav-actions { display: flex; gap: 12px; }
+    .m-search {
+      background: none; border: 1.5px solid #e5e7eb; border-radius: 50%;
+      width: 36px; height: 36px; cursor: pointer; font-size: 14px;
+      transition: all .18s;
+    }
+    .m-search:hover { border-color: var(--m-pink); background: #fdf2f8; }
+
+    /* ─ ヒーロー ─ */
+    .m-hero {
+      position: relative; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 50%, #ffffff 100%);
+      padding: 56px 24px 72px; overflow: hidden;
+    }
+    .m-hero-grid {
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .m-hero-left { padding: 24px 0; }
+    .m-hero-title {
+      font-size: clamp(36px, 5vw, 56px); font-weight: 900;
+      color: var(--m-text-dark); line-height: 1.18; letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+    .m-hero-title-accent { position: relative; display: inline-block; }
+    .m-hero-underline {
+      position: absolute; left: 0; right: 38%; bottom: -4px; height: 8px;
+      background: linear-gradient(90deg, var(--m-pink), var(--m-pink-light));
+      border-radius: 999px; opacity: .9;
+    }
+    .m-hero-en {
+      font-size: 14px; font-weight: 700; color: var(--m-pink);
+      letter-spacing: .12em; font-style: italic; margin-bottom: 18px;
+    }
+    .m-hero-sub {
+      font-size: 14.5px; color: var(--m-text-sub); line-height: 2;
+      margin-bottom: 28px; max-width: 500px;
+    }
+    .m-hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--m-pink), var(--m-pink-light));
+      color: white; text-decoration: none;
+      padding: 16px 32px; border-radius: 999px;
+      font-size: 15px; font-weight: 800;
+      box-shadow: 0 8px 24px rgba(236,72,153,.4);
+      transition: all .2s;
+    }
+    .m-hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(236,72,153,.5); }
+    .m-hero-cta .arr { font-size: 18px; transition: transform .2s; }
+    .m-hero-cta:hover .arr { transform: translateX(4px); }
+    .m-hero-right { display: flex; justify-content: center; }
+    .m-hero-svg { width: 100%; max-width: 500px; height: auto; border-radius: 20px; }
+    .m-hero-band {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 8px;
+      background: linear-gradient(90deg, #fce7f3, #fbcfe8, #fce7f3);
+    }
+
+    /* ─ セクション共通 ─ */
+    .m-section { padding: 64px 24px; }
+    .m-container { max-width: 1240px; margin: 0 auto; }
+    .m-section-title {
+      font-size: clamp(22px, 2.4vw, 30px); font-weight: 800;
+      color: #1A1F36; text-align: center; margin-bottom: 36px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .m-section-emoji { font-size: 28px; }
+
+    /* ─ 人気シミュレーター 5カード ─ */
+    .m-sim-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+    }
+    .m-sim-card {
+      text-decoration: none; color: #1A1F36;
+      padding: 24px 18px; border-radius: 18px;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column; gap: 10px; align-items: center;
+    }
+    .m-sim-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0,0,0,.1);
+    }
+    .m-sim-icon {
+      width: 60px; height: 60px; border-radius: 16px;
+      display: grid; place-items: center; font-size: 32px; color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+    .m-sim-name { font-size: 14px; font-weight: 800; color: #1A1F36; line-height: 1.4; }
+    .m-sim-desc { font-size: 12px; color: #6B7280; line-height: 1.6; }
+
+    /* ─ 下段4カード ─ */
+    .m-card4-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+    }
+    .m-card4 {
+      background: white; border-radius: 18px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .m-card4:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.1); }
+    .m-card4-img {
+      height: 140px; display: grid; place-items: center;
+    }
+    .m-card4-body { padding: 20px; }
+    .m-card4-title { font-size: 15px; font-weight: 800; color: #1A1F36; margin-bottom: 8px; }
+    .m-card4-desc { font-size: 12.5px; color: #6B7280; line-height: 1.75; margin-bottom: 12px; }
+    .m-card4-link { font-size: 13px; color: var(--m-pink); font-weight: 800; text-decoration: none; }
+    .m-card4-link:hover { text-decoration: underline; }
+    .m-card4-list { list-style: none; padding: 0; margin: 0; font-size: 12.5px; color: #4B5563; line-height: 2; }
+
+    /* ─ 信頼性アイコン列 ─ */
+    .m-trust-row {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      max-width: 980px; margin: 0 auto;
+    }
+    .m-trust-item { text-align: center; }
+    .m-trust-icon { font-size: 34px; margin-bottom: 6px; }
+    .m-trust-label { font-size: 12px; color: #6B7280; font-weight: 700; }
+
+    /* ─ フッター ─ */
+    .m-footer { background: #f9fafb; padding: 36px 24px; border-top: 1px solid #e5e7eb; }
+
+    /* ─ レスポンシブ ─ */
+    @media (max-width: 980px) {
+      .m-nav-inner { flex-wrap: wrap; gap: 14px; }
+      .m-nav-links { gap: 16px; order: 3; width: 100%; justify-content: center; padding-top: 8px; border-top: 1px solid #f3f4f6; }
+      .m-nav-links a { font-size: 13px; }
+      .m-hero-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+      .m-hero-left { padding: 0; }
+      .m-hero-sub { margin-left: auto; margin-right: auto; }
+      .m-hero-right { order: -1; }
+      .m-hero-svg { max-width: 360px; }
+      .m-sim-grid { grid-template-columns: repeat(2, 1fr); }
+      .m-card4-grid { grid-template-columns: repeat(2, 1fr); }
+      .m-trust-row { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .m-section { padding: 40px 16px; }
+      .m-hero { padding: 32px 16px 48px; }
+      .m-sim-grid { grid-template-columns: 1fr; }
+      .m-card4-grid { grid-template-columns: 1fr; }
+      .m-hero-svg { max-width: 280px; }
+      .m-logo-text { display: none; }
+    }
+
   </style>
 </head>
 <body>
 <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
-<!-- ─── ナビゲーション ─── -->
-<nav class="nav" role="navigation" aria-label="メインナビゲーション">
-  <div class="nav-inner">
-    <a href="./" class="nav-logo" aria-label="未来デザイン研究所 ホーム">
-      <span class="nav-logo-icon" aria-hidden="true">🌅</span>
-      <span>未来デザイン研究所</span>
+<!-- ─── ヘッダーナビ (mockup準拠: 横並びテキストリンク) ─── -->
+<header class="m-nav" role="navigation" aria-label="メインナビ">
+  <div class="m-nav-inner">
+    <a href="./" class="m-logo" aria-label="未来デザイン研究所 ホーム">
+      <span class="m-logo-icon" aria-hidden="true">🌅</span>
+      <span class="m-logo-text">
+        <span class="m-logo-ja">未来デザイン研究所</span>
+        <span class="m-logo-en">Mirai Design Lab</span>
+      </span>
     </a>
-    <a href="#simulators" class="btn-nav">人気シミュレーターを試す →</a>
+    <nav class="m-nav-links" aria-label="セクション">
+      <a href="#simulators">シミュレーター</a>
+      <a href="#guide">資産形成ガイド</a>
+      <a href="#news">記事・コラム</a>
+      <a href="#policy">制度・ニュース解説</a>
+    </nav>
+    <div class="m-nav-actions">
+      <button class="m-search" aria-label="検索">🔍</button>
+    </div>
   </div>
-</nav>
+</header>
 
 <main id="main">
 
-  <!-- ─── ヒーローセクション ─── -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="container">
-      <p class="hero-badge" aria-label="未来デザイン研究所">
-        <span aria-hidden="true">🌅</span> 学ぶ・試算する・判断する・行動する
-      </p>
-      <h1 id="hero-heading">
-        未来は、<br class="hide-mobile">
-        <span class="hl">あなたの手で設計できる。</span>
-      </h1>
-      <p class="hero-sub">
-        「お金の知識を身につけて、自分らしい人生を設計する」── 未来デザイン研究所は20〜40代の若年層が、NISA・FIRE・税金・社会保険・ふるさと納税の仕組みを学び、無料シミュレーターで将来を試算しながら、理想の人生を計画するための情報プラットフォームです。
-      </p>
-      <a href="#simulators" class="btn-hero">人気シミュレーターを試す →</a>
-      <p class="hero-note">完全無料 ・ 登録不要 ・ 初心者にやさしい解説つき</p>
-      <div class="hero-stats" role="list" aria-label="サービス概要">
-        <div class="hero-stat" role="listitem">
-          <div class="val">7+</div>
-          <div class="lbl">無料シミュレーター</div>
-        </div>
-        <div class="hero-stat" role="listitem">
-          <div class="val">学べる</div>
-          <div class="lbl">初心者解説つき</div>
-        </div>
-        <div class="hero-stat" role="listitem">
-          <div class="val">完全無料</div>
-          <div class="lbl">登録なし</div>
-        </div>
-        <div class="hero-stat" role="listitem">
-          <div class="val">スマホ対応</div>
-          <div class="lbl">レスポンシブデザイン</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── ページ内アンカーナビ ─── -->
-  <nav class="jump-nav" aria-label="ページ内ナビゲーション">
-    <div class="jump-nav-inner">
-      <a href="#strengths">3つの強み</a>
-      <a href="#features">5つの機能</a>
-      <a href="#howto">使い方</a>
-      <a href="#faq">よくある質問</a>
-      <a href="#glossary">用語解説</a>
-      <a href="#eeat">運営者情報</a>
-      <a href="./simulator_tumitate.html" class="jump-cta">シミュレーターを使う →</a>
-    </div>
-  </nav>
-
-  <!-- ─── 3つの強み ─── -->
-  
-  <!-- ─── ヒーロー直下: ステップフロー + 主要4シミュレーター大型カード ─── -->
-  <section id="quick-start" class="section" aria-labelledby="quick-heading" style="background:linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%); padding: 48px 0 56px; border-bottom: 1px solid #c8cdd8;">
-    <div class="container">
-      <!-- 4ステップフロー -->
-      <div style="max-width:980px;margin:0 auto 36px;text-align:center;">
-        <p class="section-label" style="color:#1d4ed8;">How it works</p>
-        <h2 id="quick-heading" class="section-title" style="margin-bottom:24px;">未来を設計する 4 ステップ</h2>
-        <div class="step-flow" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;">
-          <div style="background:white;border:1.5px solid #c8cdd8;border-radius:14px;padding:18px 12px;text-align:center;">
-            <div style="font-size:34px;margin-bottom:4px;" aria-hidden="true">📚</div>
-            <div style="font-size:12px;color:#1d4ed8;font-weight:800;letter-spacing:.05em;margin-bottom:4px;">STEP 1</div>
-            <div style="font-size:15px;font-weight:800;color:#111827;">学ぶ</div>
-            <div style="font-size:11.5px;color:#6b7280;margin-top:4px;line-height:1.5;">用語解説・FAQで仕組みを理解</div>
-          </div>
-          <div style="background:white;border:1.5px solid #c8cdd8;border-radius:14px;padding:18px 12px;text-align:center;">
-            <div style="font-size:34px;margin-bottom:4px;" aria-hidden="true">🔢</div>
-            <div style="font-size:12px;color:#1d4ed8;font-weight:800;letter-spacing:.05em;margin-bottom:4px;">STEP 2</div>
-            <div style="font-size:15px;font-weight:800;color:#111827;">試算する</div>
-            <div style="font-size:11.5px;color:#6b7280;margin-top:4px;line-height:1.5;">7つのシミュレーターで数字を出す</div>
-          </div>
-          <div style="background:white;border:1.5px solid #c8cdd8;border-radius:14px;padding:18px 12px;text-align:center;">
-            <div style="font-size:34px;margin-bottom:4px;" aria-hidden="true">💡</div>
-            <div style="font-size:12px;color:#1d4ed8;font-weight:800;letter-spacing:.05em;margin-bottom:4px;">STEP 3</div>
-            <div style="font-size:15px;font-weight:800;color:#111827;">判断する</div>
-            <div style="font-size:11.5px;color:#6b7280;margin-top:4px;line-height:1.5;">複数シナリオを比較して選ぶ</div>
-          </div>
-          <div style="background:white;border:1.5px solid #c8cdd8;border-radius:14px;padding:18px 12px;text-align:center;">
-            <div style="font-size:34px;margin-bottom:4px;" aria-hidden="true">🚀</div>
-            <div style="font-size:12px;color:#1d4ed8;font-weight:800;letter-spacing:.05em;margin-bottom:4px;">STEP 4</div>
-            <div style="font-size:15px;font-weight:800;color:#111827;">行動する</div>
-            <div style="font-size:11.5px;color:#6b7280;margin-top:4px;line-height:1.5;">未来を変える一歩を踏み出す</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 主要4シミュレーター 大型カード -->
-      <div style="max-width:1100px;margin:0 auto;">
-        <div style="text-align:center;margin-bottom:24px;">
-          <p class="section-label" style="color:#f59e0b;">Popular</p>
-          <h2 class="section-title" style="margin-bottom:10px;">🎯 すぐに試せる人気シミュレーター</h2>
-          <p class="section-desc" style="max-width:680px;margin:0 auto;">登録不要・無料・スマホ対応。あなたの未来は、いま手元の電卓1つで設計できます。</p>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
-          <a href="./simulator_tumitate.html" style="text-decoration:none;color:inherit;background:white;border:2px solid #1d4ed8;border-radius:16px;padding:24px 20px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(29,78,216,.12);display:block;">
-            <div style="font-size:42px;margin-bottom:10px;" aria-hidden="true">📈</div>
-            <h3 style="font-size:17px;font-weight:800;color:#111827;margin-bottom:6px;">積立投資シミュレーター</h3>
-            <p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:12px;">月いくら積み立てれば、20年後にいくらになる？新NISAを最大限活用した複利の魔法を体験。</p>
-            <span style="font-size:13px;color:#1d4ed8;font-weight:800;">いますぐ試す →</span>
-          </a>
-          <a href="./simulator_fire.html" style="text-decoration:none;color:inherit;background:white;border:2px solid #f59e0b;border-radius:16px;padding:24px 20px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(245,158,11,.12);display:block;">
-            <div style="font-size:42px;margin-bottom:10px;" aria-hidden="true">🔥</div>
-            <h3 style="font-size:17px;font-weight:800;color:#111827;margin-bottom:6px;">FIRE逆算シミュレーター</h3>
-            <p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:12px;">何歳でいくらあれば自由に生きられる？目標生活費から達成年数を逆算し、人生の選択肢を広げる。</p>
-            <span style="font-size:13px;color:#f59e0b;font-weight:800;">いますぐ試す →</span>
-          </a>
-          <a href="./simulator_shaho.html" style="text-decoration:none;color:inherit;background:white;border:2px solid #059669;border-radius:16px;padding:24px 20px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(5,150,105,.12);display:block;">
-            <div style="font-size:42px;margin-bottom:10px;" aria-hidden="true">📊</div>
-            <h3 style="font-size:17px;font-weight:800;color:#111827;margin-bottom:6px;">社会保険料シミュレーター</h3>
-            <p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:12px;">4-6月の残業で社会保険料はどう変わる？標準報酬月額の仕組みを知って年間手取りを最大化。</p>
-            <span style="font-size:13px;color:#059669;font-weight:800;">いますぐ試す →</span>
-          </a>
-          <a href="./simulator_juminzei.html" style="text-decoration:none;color:inherit;background:white;border:2px solid #dc2626;border-radius:16px;padding:24px 20px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(220,38,38,.12);display:block;">
-            <div style="font-size:42px;margin-bottom:10px;" aria-hidden="true">🏠</div>
-            <h3 style="font-size:17px;font-weight:800;color:#111827;margin-bottom:6px;">住民税&ふるさと納税</h3>
-            <p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:12px;">翌年の住民税はいくら？ふるさと納税の限度額は？自己負担2,000円で賢く節税する戦略を立てる。</p>
-            <span style="font-size:13px;color:#dc2626;font-weight:800;">いますぐ試す →</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    @media (max-width: 720px) {
-      #quick-start .step-flow { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-  </style>
-
-
-  
-  <!-- ─── ライフイベント別ナビ - 人生のシーンから探す ─── -->
-  <section id="life-events" class="section" aria-labelledby="life-heading" style="background:linear-gradient(180deg, #fff7ed 0%, #ffedd5 50%, #fef3c7 100%); padding: 56px 0;">
-    <div class="container">
-      <div class="features-head" style="text-align:center;margin-bottom:32px;">
-        <p class="section-label" style="color:#c2410c;">Life Events</p>
-        <h2 id="life-heading" class="section-title">🌟 人生のシーンから、未来を設計する</h2>
-        <p class="section-desc" style="max-width:680px;margin:0 auto;">就職・結婚・出産・住宅・退職… あなたの人生のターニングポイントで「いま何をすべきか」を一緒に考えます。</p>
-      </div>
-
-      <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #3b82f6;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">🎓</span>
-            <div>
-              <div style="font-size:11px;color:#3b82f6;font-weight:800;letter-spacing:.05em;">20代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">就職・転職</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">最初の給与で何にいくら使う？節税の基本を知って、20代から賢く資産形成のスタートを切ろう。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_shaho.html" style="text-decoration:none;background:#eff6ff;color:#1d4ed8;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">📊 社会保険料</a>
-            <a href="./simulator_juminzei.html" style="text-decoration:none;background:#eff6ff;color:#1d4ed8;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🏠 住民税</a>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #1d4ed8;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">🌱</span>
-            <div>
-              <div style="font-size:11px;color:#1d4ed8;font-weight:800;letter-spacing:.05em;">20-30代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">投資デビュー</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">新NISAの非課税枠を最大活用。月1万円からでも、複利で人生が変わる体験を試算で。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_tumitate.html" style="text-decoration:none;background:#eff6ff;color:#1d4ed8;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">📈 積立投資</a>
-            <a href="./simulator_nisa.html" style="text-decoration:none;background:#eff6ff;color:#1d4ed8;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🎯 新NISA</a>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #f59e0b;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">💍</span>
-            <div>
-              <div style="font-size:11px;color:#f59e0b;font-weight:800;letter-spacing:.05em;">25-35代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">結婚・共働き戦略</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">配偶者控除はどう影響？2人で投資すると将来は？シミュレーター比較で最適解を発見。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_juminzei.html" style="text-decoration:none;background:#fff7ed;color:#c2410c;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🏠 住民税&ふるさと納税</a>
-            <a href="./simulator_tumitate.html" style="text-decoration:none;background:#fff7ed;color:#c2410c;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">📈 積立投資</a>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #ec4899;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">👶</span>
-            <div>
-              <div style="font-size:11px;color:#ec4899;font-weight:800;letter-spacing:.05em;">30-40代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">出産・教育費</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">扶養控除と児童手当で家計はどう変わる？大学までの教育費は積立で備える戦略を試算。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_tumitate.html" style="text-decoration:none;background:#fdf2f8;color:#be185d;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">📈 積立投資</a>
-            <span style="background:#f9fafb;color:#6b7280;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;">🎓 教育費 (準備中)</span>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #059669;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">🏡</span>
-            <div>
-              <div style="font-size:11px;color:#059669;font-weight:800;letter-spacing:.05em;">30-50代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">マイホーム購入</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">頭金 vs 投資、ローン控除と住宅ローン金利上昇影響、賃貸との生涯コスト比較を未来思考で。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_juminzei.html" style="text-decoration:none;background:#ecfdf5;color:#047857;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🏠 住民税</a>
-            <span style="background:#f9fafb;color:#6b7280;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;">🏠 住宅購入 (準備中)</span>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #dc2626;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">🔥</span>
-            <div>
-              <div style="font-size:11px;color:#dc2626;font-weight:800;letter-spacing:.05em;">30-50代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">FIRE準備</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">何歳でいくらあれば「自由」が手に入る？目標生活費から逆算し、年数と必要資産を可視化。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_fire.html" style="text-decoration:none;background:#fef2f2;color:#b91c1c;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🔥 FIRE逆算</a>
-            <a href="./simulator_torikuzushi.html" style="text-decoration:none;background:#fef2f2;color:#b91c1c;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🏖️ 取り崩し</a>
-          </div>
-        </article>
-
-        <article style="background:white;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid #6366f1;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">🌅</span>
-            <div>
-              <div style="font-size:11px;color:#6366f1;font-weight:800;letter-spacing:.05em;">50-60代</div>
-              <h3 style="font-size:16px;font-weight:800;color:#111827;">リタイア・老後設計</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#374151;line-height:1.7;margin-bottom:12px;">退職金・年金・運用資産から何年暮らせる？4%ルールで安心の取り崩しシナリオを設計。</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a href="./simulator_torikuzushi.html" style="text-decoration:none;background:#eef2ff;color:#4338ca;padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;">🏖️ 取り崩し</a>
-            <span style="background:#f9fafb;color:#6b7280;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;">👴 老後資金 (準備中)</span>
-          </div>
-        </article>
-
-        <article style="background:linear-gradient(135deg, #1d4ed8, #3b82f6);color:white;border-radius:16px;padding:22px;box-shadow:0 6px 20px rgba(29,78,216,.3);border-top:4px solid #1e40af;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <span style="font-size:32px;" aria-hidden="true">✨</span>
-            <div>
-              <div style="font-size:11px;color:#bfdbfe;font-weight:800;letter-spacing:.05em;">いますぐ</div>
-              <h3 style="font-size:16px;font-weight:800;color:white;">未来は今日から変わる</h3>
-            </div>
-          </div>
-          <p style="font-size:12.5px;color:#dbeafe;line-height:1.7;margin-bottom:14px;">迷ったら積立投資から。月1万円・年利5%・20年で <strong style="color:white;font-size:14px;">約411万円</strong> に。複利の力を体感しよう。</p>
-          <a href="./simulator_tumitate.html" style="display:inline-block;text-decoration:none;background:white;color:#1d4ed8;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:800;">いますぐ試算する →</a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <section id="strengths" class="section unique" aria-labelledby="unique-heading">
-    <div class="container">
-      <div class="unique-head">
-        <p class="section-label">Why This Tool</p>
-        <h2 id="unique-heading" class="section-title">他にはない、3つの強み</h2>
-        <p class="section-desc">「将来の数字を出すだけ」では終わらせない。意思決定に使えるシミュレーターです。</p>
-      </div>
-      <div class="unique-grid">
-        <article class="unique-card">
-          <span class="unique-num" aria-hidden="true">01</span>
-          <div class="unique-ic" aria-hidden="true">📊</div>
-          <h3>4つの未来を、ひとつのグラフで見る</h3>
-          <p>年利・積立額・期間が違う最大4つのシナリオを、1枚のグラフに色分けで重ね描き。「もし年利が2%違ったら？」を一目で比較でき、ヘッドラインも比較サマリーで表示。条件選びの迷いがなくなります。</p>
-          <svg class="unique-mini" viewBox="0 0 320 90" role="img" aria-label="複数シナリオの比較グラフ例">
-            <rect width="320" height="90" rx="8" fill="#f8fbff"/>
-            <polyline points="12,78 90,60 170,40 250,22 308,12" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
-            <polyline points="12,80 90,68 170,54 250,40 308,30" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round"/>
-            <polyline points="12,82 90,74 170,66 250,56 308,48" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round"/>
-          </svg>
-        </article>
-        <article class="unique-card">
-          <span class="unique-num" aria-hidden="true">02</span>
-          <div class="unique-ic" aria-hidden="true">🧩</div>
-          <h3>NISA枠1,800万を、人生に合わせて使い切る</h3>
-          <p>「最初の5年は積立中心、その後は一括も追加」——投資フェーズ機能で期間ごとに月額積立・年間一括を自由に設計。年360万・生涯1,800万円の新NISA非課税枠も自動で管理し、最適な使い方を試算できます。</p>
-          <svg class="unique-mini" viewBox="0 0 320 90" role="img" aria-label="期間別の投資フェーズ例">
-            <rect width="320" height="90" rx="8" fill="#f8fbff"/>
-            <rect x="16" y="50" width="40" height="28" rx="3" fill="#1d4ed8" opacity="0.5"/>
-            <rect x="64" y="42" width="40" height="36" rx="3" fill="#1d4ed8" opacity="0.6"/>
-            <rect x="112" y="30" width="40" height="48" rx="3" fill="#1d4ed8" opacity="0.7"/>
-            <rect x="160" y="34" width="40" height="44" rx="3" fill="#059669" opacity="0.6"/>
-            <rect x="208" y="22" width="40" height="56" rx="3" fill="#059669" opacity="0.7"/>
-            <rect x="256" y="14" width="40" height="64" rx="3" fill="#059669" opacity="0.8"/>
-          </svg>
-        </article>
-        <article class="unique-card">
-          <span class="unique-num" aria-hidden="true">03</span>
-          <div class="unique-ic" aria-hidden="true">🎯</div>
-          <h3>「いつ仕事を辞められるか」が数値でわかる</h3>
-          <p>FIRE逆算機能なら、目標の生活費と想定運用利回りから、FIRE達成に必要な資産額と到達までの年数を逆算。漠然とした不安を、具体的な数字と達成年齢に変えて、出口戦略を描けます。</p>
-          <svg class="unique-mini" viewBox="0 0 320 90" role="img" aria-label="FIRE達成までの資産推移例">
-            <rect width="320" height="90" rx="8" fill="#f8fbff"/>
-            <line x1="12" y1="26" x2="308" y2="26" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
-            <text x="304" y="20" text-anchor="end" fill="#ef4444" font-size="10" font-weight="700" font-family="sans-serif">FIRE目標</text>
-            <polyline points="12,80 90,66 170,48 236,30 236,26" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="236" cy="26" r="5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
-          </svg>
-        </article>
-      </div>
-      <div class="unique-cta">
-        <a href="./simulator_tumitate.html" class="btn-nav" style="font-size:16px;padding:14px 32px;border-radius:14px;">3つの強みを試してみる →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 機能紹介 ─── -->
-  <section id="simulators" class="section features" aria-labelledby="features-heading">
-    <div class="container">
-      <div class="features-head">
-        <p class="section-label">Features</p>
-        <h2 id="features-heading" class="section-title">🎯 人気シミュレーター</h2>
-        <p class="section-desc">資産形成のすべてのフェーズに対応。状況に合わせてお使いください。</p>
-      </div>
-      <div class="features-grid">
-        <a class="feature-card" href="./simulator_tumitate.html" aria-label="積立投資シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">📅</span>
-          <div class="feature-name">積立投資シミュレーション</div>
-          <p class="feature-desc">毎月一定額を積み立てた場合の将来評価額を複利計算。月額・年利・運用年数・初期投資額を自由に設定。ドルコスト平均法による長期投資の効果を確認できます。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_ikkatsu.html" aria-label="一括投資シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">💰</span>
-          <div class="feature-name">一括投資シミュレーション</div>
-          <p class="feature-desc">まとまった資金を一括投資した場合の資産推移を年複利で計算。元本・年利・運用年数を設定して将来の評価額と運用益を試算できます。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_torikuzushi.html" aria-label="資産取り崩しシミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">🔥</span>
-          <div class="feature-name">資産取り崩しシミュレーション</div>
-          <p class="feature-desc">リタイア後の取り崩し計画を試算。4%ルールにも対応し、資産が何年持続するかをグラフで確認。取り崩し額は割合・金額どちらでも指定できます。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_nisa.html" aria-label="積立＆一括（新NISA対応）シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">🏦</span>
-          <div class="feature-name">積立＆一括（新NISA対応）</div>
-          <p class="feature-desc">積立と一括を期間ごとに自由に組み合わせ、新NISAの非課税枠を最大限活用するシミュレーション。年360万円・生涯1,800万円の枠を自動管理します。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_fire.html" aria-label="FIRE逆算シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">🎯</span>
-          <div class="feature-name">FIRE逆算シミュレーション</div>
-          <p class="feature-desc">目標の生活費と想定運用利回りから、FIRE（経済的自立・早期リタイア）達成に必要な資産額と到達までの期間・年齢を逆算。出口から逆算した計画づくりに役立ちます。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_shaho.html" aria-label="社会保険料シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">📊</span>
-          <div class="feature-name">社会保険料シミュレーション</div>
-          <p class="feature-desc">基本給・各種手当・4-6月の残業時間から標準報酬月額と社会保険料ランクを予測。残業がランク境界に届くかを可視化して、年間手取りを最大化する戦略立てを支援。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
-        </a>
-        <a class="feature-card" href="./simulator_juminzei.html" aria-label="住民税&ふるさと納税シミュレーションを開く">
-          <span class="feature-icon" aria-hidden="true">🏠</span>
-          <div class="feature-name">住民税&ふるさと納税シミュレーション</div>
-          <p class="feature-desc">年収・各種控除から翌年の住民税と、ふるさと納税の自己負担2,000円で済む寄付限度額を試算。配偶者控除・扶養・iDeCo・医療費控除など細かい条件にも対応。</p>
-          <span class="feature-cta" aria-hidden="true">このシミュレーターを開く →</span>
+  <!-- ─── ヒーロー (左テキスト+右イラスト 2分割grid) ─── -->
+  <section class="m-hero" aria-labelledby="m-hero-heading">
+    <div class="m-hero-grid">
+      <div class="m-hero-left">
+        <h1 id="m-hero-heading" class="m-hero-title">
+          未来は、<br>
+          <span class="m-hero-title-accent">デザイン<span class="m-hero-underline"></span>できる。</span>
+        </h1>
+        <p class="m-hero-en">Design your future.</p>
+        <p class="m-hero-sub">未来デザイン研究所は、20〜40代の若年層が、お金の知識を身につけ、自分らしい未来を設計するための情報プラットフォームです。</p>
+        <a href="#simulators" class="m-hero-cta">
+          <span>🔍</span> シミュレーターを使ってみる <span class="arr">→</span>
         </a>
       </div>
-      <div class="section-cta">
-        <a href="./simulator_tumitate.html" class="btn-nav" style="font-size:16px;padding:14px 32px;border-radius:14px;">7つの機能を無料で試す →</a>
+      <div class="m-hero-right" aria-hidden="true">
+        <!-- 都市スカイライン + 3人物 SVG -->
+        <svg viewBox="0 0 500 380" class="m-hero-svg">
+          <!-- 空のグラデ -->
+          <defs>
+            <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e0f2fe"/>
+              <stop offset="100%" stop-color="#bae6fd"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="380" fill="url(#skyG)" rx="20"/>
+          <!-- 雲 -->
+          <ellipse cx="80" cy="60" rx="44" ry="14" fill="#fff" opacity=".8"/>
+          <ellipse cx="100" cy="50" rx="32" ry="10" fill="#fff" opacity=".85"/>
+          <ellipse cx="380" cy="80" rx="50" ry="14" fill="#fff" opacity=".75"/>
+          <!-- 都市スカイライン -->
+          <g fill="#2D7FF9" opacity=".85">
+            <rect x="20" y="220" width="40" height="100"/>
+            <rect x="65" y="200" width="35" height="120"/>
+            <rect x="105" y="240" width="30" height="80"/>
+            <rect x="140" y="190" width="50" height="130"/>
+            <rect x="195" y="210" width="40" height="110"/>
+            <rect x="240" y="180" width="55" height="140"/>
+            <rect x="300" y="220" width="42" height="100"/>
+            <rect x="347" y="200" width="38" height="120"/>
+            <rect x="390" y="230" width="45" height="90"/>
+            <rect x="440" y="210" width="40" height="110"/>
+          </g>
+          <g fill="#2D7FF9" opacity=".7">
+            <rect x="25" y="240" width="6" height="80"/>
+            <rect x="40" y="240" width="6" height="80"/>
+            <rect x="75" y="220" width="6" height="100"/>
+            <rect x="150" y="210" width="6" height="110"/>
+            <rect x="165" y="210" width="6" height="110"/>
+            <rect x="252" y="200" width="6" height="120"/>
+            <rect x="268" y="200" width="6" height="120"/>
+            <rect x="358" y="220" width="6" height="100"/>
+            <rect x="450" y="230" width="6" height="90"/>
+          </g>
+          <!-- 地面 -->
+          <rect x="0" y="320" width="500" height="60" fill="#f0f9ff"/>
+          <!-- 3人物 後ろ姿 -->
+          <!-- 人物1 (中央) -->
+          <g transform="translate(230, 200)">
+            <ellipse cx="0" cy="0" rx="22" ry="26" fill="#2D7FF9"/> <!-- 髪 -->
+            <rect x="-25" y="20" width="50" height="80" rx="8" fill="#2D7FF9"/> <!-- 服 -->
+            <rect x="-22" y="100" width="18" height="22" fill="#1A1F36"/>
+            <rect x="4" y="100" width="18" height="22" fill="#1A1F36"/>
+          </g>
+          <!-- 人物2 (左) -->
+          <g transform="translate(170, 220)">
+            <ellipse cx="0" cy="0" rx="20" ry="24" fill="#92400e"/>
+            <rect x="-23" y="18" width="46" height="72" rx="8" fill="#FF6B9D"/>
+            <rect x="-20" y="90" width="16" height="20" fill="#1A1F36"/>
+            <rect x="4" y="90" width="16" height="20" fill="#1A1F36"/>
+          </g>
+          <!-- 人物3 (右) -->
+          <g transform="translate(290, 220)">
+            <ellipse cx="0" cy="0" rx="20" ry="24" fill="#1A1F36"/>
+            <rect x="-23" y="18" width="46" height="72" rx="8" fill="#fbbf24"/>
+            <rect x="-20" y="90" width="16" height="20" fill="#1A1F36"/>
+            <rect x="4" y="90" width="16" height="20" fill="#1A1F36"/>
+          </g>
+          <!-- 吹き出し -->
+          <g transform="translate(360, 100)">
+            <path d="M 0,0 L 130,0 Q 140,0 140,10 L 140,50 Q 140,60 130,60 L 30,60 L 15,75 L 20,60 L 10,60 Q 0,60 0,50 Z" fill="#fff" stroke="#FF6B9D" stroke-width="2"/>
+            <text x="70" y="25" text-anchor="middle" fill="#1A1F36" font-size="11" font-weight="700">あなたの未来は</text>
+            <text x="70" y="45" text-anchor="middle" fill="#FF6B9D" font-size="14" font-weight="800">いくらになる？</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <!-- ピンク薄帯 -->
+    <div class="m-hero-band" aria-hidden="true"></div>
+  </section>
+
+  <!-- ─── 人気シミュレーター (5カード横並び パステル多色) ─── -->
+  <section id="simulators" class="m-section" aria-labelledby="m-pop-heading">
+    <div class="m-container">
+      <h2 id="m-pop-heading" class="m-section-title">
+        <span class="m-section-emoji">⭐</span> 人気のシミュレーター
+      </h2>
+      <div class="m-sim-grid">
+        <a href="./simulator_nisa.html" class="m-sim-card" style="background:#FFF3D1;">
+          <div class="m-sim-icon" style="background:#FFC857;">🌳</div>
+          <div class="m-sim-name">NISAシミュレーター</div>
+          <p class="m-sim-desc">新NISA非課税枠を最大活用</p>
+        </a>
+        <a href="./simulator_fire.html" class="m-sim-card" style="background:#EAF4FF;">
+          <div class="m-sim-icon" style="background:#FF8A65;">🌴</div>
+          <div class="m-sim-name">FIRE逆算シミュレーター</div>
+          <p class="m-sim-desc">自由までの年数を逆算</p>
+        </a>
+        <a href="./simulator_shaho.html" class="m-sim-card" style="background:#D4F5EB;">
+          <div class="m-sim-icon" style="background:#27B99A;">📊</div>
+          <div class="m-sim-name">社会保険料シミュレーター</div>
+          <p class="m-sim-desc">4-6月の残業ランクを予測</p>
+        </a>
+        <a href="./simulator_juminzei.html" class="m-sim-card" style="background:#FFE2EC;">
+          <div class="m-sim-icon" style="background:#FF6B9D;">🏠</div>
+          <div class="m-sim-name">住民税&ふるさと納税</div>
+          <p class="m-sim-desc">翌年の税金と寄付限度額</p>
+        </a>
+        <a href="./simulator_tumitate.html" class="m-sim-card" style="background:#E3E5FE;">
+          <div class="m-sim-icon" style="background:#7A7FF0;">📈</div>
+          <div class="m-sim-name">積立投資シミュレーター</div>
+          <p class="m-sim-desc">複利で20年後の資産を試算</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ─── 複利運用とは ─── -->
-  <section id="compound" class="section compound" aria-labelledby="compound-heading">
-    <div class="container">
-      <div class="compound-inner">
-        <div>
-          <p class="section-label">Compound Interest</p>
-          <h2 id="compound-heading" class="section-title">複利運用の力を<br>グラフで実感</h2>
-          <p style="color:var(--text2);line-height:1.9;margin:16px 0 14px;">
-            <strong>複利</strong>とは、運用で得た利益を再び投資に回すことで、資産が雪だるま式に増えていく仕組みです。単純な利息計算（単利）と異なり、時間が経つほどその効果は大きくなります。
-          </p>
-          <p style="color:var(--text2);line-height:1.9;margin-bottom:14px;">
-            例えば毎月3万円を<strong>年利5%で20年</strong>積み立てると、投資元本720万円に対して将来の評価額は<strong style="color:var(--accent);">約1,237万円</strong>になります。単利なら857万円ほどですが、複利効果により約380万円も多く資産が増えます。
-          </p>
-          <p style="color:var(--text2);line-height:1.9;margin-bottom:28px;">
-            新NISAを活用すれば、この複利運用益が<strong>非課税</strong>になります。長期・積立・分散投資との相性は抜群です。
-          </p>
-          <a href="./simulator_tumitate.html" class="btn-nav" style="display:inline-block;padding:12px 24px;font-size:15px;">複利をシミュレーションする →</a>
-        </div>
-        <div class="compound-chart-wrap" aria-label="複利効果のグラフ（毎月3万円・年利5%・20年の場合）">
-          <p class="compound-chart-label">毎月3万円 × 年利5% × 20年間の場合</p>
-          <svg viewBox="0 0 400 230" width="400" height="230">
-            <rect width="400" height="230" fill="white" rx="8"/>
-            <!-- グリッド横線 -->
-            <line x1="54" y1="20" x2="54" y2="185" stroke="#e2e8f0" stroke-width="1"/>
-            <line x1="54" y1="185" x2="392" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="54" y1="140" x2="392" y2="140" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4 3"/>
-            <line x1="54" y1="97" x2="392" y2="97" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4 3"/>
-            <line x1="54" y1="54" x2="392" y2="54" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4 3"/>
-            <!-- Y軸ラベル -->
-            <text x="48" y="189" text-anchor="end" fill="#9ca3af" font-size="10" font-family="sans-serif">0</text>
-            <text x="48" y="144" text-anchor="end" fill="#9ca3af" font-size="10" font-family="sans-serif">500万</text>
-            <text x="48" y="101" text-anchor="end" fill="#9ca3af" font-size="10" font-family="sans-serif">1,000万</text>
-            <text x="48" y="58" text-anchor="end" fill="#9ca3af" font-size="10" font-family="sans-serif">1,500万</text>
-            <!-- X軸ラベル -->
-            <text x="54" y="200" text-anchor="middle" fill="#9ca3af" font-size="10" font-family="sans-serif">0年</text>
-            <text x="223" y="200" text-anchor="middle" fill="#9ca3af" font-size="10" font-family="sans-serif">10年</text>
-            <text x="392" y="200" text-anchor="middle" fill="#9ca3af" font-size="10" font-family="sans-serif">20年</text>
-            <!-- 元本エリア（塗り） -->
-            <polygon points="54,185 223,140 392,113 392,185 54,185" fill="#059669" opacity="0.12"/>
-            <!-- 元本ライン -->
-            <polyline points="54,185 223,140 392,113" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round"/>
-            <!-- 評価額エリア（塗り） -->
-            <polygon points="54,185 223,130 392,71 392,185 54,185" fill="#1d4ed8" opacity="0.10"/>
-            <!-- 評価額ライン -->
-            <polyline points="54,185 223,130 392,71" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- 端点 -->
-            <circle cx="392" cy="113" r="4.5" fill="#059669" stroke="white" stroke-width="1.5"/>
-            <circle cx="392" cy="71" r="4.5" fill="#1d4ed8" stroke="white" stroke-width="1.5"/>
-            <!-- 端ラベル -->
-            <text x="389" y="109" text-anchor="end" fill="#059669" font-size="11" font-weight="bold" font-family="sans-serif">元本 720万</text>
-            <text x="389" y="66" text-anchor="end" fill="#1d4ed8" font-size="11" font-weight="bold" font-family="sans-serif">評価額 1,237万</text>
-            <!-- 複利効果ラベル -->
-            <line x1="370" y1="113" x2="370" y2="71" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
-            <text x="358" y="94" text-anchor="end" fill="#d97706" font-size="10" font-weight="bold" font-family="sans-serif">+517万</text>
-            <text x="358" y="105" text-anchor="end" fill="#d97706" font-size="10" font-family="sans-serif">(複利効果)</text>
-            <!-- 凡例 -->
-            <circle cx="62" cy="215" r="4" fill="#1d4ed8"/>
-            <text x="70" y="219" fill="#374151" font-size="11" font-family="sans-serif">評価額（複利）</text>
-            <circle cx="162" cy="215" r="4" fill="#059669"/>
-            <text x="170" y="219" fill="#374151" font-size="11" font-family="sans-serif">投資元本</text>
-          </svg>
-          <p class="compound-chart-note">※税金・手数料は考慮していません。将来の運用成果を保証するものではありません。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 新NISAとは ─── -->
-  <section id="nisa-section" class="section nisa" aria-labelledby="nisa-heading">
-    <div class="container">
-      <div class="nisa-inner">
-        <div>
-          <p class="section-label">New NISA 2024</p>
-          <h2 id="nisa-heading" class="section-title">新NISA制度に<br>完全対応</h2>
-          <p style="color:var(--text2);line-height:1.9;margin:16px 0 14px;">
-            2024年にスタートした<strong>新NISA</strong>は、年間最大360万円・生涯1,800万円まで投資できる非課税制度です。旧NISAと異なり非課税期間が無期限になり、売却後は翌年に枠が復活するなど大幅に拡充されました。
-          </p>
-          <p style="color:var(--text2);line-height:1.9;margin-bottom:28px;">
-            本シミュレーターでは、<strong>積立投資枠（月最大10万円）</strong>と<strong>成長投資枠（年最大240万円）</strong>を組み合わせた本格シミュレーションに対応。NISA枠の使用率も自動計算します。
-          </p>
-          <a href="./simulator_nisa.html" class="btn-nav" style="display:inline-block;padding:12px 24px;font-size:15px;">新NISAをシミュレーションする →</a>
-        </div>
-        <div class="nisa-cards">
-          <div class="nisa-card">
-            <span class="nisa-card-icon" aria-hidden="true">💎</span>
-            <div>
-              <div class="nisa-card-title">生涯投資枠</div>
-              <div class="nisa-card-val">1,800万円</div>
-              <div class="nisa-card-desc">一生涯で非課税投資できる上限（成長投資枠は1,200万円まで）</div>
-            </div>
+  <!-- ─── 下段 4カード (資産形成ガイド/最新記事/制度改正/将来追加) ─── -->
+  <section class="m-section" style="background:#f9fafb;">
+    <div class="m-container">
+      <div class="m-card4-grid">
+        <article id="guide" class="m-card4">
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #fef3c7, #fde68a);">
+            <span style="font-size:54px;">📚</span>
           </div>
-          <div class="nisa-card">
-            <span class="nisa-card-icon" aria-hidden="true">📆</span>
-            <div>
-              <div class="nisa-card-title">年間投資上限</div>
-              <div class="nisa-card-val">360万円</div>
-              <div class="nisa-card-desc">積立投資枠120万＋成長投資枠240万（最速5年で枠を使い切れる）</div>
-            </div>
+          <div class="m-card4-body">
+            <h3 class="m-card4-title">資産形成ガイド</h3>
+            <p class="m-card4-desc">「複利」「インデックス投資」など基礎用語を初心者にやさしく解説。</p>
+            <a href="#learn-guide" class="m-card4-link">記事を読む →</a>
           </div>
-          <div class="nisa-card">
-            <span class="nisa-card-icon" aria-hidden="true">♾️</span>
-            <div>
-              <div class="nisa-card-title">非課税保有期間</div>
-              <div class="nisa-card-val">無期限</div>
-              <div class="nisa-card-desc">運用益・配当金がずっと非課税。保有し続けるほど有利に</div>
-            </div>
+        </article>
+        <article id="news" class="m-card4">
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #ffedd5, #fed7aa);">
+            <span style="font-size:54px;">🌅</span>
           </div>
-          <div class="nisa-card">
-            <span class="nisa-card-icon" aria-hidden="true">🔄</span>
-            <div>
-              <div class="nisa-card-title">非課税枠の再利用</div>
-              <div class="nisa-card-val">翌年に復活</div>
-              <div class="nisa-card-desc">売却した翌年、その分の枠が生涯枠の範囲内で復活</div>
-            </div>
+          <div class="m-card4-body">
+            <h3 class="m-card4-title">最新記事</h3>
+            <p class="m-card4-desc">お金・人生設計に役立つ最新トピックを定期更新。<br><span style="color:#9ca3af;font-size:11.5px;">※ 準備中</span></p>
+            <a href="#" class="m-card4-link">記事一覧 →</a>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 使い方 ─── -->
-  <section id="howto" class="section howto" aria-labelledby="howto-heading">
-    <div class="container">
-      <div class="howto-head">
-        <p class="section-label">How To Use</p>
-        <h2 id="howto-heading" class="section-title">4ステップで使える</h2>
-        <p class="section-desc">難しい操作はありません。設定したらすぐに結果が表示されます。</p>
-      </div>
-      <div class="steps" role="list">
-        <div class="step" role="listitem">
-          <div class="step-num" aria-label="ステップ1">1</div>
-          <div class="step-title">種別を選ぶ</div>
-          <p class="step-desc">上部タブから「積立投資」「一括投資」「資産取り崩し」「積立＆一括（新NISA対応）」「FIRE逆算」の中から目的に合ったものを選択。</p>
-        </div>
-        <div class="step" role="listitem">
-          <div class="step-num" aria-label="ステップ2">2</div>
-          <div class="step-title">条件を入力する</div>
-          <p class="step-desc">月額・年利・運用年数などをスライダーや入力欄で設定。±ボタンで細かく調整できます。</p>
-        </div>
-        <div class="step" role="listitem">
-          <div class="step-num" aria-label="ステップ3">3</div>
-          <div class="step-title">グラフと数値で確認</div>
-          <p class="step-desc">将来の評価額・投資元本・運用益がグラフと数値で即時表示。グラフをホバーすると詳細が確認できます。</p>
-        </div>
-        <div class="step" role="listitem">
-          <div class="step-num" aria-label="ステップ4">4</div>
-          <div class="step-title">シナリオを比較する</div>
-          <p class="step-desc">「シナリオ比較」機能で最大4つの条件を同時表示。最適な投資プランを見つけるのに役立ちます。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 用語解説（FIRE / 4%ルール / 一括 vs 積立） ─── -->
-  <section id="glossary" class="section glossary" aria-labelledby="glossary-heading">
-    <div class="container">
-      <div class="glossary-head">
-        <p class="section-label">Key Terms</p>
-        <h2 id="glossary-heading" class="section-title">投資の基礎用語をやさしく解説</h2>
-        <p class="section-desc">シミュレーターをより活用できるよう、押さえておきたい考え方をまとめました。</p>
-      </div>
-      <div class="glossary-grid">
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">🔥</span>FIREとは</h3>
-          <p>FIRE（Financial Independence, Retire Early）は、資産運用による収入で生活費をまかない、経済的自立と早期リタイアを目指すライフスタイルです。一般的には<strong>年間生活費の25倍</strong>の資産を築くことが一つの目安とされます。例えば年間生活費が300万円なら、目標資産は7,500万円です。本シミュレーターの「FIRE逆算」では、毎月の積立額・想定年利から、何年で目標資産に到達できるかを試算できます。完全リタイアだけでなく、生活費の一部を資産収入でまかなう「サイドFIRE」の検討にも役立ちます。</p>
         </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">📉</span>4%ルールとは</h3>
-          <p>4%ルールは、退職時の資産の<strong>年4%程度を取り崩しても、長期間にわたり資産が維持されやすい</strong>という、米国の過去データにもとづく経験則です。裏を返せば、年間生活費の25倍の資産があれば取り崩しで暮らせるという目安になります。ただし将来のリターンを保証するものではなく、相場下落の時期やインフレ率によって安全な取り崩し率は変動します。保守的に運用する場合は3〜4%で計画する人が多く、本ツールの「資産取り崩し」タブで残高推移を確認できます。</p>
+        <article id="policy" class="m-card4">
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #dbeafe, #bfdbfe);">
+            <span style="font-size:54px;">🏛️</span>
+          </div>
+          <div class="m-card4-body">
+            <h3 class="m-card4-title">制度改正・ニュース解説</h3>
+            <p class="m-card4-desc">新NISA・iDeCo・税制改正など、あなたへの影響を解説。<br><span style="color:#9ca3af;font-size:11.5px;">※ 準備中</span></p>
+            <a href="#" class="m-card4-link">最新解説 →</a>
+          </div>
         </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">⚖️</span>一括投資と積立投資の違い</h3>
-          <p>一括投資はまとまった資金を一度に投じる方法で、運用期間を最大限に活かせる一方、投資直後の下落の影響を受けやすい特徴があります。積立投資は毎月一定額を投じる方法で、購入価格が平準化される<strong>ドルコスト平均法</strong>により高値づかみのリスクを抑えられます。どちらが有利かは相場と手元資金次第です。本シミュレーターの「積立投資」「一括投資」タブで両者を試算し、シナリオ比較機能で同じ条件のもとに並べて検討できます。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">🛡️</span>リスク分散と長期投資</h3>
-          <p>投資のリスクは「長期・積立・分散」で抑えるのが基本です。投資対象を複数地域・資産に分散し、購入時期を分け、保有期間を長く取ることで価格変動の影響が平準化されます。新NISAは非課税で長期保有しやすく、この3つの原則と非常に相性が良い制度です。本ツールで運用年数や年利を変えながら試算すると、時間を味方につけることの効果を視覚的に理解できます。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">📅</span>ドルコスト平均法</h3>
-          <p>毎月一定額を継続購入することで、価格が高いときは少なく、安いときは多く買えるため、平均購入単価が下がりやすくなる手法です。一括投資と異なり高値掴みのリスクを抑えられ、相場の上下に一喜一憂せず継続できるのが利点です。新NISA積立投資はこのドルコスト平均法を自然に実践できる仕組みです。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">📊</span>インデックス投資</h3>
-          <p>S&P500や全世界株式（オルカン）など、市場全体の指数（インデックス）に連動するファンドに投資する方法です。個別銘柄を選ぶ必要がなく、信託報酬が低く、長期的には市場平均並みのリターンが期待できます。投資初心者・忙しい人に広く選ばれており、本シミュレーターの想定年利3〜7%もインデックス投資を念頭にした数字です。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">⚖️</span>リバランス</h3>
-          <p>運用を続けると資産配分が当初比率からずれていきます。例えば株：債券=50:50で始めても、株価上昇で60:40に偏ることがあります。これを定期的に元の配分に戻す作業がリバランスです。年1回程度の頻度が一般的で、リスク水準を維持しつつ「高くなった資産を売り、安くなった資産を買う」効果も生まれます。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">📦</span>ETF（上場投資信託）</h3>
-          <p>株式と同じく証券取引所に上場している投資信託です。S&P500連動・全世界株式連動などのインデックス型ETFは信託報酬が0.05〜0.2%程度と低く、リアルタイムで売買できます。投資信託より信託報酬が安いケースが多く、新NISA成長投資枠でも購入可能です。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">🏦</span>投資信託</h3>
-          <p>投資家から集めた資金をプロが運用し、その成果を分配する金融商品です。1本で数十〜数百銘柄に分散投資できます。新NISAでは「つみたて投資枠」対象の投資信託は金融庁の基準を満たした低コスト・長期運用向けの商品に限定されており、初心者でも選びやすい仕組みになっています。</p>
-        </article>
-        <article class="gloss-card">
-          <h3><span class="ic" aria-hidden="true">🌱</span>新NISA 成長投資枠</h3>
-          <p>新NISAの2つの枠のうち、年間最大240万円・生涯1,200万円まで投資できる枠です。つみたて枠よりも対象商品が広く、ETF・個別株・REITも購入可能。積立枠（年120万・生涯1,800万 - 成長枠分）と組み合わせると年360万円・生涯1,800万円まで非課税運用ができます。</p>
+        <article class="m-card4">
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #dcfce7, #bbf7d0);">
+            <span style="font-size:54px;">🚀</span>
+          </div>
+          <div class="m-card4-body">
+            <h3 class="m-card4-title">将来追加予定のコンテンツ</h3>
+            <ul class="m-card4-list">
+              <li>💰 年収手取りシミュレーター</li>
+              <li>👴 老後資金シミュレーター</li>
+              <li>🎓 教育費シミュレーター</li>
+              <li>🏠 住宅購入シミュレーター</li>
+            </ul>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ─── FAQ ─── -->
-  <section id="faq" class="section faq" aria-labelledby="faq-heading">
-    <div class="container">
-      <div class="faq-head">
-        <p class="section-label">FAQ</p>
-        <h2 id="faq-heading" class="section-title">よくある質問</h2>
-        <p class="section-desc">投資初心者の方からよく寄せられる質問にお答えします。</p>
-      </div>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>年利は何%で設定するのが一般的ですか？</summary>
-          <div class="faq-a">S&amp;P500や全世界株式などのインデックス投資では、過去の実績として年平均7〜10%程度のリターンが知られています。ただし将来のリターンは保証されないため、長期の資産計画では3〜7%程度で保守的に見積もる人が多いです。低めに想定するほど計画の安全性が高まります。本シミュレーターでは年利を自由に変えて複数のシナリオを比較できます。</div>
-        </details>
-        <details class="faq-item">
-          <summary>新NISAはどんな制度ですか？</summary>
-          <div class="faq-a">新NISAは2024年に始まった少額投資非課税制度です。年間最大360万円（つみたて投資枠120万円＋成長投資枠240万円）、生涯で1,800万円まで投資でき、運用益や配当が<strong>非課税</strong>になります。非課税保有期間は無期限で、売却した分の非課税枠は翌年に復活します。本ツールの「新NISA」タブでは、これらの枠を考慮した本格的な試算ができます。</div>
-        </details>
-        <details class="faq-item">
-          <summary>FIRE（早期リタイア）とは何ですか？</summary>
-          <div class="faq-a">FIREは経済的自立と早期リタイアを目指す考え方で、一般に年間生活費の25倍の資産形成が目安とされます。その資産を年4%程度ずつ取り崩して生活するのが基本的な戦略です。「FIRE逆算」タブで、毎月の積立額と想定年利から達成までの年数をシミュレーションできます。</div>
-        </details>
-        <details class="faq-item">
-          <summary>4%ルールは安全ですか？</summary>
-          <div class="faq-a">4%ルールは長期的に資産が維持されやすいという経験則ですが、万能ではありません。運用利回り・インフレ率・相場下落のタイミングによって安全な取り崩し率は変わります。保守的には3〜4%で計画する人が多く、「資産取り崩し」タブで取り崩し率を変えながら資産寿命を確認することをおすすめします。</div>
-        </details>
-        <details class="faq-item">
-          <summary>長期投資のメリットは何ですか？</summary>
-          <div class="faq-a">最大のメリットは<strong>複利効果</strong>です。運用益を再投資し続けることで資産が雪だるま式に増えます。さらに保有期間が長いほど価格変動の影響が平準化され、毎月一定額を積み立てる時間分散と組み合わせることでリスクを抑えやすくなります。新NISAの非課税メリットと長期投資は特に相性が良い組み合わせです。</div>
-        </details>
-        <details class="faq-item">
-          <summary>このシミュレーターは無料ですか？登録は必要ですか？</summary>
-          <div class="faq-a">完全無料で、会員登録やアプリのインストールは不要です。入力したデータはお使いのブラウザ内だけで処理され、サーバーに保存・送信されることはありません。スマートフォン・PCどちらでもそのままご利用いただけます。</div>
-        </details>
-        <details class="faq-item">
-          <summary>iDeCoと新NISAはどちらを優先すべきですか？</summary>
-          <div class="faq-a">一般的には「新NISA優先」が多く選ばれます。新NISAはいつでも引き出せる自由度があり、非課税保有期間も無期限です。iDeCoは掛金が所得控除になる節税メリットがある一方、原則60歳まで引き出せません。まずは<a href="./simulator_nisa.html">新NISA（積立＆一括）シミュレーター</a>で目標額を把握し、余裕があればiDeCoも組み合わせる方法が広く推奨されています。</div>
-        </details>
-        <details class="faq-item">
-          <summary>インフレはシミュレーション結果に影響しますか？</summary>
-          <div class="faq-a">本ツールの試算は名目値（インフレ調整前）で表示されます。インフレが年2%続くと仮定すると、20年後の購買力は現在の約67%になります。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>や<a href="./simulator_ikkatsu.html">一括投資シミュレーター</a>では、インフレ率を設定して実質評価額も確認できます。実質的な資産価値を把握したい場合は、想定年利からインフレ率（例：2%）を引いた<strong>実質利回り</strong>で設定すると保守的な試算が可能です。</div>
-        </details>
-        <details class="faq-item">
-          <summary>投資はいつから始めるのが良いですか？</summary>
-          <div class="faq-a">複利効果の観点では「できるだけ早く始める」が鉄則です。例えば月3万円を年利5%で積み立てると、20年間で約1,237万円ですが、30年間では約2,497万円と2倍以上になります。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>で<strong>運用年数を変えて比較</strong>すると、開始を10年遅らせると資産形成に大きな差が生まれることが一目でわかります。</div>
-        </details>
-        <details class="faq-item">
-          <summary>毎月いくらから積立投資を始めれば良いですか？</summary>
-          <div class="faq-a">月1,000円など少額からでも始められます。重要なのは「継続」です。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>では月額をスライダーで自由に動かして将来の試算額を確認できます。まず現実的な金額でシミュレーションし、生活費の見直しで積立額を少しずつ増やしていく方法が長続きしやすいとされています。</div>
-        </details>
-        <details class="faq-item">
-          <summary>4-6月の残業を減らすと本当に手取りが増えますか？</summary>
-          <div class="faq-a">はい、標準報酬月額は4・5・6月の支給額平均で決まり、その年9月から翌年8月までの社会保険料に反映されます。1ランク上がると毎月数千円〜1万円以上の保険料アップになるため、年間で数万〜10万円以上の手取りに差が出るケースもあります。<a href="./simulator_shaho.html">社会保険料シミュレーター</a>で残業時間別のランク変動と保険料差を可視化できます。</div>
-        </details>
-        <details class="faq-item">
-          <summary>ふるさと納税の限度額はどう計算しますか？</summary>
-          <div class="faq-a">ふるさと納税の「自己負担2,000円で済む限度額」は、住民税の所得割額の約20%＋2,000円が目安です。正確には課税所得階層・所得税率により異なります。<a href="./simulator_juminzei.html">住民税&ふるさと納税シミュレーター</a>に年収・社会保険料・各種控除を入力すると、限度額を自動計算します。年末ぎりぎりの寄付では支払日が翌年にずれる場合があるので、12月20日頃までに完了させるのが安全です。</div>
-        </details>
-        <details class="faq-item">
-          <summary>iDeCo・ふるさと納税・新NISAを併用するメリットは？</summary>
-          <div class="faq-a">3つの制度はそれぞれ目的・効果が異なり、併用で節税・資産形成・地域貢献を最大化できます。<strong>iDeCo</strong>は掛金全額が所得控除（住民税&所得税の節税）、<strong>ふるさと納税</strong>は実質2,000円で返礼品取得、<strong>新NISA</strong>は運用益が非課税です。年収500万円なら年間で iDeCo 27.6万 + ふるさと納税 6万 + 新NISA 月10万 程度の併用がよく選ばれます。本サイトの<a href="./simulator_juminzei.html">住民税シミュレーター</a>でiDeCo導入時の節税効果を試算可能。</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 最終CTA ─── -->
-  <section class="cta-final" aria-labelledby="cta-heading">
-    <div class="container">
-      <h2 id="cta-heading">今すぐシミュレーションを始めよう</h2>
-      <p>登録不要・完全無料。あなたの将来の資産を今すぐ試算しましょう。</p>
-      <a href="./simulator_tumitate.html" class="btn-cta">シミュレーターを使う（無料）→</a>
-    </div>
-  </section>
-
-  <!-- ─── 運営者情報・免責（E-E-A-T） ─── -->
-  <section id="eeat" class="section eeat" aria-labelledby="eeat-heading">
-    <div class="container">
-      <article class="eeat-card">
-        <h2 id="eeat-heading">運営者情報と免責事項</h2>
-        <p>本サイト「新NISAシミュレーター」は、新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算を無料で試算できるツールを提供する個人運営の情報サイトです。運営者（shakewakame）は、金融・資産形成に関する情報を、初心者の方にも分かりやすく届けることを目的に本ツールを開発・公開しています。</p>
-
-        <h3>免責事項</h3>
-        <p>本ツールが表示する結果は、入力された条件にもとづく数学的な試算であり、将来の運用成果・利回り・FIRE達成時期を保証するものではありません。実際の投資は手数料・税金・物価変動・為替・市場環境などの影響を受け、元本割れの可能性があります。本サイトは情報提供のみを目的としており、特定の金融商品の購入・売却を推奨・勧誘するものではありません。最終的な投資判断はご自身の責任で行ってください。</p>
-
-        <h3>データの取り扱い</h3>
-        <p>入力された数値はお使いのブラウザ内でのみ計算に使用され、サーバーへ送信・保存されることはありません。会員登録やアプリのインストールは不要です。</p>
-
-        <p class="eeat-meta">最終更新日：<time datetime="2026-05-29">2026年5月29日</time>　／　運営者：<address style="display:inline;font-style:normal;">未来デザイン研究所 (Mirai Design Lab) — shakewakame</address></p>
-      </article>
-    </div>
-  </section>
-
-
-  <!-- ─── 将来追加予定コンテンツ ─── -->
-  <section id="roadmap" class="section" aria-labelledby="roadmap-heading" style="background:linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 56px 0;">
-    <div class="container">
-      <div class="features-head">
-        <p class="section-label" style="color:#0369a1;">Roadmap</p>
-        <h2 id="roadmap-heading" class="section-title">🚀 これから追加予定のコンテンツ</h2>
-        <p class="section-desc">未来デザイン研究所は継続的に成長します。あなたの未来設計をもっと豊かに支える機能を準備中。</p>
-      </div>
-      <div class="features-grid" style="max-width:1100px;margin:32px auto 0;">
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">💰</span>
-          <div class="feature-name">年収手取りシミュレーター</div>
-          <p class="feature-desc">基本給+ボーナス+手当から、社会保険料・税金を差し引いた手取り額をリアルタイム試算。年収アップ時のインパクトも可視化。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">👴</span>
-          <div class="feature-name">老後資金シミュレーター</div>
-          <p class="feature-desc">年金見込額・退職金・資産運用を統合し、65歳時点で必要な資金と現在の準備状況のギャップを可視化。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">🎓</span>
-          <div class="feature-name">教育費シミュレーター</div>
-          <p class="feature-desc">幼稚園〜大学までの教育費(公立/私立/理系/文系)を子の人数別に試算。学資保険・つみたてNISA活用案も提示。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">🏠</span>
-          <div class="feature-name">住宅購入シミュレーター</div>
-          <p class="feature-desc">物件価格・頭金・金利・返済年数から月々返済額と総支払額を試算。賃貸 vs 購入の生涯コスト比較も可能。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">📊</span>
-          <div class="feature-name">ライフプランダッシュボード</div>
-          <p class="feature-desc">全シミュレーターの結果を統合した「人生設計ダッシュボード」。結婚・出産・住宅・退職などイベント毎の資金計画を一元管理。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
-        <article class="feature-card" style="opacity:.92;cursor:default;">
-          <span class="feature-icon" aria-hidden="true">📰</span>
-          <div class="feature-name">制度改正ニュース解説</div>
-          <p class="feature-desc">NISA拡充・iDeCo改正・税制改正など、あなたの生活にどう影響するかを分かりやすく解説する記事コーナー。</p>
-          <span class="feature-cta" style="color:#0369a1;">準備中</span>
-        </article>
+  <!-- ─── 信頼性アイコン列 (6個) ─── -->
+  <section class="m-section" style="padding:32px 0;">
+    <div class="m-container">
+      <div class="m-trust-row">
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#2D7FF9;">🛡️</div><div class="m-trust-label">完全無料</div></div>
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#FF6B9D;">📱</div><div class="m-trust-label">スマホ対応</div></div>
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#27B99A;">🔒</div><div class="m-trust-label">登録不要</div></div>
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#f59e0b;">📊</div><div class="m-trust-label">7+ ツール</div></div>
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#8b5cf6;">💡</div><div class="m-trust-label">初心者解説</div></div>
+        <div class="m-trust-item"><div class="m-trust-icon" style="color:#2D7FF9;">⚡</div><div class="m-trust-label">即試算</div></div>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ─── フッター ─── -->
-<footer class="footer" role="contentinfo">
-  <p><strong>新NISAシミュレーター</strong>｜積立・一括・取り崩し・新NISAを無料で試算</p>
-  <p>© 2024-2026 shakewakame. All Rights Reserved.</p>
-  <p class="footer-disclaimer">本ツールは情報提供目的のみであり、特定の金融商品の購入・売却を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、将来の投資成果を保証するものではありません。投資は元本割れのリスクを伴います。</p>
+<footer class="m-footer">
+  <div class="m-container" style="text-align:center;">
+    <p style="font-size:13px;color:#6B7280;">© 2026 未来デザイン研究所 (Mirai Design Lab) — <a href="./simulator_tumitate.html" style="color:#2D7FF9;text-decoration:none;">シミュレーター一覧</a> · <span style="color:#9ca3af;">運営者: shakewakame</span></p>
+    <p style="font-size:11px;color:#9ca3af;margin-top:6px;">本サイトは情報提供を目的とし、特定金融商品の購入・売却を推奨するものではありません。</p>
+  </div>
 </footer>
 
 </body>
