@@ -1423,7 +1423,7 @@
       const mx = px(opts.limitYear);
       const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
       limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
-        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-115" y="-22" width="230" height="32" rx="11" fill="#ef4444"/><text x="0" y="4" text-anchor="middle" fill="#fff" font-size="22" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
     }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>
@@ -2024,7 +2024,7 @@
       const mx = pxFn(_lim);
       const lx = Math.min(Math.max(mx, pad.l + 80), W - pad.r - 80);
       limitMarker = `<line x1="${mx.toFixed(1)}" y1="${pad.t}" x2="${mx.toFixed(1)}" y2="${H-pad.b}" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 4"/>
-        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-82" y="-14" width="164" height="18" rx="9" fill="#ef4444"/><text x="0" y="-1" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
+        <g transform="translate(${lx.toFixed(1)},${(pad.t-7).toFixed(1)})"><rect x="-115" y="-22" width="230" height="32" rx="11" fill="#ef4444"/><text x="0" y="4" text-anchor="middle" fill="#fff" font-size="22" font-weight="700" font-family="sans-serif">非課税枠1800万円 到達</text></g>`;
     }
     svg.innerHTML = `
       <rect width="${W}" height="${H}" rx="12" fill="white"/>

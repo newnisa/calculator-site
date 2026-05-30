@@ -466,11 +466,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="income" type="number" min="0" max="30000000" step="100000" value="5000000">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="income" type="number" min="0" max="3000" step="10" value="500"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="income-r" min="1000000" max="20000000" step="100000" value="5000000">
-              <div class="range-labels"><span>100万円</span><span>2000万円</span></div>
+              <input type="range" id="income-r" min="100" max="2000" step="10" value="500">
+              <div class="range-labels"><span>100</span><span>2000</span></div>
             </div>
           </label>
 
@@ -480,11 +479,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="social" type="number" min="0" max="5000000" step="10000" value="750000">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="social" type="number" min="0" max="500" step="1" value="75"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="social-r" min="0" max="3000000" step="10000" value="750000">
-              <div class="range-labels"><span>0円</span><span>300万円</span></div>
+              <input type="range" id="social-r" min="0" max="300" step="1" value="75">
+              <div class="range-labels"><span>0</span><span>300</span></div>
             </div>
           </label>
 
@@ -519,11 +517,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="lifeins" type="number" min="0" max="500000" step="10000" value="80000">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="lifeins" type="number" min="0" max="50" step="0.5" value="8"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="lifeins-r" min="0" max="200000" step="5000" value="80000">
-              <div class="range-labels"><span>0円</span><span>20万円</span></div>
+              <input type="range" id="lifeins-r" min="0" max="20" step="0.5" value="8">
+              <div class="range-labels"><span>0</span><span>20</span></div>
             </div>
           </label>
 
@@ -533,11 +530,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="ideco" type="number" min="0" max="816000" step="1000" value="0">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="ideco" type="number" min="0" max="81.6" step="0.1" value="0"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="ideco-r" min="0" max="816000" step="1000" value="0">
-              <div class="range-labels"><span>0円</span><span>81.6万円</span></div>
+              <input type="range" id="ideco-r" min="0" max="81.6" step="0.1" value="0">
+              <div class="range-labels"><span>0</span><span>81.6</span></div>
             </div>
           </label>
 
@@ -547,11 +543,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="medical" type="number" min="0" max="2000000" step="10000" value="0">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="medical" type="number" min="0" max="200" step="0.5" value="0"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="medical-r" min="0" max="500000" step="10000" value="0">
-              <div class="range-labels"><span>0円</span><span>50万円</span></div>
+              <input type="range" id="medical-r" min="0" max="50" step="0.5" value="0">
+              <div class="range-labels"><span>0</span><span>50</span></div>
             </div>
           </label>
 
@@ -561,11 +556,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="furusato" type="number" min="0" max="10000000" step="1000" value="0">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="furusato" type="number" min="0" max="1000" step="0.1" value="0"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="furusato-r" min="0" max="500000" step="1000" value="0">
-              <div class="range-labels"><span>0円</span><span>50万円</span></div>
+              <input type="range" id="furusato-r" min="0" max="50" step="0.1" value="0">
+              <div class="range-labels"><span>0</span><span>50</span></div>
             </div>
           </label>
         </div>
@@ -765,14 +759,14 @@
 
   function readInput() {
     return {
-      income: parseInt(el('income').value) || 0,
-      social: parseInt(el('social').value) || 0,
+      income: (parseFloat(el('income').value) || 0) * 10000,
+      social: (parseFloat(el('social').value) || 0) * 10000,
       spouse: parseInt(el('spouse').value) || 0,
       dependents: parseInt(el('dependents').value) || 0,
-      lifeins: parseInt(el('lifeins').value) || 0,
-      ideco: parseInt(el('ideco').value) || 0,
-      medical: parseInt(el('medical').value) || 0,
-      furusato: parseInt(el('furusato').value) || 0,
+      lifeins: (parseFloat(el('lifeins').value) || 0) * 10000,
+      ideco: (parseFloat(el('ideco').value) || 0) * 10000,
+      medical: (parseFloat(el('medical').value) || 0) * 10000,
+      furusato: (parseFloat(el('furusato').value) || 0) * 10000,
     };
   }
 
@@ -817,9 +811,7 @@
 
   el('calc-btn').addEventListener('click', calc);
   el('reset-btn').addEventListener('click', () => {
-    el('income').value = 5000000; el('social').value = 750000; el('spouse').value = 330000;
-    el('dependents').value = 0; el('lifeins').value = 80000; el('ideco').value = 0;
-    el('medical').value = 0; el('furusato').value = 0;
+    el('income').value = 500; el('social').value = 75; el('spouse').value = 330000; el('dependents').value = 0; el('lifeins').value = 8; el('ideco').value = 0; el('medical').value = 0; el('furusato').value = 0;
   
   // スライダーと数値入力の連動 (既存simulator と同じパターン)
   function linkSlider(numId, rangeId, cb) {

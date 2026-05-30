@@ -554,11 +554,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="base" type="number" min="0" max="1500000" step="1000" value="280000">
-                <span class="unit-label">円/月</span>
+                <input class="num-input" id="base" type="number" min="0" max="150" step="0.5" value="28"> <span class="unit-label">万円/月</span>
               </div>
-              <input type="range" id="base-r" min="100000" max="1500000" step="5000" value="280000">
-              <div class="range-labels"><span>10万円</span><span>150万円</span></div>
+              <input type="range" id="base-r" min="10" max="150" step="0.5" value="28">
+              <div class="range-labels"><span>10</span><span>150</span></div>
             </div>
           </label>
 
@@ -568,11 +567,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="housing" type="number" min="0" max="200000" step="1000" value="20000">
-                <span class="unit-label">円/月</span>
+                <input class="num-input" id="housing" type="number" min="0" max="20" step="0.1" value="2"> <span class="unit-label">万円/月</span>
               </div>
-              <input type="range" id="housing-r" min="0" max="100000" step="1000" value="20000">
-              <div class="range-labels"><span>0円</span><span>10万円</span></div>
+              <input type="range" id="housing-r" min="0" max="10" step="0.1" value="2">
+              <div class="range-labels"><span>0</span><span>10</span></div>
             </div>
           </label>
 
@@ -582,11 +580,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="commute" type="number" min="0" max="200000" step="1000" value="15000">
-                <span class="unit-label">円/月</span>
+                <input class="num-input" id="commute" type="number" min="0" max="20" step="0.1" value="1.5"> <span class="unit-label">万円/月</span>
               </div>
-              <input type="range" id="commute-r" min="0" max="50000" step="500" value="15000">
-              <div class="range-labels"><span>0円</span><span>5万円</span></div>
+              <input type="range" id="commute-r" min="0" max="5" step="0.1" value="1.5">
+              <div class="range-labels"><span>0</span><span>5</span></div>
             </div>
           </label>
 
@@ -596,11 +593,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="other" type="number" min="0" max="500000" step="1000" value="0">
-                <span class="unit-label">円/月</span>
+                <input class="num-input" id="other" type="number" min="0" max="50" step="0.1" value="0"> <span class="unit-label">万円/月</span>
               </div>
-              <input type="range" id="other-r" min="0" max="200000" step="1000" value="0">
-              <div class="range-labels"><span>0円</span><span>20万円</span></div>
+              <input type="range" id="other-r" min="0" max="20" step="0.1" value="0">
+              <div class="range-labels"><span>0</span><span>20</span></div>
             </div>
           </label>
 
@@ -638,11 +634,10 @@
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
-                <input class="num-input" id="bonus" type="number" min="0" max="20000000" step="10000" value="800000">
-                <span class="unit-label">円/年</span>
+                <input class="num-input" id="bonus" type="number" min="0" max="2000" step="1" value="80"> <span class="unit-label">万円/年</span>
               </div>
-              <input type="range" id="bonus-r" min="0" max="5000000" step="50000" value="800000">
-              <div class="range-labels"><span>0円</span><span>500万円</span></div>
+              <input type="range" id="bonus-r" min="0" max="500" step="1" value="80">
+              <div class="range-labels"><span>0</span><span>500</span></div>
             </div>
           </label>
 
@@ -855,13 +850,13 @@
 
   function readInput() {
     return {
-      base: parseInt(el('base').value) || 0,
-      housing: parseInt(el('housing').value) || 0,
-      commute: parseInt(el('commute').value) || 0,
-      other: parseInt(el('other').value) || 0,
+      base: (parseFloat(el('base').value) || 0) * 10000,
+      housing: (parseFloat(el('housing').value) || 0) * 10000,
+      commute: (parseFloat(el('commute').value) || 0) * 10000,
+      other: (parseFloat(el('other').value) || 0) * 10000,
       overtime: parseInt(el('overtime').value) || 0,
       hourly: parseInt(el('hourly').value) || 0,
-      bonus: parseInt(el('bonus').value) || 0,
+      bonus: (parseFloat(el('bonus').value) || 0) * 10000,
       age: parseInt(el('age').value) || 35,
     };
   }
@@ -992,9 +987,7 @@
   // Event wiring
   el('calc-btn').addEventListener('click', calc);
   el('reset-btn').addEventListener('click', () => {
-    el('base').value = 280000; el('housing').value = 20000; el('commute').value = 15000;
-    el('other').value = 0; el('overtime').value = 20; el('hourly').value = 2000;
-    el('bonus').value = 800000; el('age').value = 35;
+    el('base').value = 28; el('housing').value = 2; el('commute').value = 1.5; el('other').value = 0; el('overtime').value = 20; el('hourly').value = 2000; el('bonus').value = 80; el('age').value = 35;
     calc();
   });
   ['base','housing','commute','other','overtime','hourly','bonus','age'].forEach(id => {
