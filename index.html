@@ -775,12 +775,26 @@
       --m-bg: #FFFFFF;
       --m-yellow: #FFF3D1; --m-mint: #D4F5EB; --m-rose: #FFE2EC; --m-blue: #EAF4FF; --m-purple: #E3E5FE;
     }
+    /* T-096: Parisienne 自前ホスト (SIL OFL / ローカル assets/fonts/) */
+    @font-face {
+      font-family: 'Parisienne';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/Parisienne-Regular.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
-      color: #1A1F36; background: white; line-height: 1.7; font-size: 15px;
+      /* モックアップ準拠: 親しみやすい丸ゴシック系（Hiragino Maru Gothic 優先、無ければ Quicksand 風） */
+      font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro", "Quicksand", "Avenir Next", "Yu Gothic UI", "Meiryo", "Noto Sans JP", sans-serif;
+      color: #1A1F36; background: white; line-height: 1.75; font-size: 15px;
+      font-weight: 500;
+      letter-spacing: .01em;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+    h1, h2, h3, h4, h5, h6, strong, b { font-weight: 700; }
     .skip-link { position: absolute; left: -9999px; }
     .skip-link:focus { left: 0; top: 0; background: #2D7FF9; color: white; padding: 10px 16px; z-index: 9999; }
     a { color: inherit; }
@@ -803,58 +817,104 @@
     .m-nav-links a:hover { color: var(--m-pink); border-bottom-color: var(--m-pink); }
     .m-nav-actions { display: flex; gap: 12px; }
     .m-search {
-      background: none; border: 1.5px solid #e5e7eb; border-radius: 50%;
-      width: 36px; height: 36px; cursor: pointer; font-size: 14px;
-      transition: all .18s;
+      background: #FDEEF4; border: 1.5px solid #fbcfe8; border-radius: 50%;
+      width: 38px; height: 38px; cursor: pointer; font-size: 15px;
+      color: var(--m-pink, #FF6B9D);
+      transition: all .18s; display: inline-flex; align-items: center; justify-content: center;
     }
-    .m-search:hover { border-color: var(--m-pink); background: #fdf2f8; }
+    .m-search:hover { border-color: var(--m-pink); background: #fce7f3; transform: translateY(-1px); }
 
     /* ─ ヒーロー ─ */
+    /* T-094: フル幅ヒーロー画像 + オーバーレイテキスト */
     .m-hero {
-      position: relative; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 50%, #ffffff 100%);
-      padding: 56px 24px 72px; overflow: hidden;
+      position: relative; overflow: hidden;
+      min-height: 660px;
+      /* contain で画像全体を表示 (人物の下半身+遠景の街並みまで見える) */
+      background: url('./assets/hero/homepage-hero-2.png') right center / contain no-repeat,
+                  linear-gradient(180deg, #FFFFFF 0%, #FDF2F7 50%, #F0F9FF 100%);
     }
-    .m-hero-grid {
-      max-width: 1240px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    .m-hero::before {
+      /* 左側を白く透過させ、右側で写真が見えるグラデーションオーバーレイ */
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.82) 38%, rgba(255,255,255,0.35) 58%, rgba(255,255,255,0.05) 78%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
     }
-    .m-hero-left { padding: 24px 0; }
+    .m-hero-inner {
+      position: relative; max-width: 1240px; margin: 0 auto;
+      padding: 80px 32px 110px;
+      display: flex; align-items: center;
+    }
+    .m-hero-content { max-width: 580px; }
+    /* タイトル+英字を一体ボックスに */
+    .m-hero-title-wrap {
+      position: relative; display: inline-block;
+      padding-bottom: 48px; /* en text の絶対配置スペース確保 (重なり回避) */
+      margin-bottom: 16px;
+    }
     .m-hero-title {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 900;
-      color: var(--m-text-dark); line-height: 1.18; letter-spacing: -0.03em;
-      margin-bottom: 6px;
+      font-size: clamp(36px, 5vw, 58px); font-weight: 800;
+      color: #1A1F36; line-height: 1.28; letter-spacing: 0.04em;
+    }
+    /* 「未来」: ピンク → オレンジ グラデ */
+    .m-hero-title-mirai {
+      background: linear-gradient(90deg, #FF6B9D 0%, #FF8A65 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    /* 「デザイン」: 水色 → 青色グラデ */
+    .m-hero-title-design {
+      background: linear-gradient(90deg, #4FC3F7 0%, #2D7FF9 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
     }
     .m-hero-title-accent { position: relative; display: inline-block; }
-    .m-hero-underline {
-      position: absolute; left: 0; right: 38%; bottom: -4px; height: 8px;
-      background: linear-gradient(90deg, var(--m-pink), var(--m-pink-light));
-      border-radius: 999px; opacity: .9;
-    }
     .m-hero-en {
-      font-size: 14px; font-weight: 700; color: var(--m-pink);
-      letter-spacing: .12em; font-style: italic; margin-bottom: 18px;
+      /* Parisienne (筆記体) を緑色で「しよう。」右下に斜め配置 */
+      font-family: "Parisienne", "Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive;
+      font-size: 26px; font-weight: 400; color: #27B99A;
+      letter-spacing: .02em; line-height: 1;
+      position: absolute;
+      right: -120px; bottom: 14px;
+      transform: rotate(-7deg);
+      transform-origin: right bottom;
+      white-space: nowrap;
+      pointer-events: none;
+      text-shadow: 0 2px 6px rgba(255,255,255,.7);
     }
     .m-hero-sub {
-      font-size: 14.5px; color: var(--m-text-sub); line-height: 2;
-      margin-bottom: 28px; max-width: 500px;
+      font-size: 15px; color: #4B5563; line-height: 2.05;
+      letter-spacing: 0.05em;
+      margin-bottom: 32px; max-width: 500px;
     }
     .m-hero-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--m-pink), var(--m-pink-light));
+      display: inline-flex; align-items: center; gap: 10px;
+      /* ピンク → 水色 のグラデーション */
+      background: linear-gradient(95deg, #FF6B9D 0%, #FF8A65 35%, #B591EE 65%, #4FC3F7 100%);
       color: white; text-decoration: none;
-      padding: 16px 32px; border-radius: 999px;
-      font-size: 15px; font-weight: 800;
-      box-shadow: 0 8px 24px rgba(236,72,153,.4);
-      transition: all .2s;
+      padding: 17px 38px; border-radius: 999px;
+      font-size: 15.5px; font-weight: 700;
+      box-shadow: 0 10px 28px rgba(255,107,157,.30), 0 6px 20px rgba(79,195,247,.20);
+      transition: all .22s;
+      letter-spacing: .02em;
     }
-    .m-hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(236,72,153,.5); }
+    .m-hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(255,107,157,.40), 0 8px 26px rgba(79,195,247,.30);
+    }
     .m-hero-cta .arr { font-size: 18px; transition: transform .2s; }
     .m-hero-cta:hover .arr { transform: translateX(4px); }
-    .m-hero-right { display: flex; justify-content: center; }
-    .m-hero-svg { width: 100%; max-width: 500px; height: auto; border-radius: 20px; }
+    /* 吹き出し: 写真側に絶対配置 */
+    .m-hero-fukidashi-overlay {
+      position: absolute; top: 60px; right: 4%;
+      width: 200px; height: auto;
+      filter: drop-shadow(0 8px 18px rgba(255,107,157,.30));
+      animation: fukidashi-float 3s ease-in-out infinite;
+      pointer-events: none; z-index: 2;
+    }
     .m-hero-band {
       position: absolute; bottom: 0; left: 0; right: 0; height: 8px;
       background: linear-gradient(90deg, #fce7f3, #fbcfe8, #fce7f3);
+      z-index: 3;
     }
 
     /* ─ セクション共通 ─ */
@@ -873,22 +933,36 @@
     }
     .m-sim-card {
       text-decoration: none; color: #1A1F36;
-      padding: 24px 18px; border-radius: 18px;
-      text-align: center;
-      transition: transform .2s, box-shadow .2s;
-      display: flex; flex-direction: column; gap: 10px; align-items: center;
+      padding: 18px 14px; border-radius: 18px;
+      text-align: left;
+      background: #FFFFFF !important; /* 白基調パネル (パステル inline 無効化) */
+      border: 1px solid #EEF2F7;
+      box-shadow: 0 4px 14px rgba(15,23,42,.05);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: row; gap: 10px; align-items: center;
+      position: relative;
+    }
+    .m-sim-card::before {
+      /* カード上部 アクセントライン (カテゴリ色) */
+      content: ""; position: absolute; left: 18px; right: 18px; top: 0; height: 4px;
+      background: var(--m-card-accent, #FF6B9D); border-radius: 0 0 4px 4px;
     }
     .m-sim-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 16px 32px rgba(0,0,0,.1);
+      box-shadow: 0 18px 36px rgba(15,23,42,.10);
+      border-color: #DCE3EE;
+    }
+    .m-sim-card-body {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; gap: 4px;
     }
     .m-sim-icon {
       width: 60px; height: 60px; border-radius: 16px;
       display: grid; place-items: center; font-size: 32px; color: white;
       box-shadow: 0 4px 12px rgba(0,0,0,.15);
     }
-    .m-sim-name { font-size: 14px; font-weight: 800; color: #1A1F36; line-height: 1.4; }
-    .m-sim-desc { font-size: 12px; color: #6B7280; line-height: 1.6; }
+    .m-sim-name { font-size: 13px; font-weight: 700; color: #1A1F36; line-height: 1.3; letter-spacing: -0.01em; }
+    .m-sim-desc { font-size: 11.5px; color: #6B7280; line-height: 1.5; }
 
     /* ─ 下段4カード ─ */
     .m-card4-grid {
@@ -896,12 +970,14 @@
     }
     .m-card4 {
       background: white; border-radius: 18px; overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,.06);
-      transition: transform .2s, box-shadow .2s;
+      border: 1px solid #EEF2F7;
+      box-shadow: 0 4px 14px rgba(15,23,42,.05);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
-    .m-card4:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.1); }
+    .m-card4:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(15,23,42,.10); border-color: #DCE3EE; }
     .m-card4-img {
-      height: 140px; display: grid; place-items: center;
+      height: 156px; display: grid; place-items: center;
+      background: #F7FAFC; border-bottom: 1px solid #EEF2F7;
     }
     .m-card4-body { padding: 20px; }
     .m-card4-title { font-size: 15px; font-weight: 800; color: #1A1F36; margin-bottom: 8px; }
@@ -927,52 +1003,46 @@
       .m-nav-inner { flex-wrap: wrap; gap: 14px; }
       .m-nav-links { gap: 16px; order: 3; width: 100%; justify-content: center; padding-top: 8px; border-top: 1px solid #f3f4f6; }
       .m-nav-links a { font-size: 13px; }
-      .m-hero-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; }
-      .m-hero-left { padding: 0; }
-      .m-hero-sub { margin-left: auto; margin-right: auto; }
-      .m-hero-right { order: -1; }
-      .m-hero-svg { max-width: 360px; }
+      .m-hero {
+        min-height: 720px;
+        /* モバイル: 画像を下部にフル幅で表示しテキストは上部 */
+        background: url('./assets/hero/homepage-hero-2.png') center bottom / contain no-repeat,
+                    linear-gradient(180deg, #FFFFFF 0%, #FDF2F7 40%, #F0F9FF 100%);
+      }
+      .m-hero::before { background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.0) 60%); }
+      .m-hero-inner { padding: 48px 20px 380px; align-items: flex-start; }
+      .m-hero-fukidashi-overlay { top: 16px; right: 12px; width: 130px; }
       .m-sim-grid { grid-template-columns: repeat(2, 1fr); }
       .m-card4-grid { grid-template-columns: repeat(2, 1fr); }
       .m-trust-row { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 640px) {
       .m-section { padding: 40px 16px; }
-      .m-hero { padding: 32px 16px 48px; }
+      .m-hero { min-height: 640px; }
+      .m-hero-inner { padding: 36px 16px 320px; }
+      .m-hero-title { font-size: 34px; }
+      .m-hero-title-wrap { padding-bottom: 38px; margin-bottom: 12px; }
+      .m-hero-en { font-size: 20px; right: -64px; bottom: 10px; transform: rotate(-7deg); color: #27B99A; }
+      .m-hero-fukidashi-overlay { top: 10px; right: 6px; width: 96px; }
       .m-sim-grid { grid-template-columns: 1fr; }
       .m-card4-grid { grid-template-columns: 1fr; }
-      .m-hero-svg { max-width: 280px; }
       .m-logo-text { display: none; }
-      .m-nav-inner { padding: 10px 12px; gap: 8px; }
-      .m-nav-links { gap: 4px; padding-top: 6px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
-      .m-nav-links a { font-size: 11.5px; white-space: nowrap; padding: 4px 6px; flex-shrink: 0; }
-      .m-nav-actions { gap: 6px; }
+      .m-nav-inner { padding: 10px 12px; gap: 8px; flex-wrap: nowrap; }
+      .m-nav-links { gap: 2px; padding-top: 0; border-top: none; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; order: 2; width: auto; mask-image: linear-gradient(90deg, transparent 0, #000 8px, #000 calc(100% - 16px), transparent 100%); }
+      .m-nav-links a { font-size: 12px; white-space: nowrap; padding: 4px 8px; flex-shrink: 0; }
+      .m-nav-links::-webkit-scrollbar { display: none; }
+      .m-nav-actions { gap: 6px; order: 3; flex-shrink: 0; }
+      .m-search { width: 34px; height: 34px; font-size: 13px; }
     }
 
-    /* T-090 assets活用: ヒーロー画像レイアウト */
-    .m-hero-image-wrap {
-      position: relative; width: 100%; max-width: 560px; margin: 0 auto;
-    }
-    .m-hero-image {
-      width: 100%; height: auto; display: block; border-radius: 20px;
-      box-shadow: 0 10px 32px rgba(45,127,249,.15);
-    }
-    .m-hero-fukidashi {
-      position: absolute; top: 8%; right: -10px;
-      width: 38%; height: auto; max-width: 180px;
-      filter: drop-shadow(0 4px 10px rgba(255,107,157,.25));
-      animation: fukidashi-float 3s ease-in-out infinite;
-    }
     @keyframes fukidashi-float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
     }
-    /* シミュレーター SVG アイコン (モックアップ準拠: 円形コンパクトアイコン) */
+    /* シミュレーター SVG アイコン (丸ぶち廃止、全表示) */
     .m-sim-icon-img {
-      width: 64px; height: 64px; object-fit: contain;
-      background: #ffffff; border-radius: 50%;
-      padding: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.06);
+      width: 54px; height: 54px; object-fit: contain;
+      flex-shrink: 0;
     }
     /* 信頼性 SVG アイコン */
     .m-trust-svg {
@@ -980,9 +1050,100 @@
       margin-bottom: 6px;
     }
     @media (max-width: 640px) {
-      .m-hero-fukidashi { width: 42%; max-width: 140px; right: -4px; top: 4%; }
-      .m-sim-icon-img { width: 52px; height: 52px; padding: 6px; }
+      .m-sim-icon-img { width: 56px; height: 56px; }
       .m-trust-svg { width: 44px; height: 44px; }
+    }
+
+    /* ─── T-094 移植セクション: How to Use / FAQ / 運営者情報 ─── */
+    .m-section-head { text-align: center; max-width: 720px; margin: 0 auto 36px; }
+    .m-section-label {
+      font-size: 12.5px; font-weight: 700; color: var(--m-pink, #FF6B9D);
+      letter-spacing: .22em; text-transform: uppercase; margin-bottom: 8px;
+      font-family: "Quicksand", "Avenir Next", sans-serif;
+    }
+    .m-section-title--c { text-align: center; margin: 0 0 12px; }
+    .m-section-desc { font-size: 14.5px; color: #6B7280; line-height: 1.85; }
+
+    /* How to Use */
+    .m-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .m-step {
+      background: #FFFFFF; border: 1px solid #EEF2F7; border-radius: 18px;
+      padding: 26px 22px 22px; text-align: center;
+      box-shadow: 0 4px 14px rgba(15,23,42,.05);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .m-step:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(15,23,42,.09); }
+    .m-step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B9D, #FFB1CC);
+      color: white; font-weight: 800; font-size: 20px;
+      margin-bottom: 14px;
+      font-family: "Quicksand", "Avenir Next", sans-serif;
+      box-shadow: 0 6px 16px rgba(255,107,157,.30);
+    }
+    .m-step-title { font-size: 15px; font-weight: 700; color: #1A1F36; margin-bottom: 10px; }
+    .m-step-desc { font-size: 13px; color: #6B7280; line-height: 1.8; }
+
+    /* FAQ */
+    .m-faq-list { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .m-faq-item {
+      background: #FFFFFF; border: 1px solid #EEF2F7; border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(15,23,42,.04);
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .m-faq-item[open] { border-color: #FBCFE8; box-shadow: 0 6px 18px rgba(255,107,157,.10); }
+    .m-faq-item > summary {
+      list-style: none; cursor: pointer;
+      padding: 18px 52px 18px 22px;
+      font-size: 14.5px; font-weight: 700; color: #1A1F36;
+      position: relative; line-height: 1.55;
+    }
+    .m-faq-item > summary::-webkit-details-marker { display: none; }
+    .m-faq-item > summary::after {
+      content: "＋"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+      color: var(--m-pink, #FF6B9D); font-weight: 800; font-size: 22px; line-height: 1;
+      transition: transform .2s;
+    }
+    .m-faq-item[open] > summary::after { content: "−"; }
+    .m-faq-a {
+      padding: 4px 22px 20px; font-size: 14px; color: #4B5563; line-height: 1.95;
+    }
+    .m-faq-a strong { color: #1A1F36; font-weight: 700; }
+    .m-faq-a a { color: var(--m-pink, #FF6B9D); text-decoration: none; border-bottom: 1px dotted currentColor; }
+    .m-faq-a a:hover { color: #2D7FF9; }
+
+    /* 運営者情報 */
+    .m-eeat-card {
+      background: #FFFFFF; border: 1px solid #EEF2F7; border-radius: 20px;
+      padding: 40px 44px; max-width: 880px; margin: 0 auto;
+      box-shadow: 0 6px 24px rgba(15,23,42,.06);
+    }
+    .m-eeat-card .m-section-label { text-align: left; }
+    .m-eeat-title {
+      font-size: clamp(22px, 2.4vw, 28px); font-weight: 800; color: #1A1F36;
+      margin-bottom: 18px; padding-bottom: 12px;
+      border-bottom: 2px solid #FBCFE8;
+    }
+    .m-eeat-card h3 {
+      font-size: 16px; font-weight: 700; color: #1A1F36;
+      margin: 24px 0 10px;
+    }
+    .m-eeat-card p { font-size: 14px; color: #4B5563; line-height: 1.95; margin-bottom: 8px; }
+    .m-eeat-meta { font-size: 12.5px; color: #9CA3AF; margin-top: 24px; padding-top: 16px; border-top: 1px solid #EEF2F7; }
+
+    @media (max-width: 980px) {
+      .m-steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .m-steps { grid-template-columns: 1fr; }
+      .m-eeat-card { padding: 28px 22px; }
+      .m-faq-item > summary { padding: 16px 46px 16px 18px; font-size: 14px; }
+      .m-faq-a { padding: 4px 18px 18px; }
     }
 
   </style>
@@ -1003,8 +1164,9 @@
     <nav class="m-nav-links" aria-label="セクション">
       <a href="#simulators">シミュレーター</a>
       <a href="#guide">資産形成ガイド</a>
-      <a href="#news">記事・コラム</a>
-      <a href="#policy">制度・ニュース解説</a>
+      <a href="#howto">使い方</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#eeat">運営者情報</a>
     </nav>
     <div class="m-nav-actions">
       <button class="m-search" aria-label="検索">🔍</button>
@@ -1014,25 +1176,22 @@
 
 <main id="main">
 
-  <!-- ─── ヒーロー (左テキスト+右イラスト 2分割grid) ─── -->
+  <!-- ─── ヒーロー (フル幅背景画像+左寄せオーバーレイテキスト) ─── -->
   <section class="m-hero" aria-labelledby="m-hero-heading">
-    <div class="m-hero-grid">
-      <div class="m-hero-left">
-        <h1 id="m-hero-heading" class="m-hero-title">
-          未来は、<br>
-          <span class="m-hero-title-accent">デザイン<span class="m-hero-underline"></span>できる。</span>
-        </h1>
-        <p class="m-hero-en">Design your future.</p>
-        <p class="m-hero-sub">未来デザイン研究所は、20〜40代の若年層が、お金の知識を身につけ、自分らしい未来を設計するための情報プラットフォームです。</p>
-        <a href="#simulators" class="m-hero-cta">
-          <span>🔍</span> シミュレーターを使ってみる <span class="arr">→</span>
-        </a>
-      </div>
-      <div class="m-hero-right">
-        <div class="m-hero-image-wrap">
-          <img src="./assets/hero/homepage-hero.png" alt="未来を見つめる人物のイラスト" class="m-hero-image" loading="eager">
-          <img src="./assets/hero/illust_fukidashi.png" alt="あなたの未来はいくらになる？" class="m-hero-fukidashi">
+    <img src="./assets/hero/illust_fukidashi.png" alt="あなたの未来はいくらになる？" class="m-hero-fukidashi-overlay" loading="eager">
+    <div class="m-hero-inner">
+      <div class="m-hero-content">
+        <div class="m-hero-title-wrap">
+          <h1 id="m-hero-heading" class="m-hero-title">
+            <span class="m-hero-title-mirai">未来</span>を、<br>
+            <span class="m-hero-title-accent"><span class="m-hero-title-design">デザイン</span></span>しよう。
+          </h1>
+          <span class="m-hero-en" aria-hidden="true">Design your future.</span>
         </div>
+        <p class="m-hero-sub">未来デザイン研究所は、<br>お金の知識を学び、将来をシミュレーションし、<br>あなただけの自分らしい未来をつくるための<br>情報プラットフォームです。</p>
+        <a href="#simulators" class="m-hero-cta">
+          シミュレーターを使ってみる <span class="arr">→</span>
+        </a>
       </div>
     </div>
     <!-- ピンク薄帯 -->
@@ -1046,42 +1205,52 @@
         <span class="m-section-emoji">⭐</span> 人気のシミュレーター
       </h2>
       <div class="m-sim-grid">
-        <a href="./simulator_nisa.html" class="m-sim-card" style="background:#FFF3D1;">
+        <a href="./simulator_nisa.html" class="m-sim-card" style="--m-card-accent:#FFC857;">
           <img src="./assets/icon/nisa.svg" alt="" class="m-sim-icon-img" loading="lazy">
-          <div class="m-sim-name">NISAシミュレーター</div>
-          <p class="m-sim-desc">新NISA非課税枠を最大活用</p>
+          <div class="m-sim-card-body">
+            <div class="m-sim-name">NISAシミュレーター</div>
+            <p class="m-sim-desc">新NISA非課税枠を最大活用</p>
+          </div>
         </a>
-        <a href="./simulator_fire.html" class="m-sim-card" style="background:#FFE5D6;">
+        <a href="./simulator_fire.html" class="m-sim-card" style="--m-card-accent:#FF8A65;">
           <img src="./assets/icon/fire.svg" alt="" class="m-sim-icon-img" loading="lazy">
-          <div class="m-sim-name">FIRE逆算シミュレーター</div>
-          <p class="m-sim-desc">自由までの年数を逆算</p>
+          <div class="m-sim-card-body">
+            <div class="m-sim-name">FIRE逆算シミュレーター</div>
+            <p class="m-sim-desc">自由までの年数を逆算</p>
+          </div>
         </a>
-        <a href="./simulator_shaho.html" class="m-sim-card" style="background:#D4F5EB;">
+        <a href="./simulator_shaho.html" class="m-sim-card" style="--m-card-accent:#27B99A;">
           <img src="./assets/icon/shaho.svg" alt="" class="m-sim-icon-img" loading="lazy">
-          <div class="m-sim-name">社会保険料シミュレーター</div>
-          <p class="m-sim-desc">4-6月の残業ランクを予測</p>
+          <div class="m-sim-card-body">
+            <div class="m-sim-name">社会保険料シミュレーター</div>
+            <p class="m-sim-desc">4-6月の残業ランクを予測</p>
+          </div>
         </a>
-        <a href="./simulator_juminzei.html" class="m-sim-card" style="background:#FFE2EC;">
+        <a href="./simulator_juminzei.html" class="m-sim-card" style="--m-card-accent:#FF6B9D;">
           <img src="./assets/icon/juminzei.svg" alt="" class="m-sim-icon-img" loading="lazy">
-          <div class="m-sim-name">住民税&ふるさと納税</div>
-          <p class="m-sim-desc">翌年の税金と寄付限度額</p>
+          <div class="m-sim-card-body">
+            <div class="m-sim-name">住民税&ふるさと納税</div>
+            <p class="m-sim-desc">翌年の税金と寄付限度額</p>
+          </div>
         </a>
-        <a href="./simulator_tumitate.html" class="m-sim-card" style="background:#E3E5FE;">
+        <a href="./simulator_tumitate.html" class="m-sim-card" style="--m-card-accent:#7A7FF0;">
           <img src="./assets/icon/nenshu.svg" alt="" class="m-sim-icon-img" loading="lazy">
-          <div class="m-sim-name">積立投資シミュレーター</div>
-          <p class="m-sim-desc">複利で20年後の資産を試算</p>
+          <div class="m-sim-card-body">
+            <div class="m-sim-name">積立投資シミュレーター</div>
+            <p class="m-sim-desc">複利で20年後の資産を試算</p>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- ─── 下段 4カード (資産形成ガイド/最新記事/制度改正/将来追加) ─── -->
-  <section class="m-section" style="background:#f9fafb;">
+  <section class="m-section" style="background:#FFFFFF;">
     <div class="m-container">
       <div class="m-card4-grid">
         <article id="guide" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #FFF3D1, #FFE0A8);">
-            <img src="./assets/icon/guide.svg" alt="" style="height:90px;width:auto;" loading="lazy">
+          <div class="m-card4-img">
+            <img src="./assets/icon/guide.svg" alt="" style="height:96px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">資産形成ガイド</h3>
@@ -1090,8 +1259,8 @@
           </div>
         </article>
         <article id="news" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #FFE5D6, #FFCBA8);">
-            <img src="./assets/icon/calender.svg" alt="" style="height:90px;width:auto;" loading="lazy">
+          <div class="m-card4-img">
+            <img src="./assets/icon/calender.svg" alt="" style="height:96px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">最新記事</h3>
@@ -1100,7 +1269,7 @@
           </div>
         </article>
         <article id="policy" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #EAF4FF, #BFDDFF);">
+          <div class="m-card4-img">
             <img src="./assets/illust/illust_kokkai.png" alt="国会議事堂" style="height:120px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
@@ -1110,7 +1279,7 @@
           </div>
         </article>
         <article class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #D4F5EB, #B6EFD9);">
+          <div class="m-card4-img">
             <img src="./assets/illust/illust_rocket.png" alt="ロケット" style="height:120px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
@@ -1140,6 +1309,120 @@
       </div>
     </div>
   </section>
+
+  <!-- ─── How to Use (4ステップ) ─── -->
+  <section id="howto" class="m-section m-howto" aria-labelledby="howto-heading" style="background:#F7FAFC;">
+    <div class="m-container">
+      <div class="m-section-head">
+        <p class="m-section-label">How To Use</p>
+        <h2 id="howto-heading" class="m-section-title m-section-title--c">4ステップで使える</h2>
+        <p class="m-section-desc">難しい操作はありません。設定したらすぐに結果が表示されます。</p>
+      </div>
+      <div class="m-steps">
+        <div class="m-step">
+          <div class="m-step-num" aria-label="ステップ1">1</div>
+          <div class="m-step-title">シミュレーターを選ぶ</div>
+          <p class="m-step-desc">NISA / FIRE / 社会保険料 / 住民税 / 積立 / 一括 / 取り崩し から目的に合うものを選択。</p>
+        </div>
+        <div class="m-step">
+          <div class="m-step-num" aria-label="ステップ2">2</div>
+          <div class="m-step-title">条件を入力する</div>
+          <p class="m-step-desc">月額・年利・運用年数などをスライダーや入力欄で設定。±ボタンで細かく調整できます。</p>
+        </div>
+        <div class="m-step">
+          <div class="m-step-num" aria-label="ステップ3">3</div>
+          <div class="m-step-title">グラフと数値で確認</div>
+          <p class="m-step-desc">将来の評価額・投資元本・運用益がグラフと数値で即時表示。ホバーで詳細値も確認可能。</p>
+        </div>
+        <div class="m-step">
+          <div class="m-step-num" aria-label="ステップ4">4</div>
+          <div class="m-step-title">シナリオを比較する</div>
+          <p class="m-step-desc">「シナリオ比較」機能で最大4つの条件を同時表示。最適なプランを見つけられます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section id="faq" class="m-section m-faq" aria-labelledby="faq-heading">
+    <div class="m-container">
+      <div class="m-section-head">
+        <p class="m-section-label">FAQ</p>
+        <h2 id="faq-heading" class="m-section-title m-section-title--c">よくある質問</h2>
+        <p class="m-section-desc">投資初心者の方からよく寄せられる質問にお答えします。</p>
+      </div>
+      <div class="m-faq-list">
+        <details class="m-faq-item">
+          <summary>年利は何%で設定するのが一般的ですか？</summary>
+          <div class="m-faq-a">S&amp;P500や全世界株式などのインデックス投資では、過去の実績として年平均7〜10%程度のリターンが知られています。ただし将来のリターンは保証されないため、長期計画では3〜7%程度で保守的に見積もる人が多いです。本シミュレーターでは年利を自由に変えて複数シナリオを比較できます。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>新NISAはどんな制度ですか？</summary>
+          <div class="m-faq-a">2024年に始まった少額投資非課税制度です。年間最大360万円（つみたて投資枠120万円＋成長投資枠240万円）、生涯で1,800万円まで投資でき、運用益や配当が<strong>非課税</strong>になります。非課税保有期間は無期限。本ツールの<a href="./simulator_nisa.html">NISAシミュレーター</a>で本格的な試算ができます。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>FIRE（早期リタイア）とは何ですか？</summary>
+          <div class="m-faq-a">経済的自立と早期リタイアを目指す考え方で、一般に年間生活費の25倍の資産形成が目安とされます。その資産を年4%程度ずつ取り崩して生活するのが基本戦略。<a href="./simulator_fire.html">FIRE逆算シミュレーター</a>で達成までの年数をシミュレーションできます。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>4%ルールは安全ですか？</summary>
+          <div class="m-faq-a">4%ルールは長期的に資産が維持されやすいという経験則ですが、万能ではありません。運用利回り・インフレ率・相場下落のタイミングによって安全な取り崩し率は変わります。保守的には3〜4%で計画する人が多いです。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>長期投資のメリットは何ですか？</summary>
+          <div class="m-faq-a">最大のメリットは<strong>複利効果</strong>です。運用益を再投資し続けることで資産が雪だるま式に増えます。さらに保有期間が長いほど価格変動が平準化され、毎月一定額を積み立てる時間分散と組み合わせることでリスクを抑えやすくなります。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>このシミュレーターは無料ですか？登録は必要ですか？</summary>
+          <div class="m-faq-a">完全無料で、会員登録やアプリのインストールは不要です。入力したデータはお使いのブラウザ内だけで処理され、サーバーに保存・送信されることはありません。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>iDeCoと新NISAはどちらを優先すべきですか？</summary>
+          <div class="m-faq-a">一般的には「新NISA優先」が多く選ばれます。新NISAはいつでも引き出せる自由度があり、非課税保有期間も無期限。iDeCoは掛金が所得控除になる節税メリットがある一方、原則60歳まで引き出せません。まずは新NISAで目標額を把握し、余裕があればiDeCoも組み合わせる方法が広く推奨されています。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>インフレはシミュレーション結果に影響しますか？</summary>
+          <div class="m-faq-a">本ツールの試算は名目値（インフレ調整前）で表示されます。インフレが年2%続くと仮定すると、20年後の購買力は現在の約67%になります。想定年利からインフレ率（例：2%）を引いた<strong>実質利回り</strong>で設定すると保守的な試算が可能です。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>投資はいつから始めるのが良いですか？</summary>
+          <div class="m-faq-a">複利効果の観点では「できるだけ早く始める」が鉄則です。月3万円を年利5%で積み立てると、20年で約1,237万円、30年で約2,497万円と2倍以上に。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>で運用年数を変えて比較できます。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>毎月いくらから積立投資を始めれば良いですか？</summary>
+          <div class="m-faq-a">月1,000円など少額からでも始められます。重要なのは「継続」です。<a href="./simulator_tumitate.html">積立投資シミュレーター</a>でスライダーを動かしながら現実的な金額を見つけ、生活見直しで少しずつ増やしていく方法が長続きしやすいです。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>4-6月の残業を減らすと本当に手取りが増えますか？</summary>
+          <div class="m-faq-a">はい、標準報酬月額は4・5・6月の支給額平均で決まり、その年9月から翌年8月までの社会保険料に反映されます。1ランク上がると毎月数千円〜1万円以上の保険料アップ。<a href="./simulator_shaho.html">社会保険料シミュレーター</a>で残業時間別のランク変動を可視化できます。</div>
+        </details>
+        <details class="m-faq-item">
+          <summary>ふるさと納税の限度額はどう計算しますか？</summary>
+          <div class="m-faq-a">「自己負担2,000円で済む限度額」は住民税の所得割額の約20%＋2,000円が目安。正確には課税所得階層・所得税率により異なります。<a href="./simulator_juminzei.html">住民税&ふるさと納税シミュレーター</a>に年収・社保・各種控除を入力すると限度額を自動計算します。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 運営者情報・免責 (E-E-A-T) ─── -->
+  <section id="eeat" class="m-section m-eeat" aria-labelledby="eeat-heading" style="background:#F7FAFC;">
+    <div class="m-container">
+      <article class="m-eeat-card">
+        <p class="m-section-label">About</p>
+        <h2 id="eeat-heading" class="m-eeat-title">運営者情報と免責事項</h2>
+        <p>本サイト「未来デザイン研究所 (Mirai Design Lab)」は、NISA・FIRE・社会保険料・住民税・積立投資など、お金と将来設計に関するシミュレーターを無料で提供する個人運営の情報サイトです。運営者（shakewakame）は、金融・資産形成・税制の情報を、初心者の方にも分かりやすく届けることを目的に本サイトを開発・公開しています。</p>
+
+        <h3>免責事項</h3>
+        <p>本ツールが表示する結果は、入力された条件にもとづく数学的な試算であり、将来の運用成果・利回り・FIRE達成時期・社会保険料・税額を保証するものではありません。実際の運用や納税は手数料・税制改正・物価変動・為替・市場環境などの影響を受け、元本割れの可能性があります。本サイトは情報提供のみを目的としており、特定の金融商品の購入・売却を推奨・勧誘するものではありません。最終的な投資判断・税務判断はご自身の責任で行ってください。</p>
+
+        <h3>データの取り扱い</h3>
+        <p>入力された数値はお使いのブラウザ内でのみ計算に使用され、サーバーへ送信・保存されることはありません。会員登録やアプリのインストールは不要です。</p>
+
+        <p class="m-eeat-meta">最終更新日：<time datetime="2026-06-01">2026年6月1日</time>　／　運営者：<address style="display:inline;font-style:normal;">未来デザイン研究所 (Mirai Design Lab) — shakewakame</address></p>
+      </article>
+    </div>
+  </section>
+
 </main>
 
 <footer class="m-footer">
