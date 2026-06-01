@@ -943,6 +943,46 @@
       .m-card4-grid { grid-template-columns: 1fr; }
       .m-hero-svg { max-width: 280px; }
       .m-logo-text { display: none; }
+      .m-nav-inner { padding: 10px 12px; gap: 8px; }
+      .m-nav-links { gap: 4px; padding-top: 6px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
+      .m-nav-links a { font-size: 11.5px; white-space: nowrap; padding: 4px 6px; flex-shrink: 0; }
+      .m-nav-actions { gap: 6px; }
+    }
+
+    /* T-090 assets活用: ヒーロー画像レイアウト */
+    .m-hero-image-wrap {
+      position: relative; width: 100%; max-width: 560px; margin: 0 auto;
+    }
+    .m-hero-image {
+      width: 100%; height: auto; display: block; border-radius: 20px;
+      box-shadow: 0 10px 32px rgba(45,127,249,.15);
+    }
+    .m-hero-fukidashi {
+      position: absolute; top: 8%; right: -10px;
+      width: 38%; height: auto; max-width: 180px;
+      filter: drop-shadow(0 4px 10px rgba(255,107,157,.25));
+      animation: fukidashi-float 3s ease-in-out infinite;
+    }
+    @keyframes fukidashi-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    /* シミュレーター SVG アイコン (モックアップ準拠: 円形コンパクトアイコン) */
+    .m-sim-icon-img {
+      width: 64px; height: 64px; object-fit: contain;
+      background: #ffffff; border-radius: 50%;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.06);
+    }
+    /* 信頼性 SVG アイコン */
+    .m-trust-svg {
+      width: 56px; height: 56px; object-fit: contain;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 640px) {
+      .m-hero-fukidashi { width: 42%; max-width: 140px; right: -4px; top: 4%; }
+      .m-sim-icon-img { width: 52px; height: 52px; padding: 6px; }
+      .m-trust-svg { width: 44px; height: 44px; }
     }
 
   </style>
@@ -988,76 +1028,11 @@
           <span>🔍</span> シミュレーターを使ってみる <span class="arr">→</span>
         </a>
       </div>
-      <div class="m-hero-right" aria-hidden="true">
-        <!-- 都市スカイライン + 3人物 SVG -->
-        <svg viewBox="0 0 500 380" class="m-hero-svg">
-          <!-- 空のグラデ -->
-          <defs>
-            <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#e0f2fe"/>
-              <stop offset="100%" stop-color="#bae6fd"/>
-            </linearGradient>
-          </defs>
-          <rect width="500" height="380" fill="url(#skyG)" rx="20"/>
-          <!-- 雲 -->
-          <ellipse cx="80" cy="60" rx="44" ry="14" fill="#fff" opacity=".8"/>
-          <ellipse cx="100" cy="50" rx="32" ry="10" fill="#fff" opacity=".85"/>
-          <ellipse cx="380" cy="80" rx="50" ry="14" fill="#fff" opacity=".75"/>
-          <!-- 都市スカイライン -->
-          <g fill="#2D7FF9" opacity=".85">
-            <rect x="20" y="220" width="40" height="100"/>
-            <rect x="65" y="200" width="35" height="120"/>
-            <rect x="105" y="240" width="30" height="80"/>
-            <rect x="140" y="190" width="50" height="130"/>
-            <rect x="195" y="210" width="40" height="110"/>
-            <rect x="240" y="180" width="55" height="140"/>
-            <rect x="300" y="220" width="42" height="100"/>
-            <rect x="347" y="200" width="38" height="120"/>
-            <rect x="390" y="230" width="45" height="90"/>
-            <rect x="440" y="210" width="40" height="110"/>
-          </g>
-          <g fill="#2D7FF9" opacity=".7">
-            <rect x="25" y="240" width="6" height="80"/>
-            <rect x="40" y="240" width="6" height="80"/>
-            <rect x="75" y="220" width="6" height="100"/>
-            <rect x="150" y="210" width="6" height="110"/>
-            <rect x="165" y="210" width="6" height="110"/>
-            <rect x="252" y="200" width="6" height="120"/>
-            <rect x="268" y="200" width="6" height="120"/>
-            <rect x="358" y="220" width="6" height="100"/>
-            <rect x="450" y="230" width="6" height="90"/>
-          </g>
-          <!-- 地面 -->
-          <rect x="0" y="320" width="500" height="60" fill="#f0f9ff"/>
-          <!-- 3人物 後ろ姿 -->
-          <!-- 人物1 (中央) -->
-          <g transform="translate(230, 200)">
-            <ellipse cx="0" cy="0" rx="22" ry="26" fill="#2D7FF9"/> <!-- 髪 -->
-            <rect x="-25" y="20" width="50" height="80" rx="8" fill="#2D7FF9"/> <!-- 服 -->
-            <rect x="-22" y="100" width="18" height="22" fill="#1A1F36"/>
-            <rect x="4" y="100" width="18" height="22" fill="#1A1F36"/>
-          </g>
-          <!-- 人物2 (左) -->
-          <g transform="translate(170, 220)">
-            <ellipse cx="0" cy="0" rx="20" ry="24" fill="#92400e"/>
-            <rect x="-23" y="18" width="46" height="72" rx="8" fill="#FF6B9D"/>
-            <rect x="-20" y="90" width="16" height="20" fill="#1A1F36"/>
-            <rect x="4" y="90" width="16" height="20" fill="#1A1F36"/>
-          </g>
-          <!-- 人物3 (右) -->
-          <g transform="translate(290, 220)">
-            <ellipse cx="0" cy="0" rx="20" ry="24" fill="#1A1F36"/>
-            <rect x="-23" y="18" width="46" height="72" rx="8" fill="#fbbf24"/>
-            <rect x="-20" y="90" width="16" height="20" fill="#1A1F36"/>
-            <rect x="4" y="90" width="16" height="20" fill="#1A1F36"/>
-          </g>
-          <!-- 吹き出し -->
-          <g transform="translate(360, 100)">
-            <path d="M 0,0 L 130,0 Q 140,0 140,10 L 140,50 Q 140,60 130,60 L 30,60 L 15,75 L 20,60 L 10,60 Q 0,60 0,50 Z" fill="#fff" stroke="#FF6B9D" stroke-width="2"/>
-            <text x="70" y="25" text-anchor="middle" fill="#1A1F36" font-size="11" font-weight="700">あなたの未来は</text>
-            <text x="70" y="45" text-anchor="middle" fill="#FF6B9D" font-size="14" font-weight="800">いくらになる？</text>
-          </g>
-        </svg>
+      <div class="m-hero-right">
+        <div class="m-hero-image-wrap">
+          <img src="./assets/hero/homepage-hero.png" alt="未来を見つめる人物のイラスト" class="m-hero-image" loading="eager">
+          <img src="./assets/hero/illust_fukidashi.png" alt="あなたの未来はいくらになる？" class="m-hero-fukidashi">
+        </div>
       </div>
     </div>
     <!-- ピンク薄帯 -->
@@ -1072,27 +1047,27 @@
       </h2>
       <div class="m-sim-grid">
         <a href="./simulator_nisa.html" class="m-sim-card" style="background:#FFF3D1;">
-          <div class="m-sim-icon" style="background:#FFC857;">🌳</div>
+          <img src="./assets/icon/nisa.svg" alt="" class="m-sim-icon-img" loading="lazy">
           <div class="m-sim-name">NISAシミュレーター</div>
           <p class="m-sim-desc">新NISA非課税枠を最大活用</p>
         </a>
-        <a href="./simulator_fire.html" class="m-sim-card" style="background:#EAF4FF;">
-          <div class="m-sim-icon" style="background:#FF8A65;">🌴</div>
+        <a href="./simulator_fire.html" class="m-sim-card" style="background:#FFE5D6;">
+          <img src="./assets/icon/fire.svg" alt="" class="m-sim-icon-img" loading="lazy">
           <div class="m-sim-name">FIRE逆算シミュレーター</div>
           <p class="m-sim-desc">自由までの年数を逆算</p>
         </a>
         <a href="./simulator_shaho.html" class="m-sim-card" style="background:#D4F5EB;">
-          <div class="m-sim-icon" style="background:#27B99A;">📊</div>
+          <img src="./assets/icon/shaho.svg" alt="" class="m-sim-icon-img" loading="lazy">
           <div class="m-sim-name">社会保険料シミュレーター</div>
           <p class="m-sim-desc">4-6月の残業ランクを予測</p>
         </a>
         <a href="./simulator_juminzei.html" class="m-sim-card" style="background:#FFE2EC;">
-          <div class="m-sim-icon" style="background:#FF6B9D;">🏠</div>
+          <img src="./assets/icon/juminzei.svg" alt="" class="m-sim-icon-img" loading="lazy">
           <div class="m-sim-name">住民税&ふるさと納税</div>
           <p class="m-sim-desc">翌年の税金と寄付限度額</p>
         </a>
         <a href="./simulator_tumitate.html" class="m-sim-card" style="background:#E3E5FE;">
-          <div class="m-sim-icon" style="background:#7A7FF0;">📈</div>
+          <img src="./assets/icon/nenshu.svg" alt="" class="m-sim-icon-img" loading="lazy">
           <div class="m-sim-name">積立投資シミュレーター</div>
           <p class="m-sim-desc">複利で20年後の資産を試算</p>
         </a>
@@ -1105,8 +1080,8 @@
     <div class="m-container">
       <div class="m-card4-grid">
         <article id="guide" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #fef3c7, #fde68a);">
-            <span style="font-size:54px;">📚</span>
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #FFF3D1, #FFE0A8);">
+            <img src="./assets/icon/guide.svg" alt="" style="height:90px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">資産形成ガイド</h3>
@@ -1115,8 +1090,8 @@
           </div>
         </article>
         <article id="news" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #ffedd5, #fed7aa);">
-            <span style="font-size:54px;">🌅</span>
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #FFE5D6, #FFCBA8);">
+            <img src="./assets/icon/calender.svg" alt="" style="height:90px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">最新記事</h3>
@@ -1125,8 +1100,8 @@
           </div>
         </article>
         <article id="policy" class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #dbeafe, #bfdbfe);">
-            <span style="font-size:54px;">🏛️</span>
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #EAF4FF, #BFDDFF);">
+            <img src="./assets/illust/illust_kokkai.png" alt="国会議事堂" style="height:120px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">制度改正・ニュース解説</h3>
@@ -1135,8 +1110,8 @@
           </div>
         </article>
         <article class="m-card4">
-          <div class="m-card4-img" style="background:linear-gradient(135deg, #dcfce7, #bbf7d0);">
-            <span style="font-size:54px;">🚀</span>
+          <div class="m-card4-img" style="background:linear-gradient(135deg, #D4F5EB, #B6EFD9);">
+            <img src="./assets/illust/illust_rocket.png" alt="ロケット" style="height:120px;width:auto;" loading="lazy">
           </div>
           <div class="m-card4-body">
             <h3 class="m-card4-title">将来追加予定のコンテンツ</h3>
@@ -1156,16 +1131,15 @@
   <section class="m-section" style="padding:32px 0;">
     <div class="m-container">
       <div class="m-trust-row">
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#2D7FF9;">🛡️</div><div class="m-trust-label">完全無料</div></div>
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#FF6B9D;">📱</div><div class="m-trust-label">スマホ対応</div></div>
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#27B99A;">🔒</div><div class="m-trust-label">登録不要</div></div>
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#f59e0b;">📊</div><div class="m-trust-label">7+ ツール</div></div>
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#8b5cf6;">💡</div><div class="m-trust-label">初心者解説</div></div>
-        <div class="m-trust-item"><div class="m-trust-icon" style="color:#2D7FF9;">⚡</div><div class="m-trust-label">即試算</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/yasashii.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">初心者にやさしい</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/support.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">充実サポート</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/simulation.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">7+ シミュレーター</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/guide.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">学習ガイドつき</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/calender.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">最新の制度対応</div></div>
+        <div class="m-trust-item"><img src="./assets/icon/nenshu.svg" alt="" class="m-trust-svg" loading="lazy"><div class="m-trust-label">完全無料</div></div>
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="m-footer">
