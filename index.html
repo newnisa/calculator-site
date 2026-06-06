@@ -815,6 +815,12 @@
     .m-nav-links { display: flex; gap: 28px; flex: 1; }
     .m-nav-links a { font-size: 14px; font-weight: 700; color: #4B5563; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .18s; }
     .m-nav-links a:hover { color: var(--m-pink); border-bottom-color: var(--m-pink); }
+    .m-nav-links a.m-nav-class {
+      background: linear-gradient(95deg, #FF6B9D 0%, #FF8A65 100%);
+      color: #FFF; padding: 6px 14px; border-radius: 999px;
+      border-bottom: none;
+    }
+    .m-nav-links a.m-nav-class:hover { transform: translateY(-1px); color: #FFF; border-bottom-color: transparent; opacity: .92; }
     .m-nav-actions { display: flex; gap: 12px; }
     .m-search {
       background: #FDEEF4; border: 1.5px solid #fbcfe8; border-radius: 50%;
@@ -995,6 +1001,83 @@
     .m-trust-icon { font-size: 34px; margin-bottom: 6px; }
     .m-trust-label { font-size: 12px; color: #6B7280; font-weight: 700; }
 
+    /* ─ 未来デザイン教室 専用バナー ─ */
+    .m-class-section {
+      background: linear-gradient(135deg, #FFE5EE 0%, #FFF5DA 33%, #DFF6EF 66%, #EAF4FF 100%);
+      padding: 56px 24px;
+    }
+    .m-class-hero {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 32px; align-items: center;
+      background: #FFFFFF; border-radius: 28px;
+      padding: 40px 44px; box-shadow: 0 12px 30px rgba(15,23,42,.08);
+      position: relative; overflow: hidden;
+    }
+    .m-class-hero-tag {
+      display: inline-block;
+      font-family: "Quicksand", sans-serif;
+      font-size: 12px; font-weight: 900; letter-spacing: 0.20em;
+      color: #FF6B9D; background: #FFE5EE;
+      padding: 5px 14px; border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .m-class-hero-title { font-size: clamp(26px, 3.6vw, 36px); font-weight: 900; line-height: 1.3; letter-spacing: 0.02em; margin-bottom: 12px; }
+    .m-class-hero-accent {
+      background: linear-gradient(95deg, #FF6B9D 0%, #FF8A65 50%, #FFC857 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .m-class-hero-sub { font-size: 14.5px; color: #4B5563; line-height: 1.9; margin-bottom: 14px; }
+    .m-class-hero-stats { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; font-size: 12.5px; font-weight: 700; color: #6B7280; letter-spacing: 0.04em; }
+    .m-class-hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+    .m-class-cta-primary {
+      display: inline-block; padding: 12px 26px;
+      background: linear-gradient(95deg, #FF6B9D 0%, #FF8A65 100%);
+      color: #FFF; font-weight: 800; font-size: 14px;
+      border-radius: 999px; text-decoration: none;
+      box-shadow: 0 6px 16px rgba(255,107,157,.30);
+      transition: transform .2s;
+    }
+    .m-class-cta-primary:hover { transform: translateY(-2px); }
+    .m-class-cta-secondary {
+      display: inline-block; padding: 12px 22px;
+      background: #FFFFFF; color: #FF6B9D; font-weight: 800; font-size: 14px;
+      border: 2px solid #FFE5EE; border-radius: 999px; text-decoration: none;
+    }
+    .m-class-cta-secondary:hover { background: #FFF5F9; }
+    .m-class-hero-chars { display: flex; justify-content: center; align-items: flex-end; gap: 4px; }
+    .m-class-hero-chars img { height: 200px; width: auto; filter: drop-shadow(0 8px 20px rgba(15,23,42,.10)); }
+
+    .m-class-jump {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 14px; margin-top: 24px;
+    }
+    .m-class-jump-card {
+      background: #FFFFFF; border-radius: 18px;
+      padding: 20px 18px; text-decoration: none; color: #1A1F36;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 12px rgba(15,23,42,.06);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .m-class-jump-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(15,23,42,.10); }
+    .m-class-jump-card.--ch1:hover { border-color: #FF6B9D; }
+    .m-class-jump-card.--ch2:hover { border-color: #2D7FF9; }
+    .m-class-jump-card.--ch3:hover { border-color: #FF8A65; }
+    .m-class-jump-card.--ch4:hover { border-color: #27B99A; }
+    .m-class-jump-tag {
+      font-family: "Quicksand", sans-serif;
+      font-size: 11px; font-weight: 900; letter-spacing: 0.20em;
+      padding: 4px 12px; border-radius: 999px;
+      align-self: flex-start;
+    }
+    .m-class-jump-card.--ch1 .m-class-jump-tag { background: #FFE5EE; color: #FF6B9D; }
+    .m-class-jump-card.--ch2 .m-class-jump-tag { background: #EAF4FF; color: #2D7FF9; }
+    .m-class-jump-card.--ch3 .m-class-jump-tag { background: #FFE7DC; color: #FF8A65; }
+    .m-class-jump-card.--ch4 .m-class-jump-tag { background: #DFF6EF; color: #27B99A; }
+    .m-class-jump-title { font-size: 16px; font-weight: 900; }
+    .m-class-jump-sub { font-size: 12px; color: #6B7280; line-height: 1.6; }
+
     /* ─ フッター ─ */
     .m-footer { background: #f9fafb; padding: 36px 24px; border-top: 1px solid #e5e7eb; }
 
@@ -1015,6 +1098,10 @@
       .m-sim-grid { grid-template-columns: repeat(2, 1fr); }
       .m-card4-grid { grid-template-columns: repeat(2, 1fr); }
       .m-trust-row { grid-template-columns: repeat(3, 1fr); }
+      .m-class-hero { grid-template-columns: 1fr; padding: 32px 28px; gap: 20px; }
+      .m-class-hero-chars { order: -1; }
+      .m-class-hero-chars img { height: 160px; }
+      .m-class-jump { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
       .m-section { padding: 40px 16px; }
@@ -1026,6 +1113,10 @@
       .m-hero-fukidashi-overlay { top: 10px; right: 6px; width: 96px; }
       .m-sim-grid { grid-template-columns: 1fr; }
       .m-card4-grid { grid-template-columns: 1fr; }
+      .m-class-hero { padding: 26px 22px; border-radius: 22px; }
+      .m-class-hero-chars img { height: 130px; }
+      .m-class-jump { grid-template-columns: 1fr; gap: 10px; }
+      .m-class-jump-card { padding: 16px 14px; }
       .m-logo-text { display: none; }
       .m-nav-inner { padding: 10px 12px; gap: 8px; flex-wrap: nowrap; }
       .m-nav-links { gap: 2px; padding-top: 0; border-top: none; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; order: 2; width: auto; mask-image: linear-gradient(90deg, transparent 0, #000 8px, #000 calc(100% - 16px), transparent 100%); }
@@ -1163,6 +1254,7 @@
     </a>
     <nav class="m-nav-links" aria-label="セクション">
       <a href="#simulators">シミュレーター</a>
+      <a href="./articles/" class="m-nav-class">📚 未来デザイン教室</a>
       <a href="#guide">資産形成ガイド</a>
       <a href="#howto">使い方</a>
       <a href="#faq">よくある質問</a>
@@ -1244,6 +1336,57 @@
     </div>
   </section>
 
+  <!-- ─── 未来デザイン教室 専用導線 ─── -->
+  <section class="m-section m-class-section" aria-label="未来デザイン教室">
+    <div class="m-container">
+      <div class="m-class-hero">
+        <div class="m-class-hero-text">
+          <span class="m-class-hero-tag">📚 Featured Series</span>
+          <h2 class="m-class-hero-title">しゃけとわかめの<br><span class="m-class-hero-accent">未来デザイン教室</span></h2>
+          <p class="m-class-hero-sub">
+            お金の知識を、しゃけとわかめの会話で楽しく学べる <strong>全20話 + 番外編</strong> シリーズ。<br>
+            「増やす・守る・使う・未来を設計する」の <strong>4章構成</strong> で、<br>
+            金融リテラシーゼロからでも、ムリなく "自分の未来をデザインする力" を育てます。
+          </p>
+          <div class="m-class-hero-stats">
+            <span>📖 全20話</span><span>📚 4章 + 番外編</span><span>⏱️ 1話 約8-11分</span><span>🌱 初心者向け</span>
+          </div>
+          <div class="m-class-hero-ctas">
+            <a href="./articles/" class="m-class-cta-primary">📚 シリーズ全話を見る</a>
+            <a href="./articles/future-design-class-001.html" class="m-class-cta-secondary">▶ 第1話から読む</a>
+          </div>
+        </div>
+        <div class="m-class-hero-chars" aria-hidden="true">
+          <img src="./assets/characters/shake_excited.png" alt="" loading="lazy">
+          <img src="./assets/characters/wakame_laughing.png" alt="" loading="lazy">
+        </div>
+      </div>
+
+      <div class="m-class-jump">
+        <a href="./articles/chapter-1.html" class="m-class-jump-card --ch1">
+          <div class="m-class-jump-tag">CHAPTER 1</div>
+          <div class="m-class-jump-title">お金を増やす</div>
+          <div class="m-class-jump-sub">全7話 · 投資の基礎</div>
+        </a>
+        <a href="./articles/chapter-2.html" class="m-class-jump-card --ch2">
+          <div class="m-class-jump-tag">CHAPTER 2</div>
+          <div class="m-class-jump-title">お金を守る</div>
+          <div class="m-class-jump-sub">全6話 · 節税+節約</div>
+        </a>
+        <a href="./articles/chapter-3.html" class="m-class-jump-card --ch3">
+          <div class="m-class-jump-tag">CHAPTER 3</div>
+          <div class="m-class-jump-title">お金を使う</div>
+          <div class="m-class-jump-sub">全3話 · 幸福度の使い方</div>
+        </a>
+        <a href="./articles/chapter-4.html" class="m-class-jump-card --ch4">
+          <div class="m-class-jump-tag">CHAPTER 4</div>
+          <div class="m-class-jump-title">未来を設計する</div>
+          <div class="m-class-jump-sub">全4話 · FIRE・老後・年表</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── 下段 4カード (資産形成ガイド/最新記事/制度改正/将来追加) ─── -->
   <section class="m-section" style="background:#FFFFFF;">
     <div class="m-container">
@@ -1259,13 +1402,16 @@
           </div>
         </article>
         <article id="news" class="m-card4">
-          <div class="m-card4-img">
-            <img src="./assets/icon/calender.svg" alt="" style="height:96px;width:auto;" loading="lazy">
-          </div>
+          <a href="./articles/" class="m-card4-img-link" style="display:block;text-decoration:none;color:inherit;">
+            <div class="m-card4-img" style="background:linear-gradient(135deg,#FFE5EE 0%,#FFF5DA 100%);display:flex;justify-content:center;align-items:flex-end;height:160px;overflow:hidden;">
+              <img src="./assets/characters/shake_normal.png" alt="しゃけ" style="height:150px;width:auto;" loading="lazy">
+              <img src="./assets/characters/wakame_normal.png" alt="わかめ" style="height:150px;width:auto;margin-left:-20px;" loading="lazy">
+            </div>
+          </a>
           <div class="m-card4-body">
-            <h3 class="m-card4-title">最新記事</h3>
-            <p class="m-card4-desc">お金・人生設計に役立つ最新トピックを定期更新。<br><span style="color:#9ca3af;font-size:11.5px;">※ 準備中</span></p>
-            <a href="#" class="m-card4-link">記事一覧 →</a>
+            <h3 class="m-card4-title">しゃけとわかめの<br>未来デザイン教室</h3>
+            <p class="m-card4-desc">物語を読みながら、お金の知識を楽しく学べる会話形式シリーズ。<br><span style="color:#FF6B9D;font-size:11.5px;font-weight:700;">★ 全20話・4章構成 + 番外編 公開中</span></p>
+            <a href="./articles/" class="m-card4-link">シリーズ一覧を見る →</a>
           </div>
         </article>
         <article id="policy" class="m-card4">
