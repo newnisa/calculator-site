@@ -397,17 +397,20 @@
     }
     .talk.--right { flex-direction: row-reverse; }
     .talk-avatar {
-      width: 96px; height: 96px; flex-shrink: 0;
-      border-radius: 50%; object-fit: cover; object-position: center top;
+      width: 116px; height: 116px; flex-shrink: 0;
+      border-radius: 50%;
+      /* 全身を円内に収めつつ、円自体を1.2倍に拡大して表情の視認性を確保 */
+      object-fit: contain; object-position: center bottom;
       background: #FFFFFF;
       box-shadow: var(--shadow-md);
       border: 3.5px solid #FFFFFF;
+      padding: 4px;
     }
     .talk:not(.--right) .talk-avatar { border-color: var(--c-pink-soft); }
     .talk.--right .talk-avatar { border-color: var(--c-green-soft); }
     .talk-bubble {
       max-width: 560px;
-      width: calc(100% - 116px);
+      width: calc(100% - 136px);
       position: relative;
       padding: 18px 22px 16px;
       border-radius: 22px;
@@ -792,9 +795,9 @@
       .chapter .ch-num { font-size: 11.5px; }
       .narration { padding: 18px 20px; font-size: 14.5px; border-radius: 14px; }
       .talk { gap: 12px; margin: 22px 0; }
-      .talk-avatar { width: 72px; height: 72px; border-width: 3px; }
+      .talk-avatar { width: 86px; height: 86px; border-width: 3px; }
       .talk-bubble {
-        max-width: calc(100% - 88px); width: calc(100% - 88px);
+        max-width: calc(100% - 102px); width: calc(100% - 102px);
         padding: 14px 16px 12px; font-size: 15.5px; line-height: 1.85;
         border-radius: 18px;
       }
@@ -826,8 +829,8 @@
       .next-sub { font-size: 13.5px; }
     }
     @media (max-width: 380px) {
-      .talk-avatar { width: 64px; height: 64px; }
-      .talk-bubble { max-width: calc(100% - 80px); width: calc(100% - 80px); padding: 12px 14px 10px; font-size: 15px; }
+      .talk-avatar { width: 78px; height: 78px; }
+      .talk-bubble { max-width: calc(100% - 94px); width: calc(100% - 94px); padding: 12px 14px 10px; font-size: 15px; }
     }
 
 /* ─── EP別 eyecatch 配色バリエーション ─── */
@@ -1211,6 +1214,17 @@
 .eyecatch-inner.--ep21::before { background: radial-gradient(circle, rgba(39,185,154,.34) 0%, transparent 70%); }
 .eyecatch-inner.--ep21::after { background: radial-gradient(circle, rgba(45,127,249,.28) 0%, transparent 70%); }
 .related-thumb.--ep21 { background: linear-gradient(135deg, #DFF6EF 0%, #EAF4FF 100%); }
+
+.eyecatch-inner.--ep22 {
+  background: linear-gradient(135deg, #F4F1FB 0%, #FFF0F6 50%, #F7FAFC 100%);
+}
+.eyecatch-inner.--ep22 .eyecatch-badge {
+  background: linear-gradient(135deg, #7A7FF0 0%, #FF6B9D 100%);
+  box-shadow: 0 10px 24px rgba(122,127,240,.42);
+}
+.eyecatch-inner.--ep22::before { background: radial-gradient(circle, rgba(122,127,240,.32) 0%, transparent 70%); }
+.eyecatch-inner.--ep22::after { background: radial-gradient(circle, rgba(255,107,157,.28) 0%, transparent 70%); }
+.related-thumb.--ep22 { background: linear-gradient(135deg, #F4F1FB 0%, #FFF0F6 100%); }
 
 /* 番外編 ラベル */
 .eyecatch-episode .ch-label.--bonus {
