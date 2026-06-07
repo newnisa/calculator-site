@@ -79,7 +79,7 @@
     }
     .index-cast-card {
       background: #FFFFFF; border-radius: 22px;
-      padding: 22px; display: flex; align-items: center; gap: 16px;
+      padding: 22px; display: flex; align-items: flex-start; gap: 16px;
       border: 2px solid transparent;
       box-shadow: var(--shadow-sm);
     }
@@ -98,6 +98,18 @@
     .index-cast-card.--shake .index-cast-name { color: var(--c-pink); }
     .index-cast-card.--wakame .index-cast-name { color: var(--c-green); }
     .index-cast-role { font-size: 13.5px; color: var(--c-text-muted); line-height: 1.7; }
+    .index-cast-tags {
+      list-style: none; padding: 0; margin: 10px 0 0;
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .index-cast-tags li {
+      font-size: 11.5px; font-weight: 700; line-height: 1;
+      padding: 5px 10px; border-radius: 999px;
+      background: #FFFFFF; color: var(--c-text-sub);
+      border: 1px solid var(--c-border);
+    }
+    .index-cast-card.--shake .index-cast-tags li { border-color: var(--c-pink-soft); }
+    .index-cast-card.--wakame .index-cast-tags li { border-color: var(--c-green-soft); }
 
     /* 章ジャンプ */
     .index-jump { max-width: 1240px; margin: 0 auto 40px; padding: 0 24px; }
@@ -301,14 +313,26 @@
     <img class="index-cast-avatar" src="../assets/characters/shake_normal.png" alt="しゃけ">
     <div>
       <div class="index-cast-name">しゃけ</div>
-      <div class="index-cast-role">20代会社員。金融リテラシーは皆無で、お金や投資の用語は1つも知らない。読者と同じ目線で、わかめに素直に質問する役。</div>
+      <div class="index-cast-role">のんびり屋で、ちょっぴり心配性。でも、気になったことはとことん聞きたくなる、好奇心いっぱいの食いしんぼう。難しい話は苦手だけど、前向きさは誰にも負けない。</div>
+      <ul class="index-cast-tags">
+        <li>🎂 20代</li>
+        <li>🍔 好物はマック</li>
+        <li>✈️ 旅と温泉が好き</li>
+        <li>😊 素直で前向き</li>
+      </ul>
     </div>
   </div>
   <div class="index-cast-card --wakame">
     <img class="index-cast-avatar" src="../assets/characters/wakame_normal.png" alt="わかめ">
     <div>
       <div class="index-cast-name">わかめ</div>
-      <div class="index-cast-role">資産形成にくわしい解説役。むずかしい言葉を、たとえ話を使って、やさしく、丁寧に、構造立てて説明するタイプ。</div>
+      <div class="index-cast-role">おっとり優しくて、面倒見のいいしっかり者。むずかしいことも、たとえ話でやわらかく話してくれる。しゃけのどんな質問にも、にっこり付き合ってくれる頼れる存在。</div>
+      <ul class="index-cast-tags">
+        <li>📚 読書とコーヒー</li>
+        <li>🏡 家計簿が趣味</li>
+        <li>🌱 植物を育てるのが好き</li>
+        <li>🍵 おっとりマイペース</li>
+      </ul>
     </div>
   </div>
 </section>

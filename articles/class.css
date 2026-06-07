@@ -784,37 +784,37 @@
       }
       .eyecatch-badge-num { font-size: 22px; }
       .eyecatch-badge-label { font-size: 9px; }
-      .learn-card { padding: 0 16px; margin-top: 24px; }
-      .learn-card-inner { padding: 22px 20px; border-radius: 18px; }
+      .learn-card { padding: 0 10px; margin-top: 24px; }
+      .learn-card-inner { padding: 18px 14px; border-radius: 16px; }
       .learn-card-icon { width: 40px; height: 40px; font-size: 20px; }
       .learn-card-title { font-size: 16.5px; }
       .learn-card-list { grid-template-columns: 1fr; gap: 10px; }
       .learn-card-list li { font-size: 14.5px; }
-      .layout { padding: 24px 16px 48px; }
+      .layout { padding: 24px 10px 48px; }
       .chapter { font-size: 21px; margin: 48px 0 22px; padding-left: 16px; border-left-width: 6px; }
       .chapter .ch-num { font-size: 11.5px; }
       .narration { padding: 18px 20px; font-size: 14.5px; border-radius: 14px; }
-      .talk { gap: 12px; margin: 22px 0; }
-      .talk-avatar { width: 86px; height: 86px; border-width: 3px; }
+      .talk { gap: 10px; margin: 22px 0; }
+      .talk-avatar { width: 64px; height: 64px; border-width: 3px; padding: 3px; }
       .talk-bubble {
-        max-width: calc(100% - 102px); width: calc(100% - 102px);
+        max-width: calc(100% - 78px); width: calc(100% - 78px);
         padding: 14px 16px 12px; font-size: 15.5px; line-height: 1.85;
         border-radius: 18px;
       }
       .talk-name { font-size: 12px; margin-bottom: 4px; }
-      .callout { padding: 22px 20px; border-radius: 16px; margin: 28px 0; }
+      .callout { padding: 18px 13px; border-radius: 14px; margin: 26px 0; }
       .callout-emoji { width: 44px; height: 44px; font-size: 24px; }
       .callout-title { font-size: 16px; }
       .callout-body { font-size: 14.5px; line-height: 1.9; }
-      .callout-actions li { font-size: 14.5px; padding: 10px 14px; }
+      .callout-actions li { font-size: 14.5px; padding: 10px 12px; }
       .life-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .life-item { padding: 16px 8px; border-radius: 14px; }
       .life-emoji { font-size: 34px; }
       .life-name { font-size: 14px; }
-      .summary { padding: 26px 20px; border-radius: 20px; margin: 48px 0 28px; }
+      .summary { padding: 20px 13px; border-radius: 18px; margin: 48px 0 28px; }
       .summary-icon { width: 50px; height: 50px; font-size: 28px; }
       .summary-title { font-size: 19px; }
-      .summary-list li { font-size: 14.5px; padding: 14px 16px; }
+      .summary-list li { font-size: 14.5px; padding: 13px 13px; }
       .cta-section { padding: 32px 22px; border-radius: 22px; }
       .cta-emoji { font-size: 44px; }
       .cta-title { font-size: 21px; }
@@ -829,8 +829,8 @@
       .next-sub { font-size: 13.5px; }
     }
     @media (max-width: 380px) {
-      .talk-avatar { width: 78px; height: 78px; }
-      .talk-bubble { max-width: calc(100% - 94px); width: calc(100% - 94px); padding: 12px 14px 10px; font-size: 15px; }
+      .talk-avatar { width: 58px; height: 58px; }
+      .talk-bubble { max-width: calc(100% - 72px); width: calc(100% - 72px); padding: 12px 13px 10px; font-size: 15px; }
     }
 
 /* ─── EP別 eyecatch 配色バリエーション ─── */
