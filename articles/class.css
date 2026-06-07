@@ -225,12 +225,12 @@
       gap: 12px 24px;
     }
     .learn-card-list li {
-      display: flex; align-items: flex-start; gap: 10px;
+      position: relative; padding-left: 34px;
       font-size: 15.5px; font-weight: 700; line-height: 1.6;
       color: var(--c-text);
     }
     .learn-card-list li::before {
-      content: "✓"; flex-shrink: 0;
+      content: "✓"; position: absolute; left: 0; top: 0;
       color: var(--c-green); font-weight: 900; font-size: 18px;
       width: 24px; height: 24px;
       display: grid; place-items: center;
@@ -497,12 +497,13 @@
     }
     .callout-actions li {
       background: rgba(255,255,255,.68);
-      padding: 12px 16px; border-radius: 12px;
+      padding: 12px 16px 12px 40px; border-radius: 12px;
       font-size: 15.5px; font-weight: 700; line-height: 1.65;
-      display: flex; align-items: flex-start; gap: 10px;
+      position: relative;
     }
     .callout-actions li::before {
-      content: "□"; color: var(--c-green); font-size: 22px; line-height: 1; flex-shrink: 0;
+      content: "□"; color: var(--c-green); font-size: 20px; line-height: 1;
+      position: absolute; left: 15px; top: 12px;
     }
 
     /* ─── 人生イベント グリッド ─── */
@@ -548,12 +549,12 @@
     .summary-title { font-size: 23px; font-weight: 900; letter-spacing: 0.02em; }
     .summary-list { display: flex; flex-direction: column; gap: 12px; }
     .summary-list li {
-      display: flex; align-items: flex-start; gap: 12px;
+      position: relative;
       font-size: 16px; line-height: 1.85;
       background: rgba(255,255,255,.75);
-      padding: 16px 20px; border-radius: 14px;
+      padding: 16px 20px 16px 48px; border-radius: 14px;
     }
-    .summary-list li::before { content: "✨"; flex-shrink: 0; font-size: 22px; line-height: 1.4; }
+    .summary-list li::before { content: "✨"; position: absolute; left: 18px; top: 15px; font-size: 20px; line-height: 1.4; }
     .summary-list strong { color: var(--c-orange); font-weight: 900; }
 
     /* ─── シミュレーター CTA セクション ─── */
@@ -760,7 +761,7 @@
 
     /* ─── モバイル (640px 以下) ─── */
     @media (max-width: 640px) {
-      body { font-size: 17px; line-height: 1.95; }
+      body { font-size: 15px; line-height: 1.9; }
       .nav-inner { padding: 12px 16px; }
       .nav-logo-icon { width: 34px; height: 34px; font-size: 18px; }
       .nav-logo-ja { font-size: 13px; }
@@ -784,37 +785,52 @@
       }
       .eyecatch-badge-num { font-size: 22px; }
       .eyecatch-badge-label { font-size: 9px; }
-      .learn-card { padding: 0 10px; margin-top: 24px; }
-      .learn-card-inner { padding: 18px 14px; border-radius: 16px; }
-      .learn-card-icon { width: 40px; height: 40px; font-size: 20px; }
-      .learn-card-title { font-size: 16.5px; }
-      .learn-card-list { grid-template-columns: 1fr; gap: 10px; }
-      .learn-card-list li { font-size: 14.5px; }
-      .layout { padding: 24px 10px 48px; }
-      .chapter { font-size: 21px; margin: 48px 0 22px; padding-left: 16px; border-left-width: 6px; }
-      .chapter .ch-num { font-size: 11.5px; }
-      .narration { padding: 18px 20px; font-size: 14.5px; border-radius: 14px; }
-      .talk { gap: 10px; margin: 22px 0; }
-      .talk-avatar { width: 64px; height: 64px; border-width: 3px; padding: 3px; }
+      .learn-card { padding: 0 8px; margin-top: 24px; }
+      .learn-card-inner { padding: 16px 12px; border-radius: 16px; }
+      .learn-card-icon { width: 38px; height: 38px; font-size: 19px; }
+      .learn-card-title { font-size: 15.5px; }
+      .learn-card-list { grid-template-columns: 1fr; gap: 8px; }
+      .learn-card-list li { font-size: 13.5px; line-height: 1.75; }
+      .layout { padding: 22px 8px 48px; }
+      .chapter { font-size: 20px; margin: 44px 0 20px; padding-left: 14px; border-left-width: 6px; }
+      .chapter .ch-num { font-size: 11px; }
+      .narration { padding: 16px 14px; font-size: 13.5px; line-height: 1.85; border-radius: 14px; }
+      .talk { gap: 10px; margin: 20px 0; }
+      .talk-avatar { width: 60px; height: 60px; border-width: 3px; padding: 3px; }
       .talk-bubble {
-        max-width: calc(100% - 78px); width: calc(100% - 78px);
-        padding: 14px 16px 12px; font-size: 15.5px; line-height: 1.85;
-        border-radius: 18px;
+        max-width: calc(100% - 74px); width: calc(100% - 74px);
+        padding: 13px 14px 11px; font-size: 14px; line-height: 1.8;
+        border-radius: 16px;
       }
-      .talk-name { font-size: 12px; margin-bottom: 4px; }
-      .callout { padding: 18px 13px; border-radius: 14px; margin: 26px 0; }
-      .callout-emoji { width: 44px; height: 44px; font-size: 24px; }
-      .callout-title { font-size: 16px; }
-      .callout-body { font-size: 14.5px; line-height: 1.9; }
-      .callout-actions li { font-size: 14.5px; padding: 10px 12px; }
-      .life-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .talk-name { font-size: 11.5px; margin-bottom: 3px; }
+      .callout { padding: 16px 13px; border-radius: 14px; margin: 24px 0; }
+      .callout-head { gap: 10px; margin-bottom: 10px; }
+      .callout-emoji { width: 40px; height: 40px; font-size: 22px; }
+      .callout-title { font-size: 15px; line-height: 1.5; }
+      .callout-label { font-size: 10.5px; }
+      .callout-body { font-size: 13.5px; line-height: 1.85; }
+      /* ACTION: パネルを使わず素の箇条書き + 小さめマーカー */
+      .callout-actions { gap: 5px; margin-top: 10px; }
+      .callout-actions li {
+        background: none; padding: 3px 0 3px 16px; border-radius: 0;
+        font-size: 13.5px; font-weight: 600; line-height: 1.8;
+      }
+      .callout-actions li::before { content: "・"; color: var(--c-green); font-size: 16px; left: 0; top: 3px; }
+      .life-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 24px 0; }
       .life-item { padding: 16px 8px; border-radius: 14px; }
-      .life-emoji { font-size: 34px; }
-      .life-name { font-size: 14px; }
-      .summary { padding: 20px 13px; border-radius: 18px; margin: 48px 0 28px; }
-      .summary-icon { width: 50px; height: 50px; font-size: 28px; }
-      .summary-title { font-size: 19px; }
-      .summary-list li { font-size: 14.5px; padding: 13px 13px; }
+      .life-emoji { font-size: 32px; }
+      .life-name { font-size: 13.5px; }
+      .summary { padding: 18px 14px; border-radius: 18px; margin: 44px 0 26px; }
+      .summary-head { gap: 10px; margin-bottom: 14px; }
+      .summary-icon { width: 44px; height: 44px; font-size: 24px; }
+      .summary-title { font-size: 18px; }
+      /* 今日のまとめ: パネルを使わず素の箇条書き + 小さめマーカー */
+      .summary-list { gap: 7px; }
+      .summary-list li {
+        background: none; padding: 3px 0 3px 18px; border-radius: 0;
+        font-size: 13.5px; line-height: 1.8;
+      }
+      .summary-list li::before { content: "✦"; color: var(--c-orange); font-size: 14px; left: 0; top: 4px; }
       .cta-section { padding: 32px 22px; border-radius: 22px; }
       .cta-emoji { font-size: 44px; }
       .cta-title { font-size: 21px; }
