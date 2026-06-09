@@ -2,6 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8"/>
+  <!-- ANALYTICS:START -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36ZM10B8XE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-36ZM10B8XE');
+  </script>
+  <!-- ANALYTICS:END -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- ═══ 基本SEO ═══ -->
@@ -2964,6 +2973,18 @@
   </article>
 </section>
 
+<section data-sim-related style="max-width:1220px;margin:32px auto 0;padding:0 22px;">
+  <div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:16px;padding:22px 24px;">
+    <h2 style="font-size:17px;font-weight:800;color:#0c4a6e;margin-bottom:6px;">📚 もっと学ぶ — 関連エピソード</h2>
+    <p style="color:#475569;font-size:13px;margin-bottom:14px;line-height:1.7;">「しゃけとわかめの未来デザイン教室」では、このテーマを会話形式の物語でやさしく解説しています。</p>
+    <ul style="list-style:none;display:grid;gap:10px;padding:0;margin:0;">
+      <li><a href="articles/future-design-class-018.html" style="display:block;background:#fff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 16px;color:#0c4a6e;text-decoration:none;font-weight:700;font-size:14px;">第18話 FIREって、わたしにもできる？ <span style="color:#0ea5e9;">→</span></a></li>
+      <li><a href="articles/future-design-class-019.html" style="display:block;background:#fff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 16px;color:#0c4a6e;text-decoration:none;font-weight:700;font-size:14px;">第19話 老後資金、いくら必要なの？ <span style="color:#0ea5e9;">→</span></a></li>
+    </ul>
+    <p style="margin-top:14px;text-align:center;"><a href="articles/" style="color:#0ea5e9;font-weight:800;text-decoration:none;font-size:14px;">▶ シリーズ全21話の一覧を見る</a></p>
+  </div>
+</section>
+
 <footer style="max-width:1220px;margin:40px auto 0;padding:24px 22px;border-top:2px solid #c8cdd8;text-align:center;color:#6b7280;font-size:13px;">
   <p style="margin-bottom:8px;"><strong>新NISAシミュレーター</strong> ｜ 積立・一括・取り崩し・新NISAを無料で試算</p>
   <p style="margin-bottom:8px;">© 2024-2026 shakewakame. All Rights Reserved.</p>
@@ -3286,7 +3307,7 @@ const autoFire=()=>{ if(el('f5-auto')?.checked) calcFire(); };
 calcFire();
 // URL読み込み（ページ表示時）
 loadFromURL();
-</script>
+
 // ── help-pop を body に detach + fixed 位置で表示（panel overflow:auto に影響されない） ──
   (function setupHelpPop(){
     function setup(){
