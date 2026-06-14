@@ -1,0 +1,53 @@
+{
+  "name": "新NISAシミュレーター - 積立・一括・FIRE・取り崩し試算",
+  "short_name": "新NISAシミュ",
+  "description": "新NISA・積立投資・一括投資・資産取り崩し・FIRE逆算の5機能を無料でシミュレーション。最大4シナリオ同時比較、複利計算、グラフ表示に対応。",
+  "start_url": "/calculator-site/",
+  "scope": "/calculator-site/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "lang": "ja",
+  "categories": [
+    "finance",
+    "productivity",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%231d4ed8' rx='32'/%3E%3Ctext x='96' y='128' font-size='112' text-anchor='middle' fill='white'%3E📈%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%231d4ed8' rx='80'/%3E%3Ctext x='256' y='344' font-size='304' text-anchor='middle' fill='white'%3E📈%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "積立投資シミュレーター",
+      "url": "/calculator-site/simulator_tumitate.html",
+      "description": "毎月の積立から将来資産を試算"
+    },
+    {
+      "name": "FIRE逆算シミュレーター",
+      "url": "/calculator-site/simulator_fire.html",
+      "description": "FIRE達成までの年数を逆算"
+    },
+    {
+      "name": "社会保険料シミュレーター",
+      "url": "/calculator-site/simulator_shaho.html",
+      "description": "4-6月の残業ランクを予測"
+    },
+    {
+      "name": "住民税&ふるさと納税シミュレーター",
+      "url": "/calculator-site/simulator_juminzei.html",
+      "description": "ふるさと納税限度額試算"
+    }
+  ]
+}
