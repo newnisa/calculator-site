@@ -161,8 +161,8 @@ footer{ border-top:2px dashed var(--border) !important; }
 .left-col .actions .btn-secondary{ order:1; }
 .left-col .actions .btn-share{ order:2; }
 .left-col .actions .btn-secondary, .left-col .actions .btn-share{ flex:0 0 auto; width:auto; margin:0; min-height:38px !important; max-height:38px; font-size:13px !important; padding:8px 14px !important; }
-.left-col .auto-calc-wrap{ order:3; display:inline-flex; align-items:center; gap:6px; font-size:13px !important; color:var(--muted); font-weight:600; cursor:pointer; user-select:none; white-space:nowrap; }
-.left-col .auto-calc-wrap input[type="checkbox"]{ width:16px; height:16px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+.left-col .auto-calc-wrap{ order:3; display:inline-flex; align-items:center; gap:6px; font-size:13px !important; line-height:1.4 !important; color:var(--muted); font-weight:600; cursor:pointer; user-select:none; white-space:nowrap; }
+.left-col .auto-calc-wrap input[type="checkbox"]{ width:16px; height:16px; margin:0 !important; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
 /* PC: 計算ボタンを白いカード(別パネル)として常時表示 */
 @media (min-width:981px){
   .left-col > .actions.actions-detached{
@@ -175,9 +175,9 @@ footer{ border-top:2px dashed var(--border) !important; }
   .left-col{ height:auto !important; max-height:none !important; }
   .grid > .card.panel, .left-col > .card.panel{
     flex:0 0 auto !important;
-    height:min(575px, calc(100vh - 260px)) !important;
+    height:min(580px, calc(100vh - 255px)) !important;
     min-height:0 !important;
-    max-height:min(575px, calc(100vh - 260px)) !important;
+    max-height:min(580px, calc(100vh - 255px)) !important;
     overflow-y:auto !important;
     scrollbar-width:thin; scrollbar-color:var(--border) transparent;
   }
