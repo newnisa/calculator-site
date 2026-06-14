@@ -1,213 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://newnisa.github.io/calculator-site/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_tumitate.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_ikkatsu.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_torikuzushi.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_nisa.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_fire.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_shaho.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/simulator_juminzei.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://newnisa.github.io/calculator-site/simulator_inflation.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://newnisa.github.io/calculator-site/simulator_kotehi.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/ogp.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/chapter-1.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/chapter-2.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/chapter-3.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/chapter-4.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-001.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-002.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_question.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-003.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_exclamation.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-004.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_excited.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-005.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-006.html</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_exclamation.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-007.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-008.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_excited.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-009.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_question.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-010.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_excited.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-011.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_exclamation.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-012.html</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-013.html</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_question.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-014.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-015.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_excited.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-016.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-017.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-018.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-019.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-020.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/wakame_normal.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-021.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_laughing.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://newnisa.github.io/calculator-site/articles/future-design-class-022.html</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <image:image><image:loc>https://newnisa.github.io/calculator-site/assets/characters/shake_surprised.png</image:loc></image:image>
   </url>
 </urlset>

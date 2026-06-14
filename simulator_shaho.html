@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <!-- ANALYTICS:START -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-36ZM10B8XE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,11 +16,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>社会保険料シミュレーター｜4-6月の残業で標準報酬月額が上がる？無料試算</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#1d4ed8">
+  <meta name="theme-color" content="#2D7FF9">
   <meta name="description" content="基本給・住宅手当・通勤手当・各種手当・残業時間・年間ボーナス・年齢を入力するだけで、4月から6月の支給給与平均から決まる標準報酬月額ランクと年間社会保険料を試算する無料シミュレーター。残業時間別ボーダー試算で年間手取り最大化を支援。">
   <meta name="keywords" content="社会保険料,シミュレーター,標準報酬月額,4月5月6月,残業,健康保険料,厚生年金,等級,手取り">
   <meta name="author" content="shakewakame">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator_shaho.html">
   <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/simulator_shaho.html">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
@@ -29,7 +31,7 @@
   <meta property="og:title" content="社会保険料シミュレーター｜4-6月の残業で標準報酬月額が上がる？">
   <meta property="og:description" content="基本給・手当・残業から標準報酬月額と社会保険料ランクを試算。年間手取りを最大化する戦略立てに。無料。">
   <meta property="og:url" content="https://newnisa.github.io/calculator-site/simulator_shaho.html">
-  <meta property="og:site_name" content="新NISAシミュレーター">
+  <meta property="og:site_name" content="未来デザイン研究所">
   <meta property="og:image" content="https://newnisa.github.io/calculator-site/ogp.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -85,17 +87,17 @@
       --bg: #edf0f4;
       --surface: #ffffff;
       --surface2: #f4f6f9;
-      --text: #111827;
-      --text2: #374151;
+      --text: #1A1F36;
+      --text2: #4B5563;
       --muted: #6b7280;
-      --accent: #1d4ed8;
+      --accent: #2D7FF9;
       --accent-dark: #1e3a8a;
-      --accent2: #2563eb;
+      --accent2: #2D7FF9;
       --accent3: #3b82f6;
-      --border: #c8cdd8;
-      --success: #059669;
-      --danger: #dc2626;
-      --warn: #d97706;
+      --border: #EAE2EC;
+      --success: #27B99A;
+      --danger: #F2557B;
+      --warn: #FF8A65;
       --shadow: 0 4px 24px rgba(0,0,0,.09);
       --shadow-sm: 0 1px 4px rgba(0,0,0,.07);
       --radius: 16px;
@@ -176,7 +178,7 @@
         .btn-primary {
       border: none; border-radius: 12px; padding: 15px 26px;
       font-size: 16px; font-weight: 900; cursor: pointer;
-      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
+      background: linear-gradient(135deg, #2D7FF9 0%, #3b82f6 100%); color: white;
       box-shadow: 0 6px 22px rgba(29,78,216,.45), 0 2px 6px rgba(29,78,216,.3);
       transition: transform .15s, box-shadow .15s, filter .15s; letter-spacing: -.01em;
       position: relative;
@@ -204,7 +206,7 @@
     /* ── 結果カード ── */
     .right { display: grid; gap: 18px; }
     .hero-result {
-      background: linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff;
+      background: linear-gradient(135deg,#2D7FF9,#3b82f6); color:#fff;
       border-radius: var(--radius); box-shadow: var(--shadow);
       text-align: center; padding: 24px 22px;
     }
@@ -468,7 +470,7 @@
     input[type="range"] {
       -webkit-appearance: none; appearance: none;
       width: 100%; height: 6px; border-radius: 999px; outline: none; cursor: pointer; border: none;
-      background: linear-gradient(to right, var(--accent) var(--pct, 0%), #c8cdd8 var(--pct, 0%)) !important;
+      background: linear-gradient(to right, var(--accent) var(--pct, 0%), #EAE2EC var(--pct, 0%)) !important;
       transition: background .12s;
     }
     .input-slider-wrap input[type="range"]::-webkit-slider-thumb,
@@ -524,15 +526,37 @@
 
 
   </style>
+  <style>
+  /* ブランド統一 (unify_sim_branding) */
+  .logo-link{display:flex;align-items:center;gap:9px;text-decoration:none;margin-bottom:2px;}
+  .logo-wm{display:flex;flex-direction:column;line-height:1.18;min-width:0;}
+  .logo-wm-ja{font-size:12.5px;font-weight:900;color:var(--text);letter-spacing:.01em;white-space:nowrap;}
+  .logo-wm-en{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.1em;font-family:"Quicksand","Avenir Next",sans-serif;}
+  .side-learn{display:flex;align-items:center;gap:7px;margin-top:8px;padding:10px 13px;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;color:#0c4a6e;background:#eef6ff;border:1.5px solid #bfdbfe;transition:background .18s,transform .18s;}
+  .side-learn:hover{background:#dbeafe;transform:translateY(-1px);}
+  @media (max-width:760px){ .logo-wm-ja{font-size:13px;} }
+  </style>
+  <link rel="stylesheet" href="./sim.css">
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+      { "@type": "Question", "name": "社会保険料はどうやって決まりますか？", "acceptedAnswer": { "@type": "Answer", "text": "毎年4・5・6月に支給された給与の平均（標準報酬月額）で決まり、その年の9月から翌年8月までの保険料に反映されます。" } },
+      { "@type": "Question", "name": "4-6月の残業を減らすと得ですか？", "acceptedAnswer": { "@type": "Answer", "text": "はい。標準報酬月額が下がれば、1年間の社会保険料が下がります。本ツールで残業時間別の差を試算できます。" } },
+      { "@type": "Question", "name": "ボーナスにも社会保険料はかかりますか？", "acceptedAnswer": { "@type": "Answer", "text": "かかります（標準賞与額）。健康保険は年573万円、厚生年金は1回150万円が上限です。" } },
+      { "@type": "Question", "name": "介護保険料はいつからかかりますか？", "acceptedAnswer": { "@type": "Answer", "text": "40歳の誕生月から65歳の前月まで、健康保険料に介護保険料が上乗せされます。" } },
+      { "@type": "Question", "name": "計算結果は正確ですか？", "acceptedAnswer": { "@type": "Answer", "text": "協会けんぽ東京都の料率に基づく試算です。加入する健保組合・地域により実際の金額は異なります。" } }
+  ] }
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
 <div class="wrap">
   <aside class="sidebar">
-    <a href="./index.html" aria-label="新NISAシミュレーター ホーム" style="text-decoration:none;">
-      <div class="logo-icon" role="img" aria-label="ホーム">📈</div>
+    <a href="./index.html" class="logo-link" aria-label="未来デザイン研究所 ホーム">
+      <div class="logo-icon" role="img" aria-label="">🌅</div>
+      <div class="logo-wm"><span class="logo-wm-ja">未来デザイン研究所</span><span class="logo-wm-en">Mirai Design Lab</span></div>
     </a>
+    
     <nav class="tab-bar" aria-label="シミュレーター切替">
       <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
       <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
@@ -541,14 +565,21 @@
       <a class="tab-btn" href="simulator_fire.html">FIRE逆算</a>
       <button class="tab-btn active" aria-current="page">社会保険料</button>
       <a class="tab-btn" href="simulator_juminzei.html">住民税&ふるさと納税</a>
+      <a class="tab-btn" href="simulator_inflation.html">インフレ実質価値</a>
+      <a class="tab-btn" href="simulator_kotehi.html">固定費の見直し</a>
     </nav>
+    <a href="./articles/" class="side-learn">📚 未来デザイン教室で学ぶ</a>
     <div class="crumb" aria-label="パンくず">
       <ol><li><a href="./index.html">ホーム</a></li><li>›</li><li><a href="./index.html#features">シミュレーター</a></li><li>›</li><li>社会保険料</li></ol>
     </div>
   </aside>
 
   <div class="main-area" id="main">
-    <header class="topbar"><h1>社会保険料シミュレーター</h1></header>
+    <header class="topbar"><h1>社会保険料シミュレーター</h1><div class="sim-guide">
+      <img class="sim-guide-av" src="./assets/characters/wakame_normal.png" width="262" height="280" alt="わかめ" loading="lazy">
+      <div class="sim-guide-bubble"><strong>わかめ：</strong>お給料から引かれる社会保険料の中身、いっしょにのぞいてみよう。</div>
+    </div>
+    </header>
 
     <main class="grid">
       <section class="card panel">
@@ -761,29 +792,6 @@
   </div>
 </div>
 
-<!-- ═══ シミュレーター間クロスナビ ═══ -->
-<nav class="cross-nav-section" aria-labelledby="cross-nav-heading" style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
-  <div style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
-    <h2 id="cross-nav-heading" style="font-size:17px;font-weight:800;color:#111827;margin-bottom:14px;">他のシミュレーターも試す</h2>
-    <div class="cross-nav-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
-      <a href="./simulator_tumitate.html" class="cross-nav-card"><span class="cn-emoji">📈</span><span class="cn-name">積立投資<br><small>シミュレーター</small></span></a>
-      <a href="./simulator_ikkatsu.html" class="cross-nav-card"><span class="cn-emoji">💴</span><span class="cn-name">一括投資<br><small>シミュレーター</small></span></a>
-      <a href="./simulator_torikuzushi.html" class="cross-nav-card"><span class="cn-emoji">🏖️</span><span class="cn-name">資産取り崩し<br><small>シミュレーター</small></span></a>
-      <a href="./simulator_nisa.html" class="cross-nav-card"><span class="cn-emoji">🎯</span><span class="cn-name">新NISA<br><small>シミュレーター</small></span></a>
-      <a href="./simulator_fire.html" class="cross-nav-card"><span class="cn-emoji">🔥</span><span class="cn-name">FIRE逆算<br><small>シミュレーター</small></span></a>
-      <a href="./simulator_juminzei.html" class="cross-nav-card"><span class="cn-emoji">🏠</span><span class="cn-name">住民税&ふるさと納税<br><small>シミュレーター</small></span></a>
-    </div>
-    <a href="./index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
-  </div>
-</nav>
-<style>
-  .cross-nav-card { display:flex; align-items:center; gap:10px; padding:12px 14px; text-decoration:none; background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px; color:#111827; transition:all .15s; }
-  .cross-nav-card:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
-  .cn-emoji { font-size:20px; }
-  .cn-name { font-size:13px; font-weight:700; line-height:1.3; }
-  .cn-name small { font-size:10.5px; color:#6b7280; font-weight:600; }
-</style>
-
 <script>
   const el = id => document.getElementById(id);
   const fmtYen = n => '¥' + Math.round(n).toLocaleString('ja-JP');
@@ -966,7 +974,7 @@
     for (let i = 1; i < pts.length; i++) {
       if (pts[i].grade !== pts[i-1].grade) {
         const xx = px(pts[i].ot).toFixed(1);
-        stepLine += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6"/>`;
+        stepLine += `<line x1="${xx}" y1="${pad.t}" x2="${xx}" y2="${H-pad.b}" stroke="#F2557B" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6"/>`;
       }
     }
 
@@ -978,7 +986,7 @@
       const y = py(p.fee);
       const h = H - pad.b - y;
       const isCur = Math.abs(p.ot - input.overtime) < 3;
-      bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${isCur ? '#dc2626' : '#3b82f6'}" opacity="0.75" rx="3"/>`;
+      bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${isCur ? '#F2557B' : '#3b82f6'}" opacity="0.75" rx="3"/>`;
     });
 
     // タイトル軸
@@ -1145,7 +1153,7 @@
       btn.type = 'button';
       btn.className = 'back-to-input-btn';
       btn.textContent = '↑ 条件入力に戻る';
-      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #1d4ed8;background:#fff;color:#1d4ed8;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
+      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #2D7FF9;background:#fff;color:#2D7FF9;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
       btn.addEventListener('click', () => {
         const input = findInput();
         if (input && input.scrollIntoView) input.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1293,19 +1301,34 @@
 
 <!-- ═══ SEO向けコンテンツセクション ═══ -->
 <section class="seo-content" aria-labelledby="seo-about-shaho" style="max-width:1220px;margin:40px auto 0;padding:0 22px;">
-  <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
-    <h2 id="seo-about-shaho" style="font-size:20px;font-weight:800;color:#111827;margin-bottom:14px;border-bottom:2px solid #c8cdd8;padding-bottom:10px;">社会保険料シミュレーターについて</h2>
-    <p style="color:#374151;line-height:1.9;margin-bottom:14px;">社会保険料(健康保険+厚生年金+介護保険)は、毎年4・5・6月の支給給与の平均から算出される<strong>標準報酬月額</strong>を基準に決まり、その年9月から翌年8月まで反映されます。1ランク上がると毎月数千円〜1万円以上、年間では数万円〜10万円以上の差が出るため、4-6月の残業時間管理は手取り最大化の重要な戦略です。</p>
-    <p style="color:#374151;line-height:1.9;margin-bottom:14px;">本ツールは協会けんぽ東京都(2024年)の50等級テーブル・各種保険料率(健康保険9.98%/介護込み11.58%/厚生年金18.30%、労使折半)を実装。基本給・各種手当・残業時間・ボーナス・年齢を入力するだけで、標準報酬月額ランク・月額保険料・年間保険料・残業ボーダー試算を瞬時に表示します。</p>
-    <p style="color:#374151;line-height:1.9;">関連シミュレーター: <a href="./simulator_juminzei.html" style="color:#1d4ed8;">住民税&ふるさと納税</a>と組み合わせて年間手取りを総合的に最大化する戦略立てが可能です。</p>
+  <article style="background:#ffffff;border:1.5px solid #EAE2EC;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="seo-about-shaho" style="font-size:20px;font-weight:800;color:#1A1F36;margin-bottom:14px;border-bottom:2px solid #EAE2EC;padding-bottom:10px;">社会保険料シミュレーターについて</h2>
+    <p style="color:#4B5563;line-height:1.9;margin-bottom:14px;">社会保険料(健康保険+厚生年金+介護保険)は、毎年4・5・6月の支給給与の平均から算出される<strong>標準報酬月額</strong>を基準に決まり、その年9月から翌年8月まで反映されます。1ランク上がると毎月数千円〜1万円以上、年間では数万円〜10万円以上の差が出るため、4-6月の残業時間管理は手取り最大化の重要な戦略です。</p>
+    <p style="color:#4B5563;line-height:1.9;margin-bottom:14px;">本ツールは協会けんぽ東京都(2024年)の50等級テーブル・各種保険料率(健康保険9.98%/介護込み11.58%/厚生年金18.30%、労使折半)を実装。基本給・各種手当・残業時間・ボーナス・年齢を入力するだけで、標準報酬月額ランク・月額保険料・年間保険料・残業ボーダー試算を瞬時に表示します。</p>
+    <p style="color:#4B5563;line-height:1.9;">関連シミュレーター: <a href="./simulator_juminzei.html" style="color:#2D7FF9;">住民税&ふるさと納税</a>と組み合わせて年間手取りを総合的に最大化する戦略立てが可能です。</p>
+  </article>
+  <article style="background:#ffffff;border:1.5px solid #EAE2EC;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-top:20px;">
+    <h2 style="font-size:20px;font-weight:800;color:#1A1F36;margin-bottom:14px;border-bottom:2px solid #EAE2EC;padding-bottom:10px;">よくある質問（FAQ）</h2>
+    <dl style="color:#4B5563;line-height:1.9;">
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q1. 社会保険料はどうやって決まりますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 毎年4・5・6月に支給された給与の平均（標準報酬月額）で決まり、その年の9月から翌年8月までの保険料に反映されます。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q2. 4-6月の残業を減らすと得ですか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. はい。標準報酬月額が下がれば、1年間の社会保険料が下がります。本ツールで残業時間別の差を試算できます。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q3. ボーナスにも社会保険料はかかりますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. かかります（標準賞与額）。健康保険は年573万円、厚生年金は1回150万円が上限です。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q4. 介護保険料はいつからかかりますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 40歳の誕生月から65歳の前月まで、健康保険料に介護保険料が上乗せされます。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q5. 計算結果は正確ですか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 協会けんぽ東京都の料率に基づく試算です。加入する健保組合・地域により実際の金額は異なります。</dd>
+    </dl>
   </article>
 </section>
 
 <!-- 注意セクション(統一) -->
-<section style="max-width:1220px;margin:24px auto 0;padding:0 22px;" aria-labelledby="disclaimer-heading">
-  <article style="background:#fffbeb;border:1.5px solid #fde047;border-radius:14px;padding:22px;">
-    <h2 id="disclaimer-heading" style="font-size:16px;font-weight:800;color:#92400e;margin-bottom:8px;">⚠️ ご利用にあたっての注意</h2>
-    <p style="color:#78350f;line-height:1.8;font-size:13.5px;">本シミュレーターは情報提供のみを目的としており、特定の金融商品の購入・税制判断を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、実際の保険料・税額・運用成果を保証するものではありません。社会保険料・住民税・ふるさと納税限度額の正確な金額は、お住まいの自治体・加入する健康保険組合・年末調整等によって異なります。最終的なご判断はご自身の責任で、必要に応じて税理士・社労士等の専門家にご相談ください。</p>
+<section class="disclaimer-section" aria-labelledby="disclaimer-heading" style="max-width:1220px;margin:24px auto 0;padding:0 22px;">
+  <article style="background:#FFF8E8;border:1.5px solid #FCE4A6;border-radius:16px;padding:22px;">
+    <h2 id="disclaimer-heading" style="font-size:16px;font-weight:800;color:#9A6B00;margin-bottom:8px;">⚠️ ご利用にあたっての注意</h2>
+    <p style="color:#7A5200;line-height:1.8;font-size:13.5px;">本シミュレーターは情報提供のみを目的としており、特定の金融商品の購入・税制判断を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、実際の保険料・税額・運用成果を保証するものではありません。社会保険料・住民税・ふるさと納税限度額の正確な金額は、お住まいの自治体・加入する健康保険組合・年末調整等によって異なります。最終的なご判断はご自身の責任で、必要に応じて税理士・社労士等の専門家にご相談ください。</p>
   </article>
 </section>
 
@@ -1322,10 +1345,10 @@
   </div>
 </section>
 
-<footer style="max-width:1220px;margin:32px auto 0;padding:24px 22px;border-top:2px solid #c8cdd8;text-align:center;color:#6b7280;font-size:13px;">
-  <p style="margin-bottom:8px;"><strong>新NISAシミュレーター</strong> ｜ 積立・一括・取り崩し・新NISA・FIRE・社会保険料・住民税の7機能を無料で試算</p>
-  <p style="margin-bottom:8px;">© 2024-2026 shakewakame. All Rights Reserved.</p>
-  <p>最終更新日：<time datetime="2026-05-29">2026年5月29日</time></p>
+<footer style="max-width:1220px;margin:32px auto 0;padding:24px 22px;border-top:2px solid #EAE2EC;text-align:center;color:#6b7280;font-size:13px;">
+  <p style="margin-bottom:8px;"><strong>未来デザイン研究所</strong> ｜ 無料で使えるお金のシミュレーター</p>
+  <p style="margin-bottom:8px;">© 2024-2026 未来デザイン研究所 (Mirai Design Lab) ／ 運営: shakewakame</p>
+  <p>最終更新日：<time datetime="2026-06-14">2026年6月14日</time></p>
 </footer>
 
 </body>

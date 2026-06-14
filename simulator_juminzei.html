@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <!-- ANALYTICS:START -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-36ZM10B8XE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,11 +16,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>住民税&ふるさと納税シミュレーター｜翌年住民税と寄付限度額を試算</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#1d4ed8">
+  <meta name="theme-color" content="#2D7FF9">
   <meta name="description" content="基本給・ボーナス・社会保険料・各種控除から翌年住民税を試算し、ふるさと納税の自己負担2,000円で済む寄付限度額を算出。家族構成・iDeCo・生命保険料控除にも対応した無料の住民税&ふるさと納税シミュレーター。">
   <meta name="keywords" content="住民税,シミュレーター,ふるさと納税,限度額,所得割,源泉徴収,給与所得控除,寄付">
   <meta name="author" content="shakewakame">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
   <link rel="alternate" hreflang="ja" href="https://newnisa.github.io/calculator-site/simulator_juminzei.html">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏠%3C/text%3E%3C/svg%3E">
@@ -77,9 +79,9 @@
   <style>
     :root {
       --bg: #edf0f4; --surface: #ffffff; --surface2: #f4f6f9;
-      --text: #111827; --text2: #374151; --muted: #6b7280;
-      --accent: #1d4ed8; --accent-dark: #1e3a8a; --accent2: #2563eb; --accent3: #3b82f6;
-      --border: #c8cdd8; --success: #059669; --danger: #dc2626; --warn: #d97706;
+      --text: #1A1F36; --text2: #4B5563; --muted: #6b7280;
+      --accent: #2D7FF9; --accent-dark: #1e3a8a; --accent2: #2D7FF9; --accent3: #3b82f6;
+      --border: #EAE2EC; --success: #27B99A; --danger: #F2557B; --warn: #FF8A65;
       --shadow: 0 4px 24px rgba(0,0,0,.09); --radius: 16px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -129,7 +131,7 @@
         .btn-primary {
       border: none; border-radius: 12px; padding: 15px 26px;
       font-size: 16px; font-weight: 900; cursor: pointer;
-      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); color: white;
+      background: linear-gradient(135deg, #2D7FF9 0%, #3b82f6 100%); color: white;
       box-shadow: 0 6px 22px rgba(29,78,216,.45), 0 2px 6px rgba(29,78,216,.3);
       transition: transform .15s, box-shadow .15s, filter .15s; letter-spacing: -.01em;
       position: relative;
@@ -147,7 +149,7 @@
     .actions .btn-primary { flex: 1 1 100%; min-height: 56px; }
 
     .right { display: grid; gap: 18px; }
-    .hero-result { background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; padding: 28px 22px; }
+    .hero-result { background: linear-gradient(135deg, #2D7FF9, #3b82f6); color: #fff; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; padding: 28px 22px; }
     .hero-result .fh-label { font-size: 13px; opacity: .9; margin-bottom: 8px; font-weight: 700; letter-spacing: .05em; }
     .hero-result .fh-val { font-size: 46px; font-weight: 900; letter-spacing: -0.04em; }
     .hero-result .fh-sub { font-size: 13px; opacity: .9; font-weight: 600; margin-top: 8px; }
@@ -172,7 +174,7 @@
 
     /* furusato */
     .furusato-hero {
-      background: linear-gradient(135deg, #f59e0b, #f97316);
+      background: linear-gradient(135deg, #FF8A65, #f97316);
       color: white; border-radius: var(--radius); box-shadow: var(--shadow);
       padding: 24px; text-align: center;
     }
@@ -190,7 +192,7 @@
     .explain-list { margin: 8px 0 12px 18px; }
     .explain-list li { margin-bottom: 6px; line-height: 1.75; color: var(--text2); font-size: 13.5px; }
     .highlight-box { background: linear-gradient(135deg, #fff7ed, #fed7aa); border-left: 4px solid var(--warn); padding: 14px 16px; border-radius: 10px; margin: 14px 0; font-size: 13px; line-height: 1.85; color: var(--text2); }
-    .highlight-box strong { color: #92400e; }
+    .highlight-box strong { color: #9A6B00; }
     .step-flow { display: grid; gap: 10px; margin: 14px 0; }
     .step-row { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; padding: 12px 14px; background: var(--surface2); border-radius: 10px; border-left: 4px solid var(--accent); }
     .step-num { font-size: 18px; font-weight: 900; color: var(--accent); }
@@ -386,7 +388,7 @@
     input[type="range"] {
       -webkit-appearance: none; appearance: none;
       width: 100%; height: 6px; border-radius: 999px; outline: none; cursor: pointer; border: none;
-      background: linear-gradient(to right, var(--accent) var(--pct, 0%), #c8cdd8 var(--pct, 0%)) !important;
+      background: linear-gradient(to right, var(--accent) var(--pct, 0%), #EAE2EC var(--pct, 0%)) !important;
       transition: background .12s;
     }
     .input-slider-wrap input[type="range"]::-webkit-slider-thumb,
@@ -442,13 +444,37 @@
 
 
   </style>
+  <style>
+  /* ブランド統一 (unify_sim_branding) */
+  .logo-link{display:flex;align-items:center;gap:9px;text-decoration:none;margin-bottom:2px;}
+  .logo-wm{display:flex;flex-direction:column;line-height:1.18;min-width:0;}
+  .logo-wm-ja{font-size:12.5px;font-weight:900;color:var(--text);letter-spacing:.01em;white-space:nowrap;}
+  .logo-wm-en{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.1em;font-family:"Quicksand","Avenir Next",sans-serif;}
+  .side-learn{display:flex;align-items:center;gap:7px;margin-top:8px;padding:10px 13px;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;color:#0c4a6e;background:#eef6ff;border:1.5px solid #bfdbfe;transition:background .18s,transform .18s;}
+  .side-learn:hover{background:#dbeafe;transform:translateY(-1px);}
+  @media (max-width:760px){ .logo-wm-ja{font-size:13px;} }
+  </style>
+  <link rel="stylesheet" href="./sim.css">
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+      { "@type": "Question", "name": "ふるさと納税の限度額はどう決まりますか？", "acceptedAnswer": { "@type": "Answer", "text": "住民税所得割の約2割が目安で、年収や各種控除によって変わります。本ツールで自分の上限を試算できます。" } },
+      { "@type": "Question", "name": "自己負担は必ず2,000円で済みますか？", "acceptedAnswer": { "@type": "Answer", "text": "限度額の範囲内であれば実質負担2,000円です。限度額を超えた寄付分は自己負担になります。" } },
+      { "@type": "Question", "name": "ワンストップ特例と確定申告の違いは？", "acceptedAnswer": { "@type": "Answer", "text": "寄付先が5自治体までならワンストップ特例（申請書のみ）、6自治体以上なら確定申告が必要です。" } },
+      { "@type": "Question", "name": "住民税はいつ払いますか？", "acceptedAnswer": { "@type": "Answer", "text": "前年の所得に対して、翌年6月から翌々年5月までの12回に分けて給与天引き等で支払います。" } },
+      { "@type": "Question", "name": "計算結果は正確ですか？", "acceptedAnswer": { "@type": "Answer", "text": "標準的な控除に基づく試算です。自治体や控除状況により実際の金額は異なります。" } }
+  ] }
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
 <div class="wrap">
   <aside class="sidebar">
-    <a href="./index.html" style="text-decoration:none;"><div class="logo-icon" role="img" aria-label="ホーム">📈</div></a>
+    <a href="./index.html" class="logo-link" aria-label="未来デザイン研究所 ホーム">
+      <div class="logo-icon" role="img" aria-label="">🌅</div>
+      <div class="logo-wm"><span class="logo-wm-ja">未来デザイン研究所</span><span class="logo-wm-en">Mirai Design Lab</span></div>
+    </a>
+    
     <nav class="tab-bar">
       <a class="tab-btn" href="simulator_tumitate.html">積立投資</a>
       <a class="tab-btn" href="simulator_ikkatsu.html">一括投資</a>
@@ -457,12 +483,19 @@
       <a class="tab-btn" href="simulator_fire.html">FIRE逆算</a>
       <a class="tab-btn" href="simulator_shaho.html">社会保険料</a>
       <button class="tab-btn active" aria-current="page">住民税&ふるさと納税</button>
+      <a class="tab-btn" href="simulator_inflation.html">インフレ実質価値</a>
+      <a class="tab-btn" href="simulator_kotehi.html">固定費の見直し</a>
     </nav>
+    <a href="./articles/" class="side-learn">📚 未来デザイン教室で学ぶ</a>
     <div class="crumb"><ol><li><a href="./index.html">ホーム</a></li><li>›</li><li><a href="./index.html#features">シミュレーター</a></li><li>›</li><li>住民税&ふるさと納税</li></ol></div>
   </aside>
 
   <div class="main-area" id="main">
-    <header class="topbar"><h1>住民税&ふるさと納税シミュレーター</h1></header>
+    <header class="topbar"><h1>住民税&ふるさと納税シミュレーター</h1><div class="sim-guide">
+      <img class="sim-guide-av" src="./assets/characters/wakame_laughing.png" width="286" height="353" alt="わかめ" loading="lazy">
+      <div class="sim-guide-bubble"><strong>わかめ：</strong>住民税とふるさと納税の限度額、まとめてチェックしてみよう！</div>
+    </div>
+    </header>
 
     <main class="grid">
       <section class="card panel">
@@ -484,7 +517,7 @@
 
           <label>
             <span class="lbl-row">社会保険料（年間）
-              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>社会保険料</strong><br>健康保険・厚生年金・雇用保険の年間合計（個人負担分）。給与明細の保険料合計 × 12 + 賞与時の保険料、または源泉徴収票の「社会保険料等の金額」を入力。<br>目安: 年収の約14%程度。<a href="./simulator_shaho.html" style="color:#1d4ed8;">社会保険料シミュレーター</a>で詳しく試算可能。</span></span>
+              <span class="help-wrap"><span class="help-ic" role="button" tabindex="0">?</span><span class="help-pop"><strong>社会保険料</strong><br>健康保険・厚生年金・雇用保険の年間合計（個人負担分）。給与明細の保険料合計 × 12 + 賞与時の保険料、または源泉徴収票の「社会保険料等の金額」を入力。<br>目安: 年収の約14%程度。<a href="./simulator_shaho.html" style="color:#2D7FF9;">社会保険料シミュレーター</a>で詳しく試算可能。</span></span>
             </span>
             <div class="input-slider-wrap">
               <div class="input-row">
@@ -679,10 +712,8 @@
     </main>
   </div>
 </div>
-
-<!-- クロスナビ -->
 <nav style="max-width:1220px;margin:30px auto 0;padding:0 22px;">
-  <div style="background:#fff;border:1.5px solid #c8cdd8;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+  <div style="background:#fff;border:1.5px solid #EAE2EC;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
     <h2 style="font-size:17px;font-weight:800;margin-bottom:14px;">他のシミュレーターも試す</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
       <a href="./simulator_tumitate.html" class="cn"><span style="font-size:20px;">📈</span><span style="font-size:13px;font-weight:700;">積立投資<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
@@ -692,12 +723,12 @@
       <a href="./simulator_fire.html" class="cn"><span style="font-size:20px;">🔥</span><span style="font-size:13px;font-weight:700;">FIRE逆算<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
       <a href="./simulator_shaho.html" class="cn"><span style="font-size:20px;">📊</span><span style="font-size:13px;font-weight:700;">社会保険料<br><small style="font-size:10.5px;color:#6b7280;">シミュレーター</small></span></a>
     </div>
-    <a href="./index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#1d4ed8;text-decoration:none;font-weight:700;">← トップへ戻る</a>
+    <a href="./index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#2D7FF9;text-decoration:none;font-weight:700;">← トップへ戻る</a>
   </div>
 </nav>
 <style>
-  .cn { display:flex; align-items:center; gap:10px; padding:12px 14px; text-decoration:none; background:#f6f8fc; border:1.5px solid #d8dde6; border-radius:10px; color:#111827; transition:all .15s; }
-  .cn:hover { background:#e9eef8; border-color:#1d4ed8; transform:translateY(-1px); }
+  .cn { display:flex; align-items:center; gap:10px; padding:12px 14px; text-decoration:none; background:#FBF7FB; border:1.5px solid #EAE2EC; border-radius:10px; color:#1A1F36; transition:all .15s; }
+  .cn:hover { background:#FFF0F5; border-color:#2D7FF9; transform:translateY(-1px); }
 </style>
 
 <script>
@@ -965,7 +996,7 @@
       btn.type = 'button';
       btn.className = 'back-to-input-btn';
       btn.textContent = '↑ 条件入力に戻る';
-      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #1d4ed8;background:#fff;color:#1d4ed8;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
+      btn.style.cssText = 'display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid #2D7FF9;background:#fff;color:#2D7FF9;font-size:14px;font-weight:800;border-radius:10px;cursor:pointer;transition:all .15s;';
       btn.addEventListener('click', () => {
         const input = findInput();
         if (input && input.scrollIntoView) input.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1113,19 +1144,34 @@
 
 <!-- ═══ SEO向けコンテンツセクション ═══ -->
 <section class="seo-content" aria-labelledby="seo-about-juminzei" style="max-width:1220px;margin:40px auto 0;padding:0 22px;">
-  <article style="background:#ffffff;border:1.5px solid #c8cdd8;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
-    <h2 id="seo-about-juminzei" style="font-size:20px;font-weight:800;color:#111827;margin-bottom:14px;border-bottom:2px solid #c8cdd8;padding-bottom:10px;">住民税&ふるさと納税シミュレーターについて</h2>
-    <p style="color:#374151;line-height:1.9;margin-bottom:14px;">住民税は前年所得に対し翌年6月から翌々年5月までの12回で給与天引きされます。所得割(課税所得×10%)+均等割(5,000円)-調整控除という構造で、給与所得控除・基礎控除・社会保険料控除・配偶者控除・扶養控除・生命保険料控除・iDeCo掛金控除・医療費控除など各種控除を反映して計算されます。</p>
-    <p style="color:#374151;line-height:1.9;margin-bottom:14px;"><strong>ふるさと納税</strong>は応援したい自治体に寄付すると2,000円を超える額が翌年住民税から控除される制度で、実質負担2,000円で寄付額の30%相当の返礼品(米・肉・果物・家電等)が受け取れる「ノーリスクで節約できる仕組み」。本ツールでは課税所得階層別の係数(20-40%)を使った正確な限度額計算が可能です。</p>
-    <p style="color:#374151;line-height:1.9;">関連シミュレーター: <a href="./simulator_shaho.html" style="color:#1d4ed8;">社会保険料</a>で年間社会保険料を試算→本ツールに入力すれば住民税試算の精度UP。<a href="./simulator_tumitate.html" style="color:#1d4ed8;">新NISA積立投資</a>と併用で資産形成の最適化が可能です。</p>
+  <article style="background:#ffffff;border:1.5px solid #EAE2EC;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <h2 id="seo-about-juminzei" style="font-size:20px;font-weight:800;color:#1A1F36;margin-bottom:14px;border-bottom:2px solid #EAE2EC;padding-bottom:10px;">住民税&ふるさと納税シミュレーターについて</h2>
+    <p style="color:#4B5563;line-height:1.9;margin-bottom:14px;">住民税は前年所得に対し翌年6月から翌々年5月までの12回で給与天引きされます。所得割(課税所得×10%)+均等割(5,000円)-調整控除という構造で、給与所得控除・基礎控除・社会保険料控除・配偶者控除・扶養控除・生命保険料控除・iDeCo掛金控除・医療費控除など各種控除を反映して計算されます。</p>
+    <p style="color:#4B5563;line-height:1.9;margin-bottom:14px;"><strong>ふるさと納税</strong>は応援したい自治体に寄付すると2,000円を超える額が翌年住民税から控除される制度で、実質負担2,000円で寄付額の30%相当の返礼品(米・肉・果物・家電等)が受け取れる「ノーリスクで節約できる仕組み」。本ツールでは課税所得階層別の係数(20-40%)を使った正確な限度額計算が可能です。</p>
+    <p style="color:#4B5563;line-height:1.9;">関連シミュレーター: <a href="./simulator_shaho.html" style="color:#2D7FF9;">社会保険料</a>で年間社会保険料を試算→本ツールに入力すれば住民税試算の精度UP。<a href="./simulator_tumitate.html" style="color:#2D7FF9;">新NISA積立投資</a>と併用で資産形成の最適化が可能です。</p>
+  </article>
+  <article style="background:#ffffff;border:1.5px solid #EAE2EC;border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-top:20px;">
+    <h2 style="font-size:20px;font-weight:800;color:#1A1F36;margin-bottom:14px;border-bottom:2px solid #EAE2EC;padding-bottom:10px;">よくある質問（FAQ）</h2>
+    <dl style="color:#4B5563;line-height:1.9;">
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q1. ふるさと納税の限度額はどう決まりますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 住民税所得割の約2割が目安で、年収や各種控除によって変わります。本ツールで自分の上限を試算できます。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q2. 自己負担は必ず2,000円で済みますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 限度額の範囲内であれば実質負担2,000円です。限度額を超えた寄付分は自己負担になります。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q3. ワンストップ特例と確定申告の違いは？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 寄付先が5自治体までならワンストップ特例（申請書のみ）、6自治体以上なら確定申告が必要です。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q4. 住民税はいつ払いますか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 前年の所得に対して、翌年6月から翌々年5月までの12回に分けて給与天引き等で支払います。</dd>
+      <dt style="font-weight:700;color:#1A1F36;margin-top:14px;">Q5. 計算結果は正確ですか？</dt>
+      <dd style="margin-left:0;margin-top:6px;">A. 標準的な控除に基づく試算です。自治体や控除状況により実際の金額は異なります。</dd>
+    </dl>
   </article>
 </section>
 
 <!-- 注意セクション(統一) -->
-<section style="max-width:1220px;margin:24px auto 0;padding:0 22px;" aria-labelledby="disclaimer-heading">
-  <article style="background:#fffbeb;border:1.5px solid #fde047;border-radius:14px;padding:22px;">
-    <h2 id="disclaimer-heading" style="font-size:16px;font-weight:800;color:#92400e;margin-bottom:8px;">⚠️ ご利用にあたっての注意</h2>
-    <p style="color:#78350f;line-height:1.8;font-size:13.5px;">本シミュレーターは情報提供のみを目的としており、特定の金融商品の購入・税制判断を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、実際の保険料・税額・運用成果を保証するものではありません。社会保険料・住民税・ふるさと納税限度額の正確な金額は、お住まいの自治体・加入する健康保険組合・年末調整等によって異なります。最終的なご判断はご自身の責任で、必要に応じて税理士・社労士等の専門家にご相談ください。</p>
+<section class="disclaimer-section" aria-labelledby="disclaimer-heading" style="max-width:1220px;margin:24px auto 0;padding:0 22px;">
+  <article style="background:#FFF8E8;border:1.5px solid #FCE4A6;border-radius:16px;padding:22px;">
+    <h2 id="disclaimer-heading" style="font-size:16px;font-weight:800;color:#9A6B00;margin-bottom:8px;">⚠️ ご利用にあたっての注意</h2>
+    <p style="color:#7A5200;line-height:1.8;font-size:13.5px;">本シミュレーターは情報提供のみを目的としており、特定の金融商品の購入・税制判断を推奨するものではありません。表示される結果は入力された条件に基づく試算であり、実際の保険料・税額・運用成果を保証するものではありません。社会保険料・住民税・ふるさと納税限度額の正確な金額は、お住まいの自治体・加入する健康保険組合・年末調整等によって異なります。最終的なご判断はご自身の責任で、必要に応じて税理士・社労士等の専門家にご相談ください。</p>
   </article>
 </section>
 
@@ -1142,10 +1188,10 @@
   </div>
 </section>
 
-<footer style="max-width:1220px;margin:32px auto 0;padding:24px 22px;border-top:2px solid #c8cdd8;text-align:center;color:#6b7280;font-size:13px;">
-  <p style="margin-bottom:8px;"><strong>新NISAシミュレーター</strong> ｜ 積立・一括・取り崩し・新NISA・FIRE・社会保険料・住民税の7機能を無料で試算</p>
-  <p style="margin-bottom:8px;">© 2024-2026 shakewakame. All Rights Reserved.</p>
-  <p>最終更新日：<time datetime="2026-05-29">2026年5月29日</time></p>
+<footer style="max-width:1220px;margin:32px auto 0;padding:24px 22px;border-top:2px solid #EAE2EC;text-align:center;color:#6b7280;font-size:13px;">
+  <p style="margin-bottom:8px;"><strong>未来デザイン研究所</strong> ｜ 無料で使えるお金のシミュレーター</p>
+  <p style="margin-bottom:8px;">© 2024-2026 未来デザイン研究所 (Mirai Design Lab) ／ 運営: shakewakame</p>
+  <p>最終更新日：<time datetime="2026-06-14">2026年6月14日</time></p>
 </footer>
 
 </body>
