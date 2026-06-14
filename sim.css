@@ -175,9 +175,9 @@ footer{ border-top:2px dashed var(--border) !important; }
   .left-col{ height:auto !important; max-height:none !important; }
   .grid > .card.panel, .left-col > .card.panel{
     flex:0 0 auto !important;
-    height:min(500px, calc(100vh - 300px)) !important;
+    height:min(575px, calc(100vh - 260px)) !important;
     min-height:0 !important;
-    max-height:min(500px, calc(100vh - 300px)) !important;
+    max-height:min(575px, calc(100vh - 260px)) !important;
     overflow-y:auto !important;
     scrollbar-width:thin; scrollbar-color:var(--border) transparent;
   }
