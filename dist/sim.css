@@ -1,0 +1,228 @@
+/* =====================================================================
+   sim.css — シミュレーター共通ブランドCSS（未来デザイン研究所）
+   全シミュレーターが最後に読み込み、配色・フォント・コンポーネント寸法を統一。
+   記事/ホームのパステル・ブランドへフル統一 + しゃけ/わかめ キャラ要素。
+   ===================================================================== */
+
+/* ── ブランド・トークン上書き（既存の :root を後勝ちで再定義） ── */
+:root{
+  --bg:#FBF7FB;            /* ほんのり温かい背景 */
+  --surface:#FFFFFF;
+  --surface2:#FFF6F9;      /* 入力ボックス等の淡いピンク白 */
+  --text:#1A1F36; --text2:#4B5563; --muted:#6B7280;
+  --accent:#2D7FF9;        /* ブランド・ブルー（データ視認性は維持） */
+  --accent-dark:#1B5FD0; --accent2:#2D7FF9; --accent3:#4FC3F7;
+  --border:#EAE2EC;        /* 温かいボーダー */
+  --success:#27B99A; --danger:#F2557B; --warn:#FF8A65;
+  --shadow:0 8px 26px rgba(255,107,157,.10), 0 4px 14px rgba(15,23,42,.05);
+  --radius:20px;
+  /* ブランド補助色 */
+  --c-pink:#FF6B9D; --c-pink-soft:#FFE5EE; --c-orange:#FF8A65; --c-orange-soft:#FFE7DC;
+  --c-yellow:#FFC857; --c-yellow-soft:#FFF5DA; --c-green:#27B99A; --c-green-soft:#DFF6EF;
+  --c-blue:#2D7FF9; --c-blue-soft:#EAF4FF;
+  --brand-grad:linear-gradient(135deg,#FF6B9D 0%,#FF8A65 50%,#FFC857 100%);
+  --blue-grad:linear-gradient(135deg,#4FC3F7 0%,#2D7FF9 100%);
+}
+
+/* ── ベース ── */
+/* フォントを全要素ブランド丸ゴへ統一（既存simのT-080角ゴ全要素!important指定を、後読みの同指定で上書き） */
+html, body, button, input, select, textarea, label, p, span, div, h1, h2, h3, h4, h5, h6, a, td, th, li {
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","ヒラギノ丸ゴ Pro","Quicksand","Yu Gothic UI","Meiryo","Noto Sans JP",sans-serif !important;
+}
+body{ font-size:16px !important; line-height:1.6 !important; }
+body{
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","ヒラギノ丸ゴ Pro","Quicksand","Yu Gothic UI","Meiryo","Noto Sans JP",sans-serif !important;
+  background:
+    radial-gradient(1200px 420px at 110% -8%, rgba(255,200,87,.16), transparent 60%),
+    radial-gradient(1000px 420px at -10% 0%, rgba(255,107,157,.12), transparent 55%),
+    var(--bg) !important;
+  color:var(--text);
+}
+
+/* ── サイドバー ── */
+.sidebar{ background:rgba(255,255,255,.86) !important; backdrop-filter:blur(6px); border-right:1.5px solid var(--border) !important; }
+.logo-icon{ background:var(--brand-grad) !important; box-shadow:0 6px 16px rgba(255,138,101,.38) !important; border-radius:15px !important; }
+.logo-wm-ja{ color:var(--text) !important; }
+/* サイドバー: 非アクティブは通常太さ、現在ページ(active)のみ太字 */
+.tab-btn{ border-radius:12px !important; font-weight:600 !important; text-decoration:none !important; line-height:1.4 !important; }
+/* 入力フィールド(div.field) — 旧 label の体裁を踏襲 */
+.field{ display:grid; gap:6px; }
+.field > .lbl-row{ font-size:13px !important; font-weight:700 !important; color:var(--text2); display:flex; align-items:center; gap:6px; cursor:default; }
+.tab-btn:hover{ background:var(--c-pink-soft) !important; color:var(--c-pink-dark,#C8487A) !important; }
+.tab-btn.active{ background:var(--blue-grad) !important; color:#fff !important; font-weight:800 !important; box-shadow:0 6px 16px rgba(45,127,249,.34) !important; }
+.side-learn{ background:var(--c-yellow-soft) !important; border:1.5px solid #FCE4A6 !important; color:#9A6B00 !important; border-radius:12px !important; }
+.side-learn:hover{ background:#FCEFC6 !important; }
+.crumb a{ color:var(--c-pink,#FF6B9D) !important; }
+
+/* ── トップバー + キャラ案内 ── */
+.topbar{ border-bottom:2px dashed var(--border) !important; flex-wrap:wrap !important; gap:6px 14px !important; min-height:0 !important; margin-bottom:10px !important; padding-bottom:8px !important; }
+.topbar h1, .main-area h1{ color:var(--text) !important; font-weight:700 !important; font-size:15px !important; }
+/* わかめ案内：タイトル右にコンパクト配置（縦スペースを節約し計算ボタンを見せる） */
+.sim-guide{
+  display:flex; align-items:center; gap:9px;
+  margin:0 0 0 auto !important; padding:6px 10px !important;
+  background:linear-gradient(135deg,#FFF1F6,#FFF8E8);
+  border:1.5px solid #FFE0EC; border-radius:14px; max-width:560px;
+}
+.sim-guide-av{ width:38px !important; height:38px !important; flex:0 0 auto; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(15,23,42,.12)); }
+.sim-guide-bubble{ position:relative; background:#fff; border:1.5px solid #FFE0EC; border-radius:12px; padding:6px 11px !important; font-size:12px !important; font-weight:700; color:var(--text2); line-height:1.55 !important; }
+.sim-guide-bubble::before{ content:""; position:absolute; left:-7px; top:50%; transform:translateY(-50%) rotate(45deg); width:12px; height:12px; background:#fff; border-left:1.5px solid #FFE0EC; border-bottom:1.5px solid #FFE0EC; }
+.sim-guide-bubble strong{ color:var(--c-pink,#FF6B9D); }
+@media (max-width:760px){ .sim-guide{ margin:8px 0 0 !important; max-width:none; } }
+
+/* ── カード・パネル ── */
+.card{ border-radius:var(--radius) !important; border:1.5px solid var(--border) !important; box-shadow:var(--shadow) !important; }
+.panel-title{ border-bottom:2px dashed var(--border) !important; color:var(--text) !important; font-weight:900 !important; }
+
+/* ── 入力 ── */
+/* スピンボタン基本形（新シミュレーター用に定義。既存simにも安全に適用） */
+.input-row{ display:flex; align-items:center; gap:6px; }
+.spin-btn{
+  width:36px !important; height:38px !important; flex:0 0 auto; padding:0;
+  display:grid; place-items:center; cursor:pointer; user-select:none;
+  font-size:18px; font-weight:800; line-height:1; touch-action:manipulation;
+  border-radius:11px; border:1.5px solid var(--border);
+  background:var(--surface2); color:var(--accent);
+  transition:background .15s,color .15s,border-color .15s;
+}
+.spin-btn:active{ transform:scale(.96); }
+/* 入力寸法を既存simの値へ統一（新旧でピクセル一致） */
+.num-input{ border-radius:11px !important; border:1.5px solid var(--border) !important; background:var(--surface2) !important; padding:8px 10px !important; font-size:15px !important; }
+/* 主要ボタンの寸法統一 */
+.btn-primary{ padding:17px 28px !important; font-size:18px !important; min-height:56px !important; }
+.num-input:focus{ border-color:var(--accent) !important; box-shadow:0 0 0 3px rgba(45,127,249,.14) !important; background:#fff !important; }
+.spin-btn{ border-radius:11px !important; border:1.5px solid var(--border) !important; background:var(--surface2) !important; color:var(--accent) !important; }
+@media (hover:hover){ .spin-btn:hover{ background:var(--blue-grad) !important; color:#fff !important; border-color:transparent !important; } }
+input[type="range"]{ background:linear-gradient(to right,var(--accent) var(--pct,0%),#F0E6EC var(--pct,0%)) !important; }
+input[type="range"]::-webkit-slider-thumb{ border-color:var(--accent) !important; box-shadow:0 2px 7px rgba(45,127,249,.35) !important; }
+.toggle-group button.active{ background:var(--blue-grad) !important; }
+
+/* ── ボタン ── */
+.btn-primary{
+  position:relative !important;
+  border-radius:14px !important;
+  background:var(--blue-grad) !important;
+  box-shadow:0 8px 22px rgba(45,127,249,.40) !important;
+  letter-spacing:.01em !important;
+}
+/* 計算ボタンの強調パルス（全sim統一・ブランド・ブルー） */
+.btn-primary::after{
+  content:'' !important; position:absolute !important; inset:0 !important;
+  border-radius:14px !important; pointer-events:none !important;
+  box-shadow:0 0 0 0 rgba(45,127,249,.55) !important;
+  animation:simPulse 2.2s ease-out infinite !important;
+}
+/* リセット/共有ボタンの枠線(既存simと統一・既定の黒outsetを防ぐ) */
+.btn-secondary, .btn-share{ border:1.5px solid var(--border) !important; }
+@keyframes simPulse{
+  0%{ box-shadow:0 0 0 0 rgba(45,127,249,.5); }
+  70%{ box-shadow:0 0 0 14px rgba(45,127,249,0); }
+  100%{ box-shadow:0 0 0 0 rgba(45,127,249,0); }
+}
+.btn-secondary, .btn-share{ border-radius:12px !important; background:var(--surface2) !important; }
+.btn-secondary:hover, .btn-share:hover{ border-color:var(--c-pink) !important; color:var(--c-pink) !important; }
+
+/* ── 結果ヒーロー（ブランド・グラデ。インラインgradientはクラスで上書き） ── */
+.hero-result, .furusato-hero{ border-radius:var(--radius) !important; }
+/* 結果ヒーローは全sim 青基調で統一(--warn/--save も青へ) */
+.hero-result, .hero-result.--warn, .hero-result.--save{ background:var(--blue-grad) !important; box-shadow:0 10px 28px rgba(45,127,249,.30) !important; }
+.furusato-hero{ background:linear-gradient(135deg,#FF8A65,#FFC857) !important; }
+
+/* ── stats / 内訳 ── */
+.stats-wrap, .result-block{ border-radius:var(--radius) !important; }
+.stat .v.accent, .v-accent{ color:var(--accent) !important; }        /* 青=主要数値 */
+.stat .v.success, .v-success, .v-positive{ color:var(--success) !important; } /* 緑=プラス */
+.stat .v.danger, .v-danger{ color:var(--danger) !important; }        /* ピンク赤=マイナス */
+.stat .v.warn, .v-warn{ color:var(--warn) !important; }              /* オレンジ=注意 */
+.bd-title{ color:var(--text) !important; font-weight:900 !important; }
+
+/* ── 解説カード ── */
+.explain-card h2{ color:var(--c-pink,#FF6B9D) !important; }
+.explain-card h3{ color:var(--accent) !important; }
+.highlight-box{ background:var(--c-yellow-soft) !important; border:1.5px solid #FCE4A6 !important; color:#7A5200 !important; border-radius:14px !important; }
+
+/* ── 結果へのキャラのひとこと ── */
+.result-comment{
+  display:flex; align-items:flex-start; gap:11px;
+  background:#fff; border:1.5px solid var(--c-green-soft); border-left:4px solid var(--c-green);
+  border-radius:14px; padding:12px 15px; box-shadow:var(--shadow);
+}
+.result-comment-av{ width:46px; height:46px; flex:0 0 auto; object-fit:contain; }
+.result-comment-txt{ font-size:13px; font-weight:700; color:var(--text2); line-height:1.7; }
+.result-comment-txt b{ color:var(--c-green,#27B99A); }
+
+/* ── フッター ── */
+footer{ border-top:2px dashed var(--border) !important; }
+
+/* ── 新シミュレーターの左カラム（入力カード＋白い操作パネル：shahoと同一配置） ── */
+.left-col{ display:flex; flex-direction:column; gap:12px; min-width:0; }
+.left-col .actions{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
+.left-col .actions .btn-primary{ flex:1 1 100%; order:0; height:56px !important; min-height:56px !important; max-height:56px !important; padding:0 28px !important; display:flex; align-items:center; justify-content:center; }
+.left-col .actions .btn-secondary{ order:1; }
+.left-col .actions .btn-share{ order:2; }
+.left-col .actions .btn-secondary, .left-col .actions .btn-share{ flex:0 0 auto; width:auto; margin:0; min-height:38px !important; max-height:38px; font-size:13px !important; padding:8px 14px !important; }
+.left-col .auto-calc-wrap{ order:3; display:inline-flex; align-items:center; gap:6px; font-size:13px !important; color:var(--muted); font-weight:600; cursor:pointer; user-select:none; white-space:nowrap; }
+.left-col .auto-calc-wrap input[type="checkbox"]{ width:16px; height:16px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+/* PC: 計算ボタンを白いカード(別パネル)として常時表示 */
+@media (min-width:981px){
+  .left-col > .actions.actions-detached{
+    background:var(--surface) !important; border:1.5px solid var(--border) !important;
+    border-radius:var(--radius) !important; padding:12px 14px !important; box-shadow:var(--shadow) !important;
+  }
+  /* 条件入力パネルを全sim同一の固定高さに → 計算ボタンパネルの位置を全sim統一。
+     1920x1080実機(タブ+URL欄でusable≈940px)でも操作パネルが収まる高さ。溢れたら内部スクロール。
+     min()で短い画面でもはみ出さないが、1080では常に同一値=統一。 */
+  .left-col{ height:auto !important; max-height:none !important; }
+  .grid > .card.panel, .left-col > .card.panel{
+    flex:0 0 auto !important;
+    height:min(500px, calc(100vh - 300px)) !important;
+    min-height:0 !important;
+    max-height:min(500px, calc(100vh - 300px)) !important;
+    overflow-y:auto !important;
+    scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+  }
+  .grid > .card.panel::-webkit-scrollbar, .left-col > .card.panel::-webkit-scrollbar{ width:8px; }
+  .grid > .card.panel::-webkit-scrollbar-thumb, .left-col > .card.panel::-webkit-scrollbar-thumb{ background:var(--border); border-radius:8px; }
+  /* left-col の gap(12px) と二重にならないよう detached の上マージンは0 */
+  .left-col > .actions.actions-detached{ margin-top:0 !important; }
+}
+
+/* side-learn の位置を既存sim基準(margin-top:8px)に統一 */
+.side-learn{ margin-top:8px !important; }
+
+/* ── 右カラム: ヒーロー・stats・各カードを「全て分離」(新sim基準)に統一 ── */
+/* nisa等の result-block(ヒーロー+statsを1枠に結合)を解除し個別カード化 */
+.result-block{ border:none !important; box-shadow:none !important; border-radius:0 !important; overflow:visible !important; background:none !important; display:grid !important; gap:18px !important; }
+.result-block .hero-result{ border-radius:var(--radius) !important; box-shadow:var(--shadow) !important; }
+.result-block .stats{ border-top:1.5px solid var(--border) !important; border:1.5px solid var(--border) !important; border-radius:var(--radius) !important; box-shadow:var(--shadow) !important; overflow:hidden !important; }
+/* stats は単独カードとして分離表示 */
+.right > .stats, .right > .stats-wrap{ border-radius:var(--radius); box-shadow:var(--shadow); border:1.5px solid var(--border); overflow:hidden; }
+
+/* ── 結果カード(右カラム)レイアウト統一 — shaho基準 ── */
+.right{ display:grid !important; gap:18px !important; align-items:start; }
+.hero-result{ padding:24px 22px !important; text-align:center; }
+.hero-result .fh-label{ font-size:13px !important; font-weight:700 !important; }
+.hero-result .fh-val{ font-size:clamp(30px,2.2vw,38px) !important; font-weight:900 !important; line-height:1.15 !important; }
+.hero-result .fh-sub{ font-size:13px !important; }
+.stat{ padding:14px 16px !important; }
+.stat .k{ font-size:11px !important; font-weight:700 !important; }
+.stat .v{ font-size:clamp(16px,1.3vw,22px) !important; font-weight:800 !important; }
+
+/* ── 教室への大きめ導線（任意） ── */
+.brand-cta{
+  max-width:1220px; margin:26px auto 0; padding:0 22px;
+}
+.brand-cta-inner{
+  background:var(--brand-grad); border-radius:22px; padding:22px 26px;
+  display:flex; align-items:center; gap:16px; color:#fff; box-shadow:0 12px 30px rgba(255,138,101,.30); flex-wrap:wrap;
+}
+.brand-cta-inner img{ width:64px; height:64px; object-fit:contain; flex:0 0 auto; }
+.brand-cta-txt{ flex:1 1 240px; }
+.brand-cta-txt b{ font-size:16px; font-weight:900; display:block; margin-bottom:2px; }
+.brand-cta-txt span{ font-size:13px; opacity:.95; }
+.brand-cta a{ background:#fff; color:#C8487A; font-weight:900; text-decoration:none; padding:12px 20px; border-radius:999px; font-size:14px; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.12); }
+
+@media (max-width:760px){
+  .sim-guide-av{ width:46px; height:46px; }
+  .sim-guide-bubble{ font-size:12.5px; }
+}
