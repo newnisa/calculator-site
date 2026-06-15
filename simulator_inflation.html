@@ -117,8 +117,10 @@
     input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;cursor:pointer;border:3px solid var(--accent);}
     .range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:500;margin-top:-4px;}
     .actions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
-    .btn-primary{flex:1 1 100%;order:0;border:none;border-radius:14px;height:56px;min-height:56px;max-height:56px;padding:0 28px;font-size:18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#2D7FF9 0%,#3b82f6 100%);color:#fff;box-shadow:0 6px 22px rgba(29,78,216,.45);transition:transform .15s,filter .15s;display:flex;align-items:center;justify-content:center;}
+    .btn-primary{position:relative;flex:1 1 100%;order:0;border:none;border-radius:14px;height:56px;min-height:56px;max-height:56px;padding:0 28px;font-size:18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#2D7FF9 0%,#3b82f6 100%);color:#fff;box-shadow:0 6px 22px rgba(29,78,216,.45);transition:transform .15s,filter .15s;display:flex;align-items:center;justify-content:center;}
     .btn-primary:hover{transform:translateY(-2px) scale(1.01);filter:brightness(1.08);}
+    .btn-primary::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:0 0 0 0 rgba(45,127,249,.55);animation:simPulse 2.2s ease-out infinite;}
+    @keyframes simPulse{0%{box-shadow:0 0 0 0 rgba(45,127,249,.5);}70%{box-shadow:0 0 0 14px rgba(45,127,249,0);}100%{box-shadow:0 0 0 0 rgba(45,127,249,0);}}
     .btn-secondary{order:1;flex:0 0 auto;border:1.5px solid var(--border);border-radius:12px;background:var(--surface2);color:var(--text2);min-height:38px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;}
     .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
     .btn-share{order:2;flex:0 0 auto;border:1.5px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;background:var(--surface2);color:var(--text2);min-height:38px;}
@@ -254,7 +256,7 @@
         <button type="button" class="btn-primary" id="calc-btn">✨ 計算する</button>
         <button type="button" class="btn-secondary" id="reset-btn">リセット</button>
         <button type="button" class="btn-share" id="share-btn" title="URLをコピー">🔗 共有</button>
-        <label class="auto-calc-wrap"><input type="checkbox" id="auto-calc"> 自動再計算</label>
+        <label class="auto-calc-wrap"><input type="checkbox" id="auto-calc"> 自動で再計算する</label>
       </div>
       </div><!-- /left-col -->
 
